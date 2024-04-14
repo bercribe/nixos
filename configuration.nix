@@ -90,7 +90,7 @@
   users.users.mawz = {
     isNormalUser = true;
     description = "mawz";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       firefox
       #  thunderbird
@@ -109,6 +109,9 @@
     alejandra
     libnotify
   ];
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # Set default text editor
   environment.variables.EDITOR = "vim";
