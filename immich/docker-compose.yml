@@ -14,7 +14,11 @@ services:
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     command: ['start.sh', 'immich']
     volumes:
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - type: volume
+        source: upload-location
+        target: /usr/src/app/upload
+        volume:
+          nocopy: true
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -33,7 +37,11 @@ services:
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     command: ['start.sh', 'microservices']
     volumes:
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - type: volume
+        source: upload-location
+        target: /usr/src/app/upload
+        volume:
+          nocopy: true
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -75,3 +83,9 @@ services:
 volumes:
   pgdata:
   model-cache:
+  upload-location:
+    driver_opts:
+      type: nfs
+      o: addr=192.168.0.43,nolock,soft,rw
+      device: :/volume1/mawz-home/immich-photos
+
