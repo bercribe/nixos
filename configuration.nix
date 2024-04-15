@@ -110,11 +110,21 @@
     libnotify
   ];
 
+  # Set default text editor
+  environment.variables.EDITOR = "vim";
+
   # Enable docker
   virtualisation.docker.enable = true;
 
-  # Set default text editor
-  environment.variables.EDITOR = "vim";
+  # Start immich
+  systemd.services.immich = {
+    script = ''
+      cd /etc/nixos/immich
+      ${pkgs.docker}/bin/docker compose up -d
+    '';
+    wantedBy = ["multi-user.target"];
+    after = ["docker.service" "docker.socket"];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
