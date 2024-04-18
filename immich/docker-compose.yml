@@ -80,6 +80,28 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: always
 
+  backup:
+    container_name: immich_db_dumper
+    image: prodrigestivill/postgres-backup-local:14
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: database
+      POSTGRES_CLUSTER: 'TRUE'
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      SCHEDULE: "@daily"
+      POSTGRES_EXTRA_OPTS: '--clean --if-exists'
+      BACKUP_DIR: /db_dumps
+    volumes:
+      - type: volume
+        source: db-dumps
+        target: /db_dumps
+        volume:
+          nocopy: true
+    depends_on:
+      - database
+
 volumes:
   pgdata:
   model-cache:
@@ -88,4 +110,9 @@ volumes:
       type: nfs
       o: addr=192.168.0.43,nolock,soft,rw
       device: :/volume1/mawz-home/immich-photos
+  db-dumps:
+    driver_opts:
+      type: nfs
+      o: addr=192.168.0.43,nolock,soft,rw
+      device: :/volume1/mawz-home/immich-photos/db_dumps
 
