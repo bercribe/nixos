@@ -3,10 +3,10 @@
 set -e
 
 # Edit your config
-$EDITOR configuration.nix
+$EDITOR ~/nixos/hosts/${HOSTNAME}/configuration.nix
 
 # cd to your config dir
-pushd /etc/nixos/
+pushd ~/nixos/
 
 # Early return if no changes were detected (thanks @singiamtel!)
 if git diff --quiet '*.nix'; then
