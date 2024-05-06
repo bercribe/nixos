@@ -119,6 +119,7 @@
 
   # List services that you want to enable:
 
+  # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing = {
     enable = true;
     user = "mawz";
