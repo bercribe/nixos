@@ -135,7 +135,7 @@
       folders = {
         "personal-cloud" = {
           # Name of folder in Syncthing, also the folder ID
-          path = "/home/myusername/personal-cloud"; # Which folder to add to Syncthing
+          path = "/home/mawz/personal-cloud"; # Which folder to add to Syncthing
           devices = ["mawz-nas" "mawz-hue" "mawz-galaxy"]; # Which devices to share the folder with
         };
       };
