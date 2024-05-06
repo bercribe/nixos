@@ -119,6 +119,13 @@
 
   # List services that you want to enable:
 
+  services.syncthing = {
+    enable = true;
+    user = "mawz";
+    dataDir = "/home/mawz/Documents"; # Default folder for new synced folders
+    configDir = "/home/mawz/Documents/.config/syncthing"; # Folder for Syncthing's settings and keys
+  };
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
