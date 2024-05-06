@@ -124,6 +124,22 @@
     user = "mawz";
     dataDir = "/home/mawz/Documents"; # Default folder for new synced folders
     configDir = "/home/mawz/Documents/.config/syncthing"; # Folder for Syncthing's settings and keys
+    overrideDevices = true; # overrides any devices added or deleted through the WebUI
+    overrideFolders = true; # overrides any folders added or deleted through the WebUI
+    settings = {
+      devices = {
+        "mawz-nas" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
+        "mawz-hue" = {id = "UCHJJO7-WXOENUZ-SBOV5NO-LSRAGOJ-IWGNSCY-SETUCQF-5PZTPLZ-VXWYFQG";};
+        "mawz-galaxy" = {id = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
+      };
+      folders = {
+        "personal-cloud" = {
+          # Name of folder in Syncthing, also the folder ID
+          path = "/home/myusername/personal-cloud"; # Which folder to add to Syncthing
+          devices = ["mawz-nas" "mawz-hue" "mawz-galaxy"]; # Which devices to share the folder with
+        };
+      };
+    };
   };
 
   # Enable the OpenSSH daemon.
