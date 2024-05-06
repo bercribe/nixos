@@ -31,7 +31,7 @@ sudo nixos-rebuild switch &>nixos-switch.log || (cat nixos-switch.log | grep --c
 current=$(nixos-rebuild list-generations | grep current)
 
 # Commit all changes witih the generation metadata
-git commit -am "$current"
+git commit -am "${HOSTNAME}: $current"
 
 # Back to where you were
 popd

@@ -12,4 +12,3 @@ in {
     (/home/mawz/nixos/hosts + "/${hostname}/configuration.nix")
   ];
 }
-
