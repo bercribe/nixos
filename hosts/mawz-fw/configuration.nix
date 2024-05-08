@@ -88,6 +88,7 @@
       syncthing
       keepassxc
       obsidian
+      vscode
       #  thunderbird
     ];
   };
