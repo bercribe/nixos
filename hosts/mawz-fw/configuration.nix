@@ -46,6 +46,23 @@
   i18n.inputMethod.enabled = "ibus";
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [mozc libpinyin];
 
+  # Enable Japanese and Chinese fonts
+  fonts.packages = with pkgs; [dejavu_fonts ipafont];
+  fonts.fontconfig.defaultFonts = {
+    monospace = [
+      "DejaVu Sans Mono"
+      "IPAGothic"
+    ];
+    sansSerif = [
+      "DejaVu Sans"
+      "IPAPGothic"
+    ];
+    serif = [
+      "DejaVu Serif"
+      "IPAPMincho"
+    ];
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
