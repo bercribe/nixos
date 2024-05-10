@@ -42,6 +42,10 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Enable Japanese and Chinese keyboards
+  i18n.inputMethod.enabled = "ibus";
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [mozc libpinyin];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
