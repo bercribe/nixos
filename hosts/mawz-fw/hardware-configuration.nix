@@ -22,6 +22,9 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  # Force S3 sleep mode
+  boot.kernelParams = ["mem_sleep_default=deep"];
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/4188149e-04e3-4468-b8ce-18b6b9342b7b";
     fsType = "ext4";
