@@ -141,6 +141,7 @@
       keepassxc
       obsidian
       vscode
+      alacritty
       #  thunderbird
     ];
   };
