@@ -3,7 +3,7 @@
 set -e
 
 # Edit your config
-$EDITOR ~/nixos/hosts/${HOSTNAME}/$1configuration.nix
+$EDITOR ~/nixos/hosts/${HOSTNAME}/${1:configuration}.nix
 
 # cd to your config dir
 pushd ~/nixos/
