@@ -4,11 +4,13 @@
 {
   config,
   pkgs,
+  home-manager,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    home-manager.nixosModules.home-manager
   ];
 
   # Bootloader.
@@ -147,6 +149,13 @@
       alacritty
       #  thunderbird
     ];
+  };
+
+  # Home manager
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.mawz = import ./home.nix;
   };
 
   # Allow unfree packages
