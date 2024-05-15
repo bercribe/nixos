@@ -9,8 +9,6 @@
   ...
 }: {
   imports = [
-    # https://github.com/NixOS/nixos-hardware
-    <nixos-hardware/framework/13-inch/11th-gen-intel>
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
