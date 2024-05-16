@@ -16,6 +16,18 @@
     userEmail = "mawz@hey.com";
   };
 
+  # ssh config
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      mawz-nuc = {
+        port = 22;
+        hostname = "192.168.0.54";
+        user = "mawz";
+      };
+    };
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
