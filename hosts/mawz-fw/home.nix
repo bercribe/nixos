@@ -9,6 +9,13 @@
   home.username = "mawz";
   home.homeDirectory = "/home/mawz";
 
+  # Set defaults
+  home.sessionVariables = {
+    TERMINAL = "alacritty";
+    EDITOR = "vim";
+    BROWSER = "firefox";
+  };
+
   # Git config
   programs.git = {
     enable = true;
