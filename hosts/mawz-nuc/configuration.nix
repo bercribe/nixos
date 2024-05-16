@@ -119,7 +119,7 @@
   # Start immich
   systemd.services.immich = {
     script = ''
-      cd /home/mawz/nixos/immich
+      cd ${../../modules/containers/immich}
       ${pkgs.docker}/bin/docker compose up -d
     '';
     wantedBy = ["multi-user.target"];
