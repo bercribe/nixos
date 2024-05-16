@@ -17,6 +17,7 @@
   };
 
   # ssh config
+  # use `ssh-copy-id` to add key to remote
   programs.ssh = {
     enable = true;
     matchBlocks = {
