@@ -174,6 +174,11 @@
     libnotify
   ];
 
+  # Set defaults
+  environment.variables.EDITOR = "vim";
+  environment.variables.BROWSER = "firefox";
+  environment.variables.TERMINAL = "alacritty";
+
   # Enable docker
   virtualisation.docker.enable = true;
 
