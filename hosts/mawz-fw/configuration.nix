@@ -11,6 +11,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
+    # Tiling window manager
+    ../../modules/hyprland
   ];
 
   # Bootloader.
@@ -76,8 +78,8 @@
   # services.xserver.dpi = 160;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Tiling window manager
   # services.xserver = {
