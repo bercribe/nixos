@@ -10,4 +10,6 @@
     libnotify
     hyprpaper # wallpapers
   ];
+  # icons for waybar
+  fonts.packages = with pkgs; [font-awesome];
 }
