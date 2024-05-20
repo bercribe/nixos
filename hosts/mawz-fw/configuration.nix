@@ -157,6 +157,8 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    # fixes issue where login can fail due to home-manager
+    backupFileExtension = "backup";
     users.mawz = import ./home.nix;
   };
 
