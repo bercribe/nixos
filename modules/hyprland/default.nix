@@ -18,4 +18,9 @@
   ];
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
+  # screen sharing
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+  };
 }
