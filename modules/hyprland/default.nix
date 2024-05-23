@@ -3,7 +3,11 @@
   environment.systemPackages = with pkgs; [
     kitty # terminal
     wofi # app launcher
-    waybar # status bar
+    # status bar
+    (waybar.overrideAttrs
+      (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      }))
     dolphin # file browser
     # notifications
     mako
