@@ -21,6 +21,8 @@
     wl-clipboard
     # lock screen
     hyprlock
+    # wifi widget
+    networkmanagerapplet
   ];
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
