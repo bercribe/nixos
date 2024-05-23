@@ -51,8 +51,13 @@
   };
 
   # Enable Japanese and Chinese keyboards
-  i18n.inputMethod.enabled = "ibus";
-  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [mozc libpinyin];
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-chinese-addons
+    ];
+  };
 
   # Enable Japanese and Chinese fonts
   fonts.packages = with pkgs; [dejavu_fonts ipafont];
