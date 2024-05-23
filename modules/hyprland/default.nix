@@ -15,6 +15,10 @@
     hyprpaper # wallpapers
     # screen brightess
     brightnessctl
+    # screenshots
+    grim
+    slurp
+    wl-clipboard
   ];
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
