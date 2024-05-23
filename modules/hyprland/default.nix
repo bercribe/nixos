@@ -19,6 +19,8 @@
     grim
     slurp
     wl-clipboard
+    # lock screen
+    hyprlock
   ];
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
