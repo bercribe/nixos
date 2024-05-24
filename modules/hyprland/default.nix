@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   programs.hyprland.enable = true;
+
   environment.systemPackages = with pkgs; [
     kitty # terminal
     wofi # app launcher
@@ -24,11 +25,17 @@
     # wifi widget
     networkmanagerapplet
   ];
+
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
+
   # screen sharing
   xdg.portal = {
     enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }
