@@ -175,6 +175,7 @@
     git
     alejandra
     libnotify
+    wireguard-tools
   ];
 
   # Set defaults
