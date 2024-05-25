@@ -40,6 +40,11 @@
         hostname = "192.168.0.54";
         user = "mawz";
       };
+      mawz-nas = {
+        port = 22;
+        hostname = "192.168.0.43";
+        user = "mawz";
+      };
     };
   };
 
