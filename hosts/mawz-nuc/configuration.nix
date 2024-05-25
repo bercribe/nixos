@@ -108,6 +108,7 @@
     git
     alejandra
     libnotify
+    wireguard-tools
   ];
 
   # Set default text editor
