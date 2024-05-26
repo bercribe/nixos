@@ -45,6 +45,11 @@
         hostname = "192.168.0.43";
         user = "mawz";
       };
+      mawz-nvr = {
+        port = 22;
+        hostname = "192.168.0.32";
+        user = "mawz";
+      };
     };
   };
 
