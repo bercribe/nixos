@@ -139,7 +139,7 @@
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
-        "$mainMod, L, exec, hyprlock"
+        "$mainMod, L, exec, swaylock"
         "$mainMod, D, exec, makoctl dismiss"
 
         # Move focus with mainMod + arrow keys

@@ -21,13 +21,16 @@
     slurp
     wl-clipboard
     # lock screen
-    hyprlock
+    swaylock
     # wifi widget
     networkmanagerapplet
   ];
 
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
+
+  # without this, swaylock refuses to accept the correct password
+  security.pam.services.swaylock = {};
 
   # screen sharing
   xdg.portal = {
