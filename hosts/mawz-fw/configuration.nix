@@ -176,6 +176,7 @@
     alejandra
     libnotify
     wireguard-tools
+    fzf
   ];
 
   # Set defaults
