@@ -213,7 +213,6 @@
     extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       firefox
-      syncthing
       keepassxc
       obsidian
       vscode
@@ -247,6 +246,8 @@
     libnotify
     wireguard-tools
     fzf
+    syncthing
+    restic
   ];
 
   # Set defaults
@@ -266,6 +267,25 @@
   # };
 
   # List services that you want to enable:
+
+  # Restic file system backups
+  systemd.tmpfiles.rules = [
+    "d /backups/restic-repo 0755 mawz users -"
+  ];
+  services.restic.backups = {
+    localbackup = {
+      user = "mawz";
+      exclude = [
+        "/home/*/.cache"
+      ];
+      initialize = true;
+      passwordFile = "/etc/nixos/secrets/restic-password";
+      paths = [
+        "/home"
+      ];
+      repository = "/backups/restic-repo";
+    };
+  };
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing = {
@@ -293,6 +313,10 @@
               maxAge = "31536000";
             };
           };
+        };
+        "mawz-fw" = {
+          path = "/backups";
+          devices = ["mawz-nas"];
         };
       };
     };
