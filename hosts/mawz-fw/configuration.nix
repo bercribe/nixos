@@ -30,11 +30,13 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager = {
+  networking.networkmanager = let
+    vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../credentials/openvpn/mawz-nas-ca.pem);
+  in {
     enable = true;
     # generated with: https://github.com/janik-haag/nm2nix
     ensureProfiles.profiles = {
-      "mawz nas fullTunnel" = {
+      "mawz nas full tunnel" = {
         connection = {
           autoconnect = "false";
           id = "mn-full";
@@ -52,7 +54,7 @@
         proxy = {};
         vpn = {
           auth = "SHA512";
-          ca = "/home/mawz/.cert/nm-openvpn/fullTunnelVPNConfig-ca.pem";
+          ca = vpnCert;
           cipher = "AES-256-CBC";
           comp-lzo = "adaptive";
           connection-type = "password";
@@ -66,7 +68,7 @@
           username = "mawz";
         };
       };
-      "mawz nas splitTunnel" = {
+      "mawz nas split tunnel" = {
         connection = {
           autoconnect = "false";
           id = "mn-split";
@@ -85,7 +87,7 @@
         proxy = {};
         vpn = {
           auth = "SHA512";
-          ca = "/home/mawz/.cert/nm-openvpn/splitTunnelVPNConfig-ca.pem";
+          ca = vpnCert;
           cipher = "AES-256-CBC";
           comp-lzo = "adaptive";
           connection-type = "password";
