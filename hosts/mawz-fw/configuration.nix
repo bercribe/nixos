@@ -31,7 +31,7 @@
 
   # Enable networking
   networking.networkmanager = let
-    vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../credentials/openvpn/mawz-nas-ca.pem);
+    vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../certs/openvpn/mawz-nas-ca.pem);
   in {
     enable = true;
     # generated with: https://github.com/janik-haag/nm2nix
