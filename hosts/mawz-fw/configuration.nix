@@ -219,6 +219,7 @@
       obsidian
       vscode
       alacritty
+      discord
       #  thunderbird
     ];
   };
