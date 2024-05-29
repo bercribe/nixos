@@ -247,7 +247,6 @@
     git
     alejandra
     libnotify
-    wireguard-tools
     fzf
     syncthing
     restic
