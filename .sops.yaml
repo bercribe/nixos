@@ -1,0 +1,10 @@
+keys:
+  - &mawz_fw age18gwwjy4j4efkhjnx80c387mngxmwp7d5u5vvymevezadvg903dzqmqsmw6
+  - &backup age16qxll3wr9mtyad6yqu3338g65096auwp7szxdlurv6ph4s6ynp7sn052rv
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+    - age:
+      - *mawz_fw
+      - *backup
+

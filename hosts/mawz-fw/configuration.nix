@@ -5,6 +5,7 @@
   config,
   pkgs,
   home-manager,
+  sops-nix,
   ...
 }: {
   imports = [
@@ -13,6 +14,7 @@
     home-manager.nixosModules.home-manager
     # Tiling window manager
     ../../modules/hyprland
+    sops-nix.nixosModules.sops
   ];
 
   # Bootloader.
@@ -233,6 +235,17 @@
     users.mawz = import ./home.nix;
   };
 
+  # Secrets management
+  sops = {
+    # update this with `sops secrets.yaml`
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/mawz/.config/sops/age/keys.txt";
+    secrets.restic-repo = {
+      owner = "mawz";
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -250,6 +263,7 @@
     fzf
     syncthing
     restic
+    sops
   ];
 
   # Set defaults
@@ -281,7 +295,7 @@
         "/home/*/.cache"
       ];
       initialize = true;
-      passwordFile = "/etc/nixos/secrets/restic-password";
+      passwordFile = "/run/secrets/restic-repo";
       paths = [
         "/home"
       ];
