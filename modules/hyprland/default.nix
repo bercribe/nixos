@@ -21,7 +21,7 @@
     slurp
     wl-clipboard
     # lock screen
-    swaylock
+    hyprlock
     # wifi widget
     networkmanagerapplet
   ];
