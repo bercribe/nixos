@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -48,8 +48,8 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        # "col.inactive_border" = "rgba(595959aa)";
 
         layout = "dwindle";
 
@@ -71,7 +71,7 @@
         drop_shadow = "yes";
         shadow_range = 4;
         shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        # "col.shadow" = "rgba(1a1a1aee)";
       };
 
       animations = {
@@ -109,7 +109,7 @@
 
       misc = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
+        force_default_wallpaper = 0; # Set to 0 or 1 to disable the anime mascot wallpapers
       };
 
       # Example per-device config
@@ -201,6 +201,14 @@
           ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
           ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
         ];
+    };
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = "${config.stylix.image}";
+      wallpaper = ",${config.stylix.image}";
     };
   };
 }

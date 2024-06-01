@@ -6,6 +6,7 @@
   pkgs,
   home-manager,
   sops-nix,
+  stylix,
   ...
 }: {
   imports = [
@@ -15,6 +16,8 @@
     # Tiling window manager
     ../../modules/hyprland
     sops-nix.nixosModules.sops
+    # Theme manager
+    stylix.nixosModules.stylix
   ];
 
   # Bootloader.
@@ -233,6 +236,12 @@
     # fixes issue where login can fail due to home-manager
     backupFileExtension = "backup";
     users.mawz = import ./home.nix;
+  };
+
+  # Theme settings
+  stylix = {
+    image = ./wallpaper.jpg;
+    polarity = "dark";
   };
 
   # Secrets management

@@ -11,18 +11,6 @@
   home.username = "mawz";
   home.homeDirectory = "/home/mawz";
 
-  # Dark theme
-  gtk = {
-    enable = true;
-    theme = {
-      name = "adw-gtk3";
-      package = pkgs.adw-gtk3;
-    };
-    gtk3 = {
-      extraConfig.gtk-application-prefer-dark-theme = true;
-    };
-  };
-
   # Git config
   programs.git = {
     enable = true;
