@@ -15,7 +15,7 @@
 
       # Set programs that you use
       "$terminal" = "alacritty";
-      "$fileManager" = "dolphin";
+      "$fileManager" = "nemo";
       "$menu" = "wofi --show drun";
 
       # Some default env vars.

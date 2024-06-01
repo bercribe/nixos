@@ -9,7 +9,7 @@
       (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       }))
-    dolphin # file browser
+    cinnamon.nemo # file browser
     # notifications
     mako
     libnotify
