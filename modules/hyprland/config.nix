@@ -148,6 +148,10 @@
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
 
+        # to switch between windows in a floating workspace
+        "SUPER,Tab,cyclenext," # change focus to another window
+        "SUPER,Tab,bringactivetotop," # bring it to the top
+
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
