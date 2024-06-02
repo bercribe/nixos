@@ -1,6 +1,15 @@
 {pkgs, ...}: {
   programs.hyprland.enable = true;
 
+  # display manager - lightdm doesn't work reliably with hyprland
+  services.xserver = {
+    enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     kitty # terminal
     wofi # app launcher
