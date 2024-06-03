@@ -5,15 +5,13 @@
 }: {
   programs.hyprland.enable = true;
 
-  # display manager - lightdm doesn't work reliably with hyprland
-  services.xserver = {
-    enable = true;
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
-    };
-  };
+  # display manager
+  services.displayManager.defaultSession = "hyprland";
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  #   theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
+  # };
 
   environment.systemPackages = with pkgs; [
     kitty # terminal
