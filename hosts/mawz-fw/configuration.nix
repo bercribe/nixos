@@ -225,6 +225,7 @@
       vscode
       alacritty
       discord
+      spotube
       #  thunderbird
     ];
   };
