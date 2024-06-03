@@ -1,12 +1,17 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.hyprland.enable = true;
 
   # display manager - lightdm doesn't work reliably with hyprland
   services.xserver = {
     enable = true;
-    displayManager.gdm = {
+    displayManager.sddm = {
       enable = true;
-      wayland = true;
+      wayland.enable = true;
+      theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
     };
   };
 
@@ -33,6 +38,8 @@
     hyprlock
     # wifi widget
     networkmanagerapplet
+    # for sddm theme
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 
   # icons for waybar
