@@ -8,7 +8,17 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
       # Execute your favorite apps at launch
-      exec-once = "waybar & hyprpaper & fcitx5 -d & nm-applet --indicator & blueman-applet";
+      exec-once = [
+        "waybar"
+        "hyprpaper"
+        "fcitx5 -d"
+        "nm-applet --indicator"
+        "blueman-applet"
+        "[workspace 1 silent] alacritty"
+        "[workspace 2 silent] firefox"
+        "[workspace 3 silent] obsidian"
+        "[workspace 10 silent] keepassxc"
+      ];
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
