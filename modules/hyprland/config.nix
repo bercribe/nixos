@@ -212,7 +212,7 @@
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
           # Screen brightness
-          ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+          ", XF86MonBrightnessDown, exec, brightnessctl --min-value=1 set 5%-"
           ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
         ];
     };
