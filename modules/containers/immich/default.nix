@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  # upgrading: `docker compose pull` and update version in .env
   systemd.services.immich = {
     script = ''
       cd ${./.}
