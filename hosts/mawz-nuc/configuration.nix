@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/containers/immich
   ];
 
   # Bootloader.
@@ -120,16 +121,6 @@
 
   # Enable docker
   virtualisation.docker.enable = true;
-
-  # Start immich
-  systemd.services.immich = {
-    script = ''
-      cd ${../../modules/containers/immich}
-      ${pkgs.docker}/bin/docker compose up -d
-    '';
-    wantedBy = ["multi-user.target"];
-    after = ["docker.service" "docker.socket"];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
