@@ -33,6 +33,7 @@
         hostname = "192.168.0.43";
         user = "mawz";
         setEnv = {
+          # check /usr/share/terminfo
           TERM = "xterm-color";
         };
       };
