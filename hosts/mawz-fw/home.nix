@@ -32,6 +32,9 @@
         port = 22;
         hostname = "192.168.0.43";
         user = "mawz";
+        setEnv = {
+          TERM = "xterm-color";
+        };
       };
       mawz-nvr = {
         port = 22;
