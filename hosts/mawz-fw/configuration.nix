@@ -228,6 +228,11 @@
       discord
       spotube
       #  thunderbird
+      # cli extras
+      lf
+      neofetch
+      btop
+      cava
     ];
   };
 
