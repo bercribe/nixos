@@ -298,12 +298,27 @@
   #   enableSSHSupport = true;
   # };
 
+  # Manually created and repermissioned directories
+  systemd.tmpfiles.rules = [
+    "d /backups/restic-repo 0755 mawz users -"
+    "d /mnt/mawz-nas 0755 mawz users -"
+  ];
+
+  # NAS NFS mount
+  fileSystems."/mnt/mawz-nas" = {
+    device = "192.168.0.43:/volume1/mawz-home";
+    fsType = "nfs";
+    options = [
+      "rw"
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+    ];
+  };
+
   # List services that you want to enable:
 
   # Restic file system backups
-  systemd.tmpfiles.rules = [
-    "d /backups/restic-repo 0755 mawz users -"
-  ];
   services.restic.backups = {
     localbackup = {
       user = "mawz";
