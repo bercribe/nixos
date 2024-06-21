@@ -227,6 +227,7 @@
       alacritty
       discord
       spotube
+      feh
       #  thunderbird
       # cli extras
       lf
