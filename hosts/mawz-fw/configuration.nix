@@ -305,6 +305,9 @@
   ];
 
   # NAS NFS mount
+  # This configuration requires the IP of this machine to be allowed by the NAS.
+  # In case of failures check that configuration:
+  # https://kb.synology.com/en-us/DSM/tutorial/How_to_access_files_on_Synology_NAS_within_the_local_network_NFS
   fileSystems."/mnt/mawz-nas" = {
     device = "192.168.0.43:/volume1/mawz-home";
     fsType = "nfs";
