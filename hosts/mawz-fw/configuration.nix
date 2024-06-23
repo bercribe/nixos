@@ -228,6 +228,7 @@
       discord
       spotube
       feh
+      czkawka # deduping util
       #  thunderbird
       # cli extras
       lf
