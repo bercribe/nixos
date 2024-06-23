@@ -45,6 +45,20 @@
     };
   };
 
+  programs.lf = {
+    enable = true;
+    commands = {
+      copy-path = ''
+        ''${{
+        ${pkgs.wl-clipboard}/bin/wl-copy $f
+        }}
+      '';
+    };
+    keybindings = {
+      "<c-c>" = "copy-path";
+    };
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
