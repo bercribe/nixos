@@ -227,7 +227,7 @@
       alacritty
       discord
       spotube
-      feh
+      qimgv
       czkawka # deduping util
       #  thunderbird
       # cli extras
