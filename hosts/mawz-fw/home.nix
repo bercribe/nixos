@@ -56,6 +56,7 @@
     };
     keybindings = {
       "<c-c>" = "copy-path";
+      a = "push %mkdir<space>";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
