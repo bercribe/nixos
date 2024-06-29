@@ -45,6 +45,10 @@
     };
   };
 
+  # inspiration:
+  #   - https://github.com/gokcehan/lf/blob/master/doc.md
+  #   - https://github.com/gokcehan/lf/wiki/Tips
+  #   - https://github.com/vimjoyer/lf-nix-video
   programs.lf = {
     enable = true;
     commands = {
