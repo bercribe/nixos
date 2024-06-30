@@ -229,6 +229,7 @@
       spotube
       qimgv
       imagemagick
+      exiftool
       czkawka # deduping util
       #  thunderbird
       # cli extras
