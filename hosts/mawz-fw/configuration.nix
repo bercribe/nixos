@@ -228,6 +228,7 @@
       discord
       spotube
       qimgv
+      imagemagick
       czkawka # deduping util
       #  thunderbird
       # cli extras
