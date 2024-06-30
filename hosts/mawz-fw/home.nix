@@ -67,7 +67,7 @@
 
       shopt -s nocasematch
       case "$1" in
-          *.gif | *.jpg | *.jpeg | *.mov | *.mpg | *.mp4 | *.pcx | *.png | *.wav)
+          *.gif | *.jpg | *.jpeg | *.mov | *.mpg | *.mp4 | *.pcx | *.png | *.psd | *.wav)
               ${pkgs.exiftool}/bin/exiftool -S -DateTimeOriginal -CreateDate -FileModifyDate "$1";
               echo "--------------------------------"; ${pkgs.exiftool}/bin/exiftool "$1";;
           *.tar*) tar tf "$1";;
