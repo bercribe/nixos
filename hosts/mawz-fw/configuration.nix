@@ -228,6 +228,7 @@
       discord
       spotube
       qimgv
+      mpv
       imagemagick
       exiftool
       czkawka # deduping util
