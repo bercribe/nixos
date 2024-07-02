@@ -231,6 +231,7 @@
       mpv
       imagemagick
       exiftool
+      shotwell # photo editor
       czkawka # deduping util
       #  thunderbird
       # cli extras
