@@ -182,16 +182,7 @@
       owner = "mawz";
     };
   };
-  warnings = lib.optionals (!(builtins.pathExists config.sops.age.keyFile)) [
-    ""
-    "Sops key not set up. Please run the following:
-    nix-shell -p ssh-to-age age sops
-    mkdir -p ~/.config/sops/age
-    ssh-to-age -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt
-    age-keygen -y ~/.config/sops/age/keys.txt # add public key to secrets file
-    sops updatekeys secrets/secrets.yaml"
-    ""
-  ];
+  warnings = lib.optionals (!(builtins.pathExists config.sops.age.keyFile)) ["Sops key not set up, please populate ~/.config/sops/age/keys.txt"];
 
   # Required for obsidian
   nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
