@@ -19,6 +19,13 @@
     nixpkgs,
     ...
   } @ attrs: {
+    nixosConfigurations.mawz-hue = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = attrs;
+      modules = [
+        ./hosts/mawz-hue/configuration.nix
+      ];
+    };
     nixosConfigurations.mawz-fw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;

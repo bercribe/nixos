@@ -1,23 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{ config, pkgs, ... }:
+
 {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ../../modules/systems/desktop
-  ];
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      ../../modules/systems/desktop
+    ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/nvme1n1";
+  boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "mawz-fw"; # Define your hostname.
+  networking.hostName = "mawz-hue"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -48,14 +47,16 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  # Enable the KDE Plasma Desktop Environment.
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services.xserver = {
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -84,16 +85,24 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
     isNormalUser = true;
-    description = "mawz";
-    extraGroups = ["networkmanager" "wheel"];
+    description = "Matoska";
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-      #  thunderbird
+    #  kate
+    #  thunderbird
     ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -107,22 +116,7 @@
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing.folders = {
-    "personal-cloud" = {
-      # Name of folder in Syncthing, also the folder ID
-      path = "/home/mawz/personal-cloud"; # Which folder to add to Syncthing
-      devices = ["mawz-nas" "mawz-hue-win" "mawz-galaxy"]; # Which devices to share the folder with
-      versioning = {
-        type = "staggered";
-        params = {
-          cleanInterval = "3600";
-          maxAge = "31536000";
-        };
-      };
-    };
-    "mawz-fw" = {
-      path = "/backups";
-      devices = ["mawz-nas"];
-    };
+    # TODO
   };
 
   # Enable the OpenSSH daemon.
@@ -141,4 +135,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
+
 }

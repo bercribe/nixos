@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [../../modules/hyprland/config.nix];
+  imports = [../../hyprland/config.nix];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
