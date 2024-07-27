@@ -105,7 +105,7 @@
   # List services that you want to enable:
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
-  services.syncthing.folders = {
+  services.syncthing.settings.folders = {
     "personal-cloud" = {
       # Name of folder in Syncthing, also the folder ID
       path = "/home/mawz/personal-cloud"; # Which folder to add to Syncthing
