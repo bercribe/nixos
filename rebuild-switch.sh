@@ -2,11 +2,8 @@
 # based on: https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 set -e
 
-# Edit your config
-$EDITOR ~/nixos/hosts/${HOSTNAME}/${1:-configuration}.nix
-
 # cd to your config dir
-pushd ~/nixos/
+pushd $(dirname "$0")
 
 # Early return if no changes were detected (thanks @singiamtel!)
 if git diff --quiet '*.nix'; then
@@ -25,7 +22,7 @@ git diff -U0 '*.nix'
 echo "NixOS Rebuilding..."
 
 # Rebuild, output simplified errors, log trackebacks
-sudo nixos-rebuild switch --flake ~/nixos#${HOSTNAME} &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+sudo nixos-rebuild switch --flake .#${HOSTNAME} || exit 1
 
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current)
