@@ -22,6 +22,13 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Fix command-not-found functionality for flakes
+  programs.command-not-found.enable = false;
+  programs.nix-index = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   # Network config
   networking.networkmanager = let
     vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../../certs/openvpn/mawz-nas-ca.pem);
