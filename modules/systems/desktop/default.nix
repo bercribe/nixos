@@ -183,10 +183,6 @@
       owner = "mawz";
     };
   };
-  warnings =
-    if (builtins.pathExists config.sops.age.keyFile)
-    then []
-    else ["Sops key not set up, please populate ${config.sops.age.keyFile}"];
 
   # Required for obsidian
   nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
