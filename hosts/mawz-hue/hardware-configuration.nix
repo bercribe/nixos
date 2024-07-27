@@ -22,6 +22,10 @@
       device = "/dev/disk/by-uuid/c79f46ef-dad6-45bb-a825-06ed51429085";
       fsType = "ext4";
     };
+    "/mnt/distant-disk" = {
+      device = "/dev/disk/by-uuid/047A3E1F7A3E0E44";
+      fsType = "ntfs";
+    };
   };
 
   swapDevices = [
