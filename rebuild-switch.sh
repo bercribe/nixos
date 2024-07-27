@@ -2,6 +2,11 @@
 # based on: https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 set -e
 
+# set up args
+if [ "$1" == "-t" ]; then
+    disableCommit=true
+fi
+
 # cd to your config dir
 pushd $(dirname "$0")
 
@@ -29,7 +34,9 @@ sudo nixos-rebuild switch --flake .#${HOSTNAME} || exit 1
 current=$(nixos-rebuild list-generations | grep current)
 
 # Commit all changes witih the generation metadata
-git commit -am "${HOSTNAME}: $current"
+if [ "$disableCommit" != true ]; then
+    git commit -am "${HOSTNAME}: $current"
+fi
 
 # Back to where you were
 popd
