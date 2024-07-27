@@ -223,6 +223,7 @@
 
   # Manually created and repermissioned directories
   systemd.tmpfiles.rules = [
+    "d /backups 0755 mawz users -"
     "d /backups/restic-repo 0755 mawz users -"
     "d /mnt/mawz-nas 0755 mawz users -"
   ];
