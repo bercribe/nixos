@@ -150,6 +150,7 @@
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
         "$mainMod, L, exec, hyprlock"
+        "$mainMod SHIFT, L, exec, hyprlock & systemctl suspend"
         "$mainMod, D, exec, makoctl dismiss"
 
         # Move focus with mainMod + arrow keys
