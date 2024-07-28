@@ -33,4 +33,15 @@
       "[workspace 10 silent] keepassxc"
     ];
   };
+
+  programs.waybar.settings.mainBar."hyprland/workspaces"."format-icons" = lib.mkForce {
+    "1" = "";
+    "2" = "";
+    "6" = "";
+    "7" = "";
+    "10" = "";
+    "urgent" = "";
+    "active" = "";
+    "default" = "";
+  };
 }
