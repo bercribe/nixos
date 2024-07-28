@@ -40,6 +40,10 @@
     libsForQt5.qt5.qtgraphicaleffects
   ];
 
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   # icons for waybar
   fonts.packages = with pkgs; [font-awesome];
 
