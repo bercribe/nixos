@@ -91,6 +91,8 @@
     ];
   };
 
+  home-manager.users.mawz = import ./home.nix;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

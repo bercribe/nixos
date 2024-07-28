@@ -14,10 +14,6 @@
         "fcitx5 -d"
         "nm-applet --indicator"
         "blueman-applet"
-        "[workspace 1 silent] alacritty"
-        "[workspace 2 silent] firefox"
-        "[workspace 3 silent] obsidian"
-        "[workspace 10 silent] keepassxc"
       ];
 
       # Source a file (multi-file configs)

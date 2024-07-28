@@ -3,13 +3,34 @@
   lib,
   ...
 }: {
-  wayland.windowManager.hyprland.settings = {
+  wayland.windowManager.hyprland.settings = let
+    left = "desc:Ancor Communications Inc ROG PG279Q ##ASNDQNtIJcHd";
+    right = "desc:Ancor Communications Inc ROG PG279Q ##ASNpS7wVCX7d";
+  in {
     monitor = lib.mkForce [
-      "desc:Ancor Communications Inc ROG PG279Q ##ASNDQNtIJcHd,2560x1440@144,0x0,1"
-      "desc:Ancor Communications Inc ROG PG279Q ##ASNpS7wVCX7d,2560x1440@144,2560x-900,1,transform,1"
+      "${left},2560x1440@144,0x0,1"
+      "${right},2560x1440@144,2560x-900,1,transform,1"
     ];
     cursor = {
       no_hardware_cursors = true;
     };
+    workspace = [
+      "1,monitor:${left},default:true"
+      "2,monitor:${left}"
+      "3,monitor:${left}"
+      "4,monitor:${left}"
+      "5,monitor:${left}"
+      "6,monitor:${right},default:true"
+      "7,monitor:${right}"
+      "8,monitor:${right}"
+      "9:monitor:${right}"
+      "10,monitor:${right}"
+    ];
+    exec-once = [
+      "[workspace 1 silent] alacritty"
+      "[workspace 6 silent] firefox"
+      "[workspace 6 silent] obsidian"
+      "[workspace 10 silent] keepassxc"
+    ];
   };
 }
