@@ -159,6 +159,9 @@
         "$mainMod,Tab,cyclenext," # change focus to another window
         "$mainMod,Tab,bringactivetotop," # bring it to the top
 
+        # toggle between monitors
+        "$mainMod SHIFT, Tab, focusmonitor, +1"
+
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
