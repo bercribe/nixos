@@ -206,6 +206,7 @@
     syncthing
     restic
     sops
+    pavucontrol
   ];
 
   # Set defaults
