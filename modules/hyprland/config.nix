@@ -155,6 +155,12 @@
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
 
+        # move window with mainMod + SHIFT + arrow keys
+        "$mainMod SHIFT, left, movewindow, l"
+        "$mainMod SHIFT, right, movewindow, r"
+        "$mainMod SHIFT, up, movewindow, u"
+        "$mainMod SHIFT, down, movewindow, d"
+
         # to switch between windows in a floating workspace
         "$mainMod,Tab,cyclenext," # change focus to another window
         "$mainMod,Tab,bringactivetotop," # bring it to the top
