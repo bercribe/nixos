@@ -161,7 +161,6 @@
     extraGroups = ["wireshark"];
     packages = with pkgs; [
       firefox
-      chromium
       keepassxc
       obsidian
       vscode
