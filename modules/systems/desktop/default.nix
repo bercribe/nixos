@@ -157,6 +157,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
+    extraGroups = ["wireshark"];
     packages = with pkgs; [
       firefox
       keepassxc
@@ -194,6 +195,8 @@
 
   # Required for obsidian
   nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
+
+  programs.wireshark.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
