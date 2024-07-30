@@ -160,6 +160,7 @@
     extraGroups = ["wireshark"];
     packages = with pkgs; [
       firefox
+      chromium
       keepassxc
       obsidian
       vscode
@@ -180,17 +181,6 @@
       btop
       cava
     ];
-  };
-
-  # Secrets management
-  sops = {
-    # update this with `sops secrets.yaml`
-    defaultSopsFile = ../../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/mawz/.config/sops/age/keys.txt";
-    secrets.restic-repo = {
-      owner = "mawz";
-    };
   };
 
   # Required for obsidian
@@ -225,6 +215,17 @@
     # fixes issue where login can fail due to home-manager
     backupFileExtension = "backup";
     users.mawz = import ./home.nix;
+  };
+
+  # Secrets management
+  sops = {
+    # update this with `sops secrets.yaml`
+    defaultSopsFile = ../../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/mawz/.config/sops/age/keys.txt";
+    secrets.restic-repo = {
+      owner = "mawz";
+    };
   };
 
   # Theme settings
