@@ -165,6 +165,7 @@
       alacritty
       discord
       spotube
+      wireshark
       qimgv
       mpv
       imagemagick
