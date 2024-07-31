@@ -6,12 +6,12 @@
   programs.hyprland.enable = true;
 
   # display manager
-  # services.displayManager.defaultSession = "hyprland";
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
-  };
+  services.xserver.displayManager.lightdm.enable = false;
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  #   theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
+  # };
 
   environment.systemPackages = with pkgs; [
     kitty # terminal
