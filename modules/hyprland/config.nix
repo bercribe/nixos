@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -233,6 +237,7 @@
 
   programs.hyprlock = {
     enable = true;
+    package = pkgs.unstable.hyprlock;
     settings = {
       general = {
         disable_loading_bar = true;

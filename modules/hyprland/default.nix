@@ -33,8 +33,6 @@
     grim
     slurp
     wl-clipboard
-    # lock screen
-    hyprlock
     # wifi widget
     networkmanagerapplet
     # for sddm theme
