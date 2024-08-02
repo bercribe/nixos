@@ -280,6 +280,8 @@
     restic
     sops
     pavucontrol
+    # For mount.cifs, required unless domain name resolution is not needed.
+    cifs-utils
   ];
 
   # Set defaults
@@ -305,6 +307,7 @@
     secrets.restic-repo = {
       owner = "mawz";
     };
+    secrets.mawz-nas-smb = {};
   };
 
   # Theme settings
@@ -314,29 +317,24 @@
     polarity = "dark";
   };
 
+  fileSystems."/mnt/mawz-nas" = {
+    device = "//192.168.0.43/mawz-home";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    in ["${automount_opts},credentials=/run/secrets/mawz-nas-smb,uid=1000,gid=100"];
+  };
+  # fix domain name resolution
+  networking.firewall.extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
+
+  # List services that you want to enable:
+
   # Manually created and repermissioned directories
   systemd.tmpfiles.rules = [
     "d /backups 0755 mawz users -"
     "d /backups/restic-repo 0755 mawz users -"
-    "d /mnt/mawz-nas 0755 mawz users -"
   ];
-
-  # NAS NFS mount
-  # This configuration requires the IP of this machine to be allowed by the NAS.
-  # In case of failures check that configuration:
-  # https://kb.synology.com/en-us/DSM/tutorial/How_to_access_files_on_Synology_NAS_within_the_local_network_NFS
-  fileSystems."/mnt/mawz-nas" = {
-    device = "192.168.0.43:/volume1/mawz-home";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "x-systemd.automount"
-      "noauto"
-      "x-systemd.idle-timeout=600"
-    ];
-  };
-
-  # List services that you want to enable:
 
   # Restic file system backups
   services.restic.backups = {
