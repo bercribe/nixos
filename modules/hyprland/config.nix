@@ -3,7 +3,9 @@
   config,
   ...
 }: {
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = let
+    lockCmd = "swaylock-fancy";
+  in {
     enable = true;
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -148,8 +150,8 @@
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
-        "$mainMod, L, exec, hyprlock"
-        "$mainMod SHIFT, L, exec, hyprlock & sleep 2 && systemctl suspend"
+        "$mainMod, L, exec, ${lockCmd}"
+        "$mainMod SHIFT, L, exec, ${lockCmd} & sleep 5 && systemctl suspend"
         "$mainMod, D, exec, makoctl dismiss"
 
         # Move focus with mainMod + arrow keys
