@@ -132,6 +132,17 @@
         };
       };
     };
+    "projects" = {
+      path = "/mnt/distant-disk/projects";
+      devices = ["mawz-nas" "mawz-fw"];
+      versioning = {
+        type = "staggered";
+        params = {
+          cleanInterval = "3600";
+          maxAge = "2592000";
+        };
+      };
+    };
     "libraries" = {
       path = "/mnt/distant-disk/Libraries";
       devices = ["mawz-nas"];

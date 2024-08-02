@@ -120,6 +120,17 @@
         };
       };
     };
+    "projects" = {
+      path = "/home/mawz/projects";
+      devices = ["mawz-nas" "mawz-hue" "mawz-hue-win"];
+      versioning = {
+        type = "staggered";
+        params = {
+          cleanInterval = "3600";
+          maxAge = "2592000";
+        };
+      };
+    };
     "mawz-fw" = {
       path = "/backups";
       devices = ["mawz-nas"];
