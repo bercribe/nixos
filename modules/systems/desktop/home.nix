@@ -2,6 +2,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [../../hyprland/config.nix];
@@ -43,6 +44,33 @@
         user = "mawz";
       };
     };
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings.colors = with config.lib.stylix.colors.withHashtag; let
+      default = {
+        black = base00;
+        white = base07;
+        inherit red green yellow blue cyan magenta;
+      };
+    in
+      lib.mkForce {
+        primary = {
+          background = base00;
+          foreground = base07;
+        };
+        cursor = {
+          text = base02;
+          cursor = base07;
+        };
+        normal = with default; {
+          green = base02;
+          inherit black white red yellow blue cyan magenta;
+        };
+        bright = default;
+        dim = default;
+      };
   };
 
   # inspiration:
