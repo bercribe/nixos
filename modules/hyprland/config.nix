@@ -10,7 +10,6 @@
       # Execute your favorite apps at launch
       exec-once = [
         "waybar"
-        "hyprpaper"
         "fcitx5 -d"
         "nm-applet --indicator"
         "blueman-applet"
