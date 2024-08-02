@@ -7,6 +7,7 @@
 
   # display manager
   services.xserver.displayManager.lightdm.enable = false;
+  environment.loginShellInit = "[ \"$(tty)\" = \"/dev/tty1\" ] && hyprland";
   # services.displayManager.sddm = {
   #   enable = true;
   #   wayland.enable = true;
