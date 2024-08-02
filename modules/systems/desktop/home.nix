@@ -46,6 +46,14 @@
     };
   };
 
+  programs.bash.enable = true;
+  programs.dircolors = {
+    enable = true;
+    settings = {
+      OTHER_WRITABLE = "34;47";
+    };
+  };
+
   programs.alacritty = {
     enable = true;
     settings.colors = with config.lib.stylix.colors.withHashtag; let
@@ -64,10 +72,7 @@
           text = base02;
           cursor = base07;
         };
-        normal = with default; {
-          green = base02;
-          inherit black white red yellow blue cyan magenta;
-        };
+        normal = default;
         bright = default;
         dim = default;
       };
