@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  stylix,
   ...
 }: {
   imports = [../../hyprland/config.nix];
@@ -54,29 +55,22 @@
     };
   };
 
-  programs.alacritty = {
+  programs.firefox = {
     enable = true;
-    settings.colors = with config.lib.stylix.colors.withHashtag; let
-      default = {
-        black = base00;
-        white = base07;
-        inherit red green yellow blue cyan magenta;
-      };
-    in
-      lib.mkForce {
-        primary = {
-          background = base00;
-          foreground = base07;
-        };
-        cursor = {
-          text = base02;
-          cursor = base07;
-        };
-        normal = default;
-        bright = default;
-        dim = default;
-      };
+    profiles.mawz = {
+      isDefault = true;
+    };
   };
+
+  # needed for stylix theming
+  programs.alacritty.enable = true;
+  programs.btop.enable = true;
+  programs.fzf.enable = true;
+  programs.tmux.enable = true;
+  programs.vim.enable = true;
+  programs.vscode.enable = true;
+  stylix.targets.firefox.profileNames = ["mawz"];
+  gtk.enable = true;
 
   # inspiration:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md

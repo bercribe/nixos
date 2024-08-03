@@ -4,7 +4,7 @@
   ...
 }: {
   wayland.windowManager.hyprland = let
-    lockCmd = "swaylock-fancy";
+    lockCmd = "swaylock";
   in {
     enable = true;
     settings = {
@@ -238,7 +238,7 @@
   };
 
   programs.hyprlock = {
-    enable = true;
+    # enable = true;
     package = pkgs.unstable.hyprlock;
     settings = {
       general = {
@@ -482,4 +482,8 @@
       };
     };
   };
+
+  # needed for stylix theming
+  programs.swaylock.enable = true;
+  services.mako.enable = true;
 }

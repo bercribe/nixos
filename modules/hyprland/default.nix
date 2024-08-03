@@ -33,8 +33,6 @@
     grim
     slurp
     wl-clipboard
-    # lock screen
-    swaylock-fancy
     # wifi widget
     networkmanagerapplet
     # for sddm theme
