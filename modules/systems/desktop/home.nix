@@ -51,7 +51,7 @@
   programs.dircolors = {
     enable = true;
     settings = {
-      OTHER_WRITABLE = "34;47";
+      OTHER_WRITABLE = "30;46";
     };
   };
 

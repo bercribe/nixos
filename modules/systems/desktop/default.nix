@@ -315,6 +315,7 @@
     enable = true;
     image = ./wallpaper.jpg;
     polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
   };
 
   fileSystems."/mnt/mawz-nas" = {
