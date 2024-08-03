@@ -62,15 +62,12 @@
     };
   };
 
-  # needed for stylix theming
-  programs.alacritty.enable = true;
-  programs.btop.enable = true;
-  programs.fzf.enable = true;
-  programs.tmux.enable = true;
-  programs.vim.enable = true;
-  programs.vscode.enable = true;
-  stylix.targets.firefox.profileNames = ["mawz"];
-  gtk.enable = true;
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs; [
+      vscode-extensions.bbenoist.nix
+    ];
+  };
 
   # inspiration:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md
@@ -106,6 +103,15 @@
       esac
     '';
   };
+
+  # needed for stylix theming
+  programs.alacritty.enable = true;
+  programs.btop.enable = true;
+  programs.fzf.enable = true;
+  programs.tmux.enable = true;
+  programs.vim.enable = true;
+  stylix.targets.firefox.profileNames = ["mawz"];
+  gtk.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
