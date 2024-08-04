@@ -59,6 +59,39 @@
     enable = true;
     profiles.mawz = {
       isDefault = true;
+      search = {
+        default = "Kagi";
+        force = true;
+        engines = {
+          "Kagi" = {
+            urls = [
+              {template = "https://kagi.com/search?q={searchTerms}";}
+              {
+                template = "https://kagi.com/api/autosuggest?q={searchTerms}";
+                type = "application/x-suggestions+json";
+              }
+            ];
+            iconUpdateUrl = "https://assets.kagi.com/v2/favicon-32x32.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = ["@kagi"];
+          };
+          "Nix Packages" = {
+            urls = [{template = "https://search.nixos.org/packages?query={searchTerms}";}];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@np"];
+          };
+          "Nix Options" = {
+            urls = [{template = "https://search.nixos.org/options?query={searchTerms}";}];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@no"];
+          };
+          "Home Manager" = {
+            urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@hm"];
+          };
+        };
+      };
     };
   };
 
