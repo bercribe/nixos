@@ -309,6 +309,7 @@
       owner = "mawz";
     };
     secrets.mawz-nas-smb = {};
+    secrets.mawz-nas-upsd = {};
   };
 
   # Theme settings

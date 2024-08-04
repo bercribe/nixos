@@ -160,6 +160,66 @@
     };
   };
 
+  # shutdown machine automatically during power outage
+  # machine IP needs to be allowed in the synology control pannel
+  # look for "Permitted Synology NAS Devices"
+  power.ups = let
+    notifyCmd = pkgs.writeShellScript "notify-cmd" ''
+      ${pkgs.util-linux}/bin/logger -t notify-cmd "$@"
+    '';
+  in {
+    enable = true;
+    mode = "netclient";
+    upsmon = {
+      enable = true;
+      settings = {
+        NOTIFYCMD = "${notifyCmd}";
+        NOTIFYFLAG = [
+          ["ONLINE" "SYSLOG+WALL+EXEC"]
+          ["ONBATT" "SYSLOG+WALL+EXEC"]
+          ["LOWBATT" "SYSLOG+WALL+EXEC"]
+          ["FSD" "SYSLOG+WALL+EXEC"]
+          ["COMMOK" "SYSLOG+WALL"]
+          ["COMMBAD" "SYSLOG+WALL+EXEC"]
+          ["SHUTDOWN" "SYSLOG+WALL+EXEC"]
+          ["REPLBATT" "SYSLOG+WALL+EXEC"]
+          ["NOCOMM" "SYSLOG+WALL+EXEC"]
+          ["NOPARENT" "SYSLOG+WALL+EXEC"]
+          ["CAL" "SYSLOG+WALL+EXEC"]
+          ["NOTCAL" "SYSLOG+WALL+EXEC"]
+          ["OFF" "SYSLOG+WALL+EXEC"]
+          ["NOTOFF" "SYSLOG+WALL+EXEC"]
+          ["BYPASS" "SYSLOG+WALL+EXEC"]
+          ["NOTBYPASS" "SYSLOG+WALL+EXEC"]
+        ];
+      };
+      monitor.mawz-nas = {
+        # these can be found at `/usr/syno/etc/ups/upsd.users`
+        system = "ups@192.168.0.43";
+        user = "monuser";
+        passwordFile = "/run/secrets/mawz-nas-upsd";
+        type = "slave";
+      };
+    };
+  };
+  # notifications
+  systemd.user.services.ups-journal-notify = let
+    journalNotify = pkgs.writeShellScript "journal-notify" ''
+      journalctl -f -u upsmon.service -t notify-cmd | while read -r line; do
+        ${pkgs.libnotify}/bin/notify-send UPS "$line"
+      done
+    '';
+  in {
+    enable = true;
+    after = ["network.target"];
+    wantedBy = ["default.target"];
+    description = "UPS Journal Entry Notification Service";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${journalNotify}";
+    };
+  };
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
