@@ -168,6 +168,7 @@
       discord
       spotube
       wireshark
+      godot_4
       qimgv
       mpv
       imagemagick
