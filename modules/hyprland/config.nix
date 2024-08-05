@@ -119,6 +119,8 @@
       misc = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         force_default_wallpaper = 0; # Set to 0 or 1 to disable the anime mascot wallpapers
+        mouse_move_enables_dpms = true;
+        key_press_enables_dpms = true;
       };
 
       # Example per-device config
