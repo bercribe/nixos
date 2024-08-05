@@ -3,9 +3,7 @@
   config,
   ...
 }: {
-  wayland.windowManager.hyprland = let
-    lockCmd = "swaylock";
-  in {
+  wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -150,8 +148,8 @@
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
-        "$mainMod, L, exec, ${lockCmd}"
-        "$mainMod SHIFT, L, exec, ${lockCmd} & sleep 2 && systemctl suspend"
+        "$mainMod, L, exec, loginctl lock-session"
+        "$mainMod SHIFT, L, exec, systemctl suspend"
         "$mainMod, D, exec, makoctl dismiss"
 
         # Move focus with mainMod + arrow keys
@@ -268,6 +266,43 @@
           outline_thickness = 5;
           placeholder_text = "Password...";
           shadow_passes = 2;
+        }
+      ];
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "swaylock";
+        before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
+        after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
+      };
+      listener = [
+        {
+          timeout = 150; # 2.5min.
+          on-timeout = "brightnessctl -s set 10"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
+          on-resume = "brightnessctl -r"; # monitor backlight restore.
+        }
+        # turn off keyboard backlight, comment out this section if you dont have a keyboard backlight.
+        # {
+        #   timeout = 150; # 2.5min.
+        #   on-timeout = brightnessctl -sd rgb:kbd_backlight set 0; # turn off keyboard backlight.
+        #   on-resume = brightnessctl -rd rgb:kbd_backlight; # turn on keyboard backlight.
+        # }
+        {
+          timeout = 300; # 5min
+          on-timeout = "loginctl lock-session"; # lock screen when timeout has passed
+        }
+        {
+          timeout = 330; # 5.5min
+          on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed
+          on-resume = "hyprctl dispatch dpms on"; # screen on when activity is detected after timeout has fired.
+        }
+        {
+          timeout = 1800; # 30min
+          on-timeout = "systemctl suspend"; # suspend pc
         }
       ];
     };
