@@ -28,6 +28,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # NAS NFS drive
+  fileSystems."/mnt/mawz-nas" = {
+    device = "192.168.0.43:/volume1/mawz-home";
+    fsType = "nfs";
+  };
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
