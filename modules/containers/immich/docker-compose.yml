@@ -13,11 +13,7 @@ services:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     volumes:
-      - type: volume
-        source: upload-location
-        target: /usr/src/app/upload
-        volume:
-          nocopy: true
+      - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -73,25 +69,11 @@ services:
       POSTGRES_EXTRA_OPTS: '--clean --if-exists'
       BACKUP_DIR: /db_dumps
     volumes:
-      - type: volume
-        source: db-dumps
-        target: /db_dumps
-        volume:
-          nocopy: true
+      - ${BACKUP_LOCATION}:/db_dumps
     depends_on:
       - database
 
 volumes:
   pgdata:
   model-cache:
-  upload-location:
-    driver_opts:
-      type: nfs
-      o: addr=192.168.0.43,nolock,soft,rw
-      device: :/volume1/mawz-home/immich-photos
-  db-dumps:
-    driver_opts:
-      type: nfs
-      o: addr=192.168.0.43,nolock,soft,rw
-      device: :/volume1/mawz-home/immich-photos/db_dumps
 
