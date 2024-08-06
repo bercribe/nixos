@@ -9,7 +9,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/containers/immich
+    ../../modules/services/containers/immich
+    ../../modules/services/gitea.nix
   ];
 
   # Bootloader.
@@ -27,6 +28,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.insertNameservers = ["1.1.1.1" "8.8.8.8"];
 
   # NAS NFS drive
   fileSystems."/mnt/mawz-nas" = {
