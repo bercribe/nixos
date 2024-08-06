@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ../../modules/services/containers/immich
     ../../modules/services/gitea.nix
+    ../../modules/services/adguardhome.nix
   ];
 
   # Bootloader.
