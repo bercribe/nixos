@@ -97,8 +97,9 @@
 
   programs.vscode = {
     enable = true;
-    extensions = with pkgs; [
-      vscode-extensions.bbenoist.nix
+    extensions = with pkgs.vscode-extensions; [
+      bbenoist.nix
+      ms-vscode-remote.remote-ssh
     ];
   };
 
