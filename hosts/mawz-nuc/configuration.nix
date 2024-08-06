@@ -138,6 +138,9 @@
   #   enableSSHSupport = true;
   # };
 
+  # necessary for vscode remote ssh
+  programs.nix-ld.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
