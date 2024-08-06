@@ -29,7 +29,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.networkmanager.insertNameservers = ["1.1.1.1" "8.8.8.8"];
+  networking.networkmanager.insertNameservers = ["127.0.0.1"];
 
   # NAS NFS drive
   fileSystems."/mnt/mawz-nas" = {

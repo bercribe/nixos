@@ -34,7 +34,7 @@
     vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../../certs/openvpn/mawz-nas-ca.pem);
   in {
     enable = true;
-    insertNameservers = ["1.1.1.1" "8.8.8.8"];
+    insertNameservers = ["192.168.0.54"];
     # generated with: https://github.com/janik-haag/nm2nix
     ensureProfiles.profiles = {
       "mawz nas full tunnel" = {
