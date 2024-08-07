@@ -115,10 +115,16 @@
         ${pkgs.wl-clipboard}/bin/wl-copy $f
         }}
       '';
+      dragon-out = ''
+        ''${{
+          ${pkgs.xdragon}/bin/xdragon -a -x "$fx"
+        }}
+      '';
     };
     keybindings = {
       "<c-c>" = "copy-path";
       a = "push %mkdir<space>";
+      o = "dragon-out";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
