@@ -167,6 +167,7 @@
       alacritty
       discord
       spotube
+      libreoffice
       wireshark
       godot_4
       qimgv
