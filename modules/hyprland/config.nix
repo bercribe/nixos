@@ -41,6 +41,8 @@
         kb_options = "";
         kb_rules = "";
 
+        numlock_by_default = true;
+
         follow_mouse = 1;
 
         touchpad = {
