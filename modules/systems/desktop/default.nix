@@ -340,6 +340,15 @@
     "d /backups/restic-repo 0755 mawz users -"
   ];
 
+  # Printer
+  services.printing.enable = true;
+  # Auto network discovery
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   # Restic file system backups
   services.restic.backups = {
     localbackup = {
