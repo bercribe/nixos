@@ -283,8 +283,6 @@
     restic
     sops
     pavucontrol
-    # For mount.cifs, required unless domain name resolution is not needed.
-    cifs-utils
   ];
 
   # Set defaults
@@ -310,7 +308,7 @@
     secrets.restic-repo = {
       owner = "mawz";
     };
-    secrets.mawz-nas-smb = {};
+    secrets."mawz-nas-ssh-key/private" = {};
     secrets.mawz-nas-upsd = {};
   };
 
@@ -322,16 +320,17 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
   };
 
+  # Requires SFTP to be enabled
   fileSystems."/mnt/mawz-nas" = {
-    device = "//192.168.0.43/mawz-home";
-    fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    in ["${automount_opts},credentials=/run/secrets/mawz-nas-smb,uid=1000,gid=100"];
+    device = "mawz@192.168.0.43:/mawz-home";
+    fsType = "sshfs";
+    options = [
+      "nodev"
+      "noatime"
+      "allow_other"
+      "IdentityFile=/run/secrets/mawz-nas-ssh-key/private"
+    ];
   };
-  # fix domain name resolution
-  networking.firewall.extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
 
   # List services that you want to enable:
 
