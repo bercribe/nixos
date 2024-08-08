@@ -120,41 +120,19 @@
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing.settings.folders = {
-    "personal-cloud" = {
-      # Name of folder in Syncthing, also the folder ID
-      path = "/mnt/distant-disk/personal cloud"; # Which folder to add to Syncthing
-      devices = ["mawz-nas" "mawz-fw" "mawz-galaxy"]; # Which devices to share the folder with
-      versioning = {
-        type = "staggered";
-        params = {
-          cleanInterval = "3600";
-          maxAge = "31536000";
-        };
-      };
+    personal-cloud = {
+      enable = true;
+      path = "/mnt/distant-disk/personal cloud";
     };
-    "projects" = {
+    projects = {
+      enable = true;
       path = "/mnt/distant-disk/projects";
-      devices = ["mawz-nas" "mawz-fw"];
-      versioning = {
-        type = "staggered";
-        params = {
-          cleanInterval = "3600";
-          maxAge = "2592000";
-        };
-      };
     };
-    "libraries" = {
+    libraries = {
+      enable = true;
       path = "/mnt/distant-disk/Libraries";
-      devices = ["mawz-nas"];
-      versioning = {
-        type = "staggered";
-        params = {
-          cleanInterval = "3600";
-          maxAge = "2592000";
-        };
-      };
     };
-    "mawz-hue" = {
+    mawz-hue = {
       path = "/backups";
       devices = ["mawz-nas"];
     };

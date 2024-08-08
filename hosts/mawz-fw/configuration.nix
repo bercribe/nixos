@@ -108,30 +108,9 @@
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing.settings.folders = {
-    "personal-cloud" = {
-      # Name of folder in Syncthing, also the folder ID
-      path = "/home/mawz/personal-cloud"; # Which folder to add to Syncthing
-      devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-galaxy"]; # Which devices to share the folder with
-      versioning = {
-        type = "staggered";
-        params = {
-          cleanInterval = "3600";
-          maxAge = "31536000";
-        };
-      };
-    };
-    "projects" = {
-      path = "/home/mawz/projects";
-      devices = ["mawz-nas" "mawz-hue" "mawz-hue-win"];
-      versioning = {
-        type = "staggered";
-        params = {
-          cleanInterval = "3600";
-          maxAge = "2592000";
-        };
-      };
-    };
-    "mawz-fw" = {
+    personal-cloud.enable = true;
+    projects.enable = true;
+    mawz-fw = {
       path = "/backups";
       devices = ["mawz-nas"];
     };

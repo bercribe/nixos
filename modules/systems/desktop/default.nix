@@ -381,6 +381,44 @@
         "mawz-fw" = {id = "EASFCDW-AI3FKGE-RECE37P-ZUN7WOZ-4YWFU2K-CLTJ2GG-YIBZJCW-D3EBNQN";};
         "mawz-galaxy" = {id = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
       };
+      folders = {
+        personal-cloud = {
+          enable = lib.mkDefault false;
+          path = "/home/mawz/personal-cloud";
+          devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-fw" "mawz-galaxy"];
+          versioning = {
+            type = "staggered";
+            params = {
+              cleanInterval = "3600";
+              maxAge = "31536000";
+            };
+          };
+        };
+        projects = {
+          enable = lib.mkDefault false;
+          path = "/home/mawz/projects";
+          devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-fw"];
+          versioning = {
+            type = "staggered";
+            params = {
+              cleanInterval = "3600";
+              maxAge = "2592000";
+            };
+          };
+        };
+        libraries = {
+          enable = lib.mkDefault false;
+          path = "/home/mawz/libraries";
+          devices = ["mawz-nas" "mawz-hue" "mawz-hue-win"];
+          versioning = {
+            type = "staggered";
+            params = {
+              cleanInterval = "3600";
+              maxAge = "2592000";
+            };
+          };
+        };
+      };
     };
   };
 
