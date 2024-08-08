@@ -178,6 +178,7 @@
       czkawka # deduping util
       #  thunderbird
       # cli extras
+      ripgrep
       lf
       neofetch
       btop
