@@ -34,7 +34,6 @@
     vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../../certs/openvpn/mawz-nas-ca.pem);
   in {
     enable = true;
-    insertNameservers = ["192.168.0.54"];
     # generated with: https://github.com/janik-haag/nm2nix
     ensureProfiles.profiles = {
       "mawz nas full tunnel" = {
@@ -321,6 +320,10 @@
   };
 
   # Requires SFTP to be enabled
+  # Have to run:
+  # `sudo sshfs -o IdentityFile=/run/secrets/mawz-nas-ssh-key/private mawz@192.168.0.43:/mawz-home <tmpdir>`
+  # and say "yes" to the prompt the first time.
+  # Then run `sudo fusermount -u <tmpdir>`
   fileSystems."/mnt/mawz-nas" = {
     device = "mawz@192.168.0.43:/mawz-home";
     fsType = "sshfs";
@@ -384,7 +387,7 @@
       folders = {
         personal-cloud = {
           enable = lib.mkDefault false;
-          path = "/home/mawz/personal-cloud";
+          path = lib.mkDefault "/home/mawz/personal-cloud";
           devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-fw" "mawz-galaxy"];
           versioning = {
             type = "staggered";
@@ -396,7 +399,7 @@
         };
         projects = {
           enable = lib.mkDefault false;
-          path = "/home/mawz/projects";
+          path = lib.mkDefault "/home/mawz/projects";
           devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-fw"];
           versioning = {
             type = "staggered";
@@ -408,7 +411,7 @@
         };
         libraries = {
           enable = lib.mkDefault false;
-          path = "/home/mawz/libraries";
+          path = lib.mkDefault "/home/mawz/libraries";
           devices = ["mawz-nas" "mawz-hue" "mawz-hue-win"];
           versioning = {
             type = "staggered";
