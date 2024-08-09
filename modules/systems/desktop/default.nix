@@ -307,8 +307,8 @@
     secrets.restic-repo = {
       owner = "mawz";
     };
-    secrets."mawz-nas-ssh-key/private" = {};
-    secrets.mawz-nas-upsd = {};
+    secrets."mawz-nas/upsd" = {};
+    secrets."mawz-nas/ssh/private" = {};
   };
 
   # Theme settings
@@ -321,7 +321,7 @@
 
   # Requires SFTP to be enabled
   # Have to run:
-  # `sudo sshfs -o IdentityFile=/run/secrets/mawz-nas-ssh-key/private mawz@192.168.0.43:/mawz-home <tmpdir>`
+  # `sudo sshfs -o IdentityFile=/run/secrets/mawz-nas/ssh/private mawz@192.168.0.43:/mawz-home <tmpdir>`
   # and say "yes" to the prompt the first time.
   # Then run `sudo fusermount -u <tmpdir>`
   fileSystems."/mnt/mawz-nas" = {
@@ -331,7 +331,7 @@
       "nodev"
       "noatime"
       "allow_other"
-      "IdentityFile=/run/secrets/mawz-nas-ssh-key/private"
+      "IdentityFile=/run/secrets/mawz-nas/ssh/private"
     ];
   };
 
