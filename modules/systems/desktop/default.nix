@@ -278,6 +278,7 @@
     alejandra
     libnotify
     fzf
+    unzip
     syncthing
     restic
     sops
