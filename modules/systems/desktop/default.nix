@@ -29,81 +29,6 @@
     enableBashIntegration = true;
   };
 
-  # Network config
-  networking.networkmanager = let
-    vpnCert = builtins.toFile "vpn-cert.pem" (builtins.readFile ../../../certs/openvpn/mawz-nas-ca.pem);
-  in {
-    enable = true;
-    # generated with: https://github.com/janik-haag/nm2nix
-    ensureProfiles.profiles = {
-      "mawz nas full tunnel" = {
-        connection = {
-          autoconnect = "false";
-          id = "mn-full";
-          timestamp = "1716761148";
-          type = "vpn";
-          uuid = "f43aefe6-9777-4ea8-b41f-1233da32def9";
-        };
-        ipv4 = {
-          method = "auto";
-        };
-        ipv6 = {
-          addr-gen-mode = "stable-privacy";
-          method = "auto";
-        };
-        proxy = {};
-        vpn = {
-          auth = "SHA512";
-          ca = vpnCert;
-          cipher = "AES-256-CBC";
-          comp-lzo = "adaptive";
-          connection-type = "password";
-          dev = "tun";
-          mssfix = "1340";
-          password-flags = "1";
-          remote = "mawz.synology.me:1194";
-          reneg-seconds = "0";
-          service-type = "org.freedesktop.NetworkManager.openvpn";
-          tunnel-mtu = "1380";
-          username = "mawz";
-        };
-      };
-      "mawz nas split tunnel" = {
-        connection = {
-          autoconnect = "false";
-          id = "mn-split";
-          timestamp = "1716761148";
-          type = "vpn";
-          uuid = "0f8822e1-69cb-447f-b999-e1980343178b";
-        };
-        ipv4 = {
-          ignore-auto-dns = "true";
-          method = "auto";
-        };
-        ipv6 = {
-          addr-gen-mode = "stable-privacy";
-          method = "auto";
-        };
-        proxy = {};
-        vpn = {
-          auth = "SHA512";
-          ca = vpnCert;
-          cipher = "AES-256-CBC";
-          comp-lzo = "adaptive";
-          connection-type = "password";
-          dev = "tun";
-          mssfix = "1340";
-          password-flags = "1";
-          remote = "mawz.synology.me:1194";
-          reneg-seconds = "0";
-          service-type = "org.freedesktop.NetworkManager.openvpn";
-          tunnel-mtu = "1380";
-          username = "mawz";
-        };
-      };
-    };
-  };
-
   # Enable Japanese and Chinese keyboards
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -312,6 +237,7 @@
     };
     secrets."mawz-nas/upsd" = {};
     secrets."mawz-nas/ssh/private" = {};
+    secrets.network-manager = {};
   };
 
   # Theme settings

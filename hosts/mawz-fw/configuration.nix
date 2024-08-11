@@ -23,8 +23,47 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # Network config
+  networking.networkmanager = {
+    enable = true;
+    # generated with: https://github.com/janik-haag/nm2nix
+    # to generate wireguard keys:
+    # ```
+    # nix-shell -p wireguard-tools
+    # mkdir ~/wireguard-keys
+    # wg genkey > ~/wireguard-keys/private
+    # wg pubkey < ~/wireguard-keys/private > ~/wireguard-keys/public
+    # ```
+    ensureProfiles = {
+      environmentFiles = [config.sops.secrets.network-manager.path];
+      profiles = {
+        home-lan = {
+          connection = {
+            id = "home-lan";
+            interface-name = "home-lan";
+            type = "wireguard";
+            uuid = "410d1333-e836-4b91-98cc-3a5d01930181";
+          };
+          ipv4 = {
+            address1 = "192.168.99.10/32";
+            method = "manual";
+          };
+          ipv6 = {
+            addr-gen-mode = "default";
+            method = "disabled";
+          };
+          proxy = {};
+          wireguard = {
+            private-key = "$PRIVATE_KEY";
+          };
+          "wireguard-peer.$PUBLIC_KEY" = {
+            allowed-ips = "192.168.0.0/16;";
+            endpoint = "$ENDPOINT";
+          };
+        };
+      };
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
