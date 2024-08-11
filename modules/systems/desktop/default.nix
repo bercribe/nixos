@@ -334,7 +334,7 @@
       "nodev"
       "noatime"
       "allow_other"
-      "IdentityFile=/run/secrets/mawz-nas/ssh/private"
+      "IdentityFile=${config.sops.secrets."mawz-nas/ssh/private".path}"
     ];
   };
 
@@ -363,7 +363,7 @@
         "/home/*/.cache"
       ];
       initialize = true;
-      passwordFile = "/run/secrets/restic-repo";
+      passwordFile = config.sops.secrets.restic-repo.path;
       paths = [
         "/home"
       ];
