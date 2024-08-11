@@ -130,6 +130,9 @@
     ];
   };
 
+  # force wayland rendering for electron apps, fixes pixelated display
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   home-manager.users.mawz = import ./home.nix;
 
   # Allow unfree packages

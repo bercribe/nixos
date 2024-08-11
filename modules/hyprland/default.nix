@@ -39,7 +39,7 @@
     libsForQt5.qt5.qtgraphicaleffects
   ];
 
-  # enabling this causes flickering in electron apps
+  # enabling this causes flickering in electron apps with nvidia hardware
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # icons for waybar
