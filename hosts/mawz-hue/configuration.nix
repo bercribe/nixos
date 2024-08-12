@@ -175,7 +175,7 @@
         # these can be found at `/usr/syno/etc/ups/upsd.users`
         system = "ups@192.168.0.43";
         user = "monuser";
-        passwordFile = sops.secrets."mawz-nas/upsd".path;
+        passwordFile = config.sops.secrets."mawz-nas/upsd".path;
         type = "slave";
       };
     };
