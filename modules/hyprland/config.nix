@@ -25,6 +25,7 @@
       # Set programs that you use
       "$terminal" = "alacritty";
       "$fileManager" = "alacritty -e lf";
+      "$browser" = "firefox";
       "$menu" = "wofi --show drun";
 
       # Some default env vars.
@@ -148,6 +149,7 @@
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
+        "$mainMod, B, exec, $browser"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
