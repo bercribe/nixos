@@ -6,7 +6,8 @@
       ${pkgs.docker}/bin/docker compose up -d
     '';
     wantedBy = ["multi-user.target"];
-    after = ["docker.service" "docker.socket"];
+    after = ["docker.service" "docker.socket" "mnt-mawz\\x2dnas.mount"];
+    requires = ["mnt-mawz\\x2dnas.mount"];
     serviceConfig = {
       Restart = "on-failure";
       RestartSec = 5;
