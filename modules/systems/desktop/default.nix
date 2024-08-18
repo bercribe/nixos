@@ -261,6 +261,10 @@
       "noatime"
       "allow_other"
       "IdentityFile=${config.sops.secrets."mawz-nas/ssh/private".path}"
+      # for reconnecting after suspend
+      "reconnect"
+      "ServerAliveInterval=15"
+      "ServerAliveCountMax=3"
     ];
   };
 
