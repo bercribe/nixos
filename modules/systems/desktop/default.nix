@@ -14,6 +14,7 @@
     sops-nix.nixosModules.sops
     # Theme manager
     stylix.nixosModules.stylix
+    ../network-mount.nix
   ];
 
   # Bootloader.
@@ -236,7 +237,6 @@
       owner = "mawz";
     };
     secrets."mawz-nas/upsd" = {};
-    secrets."mawz-nas/ssh/private" = {};
     secrets.network-manager = {};
   };
 
@@ -246,26 +246,6 @@
     image = ./wallpaper.jpg;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
-  };
-
-  # Requires SFTP to be enabled
-  # Have to run:
-  # `sudo sshfs -o IdentityFile=/run/secrets/mawz-nas/ssh/private mawz@192.168.0.43:/mawz-home <tmpdir>`
-  # and say "yes" to the prompt the first time.
-  # Then run `sudo fusermount -u <tmpdir>`
-  fileSystems."/mnt/mawz-nas" = {
-    device = "mawz@192.168.0.43:/mawz-home";
-    fsType = "sshfs";
-    options = [
-      "nodev"
-      "noatime"
-      "allow_other"
-      "IdentityFile=${config.sops.secrets."mawz-nas/ssh/private".path}"
-      # for reconnecting after suspend
-      "reconnect"
-      "ServerAliveInterval=15"
-      "ServerAliveCountMax=3"
-    ];
   };
 
   # List services that you want to enable:
