@@ -7,5 +7,9 @@
     '';
     wantedBy = ["multi-user.target" "mnt-mawz\\x2dnas.mount"];
     after = ["docker.service" "docker.socket"];
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = 60;
+    };
   };
 }
