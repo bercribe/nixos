@@ -57,6 +57,7 @@
     };
     nixosConfigurations.mawz-nuc = nixpkgs.lib.nixosSystem {
       inherit system;
+      specialArgs = inputs;
       modules = [./hosts/mawz-nuc/configuration.nix];
     };
   };

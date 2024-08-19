@@ -12,9 +12,5 @@ in {
     };
   };
   networking.firewall.allowedTCPPorts = [port];
-
-  systemd.services.gitea = {
-    after = ["mnt-mawz\\x2dnas.mount"];
-    requires = ["mnt-mawz\\x2dnas.mount"];
-  };
+  systemd.services.gitea.wantedBy = ["mnt-mawz\\x2dnas.mount"];
 }
