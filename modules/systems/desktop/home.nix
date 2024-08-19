@@ -125,6 +125,7 @@
       "<c-c>" = "copy-path";
       a = "push %mkdir<space>";
       o = "dragon-out";
+      gn = "cd /mnt/mawz-nas";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
