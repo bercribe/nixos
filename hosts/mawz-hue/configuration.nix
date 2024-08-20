@@ -184,7 +184,7 @@
   systemd.user.services.ups-journal-notify = let
     journalNotify = pkgs.writeShellScript "journal-notify" ''
       journalctl -f -u upsmon.service -t notify-cmd | while read -r line; do
-        ${pkgs.libnotify}/bin/notify-send UPS "$line"
+        ${pkgs.libnotify}/bin/notify-send -t 60000  UPS "$line"
       done
     '';
   in {
