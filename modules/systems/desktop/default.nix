@@ -195,7 +195,15 @@
     };
   };
 
-  programs.steam.enable = true;
+  # to use these, add launch options to game in steam:
+  # `gamemoderun %command%` - improves performance
+  # `mangohud %command%` - fps monitor
+  # `gamescope %command%` - helps with resoltion issues sometimes
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+  programs.gamemode.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -211,6 +219,7 @@
     restic
     sops
     pavucontrol
+    mangohud
   ];
 
   # Set defaults
