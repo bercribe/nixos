@@ -283,7 +283,7 @@
       general = {
         lock_cmd = "swaylock";
         before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
-        after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
+        after_sleep_cmd = "sleep 2; hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
       };
       listener = [
         {
@@ -304,7 +304,7 @@
         {
           timeout = 330; # 5.5min
           on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed
-          on-resume = "hyprctl dispatch dpms on"; # screen on when activity is detected after timeout has fired.
+          on-resume = "sleep 2; hyprctl dispatch dpms on"; # screen on when activity is detected after timeout has fired.
         }
         {
           timeout = 1800; # 30min
