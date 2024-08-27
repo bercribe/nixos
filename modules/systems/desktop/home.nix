@@ -126,6 +126,7 @@
       a = "push %mkdir<space>";
       o = "dragon-out";
       gn = "cd /mnt/mawz-nas";
+      gd = "cd /mnt/distant-disk";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
