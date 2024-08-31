@@ -152,6 +152,7 @@
         "$mainMod, B, exec, $browser"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
+        "$mainMod, PERIOD, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
         "$mainMod, L, exec, loginctl lock-session"
