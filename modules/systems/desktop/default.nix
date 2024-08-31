@@ -15,6 +15,7 @@
     # Theme manager
     stylix.nixosModules.stylix
     ../network-mount.nix
+    ../bluray.nix
   ];
 
   # Bootloader.
@@ -187,6 +188,9 @@
       exiftool
       shotwell # photo editor
       czkawka # deduping util
+      makemkv # blu-ray ripper
+      handbrake # video transcoding
+      ffsubsync # sync subtitles with video
       #  thunderbird
       # cli extras
       ripgrep
