@@ -115,6 +115,16 @@
         ${pkgs.wl-clipboard}/bin/wl-copy $f
         }}
       '';
+      copy-name = ''
+        ''${{
+        basename "$f" | ${pkgs.wl-clipboard}/bin/wl-copy
+        }}
+      '';
+      copy-dir = ''
+        ''${{
+        dirname "$f" | ${pkgs.wl-clipboard}/bin/wl-copy
+        }}
+      '';
       dragon-out = ''
         ''${{
           ${pkgs.xdragon}/bin/xdragon -a -x "$fx"
@@ -122,7 +132,11 @@
       '';
     };
     keybindings = {
-      "<c-c>" = "copy-path";
+      y = null;
+      yy = "copy";
+      yp = "copy-path";
+      yn = "copy-name";
+      yd = "copy-dir";
       a = "push %mkdir<space>";
       o = "dragon-out";
       gn = "cd /mnt/mawz-nas";
