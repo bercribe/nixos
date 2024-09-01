@@ -151,6 +151,7 @@
         "$mainMod, E, exec, $fileManager"
         "$mainMod, B, exec, $browser"
         "$mainMod, V, togglefloating,"
+        "$mainMod, F, fullscreen,"
         "$mainMod, R, exec, $menu"
         "$mainMod, PERIOD, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mainMod, P, pseudo," # dwindle
