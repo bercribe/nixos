@@ -18,27 +18,16 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     nixos-hardware,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    overlay-unstable = final: prev: {
-      unstable = import nixpkgs-unstable {
-        system = final.system;
-        config.allowUnfree = true;
-      };
-    };
   in {
     nixosConfigurations.mawz-hue = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
       modules = [
-        ({
-          config,
-          pkgs,
-          ...
-        }: {nixpkgs.overlays = [overlay-unstable];})
+        ./modules/overlays.nix
         ./hosts/mawz-hue/configuration.nix
       ];
     };
@@ -46,11 +35,7 @@
       inherit system;
       specialArgs = inputs;
       modules = [
-        ({
-          config,
-          pkgs,
-          ...
-        }: {nixpkgs.overlays = [overlay-unstable];})
+        ./modules/overlays.nix
         ./hosts/mawz-fw/configuration.nix
         nixos-hardware.nixosModules.framework-11th-gen-intel
       ];
