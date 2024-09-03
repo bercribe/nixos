@@ -4,12 +4,14 @@
 {
   config,
   pkgs,
+  home-manager,
   sops-nix,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    home-manager.nixosModules.home-manager
     sops-nix.nixosModules.sops
     ../../modules/systems/network-mount.nix
     ../../modules/services/containers/immich
@@ -125,6 +127,15 @@
 
   # Set default text editor
   environment.variables.EDITOR = "vim";
+
+  # Home manager
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    # fixes issue where login can fail due to home-manager
+    backupFileExtension = "backup";
+    users.mawz = import ./home.nix;
+  };
 
   # Enable docker
   virtualisation.docker.enable = true;
