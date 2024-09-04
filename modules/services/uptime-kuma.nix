@@ -22,7 +22,7 @@ in {
   # prevents backup from being clobbered on a new system install
   # to restore backup, run
   # sudo cp <backup> /var/lib/private/uptime-kuma
-  # sudo chmod -R uptime-kuma:uptime-kuma /var/lib/private/uptime-kuma
+  # sudo chown -R uptime-kuma:uptime-kuma /var/lib/private/uptime-kuma
   # sudo ln -s private/uptime-kuma /var/lib/uptime-kuma
   systemd.services.uptime-kuma.unitConfig.ConditionPathExists = config.services.uptime-kuma.settings.DATA_DIR;
 
