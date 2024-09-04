@@ -1,8 +1,10 @@
 {
   config,
-  sops,
+  sops-nix,
   ...
 }: {
+  imports = [sops-nix.nixosModules.sops];
+
   # Secrets management
   sops = {
     # update this with `sops secrets.yaml`

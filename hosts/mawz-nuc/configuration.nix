@@ -4,13 +4,11 @@
 {
   config,
   pkgs,
-  sops-nix,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    sops-nix.nixosModules.sops
     ../../modules/network/mount.nix
     ../../modules/services/containers/immich
     ../../modules/services/gitea.nix
