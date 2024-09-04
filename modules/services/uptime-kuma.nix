@@ -6,6 +6,8 @@
 }: let
   port = 13114;
 in {
+  imports = [../network/mawz-nas-ssh.nix];
+
   # notifications set up with a gmail burner
   # password set here: https://myaccount.google.com/apppasswords
   services.uptime-kuma = {
@@ -26,8 +28,10 @@ in {
     };
   };
   systemd.services.uptime-kuma-backup = {
-    script = ''
-      ${pkgs.rsync}/bin/rsync -a --delete ${config.services.uptime-kuma.settings.DATA_DIR} /mnt/mawz-nas/uptime-kuma/
+    script = let
+      identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
+    in ''
+      ${pkgs.rsync}/bin/rsync -a --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.uptime-kuma.settings.DATA_DIR} mawz@192.168.0.43:/volume1/mawz-home/uptime-kuma/
     '';
     serviceConfig = {
       Type = "oneshot";
