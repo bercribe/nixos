@@ -31,7 +31,7 @@ in {
     script = let
       identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
     in ''
-      ${pkgs.rsync}/bin/rsync -a --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.uptime-kuma.settings.DATA_DIR} mawz@192.168.0.43:/volume1/mawz-home/uptime-kuma/
+      ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.uptime-kuma.settings.DATA_DIR} mawz@192.168.0.43:/volume1/mawz-home/uptime-kuma/
     '';
     serviceConfig = {
       Type = "oneshot";
