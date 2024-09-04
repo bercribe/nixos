@@ -121,6 +121,7 @@
     alejandra
     libnotify
     ripgrep
+    sops
   ];
 
   # Set default text editor
