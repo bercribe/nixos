@@ -12,11 +12,12 @@
     secrets."mawz-nas/ssh/private" = {};
   };
 
+  programs.ssh.knownHosts.mawz-nas = {
+    extraHostNames = ["192.168.0.43"];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPmljHSvr8veywr2SIWLw8oP0jH75y45KTqROo09yzBk";
+  };
+
   # Requires SFTP to be enabled
-  # Have to run:
-  # `sudo sshfs -o IdentityFile=/run/secrets/mawz-nas/ssh/private mawz@192.168.0.43:/mawz-home <tmpdir>`
-  # and say "yes" to the prompt the first time.
-  # Then run `sudo fusermount -u <tmpdir>`
   fileSystems."/mnt/mawz-nas" = {
     device = "mawz@192.168.0.43:/mawz-home";
     fsType = "sshfs";
