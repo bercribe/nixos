@@ -120,7 +120,7 @@
     git
     alejandra
     libnotify
-    wireguard-tools
+    ripgrep
   ];
 
   # Set default text editor
