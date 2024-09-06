@@ -109,25 +109,27 @@
   #   - https://github.com/vimjoyer/lf-nix-video
   programs.lf = {
     enable = true;
-    commands = {
+    commands = let
+      copy-cmd = "${pkgs.wl-clipboard}/bin/wl-copy";
+    in {
       copy-path = ''
         ''${{
-        ${pkgs.wl-clipboard}/bin/wl-copy $f
+        ${copy-cmd} $f
         }}
       '';
       copy-name = ''
         ''${{
-        basename "$f" | ${pkgs.wl-clipboard}/bin/wl-copy
+        basename "$f" | ${copy-cmd}
         }}
       '';
       copy-dir = ''
         ''${{
-        dirname "$f" | ${pkgs.wl-clipboard}/bin/wl-copy
+        dirname "$f" | ${copy-cmd}
         }}
       '';
-      dragon-out = ''
+      copy-files = ''
         ''${{
-          ${pkgs.xdragon}/bin/xdragon -a -x "$fx"
+          echo "$fx" | awk '{ print "file://" $0 }' | ${copy-cmd} -t text/uri-list
         }}
       '';
     };
@@ -137,8 +139,8 @@
       yp = "copy-path";
       yn = "copy-name";
       yd = "copy-dir";
+      yf = "copy-files";
       a = "push %mkdir<space>";
-      o = "dragon-out";
       gn = "cd /mnt/mawz-nas";
       gd = "cd /mnt/distant-disk";
     };
