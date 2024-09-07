@@ -18,38 +18,51 @@
   outputs = {
     self,
     nixpkgs,
-    nixos-hardware,
     sops-nix,
+    home-manager,
+    stylix,
+    nixos-hardware,
     ...
   } @ inputs: let
     system = "x86_64-linux";
+    commonModules = [
+      sops-nix.nixosModules.sops
+    ];
+    desktopModules = [
+      ./modules/overlays.nix
+      home-manager.nixosModules.home-manager
+      stylix.nixosModules.stylix
+    ];
   in {
     nixosConfigurations.mawz-hue = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = [
-        ./modules/overlays.nix
-        ./hosts/mawz-hue/configuration.nix
-        sops-nix.nixosModules.sops
-      ];
+      modules =
+        commonModules
+        ++ desktopModules
+        ++ [
+          ./hosts/mawz-hue/configuration.nix
+        ];
     };
     nixosConfigurations.mawz-fw = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = [
-        ./modules/overlays.nix
-        ./hosts/mawz-fw/configuration.nix
-        nixos-hardware.nixosModules.framework-11th-gen-intel
-        sops-nix.nixosModules.sops
-      ];
+      modules =
+        commonModules
+        ++ desktopModules
+        ++ [
+          ./hosts/mawz-fw/configuration.nix
+          nixos-hardware.nixosModules.framework-11th-gen-intel
+        ];
     };
     nixosConfigurations.mawz-nuc = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = [
-        sops-nix.nixosModules.sops
-        ./hosts/mawz-nuc/configuration.nix
-      ];
+      modules =
+        commonModules
+        ++ [
+          ./hosts/mawz-nuc/configuration.nix
+        ];
     };
   };
 }

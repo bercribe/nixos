@@ -2,16 +2,10 @@
   config,
   pkgs,
   lib,
-  home-manager,
-  stylix,
   ...
 }: {
   imports = [
-    home-manager.nixosModules.home-manager
-    # Tiling window manager
-    ../../hyprland
-    # Theme manager
-    stylix.nixosModules.stylix
+    ../../hyprland # Tiling window manager
     ../../network/mount.nix
     ../bluray.nix
   ];
