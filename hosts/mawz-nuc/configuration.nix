@@ -9,7 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/network/mount.nix
+    ../../modules/systems/network/mount.nix
     ../../modules/services/containers/immich
     ../../modules/services/gitea.nix
     ../../modules/services/adguardhome.nix

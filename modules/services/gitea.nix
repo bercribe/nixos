@@ -5,7 +5,7 @@
 }: let
   port = 12552;
 in {
-  imports = [../network/mawz-nas-ssh.nix];
+  imports = [../systems/network/mawz-nas-ssh.nix];
 
   # mirroring my repos here with this:
   # https://docs.gitea.com/usage/repo-mirror#pulling-from-a-remote-repository

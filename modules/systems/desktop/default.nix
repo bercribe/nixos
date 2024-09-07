@@ -6,7 +6,7 @@
 }: {
   imports = [
     ../../hyprland # Tiling window manager
-    ../../network/mount.nix
+    ../network/mount.nix
     ../bluray.nix
   ];
 

@@ -6,7 +6,7 @@
 }: let
   port = 13114;
 in {
-  imports = [../network/mawz-nas-ssh.nix];
+  imports = [../systems/network/mawz-nas-ssh.nix];
 
   # notifications set up with a gmail burner
   # password set here: https://myaccount.google.com/apppasswords
