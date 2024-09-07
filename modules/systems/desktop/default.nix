@@ -3,7 +3,6 @@
   pkgs,
   lib,
   home-manager,
-  sops-nix,
   stylix,
   ...
 }: {
@@ -11,10 +10,9 @@
     home-manager.nixosModules.home-manager
     # Tiling window manager
     ../../hyprland
-    sops-nix.nixosModules.sops
     # Theme manager
     stylix.nixosModules.stylix
-    ../network-mount.nix
+    ../../network/mount.nix
     ../bluray.nix
   ];
 

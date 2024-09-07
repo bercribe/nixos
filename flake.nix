@@ -19,6 +19,7 @@
     self,
     nixpkgs,
     nixos-hardware,
+    sops-nix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -29,6 +30,7 @@
       modules = [
         ./modules/overlays.nix
         ./hosts/mawz-hue/configuration.nix
+        sops-nix.nixosModules.sops
       ];
     };
     nixosConfigurations.mawz-fw = nixpkgs.lib.nixosSystem {
@@ -38,12 +40,16 @@
         ./modules/overlays.nix
         ./hosts/mawz-fw/configuration.nix
         nixos-hardware.nixosModules.framework-11th-gen-intel
+        sops-nix.nixosModules.sops
       ];
     };
     nixosConfigurations.mawz-nuc = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = [./hosts/mawz-nuc/configuration.nix];
+      modules = [
+        sops-nix.nixosModules.sops
+        ./hosts/mawz-nuc/configuration.nix
+      ];
     };
   };
 }
