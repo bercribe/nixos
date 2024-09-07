@@ -132,6 +132,11 @@
           echo "$fx" | awk '{ print "file://" $0 }' | ${copy-cmd} -t text/uri-list
         }}
       '';
+      dragon-out = ''
+        ''${{
+          ${pkgs.xdragon}/bin/xdragon -a -x "$fx"
+        }}
+      '';
     };
     keybindings = {
       y = null;
@@ -140,6 +145,7 @@
       yn = "copy-name";
       yd = "copy-dir";
       yf = "copy-files";
+      yo = "dragon-out";
       a = "push %mkdir<space>";
       gn = "cd /mnt/mawz-nas";
       gd = "cd /mnt/distant-disk";
