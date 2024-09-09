@@ -18,12 +18,6 @@ in {
   };
   networking.firewall.allowedTCPPorts = [port];
 
-  # prevents backup from being clobbered on a new system install
-  # to restore backup, run
-  # sudo cp <backup> /var/lib/gitea
-  # sudo chown -R gitea:gitea /var/lib/gitea
-  systemd.services.gitea.unitConfig.ConditionPathExists = config.services.gitea.database.path;
-
   systemd.timers.gitea-backup = {
     wantedBy = ["timers.target"];
     timerConfig = {
@@ -42,6 +36,10 @@ in {
       Type = "oneshot";
       User = "root";
     };
-    unitConfig.ConditionPathExists = config.services.gitea.database.path;
+    # prevents backup from being clobbered on a new system install
+    # to restore backup, run
+    # sudo cp <backup> /var/lib/gitea
+    # sudo chown -R gitea:gitea /var/lib/gitea
+    unitConfig.AssertPathExists = "/backups/config/gitea";
   };
 }

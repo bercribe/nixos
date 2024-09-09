@@ -45,6 +45,6 @@ in {
     # to restore backup, run
     # sudo cp <backup> /var/lib/healthchecks
     # sudo chown -R healthchecks:healthchecks /var/lib/healthchecks
-    unitConfig.ConditionPathExists = "/backups/config/healthchecks";
+    unitConfig.AssertPathExists = "/backups/config/healthchecks";
   };
 }
