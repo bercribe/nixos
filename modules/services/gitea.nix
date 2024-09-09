@@ -18,23 +18,18 @@ in {
       server.HTTP_PORT = port;
       migrations.ALLOWED_DOMAINS = "*.github.com,github.com";
     };
+    dump = {
+      enable = true;
+      backupDir = "/mnt/mawz-nas/gitea";
+    };
   };
   networking.firewall.allowedTCPPorts = [port];
 
-  systemd.timers.gitea-backup = {
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
-      Unit = "gitea-backup.service";
-    };
-  };
+  systemd.services.gitea-dump.onSuccess = ["gitea-backup.service"];
   systemd.services.gitea-backup = {
     script = let
       identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
     in ''
-      ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.gitea.stateDir} mawz@192.168.0.43:/volume1/mawz-home/gitea/
-
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 "http://192.168.0.54:45566/ping/$pingKey/gitea-backup"
     '';
@@ -42,10 +37,5 @@ in {
       Type = "oneshot";
       User = "root";
     };
-    # prevents backup from being clobbered on a new system install
-    # to restore backup, run
-    # sudo cp <backup> /var/lib/gitea
-    # sudo chown -R gitea:gitea /var/lib/gitea
-    unitConfig.AssertPathExists = "/backups/config/gitea";
   };
 }
