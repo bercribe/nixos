@@ -14,6 +14,7 @@
     ../../modules/services/gitea.nix
     ../../modules/services/adguardhome.nix
     ../../modules/services/uptime-kuma.nix
+    ../../modules/services/healthchecks.nix
   ];
 
   # Bootloader.
