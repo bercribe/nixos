@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/clients/mawz-nuc-heartbeats.nix
     ../../modules/systems/network/mount.nix
     ../../modules/services/containers/immich
     ../../modules/services/gitea.nix
