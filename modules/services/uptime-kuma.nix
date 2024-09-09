@@ -29,7 +29,7 @@ in {
   systemd.timers.uptime-kuma-backup = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnCalendar = "04:21";
+      OnCalendar = "05:21";
       Unit = "uptime-kuma-backup.service";
     };
   };

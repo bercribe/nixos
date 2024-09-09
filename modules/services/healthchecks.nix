@@ -43,7 +43,7 @@ in {
   systemd.timers.healthchecks-backup = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnCalendar = "04:22";
+      OnCalendar = "03:21";
       Unit = "healthchecks-backup.service";
     };
   };
