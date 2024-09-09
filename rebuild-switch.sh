@@ -10,8 +10,8 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-LONGOPTS=test,force
-OPTIONS=tf
+LONGOPTS=test,force,show-trace
+OPTIONS=tfs
 
 # -temporarily store output to be able to check for errors
 # -activate quoting/enhanced mode (e.g. by writing out “--options”)
@@ -21,7 +21,7 @@ PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@") 
 # read getopt’s output this way to handle the quoting right:
 eval set -- "$PARSED"
 
-disableCommit=false forceRun=false
+disableCommit=false forceRun=false showTrace=false
 # now enjoy the options in order and nicely split until we see --
 while true; do
     case "$1" in
@@ -31,6 +31,10 @@ while true; do
             ;;
         -f|--force)
             forceRun=true
+            shift
+            ;;
+        -s|--show-trace)
+            showTrace=true
             shift
             ;;
         --)
@@ -64,8 +68,12 @@ git diff HEAD -U0 '*.nix'
 
 echo "NixOS Rebuilding..."
 
-# Rebuild, output simplified errors, log trackebacks
-sudo nixos-rebuild switch --flake .#${HOSTNAME} || exit 1
+# Rebuild
+rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
+if [ "$showTrace" == true ]; then
+  rebuildCmd+=(--show-trace --option eval-cache false)
+fi
+"${rebuildCmd[@]}" || exit 1
 
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current)
