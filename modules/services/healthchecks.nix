@@ -9,11 +9,11 @@ in {
   imports = [
     ../systems/network/mawz-nas-ssh.nix
     ../sops.nix
+    ../clients/healthchecks.nix
   ];
 
   sops.secrets = {
     "healthchecks/local/secret-key" = {owner = config.services.healthchecks.user;};
-    "healthchecks/local/ping-key" = {};
     healthchecks-email = {
       owner = config.services.healthchecks.user;
       key = "email-notifications";

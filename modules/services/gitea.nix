@@ -5,7 +5,10 @@
 }: let
   port = 12552;
 in {
-  imports = [../systems/network/mawz-nas-ssh.nix];
+  imports = [
+    ../systems/network/mawz-nas-ssh.nix
+    ../clients/healthchecks.nix
+  ];
 
   # mirroring my repos here with this:
   # https://docs.gitea.com/usage/repo-mirror#pulling-from-a-remote-repository
@@ -31,6 +34,9 @@ in {
       identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
     in ''
       ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.gitea.stateDir} mawz@192.168.0.43:/volume1/mawz-home/gitea/
+
+      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 "http://192.168.0.54:45566/ping/$pingKey/gitea-backup"
     '';
     serviceConfig = {
       Type = "oneshot";
