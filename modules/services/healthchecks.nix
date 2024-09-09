@@ -54,9 +54,8 @@ in {
       ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.healthchecks.dataDir}/ mawz@192.168.0.43:/volume1/mawz-home/healthchecks/
       systemctl start healthchecks.target
 
-      sleep 10
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 "http://192.168.0.54:45566/ping/$pingKey/healthchecks-backup"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/healthchecks-backup"
     '';
     serviceConfig = {
       Type = "oneshot";

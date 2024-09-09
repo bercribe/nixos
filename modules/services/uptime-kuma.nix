@@ -38,7 +38,7 @@ in {
       systemctl start uptime-kuma
 
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 "http://192.168.0.54:45566/ping/$pingKey/uptime-kuma-backup"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/uptime-kuma-backup"
     '';
     serviceConfig = {
       Type = "oneshot";

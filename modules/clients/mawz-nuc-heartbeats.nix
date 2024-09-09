@@ -18,7 +18,7 @@
   systemd.services.uptime-heartbeat = {
     script = ''
       pingKey="$(cat ${config.sops.secrets."healthchecks/remote/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 "https://hc-ping.com/$pingKey/mawz-nuc-online"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "https://hc-ping.com/$pingKey/mawz-nuc-online"
     '';
     serviceConfig = {
       Type = "oneshot";
