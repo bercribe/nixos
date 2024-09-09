@@ -6,16 +6,12 @@
 }: let
   port = 45566;
 in {
-  imports = [../systems/network/mawz-nas-ssh.nix];
+  imports = [
+    ../systems/network/mawz-nas-ssh.nix
+    ../sops.nix
+  ];
 
-  # Secrets management
-  sops = {
-    # update this with `sops secrets.yaml`
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/mawz/.config/sops/age/keys.txt";
-    secrets.healthchecks = {owner = config.services.healthchecks.user;};
-  };
+  sops.secrets.healthchecks = {owner = config.services.healthchecks.user;};
 
   services.healthchecks = {
     enable = true;

@@ -8,6 +8,7 @@
     ../../hyprland # Tiling window manager
     ../network/mount.nix
     ../bluray.nix
+    ../../sops.nix
   ];
 
   # Bootloader.
@@ -318,17 +319,12 @@
     users.mawz = import ./home.nix;
   };
 
-  # Secrets management
-  sops = {
-    # update this with `sops secrets.yaml`
-    defaultSopsFile = ../../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/mawz/.config/sops/age/keys.txt";
-    secrets.restic-repo = {
+  sops.secrets = {
+    restic-repo = {
       owner = "mawz";
     };
-    secrets."mawz-nas/upsd" = {};
-    secrets.network-manager = {};
+    "mawz-nas/upsd" = {};
+    network-manager = {};
   };
 
   # Theme settings

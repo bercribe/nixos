@@ -1,8 +1,4 @@
-{
-  config,
-  sops,
-  ...
-}: {
+{config, ...}: {
   imports = [./mawz-nas-ssh.nix];
 
   # Requires SFTP to be enabled

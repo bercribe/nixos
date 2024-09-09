@@ -1,12 +1,7 @@
 {config, ...}: {
-  # Secrets management
-  sops = {
-    # update this with `sops secrets.yaml`
-    defaultSopsFile = ../../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/mawz/.config/sops/age/keys.txt";
-    secrets."mawz-nas/ssh/private" = {};
-  };
+  imports = [../../sops.nix];
+
+  sops.secrets."mawz-nas/ssh/private" = {};
 
   programs.ssh.knownHosts.mawz-nas = {
     extraHostNames = ["192.168.0.43"];
