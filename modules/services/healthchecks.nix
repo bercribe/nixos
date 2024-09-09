@@ -7,7 +7,7 @@
   port = 45566;
 in {
   imports = [
-    ../systems/network/mawz-nas-ssh.nix
+    ../systems/network/mount.nix
     ../sops.nix
     ../clients/healthchecks.nix
   ];
@@ -37,6 +37,9 @@ in {
   };
   networking.firewall.allowedTCPPorts = [port];
 
+  # to restore backup, run
+  # sudo cp <backup> /var/lib/healthchecks
+  # sudo chown -R healthchecks:healthchecks /var/lib/healthchecks
   systemd.timers.healthchecks-backup = {
     wantedBy = ["timers.target"];
     timerConfig = {
@@ -45,14 +48,15 @@ in {
     };
   };
   systemd.services.healthchecks-backup = {
-    script = let
-      identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
-    in ''
+    script = ''
+      backupFile="healthchecks-backup-$(date +'%s').zip"
       systemctl stop healthchecks.service
       systemctl stop healthchecks-sendalerts.service
       systemctl stop healthchecks-sendreports.service
-      ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.healthchecks.dataDir}/ mawz@192.168.0.43:/volume1/mawz-home/healthchecks/
+      ${pkgs.zip}/bin/zip -r "/tmp/$backupFile" ${config.services.healthchecks.dataDir}
       systemctl start healthchecks.target
+
+      cp "/tmp/$backupFile" /mnt/mawz-nas/healthchecks/
 
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/healthchecks-backup"
@@ -61,10 +65,5 @@ in {
       Type = "oneshot";
       User = "root";
     };
-    # prevents backup from being clobbered on a new system install
-    # to restore backup, run
-    # sudo cp <backup> /var/lib/healthchecks
-    # sudo chown -R healthchecks:healthchecks /var/lib/healthchecks
-    unitConfig.AssertPathExists = "/backups/config/healthchecks";
   };
 }

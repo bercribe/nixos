@@ -7,7 +7,7 @@
   port = 13114;
 in {
   imports = [
-    ../systems/network/mawz-nas-ssh.nix
+    ../systems/network/mount.nix
     ../clients/healthchecks.nix
   ];
 
@@ -22,6 +22,10 @@ in {
   };
   networking.firewall.allowedTCPPorts = [port];
 
+  # to restore backup, run
+  # sudo cp <backup> /var/lib/private/uptime-kuma
+  # sudo chown -R uptime-kuma:uptime-kuma /var/lib/private/uptime-kuma
+  # sudo ln -s private/uptime-kuma /var/lib/uptime-kuma
   systemd.timers.uptime-kuma-backup = {
     wantedBy = ["timers.target"];
     timerConfig = {
@@ -30,12 +34,13 @@ in {
     };
   };
   systemd.services.uptime-kuma-backup = {
-    script = let
-      identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
-    in ''
+    script = ''
+      backupFile="uptime-kuma-backup-$(date +'%s').zip"
       systemctl stop uptime-kuma
-      ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.uptime-kuma.settings.DATA_DIR} mawz@192.168.0.43:/volume1/mawz-home/uptime-kuma/
+      ${pkgs.zip}/bin/zip -r "/tmp/$backupFile" ${config.services.uptime-kuma.settings.DATA_DIR}
       systemctl start uptime-kuma
+
+      cp "/tmp/$backupFile" /mnt/mawz-nas/uptime-kuma
 
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/uptime-kuma-backup"
@@ -44,11 +49,5 @@ in {
       Type = "oneshot";
       User = "root";
     };
-    # prevents backup from being clobbered on a new system install
-    # to restore backup, run
-    # sudo cp <backup> /var/lib/private/uptime-kuma
-    # sudo chown -R uptime-kuma:uptime-kuma /var/lib/private/uptime-kuma
-    # sudo ln -s private/uptime-kuma /var/lib/uptime-kuma
-    unitConfig.AssertPathExists = "/backups/config/uptime-kuma";
   };
 }
