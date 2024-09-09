@@ -6,7 +6,6 @@
   port = 12552;
 in {
   imports = [
-    ../systems/network/mawz-nas-ssh.nix
     ../clients/healthchecks.nix
   ];
 
@@ -27,9 +26,7 @@ in {
 
   systemd.services.gitea-dump.onSuccess = ["gitea-backup.service"];
   systemd.services.gitea-backup = {
-    script = let
-      identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
-    in ''
+    script = ''
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/gitea-backup"
     '';
