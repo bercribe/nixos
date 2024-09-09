@@ -40,8 +40,7 @@ in {
   systemd.timers.healthchecks-backup = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
+      OnCalendar = "04:22";
       Unit = "healthchecks-backup.service";
     };
   };
@@ -49,8 +48,13 @@ in {
     script = let
       identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
     in ''
+      systemctl stop healthchecks.service
+      systemctl stop healthchecks-sendalerts.service
+      systemctl stop healthchecks-sendreports.service
       ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.healthchecks.dataDir}/ mawz@192.168.0.43:/volume1/mawz-home/healthchecks/
+      systemctl start healthchecks.target
 
+      sleep 10
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 "http://192.168.0.54:45566/ping/$pingKey/healthchecks-backup"
     '';
