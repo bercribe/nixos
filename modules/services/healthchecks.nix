@@ -11,7 +11,13 @@ in {
     ../sops.nix
   ];
 
-  sops.secrets.healthchecks = {owner = config.services.healthchecks.user;};
+  sops.secrets = {
+    healthchecks = {owner = config.services.healthchecks.user;};
+    healthchecks-email = {
+      owner = config.services.healthchecks.user;
+      key = "email-notifications";
+    };
+  };
 
   services.healthchecks = {
     enable = true;
@@ -19,6 +25,13 @@ in {
     inherit port;
     settings = {
       SECRET_KEY_FILE = config.sops.secrets.healthchecks.path;
+      SITE_ROOT = "http://192.168.0.54:${toString port}";
+      EMAIL_HOST = "smtp.gmail.com";
+      EMAIL_PORT = "587";
+      EMAIL_HOST_USER = "bercribe.notifications";
+      EMAIL_HOST_PASSWORD_FILE = config.sops.secrets.healthchecks-email.path;
+      EMAIL_USE_SSL = "False";
+      EMAIL_USE_TLS = "True";
     };
   };
   networking.firewall.allowedTCPPorts = [port];
