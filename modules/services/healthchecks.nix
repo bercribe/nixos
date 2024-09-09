@@ -12,7 +12,8 @@ in {
   ];
 
   sops.secrets = {
-    healthchecks = {owner = config.services.healthchecks.user;};
+    "healthchecks/local/secret-key" = {owner = config.services.healthchecks.user;};
+    "healthchecks/local/ping-key" = {};
     healthchecks-email = {
       owner = config.services.healthchecks.user;
       key = "email-notifications";
@@ -24,7 +25,7 @@ in {
     listenAddress = "0.0.0.0";
     inherit port;
     settings = {
-      SECRET_KEY_FILE = config.sops.secrets.healthchecks.path;
+      SECRET_KEY_FILE = config.sops.secrets."healthchecks/local/secret-key".path;
       SITE_ROOT = "http://192.168.0.54:${toString port}";
       EMAIL_HOST = "smtp.gmail.com";
       EMAIL_PORT = "587";
@@ -48,7 +49,10 @@ in {
     script = let
       identityFile = config.sops.secrets."mawz-nas/ssh/private".path;
     in ''
-      ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.healthchecks.dataDir} mawz@192.168.0.43:/volume1/mawz-home/healthchecks/
+      ${pkgs.rsync}/bin/rsync -az --delete -e "${pkgs.openssh}/bin/ssh -i ${identityFile}" ${config.services.healthchecks.dataDir}/ mawz@192.168.0.43:/volume1/mawz-home/healthchecks/
+
+      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 "http://192.168.0.54:45566/ping/$pingKey/healthchecks-backup"
     '';
     serviceConfig = {
       Type = "oneshot";
