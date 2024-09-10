@@ -47,7 +47,15 @@
     };
   };
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    # fixes tab completion to use dircolors
+    # dircolors must be evaluated before colored-stats is enabled
+    bashrcExtra = ''
+      eval $(${pkgs.coreutils}/bin/dircolors -b ~/.dir_colors)
+      bind 'set colored-stats on'
+    '';
+  };
   programs.dircolors = {
     enable = true;
     settings = {
