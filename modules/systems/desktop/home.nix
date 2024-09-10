@@ -142,7 +142,8 @@
       '';
       dragon-out = ''
         ''${{
-          ${pkgs.xdragon}/bin/xdragon -a -x "$fx"
+          readarray -t files <<<"$fx"
+          ${pkgs.xdragon}/bin/xdragon -a -x "''${files[@]}"
         }}
       '';
     };
