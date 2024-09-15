@@ -185,6 +185,7 @@
       handbrake # video transcoding
       ffsubsync # sync subtitles with video
       #  thunderbird
+      python3
       # cli extras
       ripgrep
       lf
