@@ -173,6 +173,8 @@
       discord
       spotube
       libreoffice
+      typst
+      typst-live
       wireshark
       godot_4
       qimgv
