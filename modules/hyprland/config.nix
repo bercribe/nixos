@@ -17,6 +17,7 @@
         "fcitx5 -d"
         "nm-applet --indicator"
         "blueman-applet"
+        "${pkgs.udiskie}/bin/udiskie" # USB automount frontend
       ];
 
       # Source a file (multi-file configs)

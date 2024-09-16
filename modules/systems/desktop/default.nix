@@ -355,6 +355,12 @@
     openFirewall = true;
   };
 
+  # USB drive automount
+  services.udisks2 = {
+    enable = true;
+    mountOnMedia = true;
+  };
+
   # Restic file system backups
   services.restic.backups = {
     localbackup = {
