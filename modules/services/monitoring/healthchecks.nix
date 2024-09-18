@@ -1,15 +1,14 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: let
   port = 45566;
 in {
   imports = [
-    ../systems/network/mount.nix
-    ../sops.nix
-    ../clients/healthchecks.nix
+    ../../systems/network/mount.nix
+    ../../sops.nix
+    ../../clients/healthchecks.nix
   ];
 
   sops.secrets = {

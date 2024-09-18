@@ -1,14 +1,13 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: let
   port = 13114;
 in {
   imports = [
-    ../systems/network/mount.nix
-    ../clients/healthchecks.nix
+    ../../systems/network/mount.nix
+    ../../clients/healthchecks.nix
   ];
 
   # notifications set up with a gmail burner

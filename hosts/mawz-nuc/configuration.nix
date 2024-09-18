@@ -12,10 +12,11 @@
     ../../modules/clients/mawz-nuc-heartbeats.nix
     ../../modules/systems/network/mount.nix
     ../../modules/services/containers/immich
+    ../../modules/services/monitoring/uptime-kuma.nix
+    ../../modules/services/monitoring/healthchecks.nix
     ../../modules/services/gitea.nix
     ../../modules/services/adguardhome.nix
-    ../../modules/services/uptime-kuma.nix
-    ../../modules/services/healthchecks.nix
+    ../../modules/services/miniflux.nix
   ];
 
   # Bootloader.
