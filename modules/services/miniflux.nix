@@ -17,6 +17,7 @@ in {
     enable = true;
     config = {
       PORT = toString port;
+      BASE_URL = "http://192.168.0.54:${toString port}/";
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
