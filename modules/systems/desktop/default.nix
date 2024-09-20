@@ -210,6 +210,12 @@
       enable = true;
       defaultApplications = {
         "inode/directory" = "lf.desktop";
+        "application/pdf" = "firefox.desktop";
+        "audio/vnd.wave" = "mpv.desktop";
+        "image/jpeg" = "qimgv.desktop";
+        "video/mp4" = "mpv.desktop";
+        "video/vnd.avi" = "mpv.desktop";
+        "video/x-matroska" = "mpv.desktop";
       };
     };
   };
