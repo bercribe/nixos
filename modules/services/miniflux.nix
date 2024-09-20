@@ -18,6 +18,7 @@ in {
     config = {
       PORT = toString port;
       BASE_URL = "http://192.168.0.54:${toString port}/";
+      FETCH_YOUTUBE_WATCH_TIME = 1;
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
