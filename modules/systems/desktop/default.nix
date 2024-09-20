@@ -252,11 +252,6 @@
           "install_url" = "https://addons.mozilla.org/firefox/downloads/latest/reddit-enhancement-suite/latest.xpi";
           "default_area" = "menupanel";
         };
-        "inodhwnfgtr463428675drebcs@jetpack" = {
-          "installation_mode" = "normal_installed";
-          "install_url" = "https://addons.mozilla.org/firefox/downloads/latest/rss-reader-extension-inoreader/latest.xpi";
-          "default_area" = "navbar";
-        };
         "sponsorBlocker@ajay.app" = {
           "installation_mode" = "normal_installed";
           "install_url" = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
