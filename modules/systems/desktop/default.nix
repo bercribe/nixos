@@ -197,6 +197,23 @@
     ];
   };
 
+  xdg = {
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [
+          "Alacritty.desktop"
+        ];
+      };
+    };
+    mime = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "lf.desktop";
+      };
+    };
+  };
+
   # Required for obsidian
   nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
 

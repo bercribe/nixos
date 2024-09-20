@@ -51,7 +51,11 @@
   # screen sharing
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      # allow apps to open dbus FileChooser
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   # Bluetooth
