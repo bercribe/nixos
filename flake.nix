@@ -64,5 +64,10 @@
           ./hosts/mawz-nuc/configuration.nix
         ];
     };
+    nixosConfigurations.mawz-vault = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = inputs;
+      modules = [./hosts/mawz-vault/configuration.nix];
+    };
   };
 }
