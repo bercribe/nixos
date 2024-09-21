@@ -44,6 +44,11 @@
         hostname = "192.168.0.32";
         user = "mawz";
       };
+      mawz-vault = {
+        port = 22;
+        hostname = "192.168.0.51";
+        user = "mawz";
+      };
     };
   };
 
