@@ -29,11 +29,13 @@
         port = 22;
         hostname = "192.168.0.54";
         user = "mawz";
+        forwardAgent = true;
       };
       mawz-nas = {
         port = 22;
         hostname = "192.168.0.43";
         user = "mawz";
+        forwardAgent = true;
         setEnv = {
           # check /usr/share/terminfo
           TERM = "xterm-color";
@@ -43,11 +45,13 @@
         port = 22;
         hostname = "192.168.0.32";
         user = "mawz";
+        forwardAgent = true;
       };
       mawz-vault = {
         port = 22;
         hostname = "192.168.0.51";
         user = "mawz";
+        forwardAgent = true;
       };
     };
   };
