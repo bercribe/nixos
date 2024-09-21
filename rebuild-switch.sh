@@ -10,6 +10,16 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  headless=true
+# many other tests omitted
+else
+  case $(ps -o comm= -p "$PPID") in
+    sshd|*/sshd) headless=true;;
+  esac
+fi
+
+
 LONGOPTS=test,force,show-trace
 OPTIONS=tfs
 
@@ -87,5 +97,7 @@ fi
 popd
 
 # Notify all OK!
-notify-send -e "NixOS Rebuilt OK!" --icon=software-update-available
-
+echo "NixOS Rebuilt OK!"
+if [ "$headless" != true ]; then
+    notify-send -e "NixOS Rebuilt OK!" --icon=software-update-available
+fi
