@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  home-manager,
   ...
 }: {
   programs.hyprland.enable = true;
@@ -61,4 +62,6 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+  home-manager.users.mawz = import ./config.nix;
 }

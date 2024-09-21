@@ -1,13 +1,12 @@
 # `man home-configuration.nix` to view configurable options
 {
+  self,
   config,
   pkgs,
   lib,
   stylix,
   ...
 }: {
-  imports = [../../hyprland/config.nix];
-
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mawz";
