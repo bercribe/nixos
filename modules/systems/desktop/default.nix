@@ -223,6 +223,8 @@
   # Required for obsidian
   nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
 
+  programs.ssh.startAgent = true;
+
   programs.wireshark.enable = true;
 
   programs.firefox = {
