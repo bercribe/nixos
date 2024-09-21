@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   ...
@@ -6,9 +7,9 @@
   port = 9044;
 in {
   imports = [
-    ../sops.nix
-    ../systems/network/mount.nix
-    ../clients/healthchecks.nix
+    (self + /modules/sops.nix)
+    (self + /modules/systems/network/mount.nix)
+    (self + /modules/clients/healthchecks.nix)
   ];
 
   sops.secrets.miniflux-admin = {};

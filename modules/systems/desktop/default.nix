@@ -1,14 +1,15 @@
 {
+  self,
   config,
   pkgs,
   lib,
   ...
 }: {
   imports = [
-    ../../hyprland # Tiling window manager
-    ../network/mount.nix
-    ../bluray.nix
-    ../../sops.nix
+    (self + /modules/hyprland) # Tiling window manager
+    (self + /modules/systems/network/mount.nix)
+    (self + /modules/systems/bluray.nix)
+    (self + /modules/sops.nix)
   ];
 
   # Bootloader.

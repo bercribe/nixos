@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   ...
@@ -6,8 +7,8 @@
   port = 13114;
 in {
   imports = [
-    ../../systems/network/mount.nix
-    ../../clients/healthchecks.nix
+    (self + /modules/systems/network/mount.nix)
+    (self + /modules/clients/healthchecks.nix)
   ];
 
   # notifications set up with a gmail burner

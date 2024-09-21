@@ -1,5 +1,9 @@
-{config, ...}: {
-  imports = [../../sops.nix];
+{
+  self,
+  config,
+  ...
+}: {
+  imports = [(self + /modules/sops.nix)];
 
   sops.secrets."mawz-nas/ssh/private" = {};
 

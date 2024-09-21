@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  self,
   config,
   pkgs,
   ...
@@ -9,7 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/systems/desktop
+    (self + /modules/systems/desktop)
   ];
 
   # Bootloader.

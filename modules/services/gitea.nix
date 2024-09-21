@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   ...
@@ -6,7 +7,7 @@
   port = 12552;
 in {
   imports = [
-    ../clients/healthchecks.nix
+    (self + /modules/clients/healthchecks.nix)
   ];
 
   # mirroring my repos here with this:

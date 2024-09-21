@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   ...
@@ -6,9 +7,9 @@
   port = 45566;
 in {
   imports = [
-    ../../systems/network/mount.nix
-    ../../sops.nix
-    ../../clients/healthchecks.nix
+    (self + /modules/systems/network/mount.nix)
+    (self + /modules/sops.nix)
+    (self + /modules/clients/healthchecks.nix)
   ];
 
   sops.secrets = {

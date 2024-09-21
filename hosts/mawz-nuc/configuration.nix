@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  self,
   config,
   pkgs,
   ...
@@ -9,14 +10,14 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/clients/mawz-nuc-heartbeats.nix
-    ../../modules/systems/network/mount.nix
-    ../../modules/services/containers/immich
-    ../../modules/services/monitoring/uptime-kuma.nix
-    ../../modules/services/monitoring/healthchecks.nix
-    ../../modules/services/gitea.nix
-    ../../modules/services/adguardhome.nix
-    ../../modules/services/miniflux.nix
+    (self + /modules/clients/mawz-nuc-heartbeats.nix)
+    (self + /modules/systems/network/mount.nix)
+    (self + /modules/services/containers/immich)
+    (self + /modules/services/monitoring/uptime-kuma.nix)
+    (self + /modules/services/monitoring/healthchecks.nix)
+    (self + /modules/services/gitea.nix)
+    (self + /modules/services/adguardhome.nix)
+    (self + /modules/services/miniflux.nix)
   ];
 
   # Bootloader.

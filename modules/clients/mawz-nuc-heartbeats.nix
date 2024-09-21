@@ -1,9 +1,10 @@
 {
+  self,
   config,
   pkgs,
   ...
 }: {
-  imports = [../sops.nix];
+  imports = [(self + /modules/sops.nix)];
 
   sops.secrets."healthchecks/remote/ping-key" = {};
 
