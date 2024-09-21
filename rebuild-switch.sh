@@ -66,7 +66,7 @@ alejandra . &>/dev/null \
 git add .
 git diff HEAD -U0 '*.nix'
 
-echo "NixOS Rebuilding..."
+echo "NixOS rebuilding $HOSTNAME..."
 
 # Rebuild
 rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
