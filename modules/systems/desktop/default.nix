@@ -217,6 +217,7 @@
         "application/pdf" = "firefox.desktop";
         "audio/vnd.wave" = "mpv.desktop";
         "image/jpeg" = "qimgv.desktop";
+        "text/plain" = "vim.desktop";
         "video/mp4" = "mpv.desktop";
         "video/vnd.avi" = "mpv.desktop";
         "video/x-matroska" = "mpv.desktop";
