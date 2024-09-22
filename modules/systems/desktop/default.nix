@@ -164,7 +164,10 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
-    extraGroups = ["wireshark"];
+    extraGroups = [
+      "wireshark"
+      "dialout" # required for bluetooth in steam VR
+    ];
     packages = with pkgs; [
       firefox
       keepassxc
