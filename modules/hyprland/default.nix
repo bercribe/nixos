@@ -23,7 +23,7 @@
       (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       }))
-    dolphin # file browser
+    thunar # file browser
     # notifications
     mako
     libnotify
