@@ -198,6 +198,8 @@
       neofetch
       btop
       cava
+      # scripts
+      (import (self + /modules/scripts/te.nix) {inherit pkgs;})
     ];
   };
 
