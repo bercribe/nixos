@@ -306,6 +306,8 @@
   # `gamemoderun %command%` - improves performance
   # `mangohud %command%` - fps monitor
   # `gamescope %command%` - helps with resoltion issues sometimes
+  # to resolve issues with steam VR, run this:
+  # `sudo setcap CAP_SYS_NICE+ep ~/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher`
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
