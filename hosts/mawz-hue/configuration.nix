@@ -89,6 +89,7 @@
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       firefox
+      (import (self + /modules/scripts/asw.nix) {inherit pkgs;})
       #  kate
       #  thunderbird
     ];
