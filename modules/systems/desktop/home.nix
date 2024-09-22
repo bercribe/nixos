@@ -71,6 +71,7 @@
     };
   };
 
+  # to apply these, visit about:support and click "Refresh Firefox..."
   programs.firefox = {
     enable = true;
     profiles.mawz = {
@@ -105,6 +106,12 @@
             urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@hm"];
+          };
+          "Github" = {
+            urls = [{template = "https://github.com/search?type=code&q={searchTerms}";}];
+            iconUpdateUrl = "https://github.githubassets.com/favicons/favicon-dark.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = ["@gh"];
           };
         };
       };
