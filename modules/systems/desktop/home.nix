@@ -192,6 +192,14 @@
     '';
   };
 
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.unstable.everforest-gtk-theme;
+      name = "Everforest-Dark";
+    };
+  };
+
   # needed for stylix theming
   programs.alacritty.enable = true;
   programs.btop.enable = true;
@@ -199,7 +207,6 @@
   programs.tmux.enable = true;
   programs.vim.enable = true;
   stylix.targets.firefox.profileNames = ["mawz"];
-  gtk.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
