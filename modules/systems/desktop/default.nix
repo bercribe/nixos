@@ -337,7 +337,7 @@
   ];
 
   programs.bash.shellAliases = {
-    rs = "~/nixos/rebuild-switch.sh";
+    nrs = "~/nixos/rebuild-switch.sh";
   };
 
   programs.neovim = {
