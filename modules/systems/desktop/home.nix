@@ -205,8 +205,8 @@
   programs.alacritty.enable = true;
   programs.btop.enable = true;
   programs.fzf.enable = true;
+  programs.neovim.enable = true;
   programs.tmux.enable = true;
-  programs.vim.enable = true;
   stylix.targets.firefox.profileNames = ["mawz"];
 
   # This value determines the Home Manager release that your

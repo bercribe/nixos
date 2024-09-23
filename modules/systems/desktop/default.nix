@@ -219,7 +219,7 @@
         "application/pdf" = "firefox.desktop";
         "audio/vnd.wave" = "mpv.desktop";
         "image/jpeg" = "qimgv.desktop";
-        "text/plain" = "vim.desktop";
+        "text/plain" = "nvim.desktop";
         "video/mp4" = "mpv.desktop";
         "video/vnd.avi" = "mpv.desktop";
         "video/x-matroska" = "mpv.desktop";
@@ -323,7 +323,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
     wget
     git
     alejandra
@@ -337,8 +336,12 @@
     mangohud
   ];
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   # Set defaults
-  environment.variables.EDITOR = "vim";
   environment.variables.BROWSER = "firefox";
   environment.variables.TERMINAL = "alacritty";
 

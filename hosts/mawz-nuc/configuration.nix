@@ -117,7 +117,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
     alejandra
@@ -126,8 +125,10 @@
     sops
   ];
 
-  # Set default text editor
-  environment.variables.EDITOR = "vim";
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # Enable docker
   virtualisation.docker.enable = true;

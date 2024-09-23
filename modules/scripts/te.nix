@@ -6,7 +6,7 @@ pkgs.writeShellScriptBin "te" ''
   touch $1
 
   ${pkgs.typst-live}/bin/typst-live $1 &> /dev/null &
-  ${pkgs.vim}/bin/vim $1
+  $EDITOR $1
   # autosave file on write
   # ${pkgs.vim}/bin/vim -c "autocmd TextChanged,TextChangedI * silent write" $1
 
