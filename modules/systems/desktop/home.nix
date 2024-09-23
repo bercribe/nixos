@@ -127,6 +127,14 @@
     ];
   };
 
+  programs.neovim = {
+    enable = true;
+    extraConfig = ''
+      "Use system clipboard
+      set clipboard=unnamedplus
+    '';
+  };
+
   # inspiration:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md
   #   - https://github.com/gokcehan/lf/wiki/Tips
@@ -205,7 +213,6 @@
   programs.alacritty.enable = true;
   programs.btop.enable = true;
   programs.fzf.enable = true;
-  programs.neovim.enable = true;
   programs.tmux.enable = true;
   stylix.targets.firefox.profileNames = ["mawz"];
 
