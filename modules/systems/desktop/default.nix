@@ -338,6 +338,7 @@
 
   programs.bash.shellAliases = {
     nrs = "~/nixos/rebuild-switch.sh";
+    vim = "nvim";
   };
 
   programs.neovim = {
