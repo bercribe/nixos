@@ -9,6 +9,7 @@ pkgs.writeShellScriptBin "te" ''
   $EDITOR $1
   # autosave file on write
   # ${pkgs.vim}/bin/vim -c "autocmd TextChanged,TextChangedI * silent write" $1
+  ${pkgs.typst}/bin/typst compile $1
 
   trap "exit" INT TERM
   trap "kill 0" EXIT
