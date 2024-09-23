@@ -21,6 +21,7 @@
 
   # ssh config
   # use `ssh-copy-id` to add key to remote
+  # `ssh-add` to forward credentials
   programs.ssh = {
     enable = true;
     matchBlocks = {
