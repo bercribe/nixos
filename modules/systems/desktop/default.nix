@@ -336,6 +336,10 @@
     mangohud
   ];
 
+  programs.bash.shellAliases = {
+    rs = "~/nixos/rebuild-switch.sh";
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
