@@ -156,9 +156,15 @@
         "$mainMod, PERIOD, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
+        "$mainMod, G, togglegroup,"
+        "$mainMod SHIFT, G, moveoutofgroup,"
         "$mainMod, L, exec, loginctl lock-session"
         "$mainMod SHIFT, L, exec, systemctl suspend"
         "$mainMod, D, exec, makoctl dismiss"
+
+        # Example special workspace (scratchpad)
+        "$mainMod, S, togglespecialworkspace, magic"
+        "$mainMod SHIFT, S, movetoworkspace, special:magic"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -172,12 +178,21 @@
         "$mainMod SHIFT, up, movewindow, u"
         "$mainMod SHIFT, down, movewindow, d"
 
+	 # move window into tab group
+        "$mainMod ALT, left, moveintogroup, l"
+        "$mainMod ALT, right, moveintogroup, r"
+        "$mainMod ALT, up, moveintogroup, u"
+        "$mainMod ALT, down, moveintogroup, d"
+
         # to switch between windows in a floating workspace
         "$mainMod,Tab,cyclenext," # change focus to another window
         "$mainMod,Tab,bringactivetotop," # bring it to the top
 
         # toggle between monitors
         "$mainMod SHIFT, Tab, focusmonitor, +1"
+
+        # toggle between tabs
+        "$mainMod ALT, Tab, changegroupactive,"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
@@ -202,10 +217,6 @@
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
-
-        # Example special workspace (scratchpad)
-        "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
