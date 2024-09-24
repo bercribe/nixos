@@ -13,10 +13,6 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     stylix.url = "github:danth/stylix?ref=release-24.05";
-
-    # encountered a bug with the version packaged in nixpkgs, version 0.7.0
-    # it hangs and doesn't start the server, and won't respond to interrupts
-    typst-live.url = "github:ItsEthra/typst-live?rev=6a0f70ae366c971d3f668a11e212dcd1580a838f";
   };
 
   outputs = {

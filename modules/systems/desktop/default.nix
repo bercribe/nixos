@@ -178,7 +178,7 @@
       spotube
       libreoffice
       typst
-      typst-live
+      unstable.zathura
       wireshark
       godot_4
       qimgv

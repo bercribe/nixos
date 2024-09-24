@@ -2,7 +2,6 @@
   config,
   pkgs,
   nixpkgs-unstable,
-  typst-live,
   ...
 }: {
   nixpkgs.overlays = [
@@ -23,8 +22,6 @@
           rm -r $out/share/dbus-1
         '';
       });
-
-      typst-live = typst-live.packages."${final.system}".default;
     })
   ];
 }
