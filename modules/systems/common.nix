@@ -45,12 +45,9 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
+  console.keyMap = "us";
 
   # User env
 
