@@ -178,7 +178,7 @@
         "$mainMod SHIFT, up, movewindow, u"
         "$mainMod SHIFT, down, movewindow, d"
 
-	 # move window into tab group
+        # move window into tab group
         "$mainMod ALT, left, moveintogroup, l"
         "$mainMod ALT, right, moveintogroup, r"
         "$mainMod ALT, up, moveintogroup, u"

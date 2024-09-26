@@ -24,20 +24,15 @@
         mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       }))
     thunar # file browser
-    # notifications
-    mako
-    libnotify
+    mako # notifications
     hyprpaper # wallpapers
-    # screen brightess
-    brightnessctl
+    brightnessctl # screen brightess
     # screenshots
     grim
     slurp
-    wl-clipboard
-    # wifi widget
-    networkmanagerapplet
-    # for sddm theme
-    libsForQt5.qt5.qtgraphicaleffects
+    wl-clipboard # clipboard
+    networkmanagerapplet # wifi widget
+    # libsForQt5.qt5.qtgraphicaleffects # for sddm theme
   ];
 
   # enabling this causes flickering in electron apps with nvidia hardware

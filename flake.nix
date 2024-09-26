@@ -29,7 +29,6 @@
       sops-nix.nixosModules.sops
     ];
     desktopModules = [
-      ./modules/overlays.nix
       home-manager.nixosModules.home-manager
       stylix.nixosModules.stylix
     ];

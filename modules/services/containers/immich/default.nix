@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  # Enable docker
+  virtualisation.docker.enable = true;
+  users.users.mawz.extraGroups = ["docker"];
+
   # upgrading: `docker compose pull` and update version in .env
   systemd.services.immich = {
     script = ''
