@@ -19,6 +19,7 @@
     userEmail = "mawz@hey.com";
   };
 
+  # generate key: `ssh-keygen -t ed25519 -C "mawz@hey.com"`
   # ssh config
   # use `ssh-copy-id` to add key to remote
   # `ssh-add` to forward credentials

@@ -12,9 +12,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  # Framework updater - `fwupdmgr update`
-  services.fwupd.enable = true;
-
   boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
@@ -23,18 +20,48 @@
   # Force S3 sleep mode
   boot.kernelParams = ["mem_sleep_default=deep"];
 
+  # configured following instructions here:
+  # https://wiki.nixos.org/wiki/ZFS
+
+  # Linux filesystem (8300)
+  # `zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -o ashift=12 zpool $DISK`
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/4188149e-04e3-4468-b8ce-18b6b9342b7b";
-    fsType = "ext4";
+    device = "zpool/root";
+    fsType = "zfs";
+    options = ["zfsutil"];
   };
 
+  fileSystems."/nix" = {
+    device = "zpool/nix";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/var" = {
+    device = "zpool/var";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  # +1G EFI system partition (ef00)
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2174-9EC1";
+    device = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_21173E800402-part1";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
+  # +4G Linux swap (8200)
   swapDevices = [
-    {device = "/dev/disk/by-uuid/3c86e64c-b542-46fa-b595-40abadef70bc";}
+    {
+      device = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_21173E800402-part2";
+      randomEncryption = true;
+    }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

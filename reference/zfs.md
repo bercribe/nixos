@@ -198,3 +198,8 @@ Now check the hardware-configuration.nix in `/mnt/etc/nixos/hardware-configurati
 
 Now you may install nixos with `nixos-install`
 
+If you have a user account declared in your configuration.nix and plan to log in using this user, set a password before rebooting, e.g. for the alice user:
+
+```
+nixos-enter --root /mnt -c 'passwd alice'
+```

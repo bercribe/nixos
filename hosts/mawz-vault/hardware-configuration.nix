@@ -21,7 +21,7 @@
   # https://wiki.nixos.org/wiki/ZFS
 
   # Linux filesystem (8300)
-  # `zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=zstd -O mountpoint=none -O xattr=sa -O acltype=posixacl -o ashift=12 zpool $DISK`
+  # `zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -o ashift=12 zpool $DISK`
   fileSystems."/" = {
     device = "zpool/root";
     fsType = "zfs";
@@ -47,7 +47,7 @@
     options = ["zfsutil"];
   };
 
-  # +1G EFI system partition (ef00) 
+  # +1G EFI system partition (ef00)
   fileSystems."/boot" = {
     device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0X310512H-part1";
     fsType = "vfat";
@@ -56,7 +56,10 @@
 
   # +4G Linux swap (8200)
   swapDevices = [
-    {device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0X310512H-part2";}
+    {
+      device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0X310512H-part2";
+      randomEncryption = true;
+    }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

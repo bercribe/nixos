@@ -8,9 +8,15 @@
     ./hardware-configuration.nix
     (self + /modules/systems/desktop)
     (self + /modules/systems/hardware/nvidia.nix)
+    (self + /modules/sops.nix)
   ];
 
   # Config
+
+  # Secrets
+  sops.secrets = {
+    "mawz-nas/upsd" = {};
+  };
 
   # Bootloader.
   boot.loader.grub.enable = true;

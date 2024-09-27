@@ -23,8 +23,6 @@
     restic-repo = {
       owner = "mawz";
     };
-    "mawz-nas/upsd" = {};
-    network-manager = {};
   };
 
   # Enable the X11 windowing system.
