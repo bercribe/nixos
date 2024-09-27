@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
+    (self + /modules/systems/hardware/zfs.nix)
   ];
 
   # Use the systemd-boot EFI boot loader.

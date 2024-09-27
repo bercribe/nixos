@@ -203,3 +203,14 @@ If you have a user account declared in your configuration.nix and plan to log in
 ```
 nixos-enter --root /mnt -c 'passwd alice'
 ```
+
+## Reservations
+
+On ZFS, the performance will deteriorate significantly when more than 80% of the available space is used. To avoid this, reserve disk space beforehand.
+
+To reserve space create a new unused dataset that gets a guaranteed disk space of 150GB.
+
+```
+# zfs create -o refreservation=150G -o mountpoint=none zpool/reserved
+```
+

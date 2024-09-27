@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/desktop)
+    (self + /modules/systems/hardware/zfs.nix)
     (self + /modules/sops.nix)
   ];
 
