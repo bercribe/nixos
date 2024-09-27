@@ -66,7 +66,7 @@
     nixosConfigurations.mawz-vault = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = [./hosts/mawz-vault/configuration.nix];
+      modules = commonModules ++ [./hosts/mawz-vault/configuration.nix];
     };
   };
 }

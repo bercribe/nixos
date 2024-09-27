@@ -84,6 +84,7 @@
     packages = with pkgs; [
       fzf
       ripgrep
+      tmux
       tree
       unzip
     ];
