@@ -10,4 +10,5 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "/secrets/sops/keys.txt";
   };
+  environment.variables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
 }
