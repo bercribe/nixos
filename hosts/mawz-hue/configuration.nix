@@ -15,11 +15,6 @@
 
   # Secrets
   sops.secrets = {
-    "ssh/private" = {
-      owner = "mawz";
-      path = "/home/mawz/.ssh/id_ed25519";
-      key = "mawz-hue/ssh/private";
-    };
     "mawz-nas/upsd" = {};
   };
 

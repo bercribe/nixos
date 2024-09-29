@@ -20,6 +20,11 @@
 
   # Secrets
   sops.secrets = {
+    ssh = {
+      owner = "mawz";
+      path = "/home/mawz/.ssh/id_ed25519";
+      key = "${config.networking.hostName}/ssh";
+    };
     restic-repo = {
       owner = "mawz";
     };

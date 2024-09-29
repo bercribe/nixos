@@ -9,7 +9,7 @@
       "nodev"
       "noatime"
       "allow_other"
-      "IdentityFile=${config.sops.secrets."ssh/private".path}"
+      "IdentityFile=${config.sops.secrets.ssh.path}"
       # for reconnecting after suspend
       "reconnect"
       "ServerAliveInterval=15"
