@@ -2,7 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
-    (self + /modules/clients/mawz-nuc-heartbeats.nix)
+    (self + /modules/clients/healthchecks-heartbeats.nix)
     (self + /modules/services/containers/immich)
     (self + /modules/services/monitoring/uptime-kuma.nix)
     (self + /modules/services/monitoring/healthchecks.nix)
