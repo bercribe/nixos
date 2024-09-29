@@ -15,7 +15,7 @@
 
   # Secrets
   sops.secrets = {
-    network-manager = {};
+    "mawz-fw/network-manager" = {};
   };
 
   # Bootloader.
@@ -37,7 +37,7 @@
     # wg pubkey < ~/wireguard-keys/private > ~/wireguard-keys/public
     # ```
     ensureProfiles = {
-      environmentFiles = [config.sops.secrets.network-manager.path];
+      environmentFiles = [config.sops.secrets."mawz-fw/network-manager".path];
       profiles = {
         home-lan = {
           connection = {
