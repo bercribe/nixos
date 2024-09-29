@@ -1,5 +1,5 @@
 {config, ...}: {
-  imports = [./mawz-nas-ssh.nix];
+  imports = [./ssh.nix];
 
   # Requires SFTP to be enabled
   fileSystems."/mnt/mawz-nas" = {
@@ -9,7 +9,7 @@
       "nodev"
       "noatime"
       "allow_other"
-      "IdentityFile=${config.sops.secrets."mawz-nas/ssh/private".path}"
+      "IdentityFile=${config.sops.secrets."ssh/private".path}"
       # for reconnecting after suspend
       "reconnect"
       "ServerAliveInterval=15"
