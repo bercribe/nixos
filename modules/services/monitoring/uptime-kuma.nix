@@ -8,7 +8,7 @@
 in {
   imports = [
     (self + /modules/systems/network/mount.nix)
-    (self + /modules/clients/healthchecks.nix)
+    (self + /modules/clients/local-healthchecks.nix)
   ];
 
   # notifications set up with a gmail burner

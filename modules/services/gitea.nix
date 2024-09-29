@@ -7,7 +7,7 @@
   port = 12552;
 in {
   imports = [
-    (self + /modules/clients/healthchecks.nix)
+    (self + /modules/clients/local-healthchecks.nix)
   ];
 
   # mirroring my repos here with this:
