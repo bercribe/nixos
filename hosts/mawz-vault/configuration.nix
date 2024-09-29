@@ -1,4 +1,8 @@
-{self, ...}: {
+{
+  self,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
@@ -8,6 +12,10 @@
 
   # Secrets
   sops.secrets = {
+    ssh-host = {
+      path = "/etc/ssh/ssh_host_ed25519_key";
+      key = "${config.networking.hostName}/ssh-host";
+    };
     "mawz-vault/zfs-vault" = {};
   };
 
