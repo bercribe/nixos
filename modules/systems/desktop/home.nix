@@ -48,6 +48,11 @@
         hostname = "192.168.0.51";
         user = "mawz";
       };
+      mawz-vault-decrypt = {
+        hostname = "192.168.0.51";
+        port = 2222;
+        user = "root";
+      };
     };
   };
 
