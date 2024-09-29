@@ -3,7 +3,13 @@
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
+    (self + /modules/sops.nix)
   ];
+
+  # Secrets
+  sops.secrets = {
+    "mawz-vault/zfs-vault" = {};
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

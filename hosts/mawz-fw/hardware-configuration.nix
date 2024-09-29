@@ -24,7 +24,7 @@
   # https://wiki.nixos.org/wiki/ZFS
 
   # Linux filesystem (8300)
-  # `zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -o ashift=12 zpool $DISK`
+  # zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zpool $DISK
   # zfs create -o refreservation=150G -o mountpoint=none zpool/reserved
   fileSystems."/" = {
     device = "zpool/root";

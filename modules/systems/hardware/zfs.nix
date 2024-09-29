@@ -36,8 +36,8 @@
         authorizedKeys = builtins.catAttrs "publicKey" (builtins.attrValues config.programs.ssh.knownHosts);
       };
       postCommands = ''
-        # Import all pools
-        zpool import -a
+        # Import boot pool
+        zpool import zpool
         # Add the load-key command to the .profile
         echo "zfs load-key -a; killall zfs" >> /root/.profile
       '';
