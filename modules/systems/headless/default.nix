@@ -19,5 +19,4 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  users.users.mawz.openssh.authorizedKeys.keys = builtins.catAttrs "publicKey" (builtins.attrValues config.programs.ssh.knownHosts);
 }

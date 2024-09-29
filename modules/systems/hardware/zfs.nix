@@ -33,7 +33,7 @@
         # `ssh-keygen -t ed25519 -N "" -f /secrets/initrd/ssh_host_ed25519_key`
         hostKeys = [/secrets/initrd/ssh_host_ed25519_key];
         # public ssh key used for login
-        authorizedKeys = builtins.catAttrs "publicKey" (builtins.attrValues config.programs.ssh.knownHosts);
+        authorizedKeys = config.users.users.mawz.openssh.authorizedKeys.keys;
       };
       postCommands = ''
         # Import boot pool
