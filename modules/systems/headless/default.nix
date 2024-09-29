@@ -7,6 +7,7 @@
 }: {
   imports = [
     ../common.nix
+    (self + /modules/systems/network/ssh.nix)
   ];
 
   # Programs
@@ -18,4 +19,5 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  users.users.mawz.openssh.authorizedKeys = builtins.catAttrs "publicKey" (builtins.attrValues config.programs.ssh.knownHosts);
 }
