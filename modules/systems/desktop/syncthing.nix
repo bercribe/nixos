@@ -1,8 +1,24 @@
 {
+  self,
   config,
   lib,
   ...
 }: {
+  imports = [
+    (self + /modules/sops.nix)
+  ];
+
+  sops.secrets = {
+    syncthing-cert = {
+      owner = "mawz";
+      key = "${config.networking.hostName}/syncthing/cert";
+    };
+    syncthing-key = {
+      owner = "mawz";
+      key = "${config.networking.hostName}/syncthing/key";
+    };
+  };
+
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing = {
     enable = true;
@@ -11,6 +27,8 @@
     configDir = "/home/mawz/Documents/.config/syncthing"; # Folder for Syncthing's settings and keys
     overrideDevices = true; # overrides any devices added or deleted through the WebUI
     overrideFolders = true; # overrides any folders added or deleted through the WebUI
+    cert = config.sops.secrets.syncthing-cert.path;
+    key = config.sops.secrets.syncthing-key.path;
     settings = {
       devices = {
         "mawz-nas" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
