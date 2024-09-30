@@ -11,7 +11,8 @@
   home.username = "mawz";
   home.homeDirectory = "/home/mawz";
 
-  # for bash integration
+  # for fzf bash integration
+  programs.bash.enable = true;
   programs.fzf.enable = true;
 
   programs.git = {
