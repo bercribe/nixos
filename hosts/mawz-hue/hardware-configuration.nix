@@ -17,20 +17,55 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/c79f46ef-dad6-45bb-a825-06ed51429085";
-      fsType = "ext4";
-    };
-    "/mnt/distant-disk" = {
-      device = "/dev/disk/by-uuid/047A3E1F7A3E0E44";
-      fsType = "ntfs";
-    };
+  # configured following instructions here:
+  # https://wiki.nixos.org/wiki/ZFS
+
+  # Linux filesystem (8300)
+  # zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zpool $DISK
+  # zfs create -o refreservation=150G -o mountpoint=none zpool/reserved
+  fileSystems."/" = {
+    device = "zpool/root";
+    fsType = "zfs";
+    options = ["zfsutil"];
   };
 
+  fileSystems."/nix" = {
+    device = "zpool/nix";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/var" = {
+    device = "zpool/var";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  # +1G EFI system partition (ef00)
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_2TB_S7KHNU0X515561Z-part1";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
+  # +4G Linux swap (8200)
   swapDevices = [
-    {device = "/dev/disk/by-uuid/8ea9f562-3243-42fe-a0ad-ecfe5234c5b3";}
+    {
+      device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_2TB_S7KHNU0X515561Z-part2";
+      randomEncryption = true;
+    }
   ];
+
+  fileSystems."/mnt/distant-disk" = {
+    device = "/dev/disk/by-id/wwn-0x5000cca095c1ce16-part2";
+    fsType = "ntfs";
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
