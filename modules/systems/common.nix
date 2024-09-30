@@ -90,6 +90,15 @@
     ];
   };
 
+  # Home manager
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    # fixes issue where login can fail due to home-manager
+    backupFileExtension = "backup";
+    users.mawz = import ./home.nix;
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

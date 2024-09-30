@@ -108,13 +108,7 @@
   nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
 
   # Home manager
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    # fixes issue where login can fail due to home-manager
-    backupFileExtension = "backup";
-    users.mawz = import ./home.nix;
-  };
+  home-manager.users.mawz = import ./home.nix;
 
   # Theme settings
   stylix = {

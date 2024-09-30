@@ -27,9 +27,9 @@
     system = "x86_64-linux";
     commonModules = [
       sops-nix.nixosModules.sops
+      home-manager.nixosModules.home-manager
     ];
     desktopModules = [
-      home-manager.nixosModules.home-manager
       stylix.nixosModules.stylix
     ];
   in {
