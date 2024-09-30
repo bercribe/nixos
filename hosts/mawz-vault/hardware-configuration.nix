@@ -48,12 +48,6 @@
     options = ["zfsutil"];
   };
 
-  fileSystems."/services" = {
-    device = "zpool/services";
-    fsType = "zfs";
-    options = ["zfsutil"];
-  };
-
   # +1G EFI system partition (ef00)
   fileSystems."/boot" = {
     device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0X310512H-part1";
