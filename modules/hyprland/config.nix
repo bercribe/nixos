@@ -158,6 +158,8 @@
         "$mainMod, J, togglesplit," # dwindle
         "$mainMod, G, togglegroup,"
         "$mainMod SHIFT, G, moveoutofgroup,"
+        "$mainMod, N, changegroupactive,"
+        "$mainMod SHIFT, N, changegroupactive, b"
         "$mainMod, L, exec, loginctl lock-session"
         "$mainMod SHIFT, L, exec, systemctl suspend"
         "$mainMod, D, exec, makoctl dismiss"
@@ -190,9 +192,6 @@
 
         # toggle between monitors
         "$mainMod SHIFT, Tab, focusmonitor, +1"
-
-        # toggle between tabs
-        "$mainMod ALT, Tab, changegroupactive,"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
