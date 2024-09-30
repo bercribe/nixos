@@ -36,14 +36,8 @@
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing.settings.folders = {
-    personal-cloud = {
-      enable = true;
-      path = "/mnt/distant-disk/personal cloud";
-    };
-    projects = {
-      enable = true;
-      path = "/mnt/distant-disk/projects";
-    };
+    personal-cloud.enable = true;
+    projects.enable = true;
     libraries = {
       enable = true;
       path = "/mnt/distant-disk/Libraries";
