@@ -7,43 +7,6 @@
   stylix,
   ...
 }: {
-  # generate key: `ssh-keygen -t ed25519 -C "mawz@hey.com"`
-  # ssh config
-  # use `ssh-copy-id` to add key to remote
-  # `ssh-add` to forward credentials
-  programs.ssh = {
-    enable = true;
-    forwardAgent = true;
-    addKeysToAgent = "yes";
-    matchBlocks = {
-      mawz-nuc = {
-        hostname = "192.168.0.54";
-        user = "mawz";
-      };
-      mawz-nas = {
-        hostname = "192.168.0.43";
-        user = "mawz";
-        setEnv = {
-          # check /usr/share/terminfo
-          TERM = "xterm-color";
-        };
-      };
-      mawz-nvr = {
-        hostname = "192.168.0.32";
-        user = "mawz";
-      };
-      mawz-vault = {
-        hostname = "192.168.0.51";
-        user = "mawz";
-      };
-      mawz-vault-decrypt = {
-        hostname = "192.168.0.51";
-        port = 2222;
-        user = "root";
-      };
-    };
-  };
-
   programs.bash = {
     enable = true;
     # fixes tab completion to use dircolors
