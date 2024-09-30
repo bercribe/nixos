@@ -129,9 +129,18 @@
 
   programs.neovim = {
     enable = true;
+    plugins = with pkgs.vimPlugins; [
+      telescope-nvim
+      telescope-fzf-native-nvim
+    ];
     extraConfig = ''
       "Use system clipboard
       set clipboard=unnamedplus
+      " Find files using Telescope command-line sugar.
+      nnoremap <leader>ff <cmd>Telescope find_files<cr>
+      nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+      nnoremap <leader>fb <cmd>Telescope buffers<cr>
+      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
     '';
   };
 
