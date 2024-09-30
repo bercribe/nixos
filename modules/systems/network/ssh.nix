@@ -25,5 +25,6 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c" # mawz-fw
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK++5T0hkrduDlpMfdtDh874EqXc4BTPvTzym3chIgHr" # mawz-hue
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wk9adw93SEYRYhiYbP6gonU3TCFtHWDpRYtkipkLc" # mawz-nuc
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1" # mawz-vault
   ];
 }

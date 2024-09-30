@@ -5,9 +5,9 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    (self + /modules/sops.nix)
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
-    (self + /modules/sops.nix)
   ];
 
   # Secrets
