@@ -22,7 +22,7 @@
 
   # Linux filesystem (8300)
   # zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zpool $DISK
-  # zfs create -o refreservation=150G -o mountpoint=none zpool/reserved
+  # zfs create -o refreservation=300G -o mountpoint=none zpool/reserved
   fileSystems."/" = {
     device = "zpool/root";
     fsType = "zfs";
@@ -61,6 +61,11 @@
       randomEncryption = true;
     }
   ];
+
+  # DISK=/dev/disk/by-id/ata-Samsung_SSD_870_EVO_4TB_S757NS0X802097A
+  # sudo zpool create -O encryption=on -O keyformat=passphrase -O keylocation=file:///run/secrets/zfs-drive -O compression=lz4 -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zsolid $DISK
+  # sudo zfs create -o refreservation=600G -o mountpoint=none zsolid/reserved
+  boot.zfs.extraPools = ["zsolid"];
 
   fileSystems."/mnt/distant-disk" = {
     device = "/dev/disk/by-id/wwn-0x5000cca095c1ce16-part2";
