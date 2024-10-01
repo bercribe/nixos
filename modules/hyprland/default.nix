@@ -39,7 +39,7 @@
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # icons for waybar
-  fonts.packages = with pkgs; [font-awesome];
+  fonts.packages = with pkgs; [nerdfonts font-awesome];
 
   # without this, swaylock refuses to accept the correct password
   security.pam.services.swaylock = {};
