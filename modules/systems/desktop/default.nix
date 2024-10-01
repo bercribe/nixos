@@ -11,6 +11,7 @@
     ./keyboard-languages.nix
     ./syncthing.nix
     (self + /modules/hyprland) # Tiling window manager
+    (self + /modules/systems/network/ssh.nix)
     (self + /modules/systems/network/mount.nix)
     (self + /modules/systems/hardware/bluray.nix)
     (self + /modules/sops.nix)
@@ -178,6 +179,12 @@
   programs.gamemode.enable = true;
 
   # Services
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
 
   # Printing
   # Enable CUPS to print documents.
