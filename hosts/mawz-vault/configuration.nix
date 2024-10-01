@@ -16,7 +16,7 @@
       path = "/etc/ssh/ssh_host_ed25519_key";
       key = "${config.networking.hostName}/ssh-host";
     };
-    "mawz-vault/zfs-vault" = {};
+    zfs-drive = {};
   };
 
   # Use the systemd-boot EFI boot loader.
