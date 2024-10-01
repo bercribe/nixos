@@ -21,6 +21,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.memtest86.enable = true;
 
   networking.hostName = "mawz-vault"; # Define your hostname.
   networking.hostId = "d7ec0e0e"; # Should be unique among ZFS machines
