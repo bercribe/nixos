@@ -41,7 +41,7 @@
     projects.enable = true;
     libraries = {
       enable = true;
-      path = "/mnt/distant-disk/Libraries";
+      path = "/zsolid/ds-syncthing/libraries";
     };
     mawz-hue = {
       path = "/backups";
