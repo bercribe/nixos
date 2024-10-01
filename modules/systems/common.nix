@@ -83,6 +83,7 @@
     ];
     packages = with pkgs; [
       fzf
+      gdu
       ripgrep
       tmux
       tree
