@@ -7,6 +7,8 @@
   nixpkgs-unstable,
   ...
 }: {
+  imports = [./network/ssh.nix];
+
   # Config
 
   # Flakes
