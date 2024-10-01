@@ -66,9 +66,9 @@
   # Spinning disk config:
   # DISK1=/dev/disk/by-id/ata-ST24000NM002H-3KS133_ZYD0JVHB
   # DISK2=/dev/disk/by-id/ata-ST24000NM002H-3KS133_ZYD0HPDP
-  # sudo zpool create -O encryption=on -O keyformat=passphrase -O keylocation=file:///run/secrets/zfs-drive -O compression=zstd -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 vault mirror $DISK1 $DISK2
-  # sudo zfs create -o refreservation=4T -o mountpoint=none vault/reserved
-  boot.zfs.extraPools = ["vault"];
+  # sudo zpool create -O encryption=on -O keyformat=passphrase -O keylocation=file:///run/secrets/zfs-drive -O compression=zstd -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zvault mirror $DISK1 $DISK2
+  # sudo zfs create -o refreservation=4T -o mountpoint=none zvault/reserved
+  boot.zfs.extraPools = ["zvault"];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
