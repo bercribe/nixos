@@ -9,7 +9,10 @@
     (self + /modules/systems/network/ssh.nix)
   ];
 
-  sops.secrets.email-notifications = {};
+  sops.secrets = {
+    email-notifications = {};
+    zfs-drive = {};
+  };
 
   # hosts ssh server on boot for decrypting drives
   boot.initrd = {
