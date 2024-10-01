@@ -6,9 +6,10 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    (self + /modules/sops.nix)
     (self + /modules/systems/desktop)
     (self + /modules/systems/hardware/zfs.nix)
-    (self + /modules/sops.nix)
+    # (self + /modules/clients/mullvad.nix)
   ];
 
   # Config
