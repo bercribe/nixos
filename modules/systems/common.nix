@@ -86,6 +86,7 @@
     packages = with pkgs; [
       fzf
       gdu
+      mosh
       ripgrep
       tmux
       tree
