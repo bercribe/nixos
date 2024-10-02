@@ -175,16 +175,10 @@
         "$mainMod, down, movefocus, d"
 
         # move window with mainMod + SHIFT + arrow keys
-        "$mainMod SHIFT, left, movewindow, l"
-        "$mainMod SHIFT, right, movewindow, r"
-        "$mainMod SHIFT, up, movewindow, u"
-        "$mainMod SHIFT, down, movewindow, d"
-
-        # move window into tab group
-        "$mainMod ALT, left, moveintogroup, l"
-        "$mainMod ALT, right, moveintogroup, r"
-        "$mainMod ALT, up, moveintogroup, u"
-        "$mainMod ALT, down, moveintogroup, d"
+        "$mainMod SHIFT, left, movewindoworgroup, l"
+        "$mainMod SHIFT, right, movewindoworgroup, r"
+        "$mainMod SHIFT, up, movewindoworgroup, u"
+        "$mainMod SHIFT, down, movewindoworgroup, d"
 
         # to switch between windows in a floating workspace
         "$mainMod,Tab,cyclenext," # change focus to another window
