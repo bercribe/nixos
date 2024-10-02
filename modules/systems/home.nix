@@ -19,30 +19,32 @@
   # ssh config
   # use `ssh-copy-id` to add key to remote
   # `ssh-add` to forward credentials
-  programs.ssh = {
-    enable = true;
+  programs.ssh = let
+    user = "mawz";
     forwardAgent = true;
+  in {
+    enable = true;
     addKeysToAgent = "yes";
     matchBlocks = {
       mawz-nuc = {
+        inherit user forwardAgent;
         hostname = "192.168.0.54";
-        user = "mawz";
       };
       mawz-nas = {
+        inherit user forwardAgent;
         hostname = "192.168.0.43";
-        user = "mawz";
         setEnv = {
           # check /usr/share/terminfo
           TERM = "xterm-color";
         };
       };
       mawz-nvr = {
+        inherit user forwardAgent;
         hostname = "192.168.0.32";
-        user = "mawz";
       };
       mawz-vault = {
+        inherit user forwardAgent;
         hostname = "192.168.0.51";
-        user = "mawz";
       };
       mawz-vault-decrypt = {
         hostname = "192.168.0.51";
