@@ -77,7 +77,7 @@
       nnoremap <leader>fb <cmd>Telescope buffers<cr>
       nnoremap <leader>fh <cmd>Telescope help_tags<cr>
       " Show file tree
-      nnoremap <leader>t :Neotree reveal<cr>
+      nnoremap <leader>t :Neotree reveal right<cr>
     '';
   };
 
