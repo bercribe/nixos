@@ -4,7 +4,7 @@
     (self + /modules/systems/headless)
     (self + /modules/clients/healthchecks-heartbeats.nix)
     (self + /modules/services/containers/immich)
-    (self + /modules/services/monitoring/healthchecks.nix)
+    (self + /modules/services/healthchecks.nix)
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/gitea.nix)
     (self + /modules/services/miniflux.nix)

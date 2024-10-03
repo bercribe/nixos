@@ -8,7 +8,7 @@
     (self + /modules/sops.nix)
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
-    (self + /modules/services/monitoring/uptime-kuma.nix)
+    (self + /modules/services/uptime-kuma.nix)
   ];
 
   # Secrets
