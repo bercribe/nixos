@@ -84,13 +84,17 @@
       "wheel" # Enable ‘sudo’ for the user.
     ];
     packages = with pkgs; [
-      fzf
-      gdu
-      mosh
-      ripgrep
-      tmux
-      tree
-      unzip
+      btop # performance visualizer
+      fzf # fuzzy find
+      gdu # go disk analyzer
+      lf # list files
+      mosh # mobile shell
+      neofetch # system info
+      python3 # scripting
+      ripgrep # file content search
+      tmux # terminal multiplexer
+      tree # directory tree
+      unzip # zip extractor
     ];
   };
 
@@ -106,10 +110,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alejandra
-    git
-    sops
-    wget
+    alejandra # nix formatter
+    git # version control
+    sops # secrets management
+    wget # network util
   ];
 
   # Programs

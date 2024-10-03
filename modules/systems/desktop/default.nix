@@ -85,13 +85,9 @@
         wireshark # network analyzer
       ];
       cli = [
-        btop # perf visualizer
         cava # audio visualizer
         exiftool # image metadata
         ffsubsync # sync subtitles with video
-        lf # list files
-        neofetch # system info
-        python3 # scripting language
         restic # backup tool
         typst # document editor
       ];
