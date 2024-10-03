@@ -7,6 +7,12 @@ in {
     openFirewall = true;
     settings = {
       http.port = port;
+      filtering.rewrites = [
+        {
+          domain = "uptime-kuma.lan";
+          answer = "192.168.0.51";
+        }
+      ];
     };
   };
   networking.firewall.allowedUDPPorts = [53];
