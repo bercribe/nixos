@@ -126,6 +126,8 @@
 
   # program defaults
   xdg = {
+    # fixes issue where some applications would not open `lf` in its own window
+    portal.xdgOpenUsePortal = true;
     terminal-exec = {
       enable = true;
       settings = {
