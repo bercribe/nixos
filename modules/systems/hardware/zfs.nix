@@ -7,10 +7,10 @@
   imports = [
     (self + /modules/sops.nix)
     (self + /modules/systems/network/ssh.nix)
+    (self + /modules/services/postfix.nix)
   ];
 
   sops.secrets = {
-    email-notifications = {};
     zfs-drive = {};
   };
 
@@ -55,7 +55,7 @@
     settings = {
       ZED_DEBUG_LOG = "/tmp/zed.debug.log";
       ZED_EMAIL_ADDR = ["root"];
-      ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
+      ZED_EMAIL_PROG = "${pkgs.mailutils}/bin/mail";
       ZED_EMAIL_OPTS = "@ADDRESS@";
 
       ZED_NOTIFY_INTERVAL_SECS = 3600;
@@ -63,31 +63,6 @@
 
       ZED_USE_ENCLOSURE_LEDS = true;
       ZED_SCRUB_AFTER_RESILVER = true;
-    };
-  };
-
-  # email client - used by zed
-  programs.msmtp = {
-    enable = true;
-    defaults.aliases = "/etc/aliases";
-    accounts.default = {
-      auth = true;
-      tls = true;
-      host = "smtp.gmail.com";
-      port = 587;
-      from = "bercribe.notifications";
-      user = "bercribe.notifications";
-      passwordeval = "cat ${config.sops.secrets.email-notifications.path}";
-    };
-  };
-
-  # redirect emails sent to root
-  environment.etc = {
-    "aliases" = {
-      text = ''
-        root: mawz@hey.com
-      '';
-      mode = "0644";
     };
   };
 }

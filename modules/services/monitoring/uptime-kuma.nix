@@ -2,25 +2,35 @@
   self,
   config,
   pkgs,
+  lib,
   ...
 }: let
   port = 13114;
+  dataDir = "/services/uptime-kuma/";
 in {
   imports = [
     (self + /modules/systems/network/mount.nix)
     (self + /modules/clients/local-healthchecks.nix)
+    (self + /modules/services/postfix.nix)
   ];
 
-  # notifications set up with a gmail burner
-  # password set here: https://myaccount.google.com/apppasswords
   services.uptime-kuma = {
     enable = true;
     settings = {
       HOST = "0.0.0.0";
       PORT = toString port;
+      DATA_DIR = lib.mkForce dataDir;
     };
   };
-  networking.firewall.allowedTCPPorts = [port];
+  systemd.services.uptime-kuma.serviceConfig.ReadWritePaths = dataDir;
+
+  networking.firewall.allowedTCPPorts = [80 port];
+  services.caddy = {
+    enable = true;
+    virtualHosts."http://uptime-kuma.lan".extraConfig = ''
+      reverse_proxy localhost:${toString port}
+    '';
+  };
 
   # to restore backup, run
   # sudo cp <backup> /var/lib/private/uptime-kuma
@@ -37,7 +47,7 @@ in {
     script = ''
       backupFile="uptime-kuma-backup-$(date +'%s').zip"
       systemctl stop uptime-kuma
-      ${pkgs.zip}/bin/zip -r "/tmp/$backupFile" ${config.services.uptime-kuma.settings.DATA_DIR}
+      ${pkgs.zip}/bin/zip -r "/tmp/$backupFile" ${dataDir}
       systemctl start uptime-kuma
 
       cp "/tmp/$backupFile" /mnt/mawz-nas/uptime-kuma
