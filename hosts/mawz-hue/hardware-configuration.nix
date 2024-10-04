@@ -67,11 +67,6 @@
   # sudo zfs create -o refreservation=600G -o mountpoint=none zsolid/reserved
   boot.zfs.extraPools = ["zsolid"];
 
-  fileSystems."/mnt/distant-disk" = {
-    device = "/dev/disk/by-id/wwn-0x5000cca095c1ce16-part2";
-    fsType = "ntfs";
-  };
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
