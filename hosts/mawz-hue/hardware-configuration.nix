@@ -62,10 +62,16 @@
     }
   ];
 
-  # DISK=/dev/disk/by-id/ata-Samsung_SSD_870_EVO_4TB_S757NS0X802097A
-  # sudo zpool create -O encryption=on -O keyformat=passphrase -O keylocation=file:///run/secrets/zfs-drive -O compression=lz4 -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zsolid $DISK
-  # sudo zfs create -o refreservation=600G -o mountpoint=none zsolid/reserved
-  boot.zfs.extraPools = ["zsolid"];
+  boot.zfs.extraPools = [
+    # DISK=/dev/disk/by-id/ata-Samsung_SSD_870_EVO_4TB_S757NS0X802097A
+    # sudo zpool create -O encryption=on -O keyformat=passphrase -O keylocation=file:///run/secrets/zfs-drive -O compression=lz4 -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zsolid $DISK
+    # sudo zfs create -o refreservation=600G -o mountpoint=none zsolid/reserved
+    "zsolid"
+    # DISK=/dev/disk/by-id/ata-WDC_WD4005FZBX-00K5WB0_VBG3Z2YR
+    # sudo zpool create -O encryption=on -O keyformat=passphrase -O keylocation=file:///run/secrets/zfs-drive -O compression=zstd -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zrust $DISK
+    # sudo zfs create -o refreservation=600G -o mountpoint=none zrust/reserved
+    "zrust"
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
