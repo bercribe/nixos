@@ -73,6 +73,12 @@
     "zrust"
   ];
 
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S467NX0M128514H-part4";
+    fsType = "ntfs";
+    options = ["ro"];
+  };
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
