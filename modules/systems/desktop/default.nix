@@ -136,7 +136,7 @@
       enable = true;
       defaultApplications = {
         "inode/directory" = "lf.desktop";
-        "application/pdf" = "firefox.desktop";
+        "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
         "audio/vnd.wave" = "mpv.desktop";
         "image/jpeg" = "qimgv.desktop";
         "text/plain" = "nvim.desktop";
