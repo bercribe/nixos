@@ -21,7 +21,7 @@ in {
   };
 
   fileSystems."/mnt/mawz-vault" = {
-    device = "mawz@192.168.0.51:/vault";
+    device = "mawz@192.168.0.51:/zvault";
     fsType = "sshfs";
     inherit options;
   };

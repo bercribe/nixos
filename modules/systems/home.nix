@@ -128,7 +128,6 @@
       a = "push %mkdir<space>";
       gn = "cd /mnt/mawz-nas";
       gv = "cd /mnt/mawz-vault";
-      gd = "cd /mnt/distant-disk";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
