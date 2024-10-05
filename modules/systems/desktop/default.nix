@@ -65,6 +65,7 @@
     packages = with pkgs; let
       gui = [
         alacritty # terminal
+        BeatSaberModManager # mod manager for beat saber
         czkawka # deduping util
         discord # voice chat
         firefox # browser
