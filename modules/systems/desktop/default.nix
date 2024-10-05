@@ -88,6 +88,7 @@
         cava # audio visualizer
         exiftool # image metadata
         ffsubsync # sync subtitles with video
+        handlr-regex # better xdg-open
         restic # backup tool
         typst # document editor
       ];
@@ -154,6 +155,7 @@
   ];
 
   # Set defaults
+  environment.variables.OPENER = "handlr open";
   environment.variables.BROWSER = "firefox";
   environment.variables.TERMINAL = "alacritty";
 

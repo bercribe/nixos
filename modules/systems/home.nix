@@ -132,6 +132,9 @@
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
 
+      mimeType=$(xdg-mime query filetype "$f")
+      echo "Mime type: $mimeType"
+
       shopt -s nocasematch
       case "$1" in
           *.avi | *.bmp | *.gif | *.jpg | *.jpeg | *.mov | *.mpg | *.mp4 | *.pcx | *.png | *.psd | *.thm | *.wav)

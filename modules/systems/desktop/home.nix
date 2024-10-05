@@ -2,6 +2,7 @@
 {
   self,
   config,
+  osConfig,
   pkgs,
   lib,
   stylix,
@@ -84,6 +85,12 @@
       package = pkgs.unstable.everforest-gtk-theme;
       name = "Everforest-Dark";
     };
+  };
+
+  # default apps
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = osConfig.xdg.mime.defaultApplications;
   };
 
   # needed for stylix theming
