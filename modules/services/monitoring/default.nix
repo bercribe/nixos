@@ -2,7 +2,7 @@
   imports = [
     ./healthchecks.nix
     ./uptime-kuma.nix
-    (self + /modules/clients/healthchecks-heartbeats.nix)
-    (self + /modules/clients/healthchecks-emails.nix)
+    (self + /modules/clients/heartbeat-healthchecks.nix)
+    (self + /modules/clients/email-healthchecks.nix)
   ];
 }
