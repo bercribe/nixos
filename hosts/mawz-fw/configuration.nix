@@ -8,7 +8,7 @@
     ./hardware-configuration.nix
     (self + /modules/sops.nix)
     (self + /modules/systems/desktop)
-    (self + /modules/systems/hardware/zfs.nix)
+    (self + /modules/systems/hardware/encrypted-zfs.nix)
     # (self + /modules/clients/mullvad.nix)
   ];
 
