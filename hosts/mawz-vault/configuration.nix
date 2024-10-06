@@ -10,6 +10,7 @@
     (self + /modules/systems/hardware/zfs.nix)
     (self + /modules/services/monitoring)
     (self + /modules/services/adguardhome.nix)
+    (self + /modules/services/gitea.nix)
   ];
 
   # Secrets

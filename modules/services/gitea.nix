@@ -14,6 +14,7 @@ in {
   # https://docs.gitea.com/usage/repo-mirror#pulling-from-a-remote-repository
   services.gitea = {
     enable = true;
+    stateDir = "/services/gitea";
     settings = {
       server.HTTP_PORT = port;
       migrations.ALLOWED_DOMAINS = "*.github.com,github.com";
@@ -23,7 +24,14 @@ in {
       backupDir = "/mnt/mawz-nas/gitea";
     };
   };
-  networking.firewall.allowedTCPPorts = [port];
+
+  networking.firewall.allowedTCPPorts = [80 port];
+  services.caddy = {
+    enable = true;
+    virtualHosts."http://gitea.lan".extraConfig = ''
+      reverse_proxy localhost:${toString port}
+    '';
+  };
 
   systemd.services.gitea-dump.onSuccess = ["gitea-backup.service"];
   systemd.services.gitea-backup = {
