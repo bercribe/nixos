@@ -7,6 +7,8 @@
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
+    # Services
+    (self + /modules/services/adguardhome.nix)
   ];
 
   # Secrets

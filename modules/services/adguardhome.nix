@@ -9,7 +9,7 @@ in {
       http.port = port;
       filtering.rewrites = let
         vaultDomains = [
-          "adguardhome.lan"
+          "*.mawz-vault.lan"
           "gitea.lan"
           "healthchecks.lan"
           "immich.lan"
@@ -30,6 +30,10 @@ in {
             domain = "pikvm.lan";
             answer = "192.168.0.49";
           }
+          {
+            domain = "*.mawz-nuc.lan";
+            answer = "192.168.0.54";
+          }
         ]
         ++ builtins.map (domain: {
           inherit domain;
@@ -43,7 +47,7 @@ in {
   networking.firewall.allowedTCPPorts = [80];
   services.caddy = {
     enable = true;
-    virtualHosts."http://adguardhome.lan".extraConfig = ''
+    virtualHosts."http://adguardhome.${config.networking.hostName}.lan".extraConfig = ''
       reverse_proxy localhost:${toString port}
     '';
   };
