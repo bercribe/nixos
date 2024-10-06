@@ -2,7 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
-    (self + /modules/services/containers/immich)
   ];
 
   # Bootloader.
