@@ -2,7 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
-    (self + /modules/clients/healthchecks-heartbeats.nix)
     (self + /modules/services/containers/immich)
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/gitea.nix)
