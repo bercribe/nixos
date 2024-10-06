@@ -7,10 +7,32 @@ in {
     openFirewall = true;
     settings = {
       http.port = port;
-      filtering.rewrites = [
+      filtering.rewrites = let
+        vaultIp = "192.168.0.51";
+      in [
+        {
+          domain = "adguardhome.lan";
+          answer = vaultIp;
+        }
+        {
+          domain = "gitea.lan";
+          answer = vaultIp;
+        }
+        {
+          domain = "healthchecks.lan";
+          answer = vaultIp;
+        }
+        {
+          domain = "immich.lan";
+          answer = vaultIp;
+        }
+        {
+          domain = "miniflux.lan";
+          answer = vaultIp;
+        }
         {
           domain = "uptime-kuma.lan";
-          answer = "192.168.0.51";
+          answer = vaultIp;
         }
       ];
     };
