@@ -9,7 +9,7 @@
   dataDir = "/services/uptime-kuma/";
 in {
   imports = [
-    ./postfix.nix
+    (self + /modules/services/postfix.nix)
     (self + /modules/systems/network/mount.nix)
     (self + /modules/clients/local-healthchecks.nix)
   ];

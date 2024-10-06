@@ -7,9 +7,9 @@
   port = 45566;
 in {
   imports = [
-    ./postfix.nix
-    (self + /modules/systems/network/mount.nix)
     (self + /modules/sops.nix)
+    (self + /modules/services/postfix.nix)
+    (self + /modules/systems/network/mount.nix)
     (self + /modules/clients/local-healthchecks.nix)
   ];
 
