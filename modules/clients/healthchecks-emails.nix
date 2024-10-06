@@ -16,7 +16,7 @@
     timerConfig = {
       OnBootSec = "1h";
       OnUnitActiveSec = "1h";
-      Unit = "uptime-heartbeat.service";
+      Unit = "email-heartbeat.service";
     };
   };
   systemd.services.email-heartbeat = {
