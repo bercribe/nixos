@@ -12,23 +12,60 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  # configured following instructions here:
+  # https://wiki.nixos.org/wiki/ZFS
+
+  # Linux filesystem (8300)
+  # zpool create -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zpool $DISK
+  # zfs create -o refreservation=150G -o mountpoint=none zpool/reserved
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/4c1974fb-1c7b-4b9f-9a70-b51ad4aac147";
-    fsType = "ext4";
+    device = "zpool/root";
+    fsType = "zfs";
+    options = ["zfsutil"];
   };
 
+  fileSystems."/nix" = {
+    device = "zpool/nix";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/var" = {
+    device = "zpool/var";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  fileSystems."/services" = {
+    device = "zpool/services";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
+  # +1G EFI system partition (ef00)
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/D696-C861";
+    device = "/dev/disk/by-id/nvme-Lexar_SSD_NM7A1_1TB_NJB5822002994P2200-part1";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
+  # +4G Linux swap (8200)
   swapDevices = [
-    {device = "/dev/disk/by-uuid/7036caa6-1beb-4e02-a730-8e0c62091941";}
+    {
+      device = "/dev/disk/by-id/nvme-Lexar_SSD_NM7A1_1TB_NJB5822002994P2200-part2";
+      randomEncryption = true;
+    }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
