@@ -8,33 +8,34 @@ in {
     settings = {
       http.port = port;
       filtering.rewrites = let
-        vaultIp = "192.168.0.51";
-      in [
-        {
-          domain = "adguardhome.lan";
-          answer = vaultIp;
-        }
-        {
-          domain = "gitea.lan";
-          answer = vaultIp;
-        }
-        {
-          domain = "healthchecks.lan";
-          answer = vaultIp;
-        }
-        {
-          domain = "immich.lan";
-          answer = vaultIp;
-        }
-        {
-          domain = "miniflux.lan";
-          answer = vaultIp;
-        }
-        {
-          domain = "uptime-kuma.lan";
-          answer = vaultIp;
-        }
-      ];
+        vaultDomains = [
+          "adguardhome.lan"
+          "gitea.lan"
+          "healthchecks.lan"
+          "immich.lan"
+          "miniflux.lan"
+          "uptime-kuma.lan"
+        ];
+      in
+        [
+          {
+            domain = "router.lan";
+            answer = "192.168.0.1";
+          }
+          {
+            domain = "switch.lan";
+            answer = "192.168.0.48";
+          }
+          {
+            domain = "pikvm.lan";
+            answer = "192.168.0.49";
+          }
+        ]
+        ++ builtins.map (domain: {
+          inherit domain;
+          answer = "192.168.0.51";
+        })
+        vaultDomains;
     };
   };
   networking.firewall.allowedUDPPorts = [53];
