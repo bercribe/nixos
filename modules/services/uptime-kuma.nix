@@ -9,9 +9,9 @@
   dataDir = "/services/uptime-kuma/";
 in {
   imports = [
+    ./postfix.nix
     (self + /modules/systems/network/mount.nix)
     (self + /modules/clients/local-healthchecks.nix)
-    (self + /modules/services/postfix.nix)
   ];
 
   services.uptime-kuma = {
@@ -53,7 +53,7 @@ in {
       cp "/tmp/$backupFile" /mnt/mawz-nas/uptime-kuma
 
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/uptime-kuma-backup"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/uptime-kuma-backup"
     '';
     serviceConfig = {
       Type = "oneshot";

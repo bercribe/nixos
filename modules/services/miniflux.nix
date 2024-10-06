@@ -48,7 +48,7 @@ in {
   systemd.services.miniflux-backup-notify = {
     script = ''
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/miniflux-backup"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/miniflux-backup"
     '';
     serviceConfig = {
       Type = "oneshot";

@@ -7,6 +7,7 @@
   port = 45566;
 in {
   imports = [
+    ./postfix.nix
     (self + /modules/systems/network/mount.nix)
     (self + /modules/sops.nix)
     (self + /modules/clients/local-healthchecks.nix)
@@ -14,28 +15,29 @@ in {
 
   sops.secrets = {
     "healthchecks/local/secret-key" = {owner = config.services.healthchecks.user;};
-    healthchecks-email = {
-      owner = config.services.healthchecks.user;
-      key = "email-notifications";
-    };
   };
 
   services.healthchecks = {
     enable = true;
     listenAddress = "0.0.0.0";
     inherit port;
+    dataDir = "/services/healthchecks";
     settings = {
       SECRET_KEY_FILE = config.sops.secrets."healthchecks/local/secret-key".path;
-      SITE_ROOT = "http://192.168.0.54:${toString port}";
-      EMAIL_HOST = "smtp.gmail.com";
-      EMAIL_PORT = "587";
-      EMAIL_HOST_USER = "bercribe.notifications";
-      EMAIL_HOST_PASSWORD_FILE = config.sops.secrets.healthchecks-email.path;
-      EMAIL_USE_SSL = "False";
-      EMAIL_USE_TLS = "True";
+      SITE_ROOT = "http://healthchecks.lan";
+      EMAIL_HOST = "localhost";
+      EMAIL_PORT = "25";
+      EMAIL_USE_TLS = "False";
     };
   };
-  networking.firewall.allowedTCPPorts = [port];
+
+  networking.firewall.allowedTCPPorts = [80 port];
+  services.caddy = {
+    enable = true;
+    virtualHosts."http://healthchecks.lan".extraConfig = ''
+      reverse_proxy localhost:${toString port}
+    '';
+  };
 
   # to restore backup, run
   # sudo cp <backup> /var/lib/healthchecks
@@ -59,7 +61,7 @@ in {
       cp "/tmp/$backupFile" /mnt/mawz-nas/healthchecks/
 
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/healthchecks-backup"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/healthchecks-backup"
     '';
     serviceConfig = {
       Type = "oneshot";

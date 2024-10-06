@@ -29,7 +29,7 @@ in {
   systemd.services.gitea-backup = {
     script = ''
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://192.168.0.54:45566/ping/$pingKey/gitea-backup"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/gitea-backup"
     '';
     serviceConfig = {
       Type = "oneshot";
