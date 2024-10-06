@@ -18,12 +18,20 @@ in {
     enable = true;
     config = {
       PORT = toString port;
-      BASE_URL = "http://192.168.0.54:${toString port}/";
+      BASE_URL = "http://miniflux.lan/";
       FETCH_YOUTUBE_WATCH_TIME = 1;
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
-  networking.firewall.allowedTCPPorts = [port];
+  services.postgresql.dataDir = "/services/postgresql/${config.services.postgresql.package.psqlSchema}";
+
+  networking.firewall.allowedTCPPorts = [80 port];
+  services.caddy = {
+    enable = true;
+    virtualHosts."http://miniflux.lan".extraConfig = ''
+      reverse_proxy localhost:${toString port}
+    '';
+  };
 
   # to restore backup, run
   # psql miniflux < miniflux.dump
