@@ -1,5 +1,12 @@
-{config, ...}: {
-  sops.secrets."postfix/sasl_passwd".owner = config.services.postfix.user;
+{
+  self,
+  config,
+  ...
+}: {
+  sops.secrets."postfix/sasl_passwd" = {
+    owner = config.services.postfix.user;
+    sopsFile = self + /secrets/common.yaml;
+  };
 
   # email - mail transfer agent
   services.postfix = {
