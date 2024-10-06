@@ -3,7 +3,8 @@
   virtualisation.docker.enable = true;
   users.users.mawz.extraGroups = ["docker"];
 
-  # upgrading: `docker compose pull` and update version in .env
+  # upgrading - update version in .env, then run
+  # `docker compose pull && docker compose up -d`
   systemd.services.immich = {
     script = ''
       cd ${./.}
