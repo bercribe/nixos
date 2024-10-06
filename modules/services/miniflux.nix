@@ -23,7 +23,7 @@ in {
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
-  services.postgresql.dataDir = "/services/postgresql/${config.services.postgresql.package.psqlSchema}";
+  services.postgresql.dataDir = "/services/postgres/${config.services.postgresql.package.psqlSchema}";
 
   networking.firewall.allowedTCPPorts = [80 port];
   services.caddy = {
