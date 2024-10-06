@@ -39,6 +39,14 @@ in {
   };
   networking.firewall.allowedUDPPorts = [53];
 
+  networking.firewall.allowedTCPPorts = [80];
+  services.caddy = {
+    enable = true;
+    virtualHosts."http://adguardhome.lan".extraConfig = ''
+      reverse_proxy localhost:${toString port}
+    '';
+  };
+
   # use local DNS
   networking.networkmanager.insertNameservers = ["127.0.0.1"];
 }

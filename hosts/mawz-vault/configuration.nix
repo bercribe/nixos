@@ -9,6 +9,7 @@
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
     (self + /modules/services/monitoring)
+    (self + /modules/services/adguardhome.nix)
   ];
 
   # Secrets

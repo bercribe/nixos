@@ -3,7 +3,6 @@
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
     (self + /modules/services/containers/immich)
-    (self + /modules/services/adguardhome.nix)
     (self + /modules/services/gitea.nix)
     (self + /modules/services/miniflux.nix)
   ];
