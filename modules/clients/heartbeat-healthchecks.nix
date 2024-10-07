@@ -6,7 +6,9 @@
 }: {
   imports = [(self + /modules/sops.nix)];
 
-  sops.secrets."healthchecks/remote/ping-key" = {};
+  sops.secrets."healthchecks/remote/ping-key" = {
+    sopsFile = self + /secrets/common.yaml;
+  };
 
   systemd.timers.uptime-heartbeat = {
     wantedBy = ["timers.target"];

@@ -8,38 +8,24 @@ in {
     settings = {
       http.port = port;
       filtering.rewrites = let
-        vaultDomains = [
-          "*.mawz-vault.lan"
-          "gitea.lan"
-          "healthchecks.lan"
-          "immich.lan"
-          "miniflux.lan"
-          "uptime-kuma.lan"
-        ];
+        domains = {
+          "192.168.0.1" = ["router.lan"];
+          "192.168.0.48" = ["switch.lan"];
+          "192.168.0.49" = ["pikvm.lan"];
+          "192.168.0.51" = [
+            "*.mawz-vault.lan"
+            "immich.lan"
+          ];
+          "192.168.0.54" = [
+            "*.mawz-nuc.lan"
+            "gitea.lan"
+            "healthchecks.lan"
+            "miniflux.lan"
+            "uptime-kuma.lan"
+          ];
+        };
       in
-        [
-          {
-            domain = "router.lan";
-            answer = "192.168.0.1";
-          }
-          {
-            domain = "switch.lan";
-            answer = "192.168.0.48";
-          }
-          {
-            domain = "pikvm.lan";
-            answer = "192.168.0.49";
-          }
-          {
-            domain = "*.mawz-nuc.lan";
-            answer = "192.168.0.54";
-          }
-        ]
-        ++ builtins.map (domain: {
-          inherit domain;
-          answer = "192.168.0.51";
-        })
-        vaultDomains;
+        builtins.concatLists (builtins.attrValues (builtins.mapAttrs (answer: domains: (builtins.map (domain: {inherit domain answer;}) domains)) domains));
     };
   };
   networking.firewall.allowedUDPPorts = [53];
