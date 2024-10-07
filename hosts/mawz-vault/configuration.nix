@@ -8,6 +8,7 @@
     (self + /modules/sops.nix)
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
+    # Services
     (self + /modules/services/monitoring)
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/containers/immich)
