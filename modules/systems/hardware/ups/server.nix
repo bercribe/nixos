@@ -9,12 +9,11 @@
     (self + /modules/clients/local-healthchecks.nix)
   ];
 
-  sops.secrets = {
-    "ups/admin" = {};
-    "ups/observer" = {
-      sopsFile = self + /secrets/common.yaml;
-    };
+  sops.secrets."ups/admin" = {};
+  sops.secrets."ups/observer" = {
+    sopsFile = self + /secrets/common.yaml;
   };
+  sops.secrets."ups/monuser" = {};
 
   power.ups = {
     enable = true;
@@ -39,6 +38,11 @@
       observer = {
         upsmon = "secondary";
         passwordFile = config.sops.secrets."ups/observer".path;
+      };
+      # only used for synology device
+      monuser = {
+        upsmon = "secondary";
+        passwordFile = config.sops.secrets."ups/monuser".path;
       };
     };
     upsmon = {
