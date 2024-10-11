@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  self,
+  pkgs,
+  ...
+}: {
+  imports = [
+    (self + /modules/systems/network/mount.nix)
+  ];
+
   # Enable docker
   virtualisation.docker.enable = true;
   users.users.mawz.extraGroups = ["docker"];
