@@ -8,6 +8,7 @@
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
     # Services
+    (self + /modules/systems/hardware/ups/server.nix)
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/monitoring)
     (self + /modules/services/gitea.nix)
