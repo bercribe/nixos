@@ -10,6 +10,8 @@
     (self + /modules/systems/hardware/nvidia.nix)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
     (self + /modules/systems/hardware/ups/desktop-client.nix)
+
+    (self + /modules/services/frigate.nix)
   ];
 
   # Config

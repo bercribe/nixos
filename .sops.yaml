@@ -21,3 +21,7 @@ creation_rules:
     - age:
       - *primary
       - *nuc
+  - path_regex: nvr.yaml$
+    key_groups:
+    - age:
+      - *primary
