@@ -118,10 +118,13 @@
 
   # Programs
 
-  # Fix command-not-found functionality for flakes
-  programs.command-not-found.enable = false;
+  # To fix database error, run:
+  # sudo -i
+  # nix-channel --update
+  programs.command-not-found.enable = true;
+  # Alternate command-not-found functionality for flakes
   programs.nix-index = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
   };
 
