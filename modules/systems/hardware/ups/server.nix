@@ -22,6 +22,11 @@
       description = "CyberPower 1500PFCLCD";
       driver = "usbhid-ups";
       port = "auto";
+      directives = [
+        "override.battery.charge.low = 50"
+        "override.battery.runtime.low = 300"
+        "ignorelb"
+      ];
     };
     upsd.listen = [
       {
@@ -55,7 +60,7 @@
       settings = {
         MINSUPPLIES = 1;
         RUN_AS_USER = "root";
-        SHUTDOWNCMD = "${pkgs.systemd}/bin/shutdown now";
+        SHUTDOWNCMD = "systemctl restart upsd";
       };
     };
   };
@@ -79,8 +84,8 @@
 
       if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 1000 ]; then
         slug="ups-runtime"
-        if [ "$status" == "OL" ]; then
-          ${pkgs.wol}/bin/wol 88:ae:dd:0f:56:d7 # mawz-vault
+        if [[ "$status" == "OL"* ]]; then
+          ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # mawz-vault
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mawz-nas
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mawz-nas
         fi
