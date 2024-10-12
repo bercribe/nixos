@@ -90,11 +90,14 @@ current=$(nixos-rebuild list-generations | grep current)
 
 # Commit all changes witih the generation metadata
 if [ "$disableCommit" != true ]; then
-    git commit -am "${HOSTNAME}: $current"
+    git commit -am "${HOSTNAME}: $current" || true
 fi
 
 # Back to where you were
 popd
+
+# Fix command-not-found functionality
+sudo -i nix-channel --update
 
 # Notify all OK!
 echo "NixOS Rebuilt OK!"
