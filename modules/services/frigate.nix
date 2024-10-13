@@ -43,6 +43,7 @@ in {
     in {
       database.path = "${dataDir}/frigate.db";
       mqtt = {
+        enabled = true;
         host = "192.168.0.43";
         user = "hass";
         password = config.sops.placeholder."frigate/mqtt";
@@ -52,7 +53,8 @@ in {
       #   device = "usb";
       # };
       cameras = {
-        mawz-office = {
+        mawz_office = {
+          enabled = true;
           ffmpeg = {
             inputs = [
               {
@@ -74,7 +76,8 @@ in {
           record.enabled = true;
           snapshots.enabled = true;
         };
-        front-porch = {
+        front_porch = {
+          enabled = true;
           ffmpeg = {
             inputs = [
               {
@@ -98,8 +101,8 @@ in {
         };
       };
       go2rtc.streams = {
-        mawz-office = [mawzOfficePath];
-        front-porch = [frontPorchPath];
+        mawz_office = [mawzOfficePath];
+        front_porch = [frontPorchPath];
       };
     };
   };
@@ -115,6 +118,7 @@ in {
   };
 
   # there is no builtin YAML generator: https://github.com/NixOS/nix/issues/4910
+  # TODO: try to use frigate supported env vars
   systemd.services.frigate-config-generator = {
     script = ''
       ${pkgs.yq-go}/bin/yq -P < ${config.sops.templates.frigate-config.path} > "${configFile}"
