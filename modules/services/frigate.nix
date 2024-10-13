@@ -25,7 +25,7 @@ in {
   networking.interfaces.${interface} = {
     ipv4.addresses = [
       {
-        address = "10.0.40.1";
+        address = "10.0.40.2";
         prefixLength = 24;
       }
     ];
