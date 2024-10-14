@@ -9,7 +9,8 @@
     (self + /modules/sops.nix)
     (self + /modules/systems/desktop)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
-    # (self + /modules/clients/mullvad.nix)
+    # Temporary
+    (self + /modules/clients/mullvad.nix)
   ];
 
   # Config
