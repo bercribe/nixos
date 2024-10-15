@@ -79,6 +79,9 @@
 
   # Services
 
+  services.automatic-timezoned.enable = true;
+  time.timeZone = null;
+
   # Framework updater - `fwupdmgr update`
   services.fwupd.enable = true;
 
