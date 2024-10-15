@@ -13,10 +13,10 @@
 
       # Execute your favorite apps at launch
       exec-once = [
-        "waybar"
-        "fcitx5 -d"
-        "nm-applet --indicator"
-        "blueman-applet"
+        "${pkgs.waybar}/bin/waybar" # status bar
+        "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator" # network picker
+        "${pkgs.blueman}/bin/blueman-applet" # bluetooth
+        "${pkgs.fcitx5}/bin/fcitx5 -d" # keyboard input languages
         "${pkgs.udiskie}/bin/udiskie" # USB automount frontend
       ];
 
@@ -27,7 +27,7 @@
       "$terminal" = "alacritty";
       "$fileManager" = "alacritty -e lf";
       "$browser" = "firefox";
-      "$menu" = "wofi --show drun";
+      "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
       # Some default env vars.
       env = [
@@ -162,7 +162,7 @@
         "$mainMod SHIFT, N, changegroupactive, b"
         "$mainMod, L, exec, loginctl lock-session"
         "$mainMod SHIFT, L, exec, systemctl suspend"
-        "$mainMod, D, exec, makoctl dismiss"
+        "$mainMod, D, exec, ${pkgs.mako}/bin/makoctl dismiss"
 
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
@@ -216,7 +216,7 @@
         "$mainMod, mouse_up, workspace, e-1"
 
         # Screenshots
-        ", Print, exec, grim -l 0 -g \"$(slurp)\" - | wl-copy"
+        ", Print, exec, ${pkgs.grim}/bin/grim -l 0 -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -233,8 +233,8 @@
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
           # Screen brightness
-          ", XF86MonBrightnessDown, exec, brightnessctl --min-value=1 set 5%-"
-          ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+          ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl --min-value=1 set 5%-"
+          ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%+"
         ];
     };
   };
@@ -294,14 +294,14 @@
       listener = [
         {
           timeout = 150; # 2.5min.
-          on-timeout = "brightnessctl -s set 10"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
-          on-resume = "brightnessctl -r"; # monitor backlight restore.
+          on-timeout = "${pkgs.brightnessctl}/bin/brightnessctl -s set 10"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
+          on-resume = "${pkgs.brightnessctl}/bin/brightnessctl -r"; # monitor backlight restore.
         }
         # turn off keyboard backlight, comment out this section if you dont have a keyboard backlight.
         # {
         #   timeout = 150; # 2.5min.
-        #   on-timeout = brightnessctl -sd rgb:kbd_backlight set 0; # turn off keyboard backlight.
-        #   on-resume = brightnessctl -rd rgb:kbd_backlight; # turn on keyboard backlight.
+        #   on-timeout = ${pkgs.brightnessctl}/bin/brightnessctl -sd rgb:kbd_backlight set 0; # turn off keyboard backlight.
+        #   on-resume = ${pkgs.brightnessctl}/bin/brightnessctl -rd rgb:kbd_backlight; # turn on keyboard backlight.
         # }
         {
           timeout = 300; # 5min
@@ -322,6 +322,11 @@
 
   programs.waybar = {
     enable = true;
+    package =
+      pkgs.waybar.overrideAttrs
+      (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      });
     # style = ./waybar-style.css;
     settings = {
       mainBar = {

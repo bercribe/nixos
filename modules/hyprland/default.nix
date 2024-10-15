@@ -6,32 +6,20 @@
 }: {
   programs.hyprland.enable = true;
 
-  # display manager
+  # Display manager
   services.xserver.displayManager.lightdm.enable = false;
   environment.loginShellInit = "[ \"$(tty)\" = \"/dev/tty1\" ] && hyprland";
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   wayland.enable = true;
-  #   theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
-  # };
 
+  services.displayManager.sddm = {
+    enable = false;
+    wayland.enable = true;
+    theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
+  };
+
+  # User env
   environment.systemPackages = with pkgs; [
-    kitty # terminal
-    wofi # app launcher
-    # status bar
-    (waybar.overrideAttrs
-      (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-      }))
     thunar # file browser
-    mako # notifications
-    hyprpaper # wallpapers
-    brightnessctl # screen brightess
-    # screenshots
-    grim
-    slurp
     wl-clipboard # clipboard
-    networkmanagerapplet # wifi widget
     # libsForQt5.qt5.qtgraphicaleffects # for sddm theme
   ];
 
@@ -40,6 +28,8 @@
 
   # icons for waybar
   fonts.packages = with pkgs; [nerdfonts font-awesome];
+
+  home-manager.users.mawz = import ./config.nix;
 
   # without this, swaylock refuses to accept the correct password
   security.pam.services.swaylock = {};
@@ -57,6 +47,4 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
-  home-manager.users.mawz = import ./config.nix;
 }
