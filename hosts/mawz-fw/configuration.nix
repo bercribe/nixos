@@ -79,7 +79,11 @@
 
   # Services
 
+  # Auto timezone
   services.automatic-timezoned.enable = true;
+  # https://github.com/NixOS/nixpkgs/issues/321121
+  # services.geoclue2.geoProviderUrl = "https://beacondb.net/v1/geolocate";
+  services.geoclue2.geoProviderUrl = "https://api.positon.xyz/v1/geolocate?key=test";
   time.timeZone = null;
 
   # Framework updater - `fwupdmgr update`
