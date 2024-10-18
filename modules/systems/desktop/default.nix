@@ -82,7 +82,6 @@
         qimgv # image viewer
         shotwell # photo editor
         spotube # music player
-        vscode # IDE
         wireshark # network analyzer
       ];
       cli = [
