@@ -86,6 +86,7 @@
     ];
     packages = with pkgs; [
       btop # performance visualizer
+      dig # dns debug
       fzf # fuzzy find
       gdu # go disk analyzer
       lf # list files
