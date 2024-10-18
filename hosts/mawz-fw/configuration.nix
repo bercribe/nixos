@@ -10,7 +10,7 @@
     (self + /modules/systems/desktop)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
     # Temporary
-    (self + /modules/clients/mullvad.nix)
+    ./china.nix
   ];
 
   # Config
