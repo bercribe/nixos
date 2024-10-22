@@ -132,7 +132,7 @@
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
 
-      mimeType=$(xdg-mime query filetype "$f")
+      mimeType=$(xdg-mime query filetype "$1")
       echo "Mime type: $mimeType"
 
       shopt -s nocasematch
