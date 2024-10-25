@@ -82,6 +82,7 @@
         qimgv # image viewer
         shotwell # photo editor
         spotube # music player
+        ticktick # todo list
         wireshark # network analyzer
       ];
       cli = [
