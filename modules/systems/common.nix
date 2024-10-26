@@ -97,6 +97,7 @@
       tmux # terminal multiplexer
       tree # directory tree
       unzip # zip extractor
+      wireguard-tools # wireguard debug
     ];
   };
 
