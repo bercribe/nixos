@@ -73,6 +73,15 @@
           rm -r $out/share/dbus-1
         '';
       });
+
+      # fixes low resolution issues on wayland
+      ticktick = prev.ticktick.overrideAttrs (prev: {
+        preFixup = ''
+          gappsWrapperArgs+=(
+            --add-flags "--ozone-platform-hint=auto"
+          )
+        '';
+      });
     })
   ];
 
