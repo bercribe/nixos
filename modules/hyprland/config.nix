@@ -16,8 +16,8 @@
         "${pkgs.waybar}/bin/waybar" # status bar
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator" # network picker
         "${pkgs.blueman}/bin/blueman-applet" # bluetooth
-        "${pkgs.fcitx5}/bin/fcitx5 -d" # keyboard input languages
         "${pkgs.udiskie}/bin/udiskie" # USB automount frontend
+        "fcitx5 -d" # keyboard input languages. needs to be run from path to load config properly
       ];
 
       # Source a file (multi-file configs)
