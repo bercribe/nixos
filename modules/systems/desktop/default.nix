@@ -84,6 +84,7 @@
         spotube # music player
         ticktick # todo list
         wireshark # network analyzer
+        zathura # pdf viewer
       ];
       cli = [
         cava # audio visualizer
@@ -96,11 +97,8 @@
       scripts = [
         (import (self + /modules/scripts/te.nix) {inherit pkgs;})
       ];
-      unstablePackages = with unstable; [
-        zathura # pdf viewer
-      ];
     in
-      gui ++ cli ++ scripts ++ unstablePackages;
+      gui ++ cli ++ scripts;
   };
 
   # Required for obsidian
