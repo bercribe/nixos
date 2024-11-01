@@ -67,6 +67,15 @@
         propagatedBuildInputs = prev.propagatedBuildInputs ++ [final.pkgs.ffmpeg final.python3.pkgs.setuptools];
       });
 
+      # fixes fcitx5 in obsidian
+      # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
+      obsidian = prev.obsidian.overrideAttrs (prev: {
+        postFixup = ''
+          wrapProgram $out/bin/obsidian \
+            --add-flags "--enable-wayland-ime"
+        '';
+      });
+
       # prevent file browser from hijacking default FileChooser status
       thunar = prev.xfce.thunar.overrideAttrs (prev: {
         postFixup = ''
