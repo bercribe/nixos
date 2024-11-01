@@ -69,6 +69,10 @@
       nvim-web-devicons
     ];
     extraConfig = ''
+      " Fix tabs
+      set tabstop=2 shiftwidth=2 smarttab
+      " Use spaces instead of tabs
+      set expandtab
       " Use system clipboard
       set clipboard=unnamedplus
       " Find files using Telescope command-line sugar.
