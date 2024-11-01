@@ -14,14 +14,14 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   headless=true
 # many other tests omitted
 else
-  case $(ps -o comm= -p "$PPID") in
-    sshd|*/sshd) headless=true;;
-  esac
+    case $(ps -o comm= -p "$PPID") in
+        sshd|*/sshd) headless=true;;
+    esac
 fi
 
 
-LONGOPTS=test,force,show-trace
-OPTIONS=tfs
+LONGOPTS=test,force,show-trace,update
+OPTIONS=tfsu
 
 # -temporarily store output to be able to check for errors
 # -activate quoting/enhanced mode (e.g. by writing out “--options”)
@@ -31,7 +31,7 @@ PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@") 
 # read getopt’s output this way to handle the quoting right:
 eval set -- "$PARSED"
 
-disableCommit=false forceRun=false showTrace=false
+disableCommit=false forceRun=false showTrace=false update=false
 # now enjoy the options in order and nicely split until we see --
 while true; do
     case "$1" in
@@ -45,6 +45,10 @@ while true; do
             ;;
         -s|--show-trace)
             showTrace=true
+            shift
+            ;;
+        -u|--update)
+            update=true
             shift
             ;;
         --)
@@ -81,7 +85,7 @@ echo "NixOS rebuilding $HOSTNAME..."
 # Rebuild
 rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
 if [ "$showTrace" == true ]; then
-  rebuildCmd+=(--show-trace --option eval-cache false)
+    rebuildCmd+=(--show-trace --option eval-cache false)
 fi
 "${rebuildCmd[@]}" || exit 1
 
@@ -97,7 +101,9 @@ fi
 popd
 
 # Fix command-not-found functionality
-sudo -i nix-channel --update
+if [ "$update" == true ]; then
+    sudo -i nix-channel --update
+fi
 
 # Notify all OK!
 echo "NixOS Rebuilt OK!"
