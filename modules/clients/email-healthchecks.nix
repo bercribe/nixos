@@ -22,7 +22,7 @@
   systemd.services.email-heartbeat = {
     script = ''
       receiver="$(cat ${config.sops.secrets."healthchecks/remote/email-receiver".path})"
-      ${pkgs.mailutils}/bin/mail -s "Email notifs good!" $receiver
+      ${pkgs.postfix}/bin/sendmail -s "Email notifs good!" $receiver
     '';
     serviceConfig = {
       Type = "oneshot";

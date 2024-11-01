@@ -16,7 +16,7 @@
     settings = {
       ZED_DEBUG_LOG = "/tmp/zed.debug.log";
       ZED_EMAIL_ADDR = ["root"];
-      ZED_EMAIL_PROG = "${pkgs.mailutils}/bin/mail";
+      ZED_EMAIL_PROG = "${pkgs.postfix}/bin/sendmail";
       ZED_EMAIL_OPTS = "@ADDRESS@";
 
       ZED_NOTIFY_INTERVAL_SECS = 3600;
