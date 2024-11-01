@@ -8,7 +8,7 @@
   imports = [
     ../common.nix
     ./firefox.nix
-    ./keyboard-languages.nix
+    ./keyboard.nix
     ./syncthing.nix
     (self + /modules/hyprland) # Tiling window manager
     (self + /modules/systems/network/ssh.nix)

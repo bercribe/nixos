@@ -139,4 +139,26 @@
       "IPAPMincho"
     ];
   };
+
+  # Key remapping
+  # inspiration - https://www.youtube.com/watch?v=XuQVbZ0wENE
+  services.kanata = {
+    enable = true;
+    keyboards.default = {
+      config = ''
+        (defsrc
+          caps
+        )
+
+        (defalias
+          ;; tap caps lock as escape, hold caps lock as left control
+          escctrl (tap-hold 100 100 esc lctrl)
+        )
+
+        (deflayer base
+          @escctrl
+        )
+      '';
+    };
+  };
 }
