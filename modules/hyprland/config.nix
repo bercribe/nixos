@@ -17,6 +17,7 @@
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator" # network picker
         "${pkgs.blueman}/bin/blueman-applet" # bluetooth
         "${pkgs.udiskie}/bin/udiskie" # USB automount frontend
+        "${pkgs.syncthingtray}/bin/syncthingtray --wait" # tray icon for syncthing
         "fcitx5 -d" # keyboard input languages. needs to be run from path to load config properly
       ];
 
