@@ -43,7 +43,7 @@
       profiles = {
         home-lan = {
           connection = {
-            autoconnect = "false";
+            # autoconnect = "false";
             id = "home-lan";
             interface-name = "home-lan";
             type = "wireguard";
