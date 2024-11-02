@@ -113,6 +113,7 @@
       lf # list files
       mosh # mobile shell
       neofetch # system info
+      nh # nix helper
       python3 # scripting
       ripgrep # file content search
       tmux # terminal multiplexer
