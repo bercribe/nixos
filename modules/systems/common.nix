@@ -84,7 +84,7 @@
       });
 
       # fixes low resolution issues on wayland
-      ticktick = prev.ticktick.overrideAttrs (prev: {
+      ticktick = final.unstable.ticktick.overrideAttrs (prev: {
         preFixup = ''
           gappsWrapperArgs+=(
             --add-flags "--ozone-platform-hint=auto"
