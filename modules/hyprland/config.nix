@@ -226,6 +226,7 @@
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      # use `wev` to find bind names
       bindel =
         # Media keys
         [
