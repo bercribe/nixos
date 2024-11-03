@@ -9,8 +9,7 @@
     (self + /modules/sops.nix)
     (self + /modules/systems/desktop)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
-    # Temporary
-    ./china.nix
+    # ./china.nix
   ];
 
   # Config
