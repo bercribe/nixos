@@ -83,8 +83,10 @@ git diff HEAD -U0 '*.nix'
 echo "NixOS rebuilding $HOSTNAME..."
 
 # Rebuild
-# rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
-rebuildCmd=(nh os switch .)
+rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
+if [ "$(command -v nh)" ]; then
+    rebuildCmd=(nh os switch .)
+fi
 if [ "$showTrace" == true ]; then
     rebuildCmd+=(--show-trace --option eval-cache false)
 fi
