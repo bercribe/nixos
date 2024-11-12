@@ -13,10 +13,12 @@ in {
           "192.168.0.48" = ["switch.lan"];
           "192.168.0.49" = ["pikvm.lan"];
           "192.168.0.51" = [
+            "mawz-vault.lan"
             "*.mawz-vault.lan"
             "immich.lan"
           ];
           "192.168.0.54" = [
+            "mawz-nuc.lan"
             "*.mawz-nuc.lan"
             "gitea.lan"
             "healthchecks.lan"
