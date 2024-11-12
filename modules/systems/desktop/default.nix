@@ -179,6 +179,31 @@
 
   # Services
 
+  # Systemd service notifications
+  systemd.services."notify-failed@" = {
+    description = "Logs failures to be reported by user service";
+    serviceConfig = {
+      Type = "oneshot";
+    };
+    script = ''
+      ${pkgs.util-linux}/bin/logger -t journal-notify "Job for '$1' failed."
+    '';
+    scriptArgs = "%i";
+  };
+  systemd.user.services.notify-user = {
+    description = "Systemd service journal entry notification service";
+    after = ["network.target"];
+    wantedBy = ["default.target"];
+    serviceConfig = {
+      Type = "simple";
+    };
+    script = ''
+      journalctl -f -t journal-notify | while read -r line; do
+        ${pkgs.libnotify}/bin/notify-send "Systemd service failure" "$line"
+      done
+    '';
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -197,6 +222,47 @@
   services.udisks2 = {
     enable = true;
     mountOnMedia = true;
+  };
+
+  # ZFS snapshots and replication
+  sops.secrets.syncoid-ssh = {
+    owner = config.services.syncoid.user;
+    key = "${config.networking.hostName}/ssh";
+  };
+  services.sanoid = {
+    enable = true;
+    templates.default = {
+      autosnap = true;
+      autoprune = true;
+      hourly = 36;
+      daily = 30;
+      monthly = 3;
+    };
+    datasets = {
+      "zpool/home" = {
+        useTemplate = ["default"];
+        recursive = true;
+      };
+    };
+  };
+  # need to `sudo zfs allow -u <user> change-key,compression,create,mount,mountpoint,receive,rollback zvault/hosts`
+  # for initial sync,
+  # then `sudo zfs unallow -u <user> change-key,compression,create,mount,mountpoint,receive,rollback zvault/hosts`
+  # and finally `sudo zfs allow -u <user> compression,mountpoint,create,mount,receive,rollback,destroy zvault/hosts/<host>`
+  services.syncoid = let
+    hostName = config.networking.hostName;
+  in {
+    enable = true;
+    sshKey = config.sops.secrets.syncoid-ssh.path;
+    commands = {
+      "zpool/home" = {
+        recursive = true;
+        target = "${hostName}@mawz-vault.lan:zvault/hosts/${hostName}";
+      };
+    };
+    service = {
+      onFailure = ["notify-failed@%n.service"];
+    };
   };
 
   # Restic file system backups
