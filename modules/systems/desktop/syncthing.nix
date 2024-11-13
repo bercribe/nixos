@@ -24,8 +24,6 @@
     enable = true;
     user = "mawz";
     openDefaultPorts = true;
-    dataDir = "/home/mawz/Documents"; # Default folder for new synced folders
-    configDir = "/home/mawz/Documents/.config/syncthing"; # Folder for Syncthing's settings and keys
     overrideDevices = true; # overrides any devices added or deleted through the WebUI
     overrideFolders = true; # overrides any folders added or deleted through the WebUI
     cert = config.sops.secrets.syncthing-cert.path;
