@@ -124,21 +124,20 @@
   };
 
   # Enable Japanese and Chinese fonts
-  fonts.packages = with pkgs; [dejavu_fonts ipafont];
-  fonts.fontconfig.defaultFonts = {
-    monospace = [
-      "DejaVu Sans Mono"
-      "IPAGothic"
-    ];
-    sansSerif = [
-      "DejaVu Sans"
-      "IPAPGothic"
-    ];
-    serif = [
-      "DejaVu Serif"
-      "IPAPMincho"
-    ];
-  };
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+
+    liberation_ttf # times new roman, arial, and courier new replacements
+    mplus-outline-fonts.githubRelease # google font
+
+    # monospace
+    fira-code
+    fira-code-symbols
+    dina-font
+    proggyfonts
+  ];
 
   # Key remapping
   # inspiration - https://www.youtube.com/watch?v=XuQVbZ0wENE
