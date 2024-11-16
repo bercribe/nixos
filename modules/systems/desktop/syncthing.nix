@@ -45,7 +45,7 @@
             type = "staggered";
             params = {
               cleanInterval = "3600";
-              maxAge = "31536000";
+              maxAge = "2592000";
             };
           };
         };
