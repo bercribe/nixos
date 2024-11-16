@@ -189,11 +189,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   # Auto network discovery
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
+  # https://discourse.nixos.org/t/cups-cups-filters-and-libppd-security-issues/52780
+  services.avahi.enable = false;
 
   # USB drive automount
   services.udisks2 = {
