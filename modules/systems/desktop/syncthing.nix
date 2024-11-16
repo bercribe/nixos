@@ -32,7 +32,6 @@
       devices = {
         "mawz-nas" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
         "mawz-hue" = {id = "D2VC45J-2GRDWF4-NAIWZA7-VTRHVCR-FDEZNNG-2P5ERHE-CLPZ6UK-JI3NEQ7";};
-        "mawz-hue-win" = {id = "UCHJJO7-WXOENUZ-SBOV5NO-LSRAGOJ-IWGNSCY-SETUCQF-5PZTPLZ-VXWYFQG";};
         "mawz-fw" = {id = "4OCFYCK-E7KDT4V-7HC7TGK-DZX7GDN-PCE4SR2-UEMNJWH-6Z6XR47-6YU7SAX";};
         "mawz-galaxy" = {id = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
       };
@@ -40,7 +39,7 @@
         personal-cloud = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/personal-cloud";
-          devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-fw" "mawz-galaxy"];
+          devices = ["mawz-nas" "mawz-hue" "mawz-fw" "mawz-galaxy"];
           versioning = {
             type = "staggered";
             params = {
@@ -52,7 +51,7 @@
         projects = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/projects";
-          devices = ["mawz-nas" "mawz-hue" "mawz-hue-win" "mawz-fw"];
+          devices = ["mawz-nas" "mawz-hue" "mawz-fw"];
           versioning = {
             type = "staggered";
             params = {
@@ -64,7 +63,7 @@
         libraries = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/libraries";
-          devices = ["mawz-nas" "mawz-hue" "mawz-hue-win"];
+          devices = ["mawz-nas" "mawz-hue"];
           versioning = {
             type = "staggered";
             params = {
