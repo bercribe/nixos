@@ -36,7 +36,7 @@
     projects.enable = true;
     libraries = {
       enable = true;
-      path = "/zsolid/ds-syncthing/libraries";
+      path = "/zsolid/syncthing/libraries";
     };
     mawz-hue = {
       path = "/backups";
