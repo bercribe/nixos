@@ -11,6 +11,8 @@
     enable = true;
     policies = {
       DisplayBookmarksToolbar = "always";
+      # found at about:support
+      # details here https://mozilla.github.io/policy-templates/#extensionsettings
       ExtensionSettings = {
         "firefox@betterttv.net" = {
           "installation_mode" = "normal_installed";
@@ -41,6 +43,11 @@
           "installation_mode" = "normal_installed";
           "install_url" = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
           "default_area" = "menupanel";
+        };
+        "clipper@obsidian.md" = {
+          "installation_mode" = "normal_installed";
+          "install_url" = "https://addons.mozilla.org/firefox/downloads/latest/web-clipper-obsidian/latest.xpi";
+          "default_area" = "navbar";
         };
         "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
           "installation_mode" = "normal_installed";
