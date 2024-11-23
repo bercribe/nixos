@@ -58,6 +58,7 @@
     enable = true;
     userName = "mawz";
     userEmail = "mawz@hey.com";
+    difftastic.enable = true;
   };
 
   programs.neovim = {

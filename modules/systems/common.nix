@@ -106,12 +106,15 @@
       "wheel" # Enable ‘sudo’ for the user.
     ];
     packages = with pkgs; [
+      bat # better cat
       btop # performance visualizer
+      difftastic # better diff
       dig # dns debug
       fzf # fuzzy find
       gdu # go disk analyzer
       lf # list files
       mosh # mobile shell
+      mtr # ping + traceroute
       neofetch # system info
       nh # nix helper
       python3 # scripting
