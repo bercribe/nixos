@@ -1,5 +1,6 @@
 {
   self,
+  pkgs,
   config,
   ...
 }: {
@@ -30,6 +31,11 @@
 
   networking.hostName = "mawz-vault"; # Define your hostname.
   networking.hostId = "d7ec0e0e"; # Should be unique among ZFS machines
+
+  environment.systemPackages = with pkgs; [
+    lzop # compression with syncoid
+    mbuffer # buffering with syncoid
+  ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
