@@ -173,7 +173,8 @@
       Type = "oneshot";
     };
     script = ''
-      ${pkgs.util-linux}/bin/logger -t journal-notify "Job for '$1' failed."
+      reason=$(journalctl -n 1 -g error -o cat -u $1)
+      ${pkgs.util-linux}/bin/logger -t journal-notify "Job for '$1' failed: $reason"
     '';
     scriptArgs = "%i";
   };
@@ -185,7 +186,7 @@
       Type = "simple";
     };
     script = ''
-      journalctl -f -t journal-notify | while read -r line; do
+      journalctl -f -t journal-notify -o cat | while read -r line; do
         ${pkgs.libnotify}/bin/notify-send "Systemd service failure" "$line"
       done
     '';
