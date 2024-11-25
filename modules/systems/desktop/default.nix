@@ -11,25 +11,12 @@
     ./keyboard.nix
     ./syncthing.nix
     (self + /modules/hyprland) # Tiling window manager
-    (self + /modules/systems/network/ssh.nix)
     (self + /modules/systems/network/mount.nix)
     (self + /modules/systems/hardware/bluray.nix)
     (self + /modules/sops.nix)
   ];
 
   # Config
-
-  # Secrets
-  sops.secrets = {
-    ssh = {
-      owner = "mawz";
-      path = "/home/mawz/.ssh/id_ed25519";
-      key = "${config.networking.hostName}/ssh";
-    };
-    restic-repo = {
-      owner = "mawz";
-    };
-  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -266,6 +253,9 @@
   };
 
   # Restic file system backups
+  sops.secrets.restic-repo = {
+    owner = "mawz";
+  };
   services.restic.backups = {
     localbackup = {
       user = "mawz";

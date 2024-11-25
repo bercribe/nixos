@@ -11,7 +11,7 @@
     "x-systemd.automount" # mount on demand
   ];
 in {
-  imports = [./ssh.nix];
+  imports = [./ssh-client.nix];
 
   # Requires SFTP to be enabled
   fileSystems."/mnt/mawz-nas" = {

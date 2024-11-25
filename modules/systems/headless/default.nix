@@ -7,7 +7,7 @@
 }: {
   imports = [
     ../common.nix
-    (self + /modules/systems/network/ssh.nix)
+    (self + /modules/systems/network/ssh-server.nix)
   ];
 
   # Programs
@@ -20,7 +20,8 @@
   programs.mosh.enable = true;
 
   # Services
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  network.sshServer = {
+    enableOpenssh = true;
+    createHostUsers = true;
+  };
 }

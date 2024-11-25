@@ -7,7 +7,7 @@
   imports = [
     ./zfs.nix
     (self + /modules/sops.nix)
-    (self + /modules/systems/network/ssh.nix)
+    (self + /modules/systems/network/ssh-server.nix)
   ];
 
   sops.secrets = {

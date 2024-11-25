@@ -8,7 +8,7 @@
   nixpkgs-unstable,
   ...
 }: {
-  imports = [./network/ssh.nix];
+  imports = [./network/ssh-client.nix];
 
   # Config
 
