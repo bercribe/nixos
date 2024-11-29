@@ -52,6 +52,7 @@
     packages = with pkgs; let
       gui = [
         alacritty # terminal
+        beeper # universal chat
         BeatSaberModManager # mod manager for beat saber
         czkawka # deduping util
         discord # voice chat
