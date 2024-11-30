@@ -88,10 +88,6 @@
       gui ++ cli ++ scripts;
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0" # required for obsidian
-  ];
-
   # Home manager
   home-manager.users.mawz = import ./home.nix;
 

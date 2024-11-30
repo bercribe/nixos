@@ -91,9 +91,6 @@
           )
         '';
       });
-
-      # version in 24.05 randomly segfaults pretty often
-      zathura = final.unstable.zathura;
     })
   ];
 

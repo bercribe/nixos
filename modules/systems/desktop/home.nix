@@ -83,7 +83,7 @@
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.unstable.everforest-gtk-theme;
+      package = pkgs.everforest-gtk-theme;
       name = "Everforest-Dark";
     };
   };
