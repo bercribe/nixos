@@ -251,6 +251,16 @@
     };
     service = {
       onFailure = ["notify-failed@%n.service"];
+      serviceConfig = {
+        # prevent transient errors from DNS resolution failures
+        Restart = "on-failure";
+        RestartSec = 10;
+        RestartMode = "direct";
+      };
+      unitConfig = {
+        StartLimitBurst = 3;
+        StartLimitInterval = 60;
+      };
     };
   };
 
