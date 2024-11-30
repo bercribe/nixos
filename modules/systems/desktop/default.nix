@@ -22,7 +22,6 @@
   services.xserver.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -53,7 +52,7 @@
       gui = [
         alacritty # terminal
         beeper # universal chat
-        BeatSaberModManager # mod manager for beat saber
+        # BeatSaberModManager # mod manager for beat saber - broken by dotnet changes in 24.11
         czkawka # deduping util
         discord # voice chat
         firefox # browser
@@ -89,8 +88,9 @@
       gui ++ cli ++ scripts;
   };
 
-  # Required for obsidian
-  nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # required for obsidian
+  ];
 
   # Home manager
   home-manager.users.mawz = import ./home.nix;

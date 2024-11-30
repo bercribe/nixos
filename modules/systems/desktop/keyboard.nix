@@ -5,7 +5,8 @@
 }: {
   # Enable Japanese and Chinese keyboards
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    enable = true;
+    type = "fcitx5";
     fcitx5 = {
       waylandFrontend = true;
       addons = with pkgs; [
@@ -126,7 +127,7 @@
   # Enable Japanese and Chinese fonts
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
 
     liberation_ttf # times new roman, arial, and courier new replacements
