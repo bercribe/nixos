@@ -84,11 +84,10 @@ echo "NixOS rebuilding $HOSTNAME..."
 
 # Rebuild
 rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
-if [ "$(command -v nh)" ]; then
-    rebuildCmd=(nh os switch .)
-fi
 if [ "$showTrace" == true ]; then
     rebuildCmd+=(--show-trace --option eval-cache false)
+elif [ "$(command -v nh)" ]; then
+    rebuildCmd=(nh os switch .)
 fi
 "${rebuildCmd[@]}" || exit 1
 
