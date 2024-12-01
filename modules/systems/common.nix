@@ -154,6 +154,8 @@
   };
 
   programs.bash.shellAliases = {
+    cat = "bat";
+    diff = "difft";
     nrs = "~/nixos/rebuild-switch.sh";
     vim = "nvim";
   };
