@@ -12,7 +12,7 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
-    stylix.url = "github:danth/stylix?ref=release-24.05";
+    stylix.url = "github:danth/stylix?ref=master";
   };
 
   outputs = {

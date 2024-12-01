@@ -8,7 +8,7 @@
 
   # Display manager
   services.xserver.displayManager.lightdm.enable = false;
-  environment.loginShellInit = "[ \"$(tty)\" = \"/dev/tty1\" ] && hyprland";
+  environment.loginShellInit = "[ \"$(tty)\" = \"/dev/tty1\" ] && Hyprland";
 
   services.displayManager.sddm = {
     enable = false;
