@@ -2,10 +2,12 @@
   self,
   pkgs,
   config,
+  lib,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./backups.nix
     (self + /modules/sops.nix)
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
@@ -31,6 +33,8 @@
 
   networking.hostName = "mawz-vault"; # Define your hostname.
   networking.hostId = "d7ec0e0e"; # Should be unique among ZFS machines
+
+  # User env
 
   environment.systemPackages = with pkgs; [
     lzop # compression with syncoid

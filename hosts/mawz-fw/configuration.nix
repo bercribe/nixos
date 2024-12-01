@@ -94,10 +94,6 @@
   services.syncthing.settings.folders = {
     personal-cloud.enable = true;
     projects.enable = true;
-    mawz-fw = {
-      path = "/backups";
-      devices = ["mawz-nas"];
-    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

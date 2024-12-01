@@ -38,10 +38,6 @@
       enable = true;
       path = "/zsolid/syncthing/libraries";
     };
-    mawz-hue = {
-      path = "/backups";
-      devices = ["mawz-nas"];
-    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

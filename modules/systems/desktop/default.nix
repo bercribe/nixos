@@ -79,7 +79,6 @@
         exiftool # image metadata
         ffsubsync # sync subtitles with video
         handlr-regex # better xdg-open
-        restic # backup tool
         typst # document editor
         wev # shows keyboard inputs
         wineWowPackages.waylandFull # windows game emulator
@@ -294,28 +293,4 @@
       };
     };
   };
-
-  # Restic file system backups
-  sops.secrets.restic-repo = {
-    owner = "mawz";
-  };
-  services.restic.backups = {
-    localbackup = {
-      user = "mawz";
-      exclude = [
-        "/home/*/.cache"
-      ];
-      initialize = true;
-      passwordFile = config.sops.secrets.restic-repo.path;
-      paths = [
-        "/home"
-      ];
-      repository = "/backups/restic-repo";
-    };
-  };
-  # Manually created and repermissioned directories
-  systemd.tmpfiles.rules = [
-    "d /backups 0755 mawz users -"
-    "d /backups/restic-repo 0755 mawz users -"
-  ];
 }

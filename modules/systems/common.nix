@@ -115,6 +115,7 @@
       neofetch # system info
       nh # nix helper
       python3 # scripting
+      restic # backup tool
       ripgrep # file content search
       tmux # terminal multiplexer
       tree # directory tree
