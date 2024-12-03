@@ -163,6 +163,7 @@
         "$mainMod SHIFT, G, moveoutofgroup,"
         "$mainMod, N, changegroupactive,"
         "$mainMod SHIFT, N, changegroupactive, b"
+        "$mainMod, O, movecurrentworkspacetomonitor, +1"
         "$mainMod, L, exec, loginctl lock-session"
         "$mainMod SHIFT, L, exec, systemctl suspend"
         "$mainMod, D, exec, ${pkgs.mako}/bin/makoctl dismiss"
