@@ -4,12 +4,12 @@
   ...
 }: {
   wayland.windowManager.hyprland.settings = let
-    main = "desc:Ancor Communications Inc ROG PG279Q ##ASNpS7wVCX7d";
+    main = "desc:Dell Inc. AW3423DWF 1YVF2S3";
     top = "desc:Ancor Communications Inc ROG PG279Q ##ASNDQNtIJcHd";
   in {
     monitor = lib.mkForce [
-      "${main}, preferred, auto, 1"
-      "${top}, preferred, auto-up, 1"
+      "${main}, highrr, auto, 1"
+      "${top}, highrr, auto-up, 1"
     ];
     cursor = {
       no_hardware_cursors = true;
