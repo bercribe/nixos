@@ -4,22 +4,22 @@
   ...
 }: {
   wayland.windowManager.hyprland.settings = let
-    bottom = "desc:Ancor Communications Inc ROG PG279Q ##ASNpS7wVCX7d";
+    main = "desc:Ancor Communications Inc ROG PG279Q ##ASNpS7wVCX7d";
     top = "desc:Ancor Communications Inc ROG PG279Q ##ASNDQNtIJcHd";
   in {
     monitor = lib.mkForce [
-      "${bottom},2560x1440@144,0x0,1"
-      "${top},2560x1440@144,0x-1440,1"
+      "${main}, preferred, auto, 1"
+      "${top}, preferred, auto-up, 1"
     ];
     cursor = {
       no_hardware_cursors = true;
     };
     workspace = [
-      "1,monitor:${bottom},default:true"
-      "2,monitor:${bottom}"
-      "3,monitor:${bottom}"
-      "4,monitor:${bottom}"
-      "5,monitor:${bottom}"
+      "1,monitor:${main},default:true"
+      "2,monitor:${main}"
+      "3,monitor:${main}"
+      "4,monitor:${main}"
+      "5,monitor:${main}"
       "6,monitor:${top},default:true"
       "7,monitor:${top}"
       "8,monitor:${top}"
