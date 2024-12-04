@@ -23,7 +23,7 @@
       "6,monitor:${top},default:true"
       "7,monitor:${top}"
       "8,monitor:${top}"
-      "9:monitor:${top}"
+      "9,monitor:${top}"
       "10,monitor:${top}"
     ];
     exec-once = [
