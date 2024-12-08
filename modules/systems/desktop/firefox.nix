@@ -13,6 +13,7 @@
       DisplayBookmarksToolbar = "always";
       # found at about:support
       # details here https://mozilla.github.io/policy-templates/#extensionsettings
+      # to apply changes, click "Refresh Firefox..."
       ExtensionSettings = let
         mozillaAddon = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
         installation_mode = "normal_installed";
