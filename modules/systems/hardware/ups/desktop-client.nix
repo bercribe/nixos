@@ -44,7 +44,7 @@
       Type = "simple";
     };
     script = ''
-      journalctl -f -u upsmon.service -t notify-cmd | while read -r line; do
+      journalctl -f -u upsmon.service -t notify-cmd -o cat | while read -r line; do
         ${pkgs.libnotify}/bin/notify-send -t 60000  UPS "$line"
       done
     '';
