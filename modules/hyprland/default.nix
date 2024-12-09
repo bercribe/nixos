@@ -31,9 +31,6 @@
 
   home-manager.users.mawz = import ./config.nix;
 
-  # without this, swaylock refuses to accept the correct password
-  security.pam.services.swaylock = {};
-
   # screen sharing
   xdg.portal = {
     enable = true;

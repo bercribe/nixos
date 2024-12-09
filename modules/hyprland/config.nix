@@ -254,7 +254,7 @@
   };
 
   programs.hyprlock = {
-    # enable = true;
+    enable = true;
     package = pkgs.hyprlock;
     settings = {
       general = {
@@ -263,29 +263,29 @@
         no_fade_in = false;
       };
 
-      background = [
-        {
-          path = "${config.stylix.image}";
-          blur_passes = 3;
-          blur_size = 8;
-        }
-      ];
-
-      input-field = [
-        {
-          size = "200, 50";
-          position = "0, -80";
-          monitor = "";
-          dots_center = true;
-          fade_on_empty = false;
-          font_color = "rgb(202, 211, 245)";
-          inner_color = "rgb(91, 96, 120)";
-          outer_color = "rgb(24, 25, 38)";
-          outline_thickness = 5;
-          placeholder_text = "Password...";
-          shadow_passes = 2;
-        }
-      ];
+      # set by stylix
+      # background = [
+      #   {
+      #     path = "${config.stylix.image}";
+      #     blur_passes = 3;
+      #     blur_size = 8;
+      #   }
+      # ];
+      # input-field = [
+      #   {
+      #     size = "200, 50";
+      #     position = "0, -80";
+      #     monitor = "";
+      #     dots_center = true;
+      #     fade_on_empty = false;
+      #     font_color = "rgb(202, 211, 245)";
+      #     inner_color = "rgb(91, 96, 120)";
+      #     outer_color = "rgb(24, 25, 38)";
+      #     outline_thickness = 5;
+      #     placeholder_text = "Password...";
+      #     shadow_passes = 2;
+      #   }
+      # ];
     };
   };
 
@@ -293,7 +293,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "swaylock";
+        lock_cmd = "hyprlock";
         before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
         after_sleep_cmd = "sleep 2; hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
       };
@@ -543,6 +543,5 @@
   };
 
   # needed for stylix theming
-  programs.swaylock.enable = true;
   services.mako.enable = true;
 }
