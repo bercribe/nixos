@@ -53,6 +53,7 @@
         alacritty # terminal
         beeper # universal chat
         # BeatSaberModManager # mod manager for beat saber - broken by dotnet changes in 24.11
+        chromium # browser
         czkawka # deduping util
         discord # voice chat
         firefox # browser
