@@ -24,7 +24,9 @@
   hardware.nvidia.powerManagement.enable = true;
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  hardware.nvidia.open = true;
+  # open drivers have a bug where they will fail to resume from suspend
+  # https://github.com/NVIDIA/open-gpu-kernel-modules/issues/360
+  hardware.nvidia.open = false;
   # 550 drivers are buggy on wayland
   # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
   #   version = "555.58.02";
