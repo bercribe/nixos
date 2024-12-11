@@ -81,6 +81,7 @@
         handlr-regex # better xdg-open
         restic # backup tool
         typst # document editor
+        wineWowPackages.waylandFull # windows game emulator
       ];
       scripts = [
         (import (self + /modules/scripts/te.nix) {inherit pkgs;})
