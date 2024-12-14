@@ -8,7 +8,7 @@ pkgs.writeShellScriptBin "asw" ''
 
   if [[ $1 = 'h' ]] # Headset or speakers
   then
-          ${pkgs.pulseaudio}/bin/pactl set-default-sink "alsa_output.pci-0000_0d_00.4.iec958-stereo"
+          ${pkgs.pulseaudio}/bin/pactl set-default-sink "alsa_output.pci-0000_0c_00.4.iec958-stereo"
           ${pkgs.pulseaudio}/bin/pactl set-default-source "alsa_input.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo"
   elif [[ $1 = 'i' ]] # Index
   then
