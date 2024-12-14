@@ -254,8 +254,8 @@
   };
 
   programs.hyprlock = {
-    enable = true;
-    package = pkgs.hyprlock;
+    # encountered some issues resuming from suspend with hyprlock enabled
+    # enable = true;
     settings = {
       general = {
         disable_loading_bar = true;
@@ -293,7 +293,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "hyprlock";
+        lock_cmd = "swaylock";
         before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
         after_sleep_cmd = "sleep 2; hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
       };
@@ -543,5 +543,6 @@
   };
 
   # needed for stylix theming
+  programs.swaylock.enable = true;
   services.mako.enable = true;
 }
