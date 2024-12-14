@@ -81,6 +81,7 @@
         handlr-regex # better xdg-open
         restic # backup tool
         typst # document editor
+        wev # shows keyboard inputs
         wineWowPackages.waylandFull # windows game emulator
       ];
       scripts = [
