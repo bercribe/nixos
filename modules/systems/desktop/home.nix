@@ -93,6 +93,10 @@
     enable = true;
     defaultApplications = osConfig.xdg.mime.defaultApplications;
   };
+  # home manager keeps reordering these entries, backing up the old version,
+  # then refusing to delete the backup automatically.
+  # just force overwrite
+  xdg.configFile."mimeapps.list".force = true;
 
   # needed for stylix theming
   programs.alacritty.enable = true;
