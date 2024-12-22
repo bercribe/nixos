@@ -30,6 +30,7 @@
       "[workspace 1 silent] alacritty"
       "[workspace 6 silent] firefox"
       "[workspace 6 silent] obsidian"
+      "[workspace 7 silent] beeper"
       "[workspace 10 silent] ticktick"
       "[workspace 10 silent] keepassxc"
     ];
