@@ -126,6 +126,7 @@
         "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
         "audio/vnd.wave" = "mpv.desktop";
         "image/jpeg" = "qimgv.desktop";
+        "image/png" = "qimgv.desktop";
         "text/plain" = "nvim.desktop";
         "video/mp4" = "mpv.desktop";
         "video/vnd.avi" = "mpv.desktop";
