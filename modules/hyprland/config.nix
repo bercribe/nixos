@@ -451,8 +451,8 @@
         };
         "clock" = {
           # "timezone": "America/New_York",
+          "format" = "{:%Y-%m-%d %H:%M}";
           "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          "format-alt" = "{:%Y-%m-%d}";
         };
         "cpu" = {
           "format" = "{usage}% ";
