@@ -121,17 +121,43 @@
     };
     mime = {
       enable = true;
-      defaultApplications = {
-        "inode/directory" = "lf.desktop";
-        "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
-        "audio/vnd.wave" = "mpv.desktop";
-        "image/jpeg" = "qimgv.desktop";
-        "image/png" = "qimgv.desktop";
-        "text/plain" = "nvim.desktop";
-        "video/mp4" = "mpv.desktop";
-        "video/vnd.avi" = "mpv.desktop";
-        "video/x-matroska" = "mpv.desktop";
-      };
+      defaultApplications = let
+        defaultApps = {
+          directory = "lf.desktop";
+          text = "nvim.desktop";
+          image = "qimgv.desktop";
+          video = "mpv.desktop";
+          pdf = "org.pwmt.zathura-pdf-mupdf.desktop";
+        };
+
+        mimeMap = {
+          directory = [
+            "inode/directory"
+          ];
+          text = [
+            "text/plain"
+          ];
+          image = [
+            "image/jpeg"
+            "image/png"
+          ];
+          video = [
+            "audio/vnd.wave"
+            "video/mp4"
+            "video/vnd.avi"
+            "video/x-matroska"
+          ];
+          pdf = [
+            "application/pdf"
+          ];
+        };
+
+        associations = with lib;
+          listToAttrs (concatLists (mapAttrsToList (key:
+            map (type: nameValuePair type defaultApps."${key}"))
+          mimeMap));
+      in
+        associations;
     };
   };
 
