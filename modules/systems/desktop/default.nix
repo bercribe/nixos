@@ -124,6 +124,7 @@
       defaultApplications = let
         defaultApps = {
           directory = "lf.desktop";
+          browser = "firefox.desktop";
           text = "nvim.desktop";
           image = "qimgv.desktop";
           video = "mpv.desktop";
@@ -133,6 +134,10 @@
         mimeMap = {
           directory = [
             "inode/directory"
+          ];
+          browser = [
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
           ];
           text = [
             "text/plain"
