@@ -10,6 +10,14 @@
     (self + /modules/systems/network/ssh-server.nix)
   ];
 
+  # Secrets
+  sops.secrets = {
+    ssh-host = {
+      path = "/etc/ssh/ssh_host_ed25519_key";
+      key = "${config.networking.hostName}/ssh-host";
+    };
+  };
+
   # Programs
 
   # necessary for vscode remote ssh

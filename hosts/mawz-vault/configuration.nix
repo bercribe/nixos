@@ -18,14 +18,6 @@
     (self + /modules/services/containers/immich)
   ];
 
-  # Secrets
-  sops.secrets = {
-    ssh-host = {
-      path = "/etc/ssh/ssh_host_ed25519_key";
-      key = "${config.networking.hostName}/ssh-host";
-    };
-  };
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
