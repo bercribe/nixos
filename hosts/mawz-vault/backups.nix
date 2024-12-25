@@ -20,9 +20,14 @@ in {
     datasets = {
       zvault = {
         useTemplate = ["default"];
-        # don't want to include zvault/hosts here, syncoid already takes care of snapshots.
-        # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
         recursive = false;
+      };
+      "zvault/hosts" = {
+        useTemplate = ["default"];
+        recursive = true;
+        # don't want to create snapshots here, syncoid will do this.
+        # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
+        autosnap = false;
       };
       "zvault/syncthing" = {
         useTemplate = ["default"];
