@@ -21,19 +21,19 @@ in {
     datasets = {
       zvault = {
         useTemplate = ["default"];
-        recursive = false;
-      };
-      "zvault/hosts" = {
-        useTemplate = ["default"];
-        recursive = true;
-        # don't want to create snapshots here, syncoid will do this.
-        # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
-        autosnap = false;
-      };
-      "zvault/syncthing" = {
-        useTemplate = ["default"];
         recursive = true;
       };
+    };
+    settings = {
+      # prevent taking snapshots on datasets managed by syncoid.
+      # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
+      # maybe not needed?
+      # template_default = {
+      #   pre_snapshot_script = "${pkgs.writeShellScript "pre_snapshot_script" ''
+      #     echo "sanoid targets: $SANOID_TARGETS"
+      #     [[ ! $SANOID_TARGETS =~ zvault/hosts/.* ]]
+      #   ''}";
+      # };
     };
   };
 
@@ -96,13 +96,17 @@ in {
       ];
 
       backupPrepareCommand = ''
+        set -eo
+
         # for each dataset recursively
         for ds in $(${zfsCommand} list -r -H -o name -s name ${dataset}); do
           # get latest snapshot
           snapshot=$(${zfsCommand} list -t snap -H -o name -s creation "$ds" | tail -1)
+          mountpoint=$(${zfsCommand} list -H -o mountpoint "$ds")
 
-          mkdir -p "${backupPath}/$ds"
-          ${pkgs.util-linux}/bin/mount -t zfs "$snapshot" "${backupPath}/$ds"
+          if [ "$mountpoint" != "none" ]; then
+            ${pkgs.util-linux}/bin/mount -t zfs -m "$snapshot" "${backupPath}/$ds"
+          fi
         done
         echo "### Mounted Snapshots ###"
       '';
@@ -121,10 +125,18 @@ in {
         extraOptions = [
           "sftp.args='-i ${config.sops.secrets.ssh.path}'"
         ];
+        timerConfig = {
+          OnCalendar = "01:00";
+          Persistent = true;
+        };
       };
       backblaze = {
         repository = "s3.us-west-000.backblazeb2.com/mawz-vault-backup";
         environmentFile = config.sops.secrets."backblaze/envVars".path;
+        timerConfig = {
+          OnCalendar = "13:00";
+          Persistent = true;
+        };
       };
     };
 
