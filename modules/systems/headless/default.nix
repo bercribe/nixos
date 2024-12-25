@@ -39,4 +39,22 @@
     enableOpenssh = true;
     createHostUsers = true;
   };
+
+  # ZFS snapshots
+  services.sanoid = {
+    enable = true;
+    templates.default = {
+      autosnap = true;
+      autoprune = true;
+      hourly = 36;
+      daily = 30;
+      monthly = 3;
+    };
+    datasets = {
+      "zpool/services" = {
+        useTemplate = ["default"];
+        recursive = true;
+      };
+    };
+  };
 }
