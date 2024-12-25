@@ -268,6 +268,7 @@
   # for initial sync,
   # then `sudo zfs unallow -u <user> change-key,compression,create,mount,mountpoint,receive,rollback zvault/hosts`
   # and finally `sudo zfs allow -u <user> compression,mountpoint,create,mount,receive,rollback,destroy zvault/hosts/<host>`
+  # https://github.com/jimsalterjrs/sanoid/wiki/Syncoid#running-without-root
   services.syncoid = let
     hostName = config.networking.hostName;
   in {

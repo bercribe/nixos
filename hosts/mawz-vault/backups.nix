@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   config,
   lib,
@@ -30,35 +31,32 @@ in {
     };
   };
 
+  sops.secrets.syncoid-ssh = {
+    owner = config.services.syncoid.user;
+    key = "${config.networking.hostName}/ssh";
+  };
+  # on remote machine, need to run `zfs allow -u mawz-vault send,hold,mount,snapshot,destroy <ds>`
+  # https://github.com/jimsalterjrs/sanoid/wiki/Syncoid#running-without-root
+  services.syncoid = let
+    hostName = config.networking.hostName;
+  in {
+    enable = true;
+    sshKey = config.sops.secrets.syncoid-ssh.path;
+    commands = {
+      mawz-nuc = {
+        recursive = true;
+        source = "${hostName}@mawz-nuc.lan:zpool/services";
+        target = "zvault/hosts/mawz-nuc";
+        service = {
+          onSuccess = ["mawz-nuc-syncoid-notify.service"];
+        };
+      };
+    };
+  };
+
   # Restic offsite backups
   sops.secrets.restic-repo = {};
   sops.secrets."backblaze/envVars" = {};
-
-  systemd.services = let
-    opts = with lib;
-      listToAttrs ((map (job:
-          nameValuePair "restic-backups-${job}" {
-            serviceConfig = {
-              # interferes with zfs mount between stages
-              PrivateTmp = lib.mkForce false;
-            };
-            onSuccess = ["${job}-restic-backup-notify.service"];
-          })
-        resticJobs)
-        ++ (map (job:
-          nameValuePair "${job}-restic-backup-notify" {
-            script = ''
-              pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-              ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${job}-restic-backup"
-            '';
-            serviceConfig = {
-              Type = "oneshot";
-              User = "root";
-            };
-          })
-        resticJobs));
-  in
-    opts;
 
   services.restic.backups = let
     dataset = "zvault";
@@ -116,6 +114,44 @@ in {
     };
 
     opts = with lib; listToAttrs (map (job: nameValuePair job ((defaultOpts job) // jobOpts."${job}")) resticJobs);
+  in
+    opts;
+
+  systemd.services = let
+    opts = with lib;
+      (listToAttrs ((map (job:
+          nameValuePair "restic-backups-${job}" {
+            serviceConfig = {
+              # interferes with zfs mount between stages
+              PrivateTmp = lib.mkForce false;
+            };
+            onSuccess = ["${job}-restic-notify.service"];
+          })
+        resticJobs)
+        ++ (map (job:
+          nameValuePair "${job}-restic-notify" {
+            script = ''
+              pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
+              ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${job}-restic-backup"
+            '';
+            serviceConfig = {
+              Type = "oneshot";
+              User = "root";
+            };
+          })
+        resticJobs)))
+      // {
+        mawz-nuc-syncoid-notify = {
+          script = ''
+            pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
+            ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/mawz-nuc-syncoid-backup"
+          '';
+          serviceConfig = {
+            Type = "oneshot";
+            User = "root";
+          };
+        };
+      };
   in
     opts;
 }
