@@ -19,10 +19,6 @@ in {
       server.HTTP_PORT = port;
       migrations.ALLOWED_DOMAINS = "*.github.com,github.com";
     };
-    dump = {
-      enable = true;
-      backupDir = "/mnt/mawz-nas/gitea";
-    };
   };
 
   networking.firewall.allowedTCPPorts = [80 port];
@@ -31,17 +27,5 @@ in {
     virtualHosts."http://gitea.lan".extraConfig = ''
       reverse_proxy localhost:${toString port}
     '';
-  };
-
-  systemd.services.gitea-dump.onSuccess = ["gitea-backup.service"];
-  systemd.services.gitea-backup = {
-    script = ''
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/gitea-backup"
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-    };
   };
 }

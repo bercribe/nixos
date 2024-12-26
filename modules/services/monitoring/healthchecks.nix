@@ -9,8 +9,6 @@ in {
   imports = [
     (self + /modules/sops.nix)
     (self + /modules/services/postfix.nix)
-    (self + /modules/systems/network/mount.nix)
-    (self + /modules/clients/local-healthchecks.nix)
   ];
 
   sops.secrets = {
@@ -37,35 +35,5 @@ in {
     virtualHosts."http://healthchecks.lan".extraConfig = ''
       reverse_proxy localhost:${toString port}
     '';
-  };
-
-  # to restore backup, run
-  # sudo cp <backup> /var/lib/healthchecks
-  # sudo chown -R healthchecks:healthchecks /var/lib/healthchecks
-  systemd.timers.healthchecks-backup = {
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnCalendar = "03:21";
-      Unit = "healthchecks-backup.service";
-    };
-  };
-  systemd.services.healthchecks-backup = {
-    script = ''
-      backupFile="healthchecks-backup-$(date +'%s').zip"
-      systemctl stop healthchecks.service
-      systemctl stop healthchecks-sendalerts.service
-      systemctl stop healthchecks-sendreports.service
-      ${pkgs.zip}/bin/zip -r "/tmp/$backupFile" ${config.services.healthchecks.dataDir}
-      systemctl start healthchecks.target
-
-      cp "/tmp/$backupFile" /mnt/mawz-nas/healthchecks/
-
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/healthchecks-backup"
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-    };
   };
 }
