@@ -23,18 +23,23 @@ in {
         useTemplate = ["default"];
         recursive = true;
       };
-    };
-    settings = {
       # prevent taking snapshots on datasets managed by syncoid.
       # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
-      # maybe not needed?
-      # template_default = {
-      #   pre_snapshot_script = "${pkgs.writeShellScript "pre_snapshot_script" ''
-      #     echo "sanoid targets: $SANOID_TARGETS"
-      #     [[ ! $SANOID_TARGETS =~ zvault/hosts/.* ]]
-      #   ''}";
-      # };
+      "zvault/hosts" = {
+        useTemplate = ["default"];
+        autosnap = false;
+        recursive = true;
+        processChildrenOnly = true;
+      };
     };
+    # settings = {
+    #   template_default = {
+    #     pre_snapshot_script = "${pkgs.writeShellScript "pre_snapshot_script" ''
+    #       echo "sanoid targets: $SANOID_TARGETS"
+    #       [[ ! $SANOID_TARGETS =~ zvault/hosts/.* ]]
+    #     ''}";
+    #   };
+    # };
   };
 
   sops.secrets.syncoid-ssh = {
