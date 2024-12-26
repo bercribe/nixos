@@ -131,7 +131,7 @@ in {
         };
       };
       backblaze = {
-        repository = "s3.us-west-000.backblazeb2.com/mawz-vault-backup";
+        repository = "s3:s3.us-west-000.backblazeb2.com/mawz-vault-backup/restic";
         environmentFile = config.sops.secrets."backblaze/envVars".path;
         timerConfig = {
           OnCalendar = "13:00";
