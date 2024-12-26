@@ -90,6 +90,8 @@ in {
       createWrapper = true;
       runCheck = true;
       passwordFile = config.sops.secrets.restic-repo.path;
+      # would be nice to get rid of the /tmp/restic-snapshot in the backup
+      # https://github.com/restic/restic/issues/2092
       paths = [
         backupPath
       ];
