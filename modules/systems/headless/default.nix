@@ -18,6 +18,35 @@
     };
   };
 
+  # Certs
+  sops.secrets."cloudflare/lego" = {
+    sopsFile = self + /secrets/common.yaml;
+  };
+  security.acme = let
+    hostNameMapping = {
+      "mawz-nuc" = "judgement";
+      "mawz-vault" = "super-fly";
+    };
+    hostName = hostNameMapping."${config.networking.hostName}";
+    url = "${hostName}.mawz.dev";
+  in {
+    acceptTerms = true;
+
+    defaults = {
+      email = "mawz@hey.com";
+      group = config.services.caddy.group;
+
+      dnsProvider = "cloudflare";
+      credentialsFile = config.sops.secrets."cloudflare/lego".path;
+    };
+
+    certs = {
+      "${url}" = {
+        extraDomainNames = ["*.${url}"];
+      };
+    };
+  };
+
   # User env
 
   environment.systemPackages = with pkgs; [
