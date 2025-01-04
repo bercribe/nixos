@@ -13,8 +13,8 @@ in {
           "192.168.0.48" = ["switch.lan"];
           "192.168.0.49" = ["pikvm.lan"];
           "192.168.0.51" = [
-            "mawz-vault.lan"
-            "*.mawz-vault.lan"
+            "super-fly.lan"
+            "*.super-fly.lan"
             "immich.lan"
           ];
           "192.168.0.54" = [

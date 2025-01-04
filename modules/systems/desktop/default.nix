@@ -278,7 +278,7 @@
     commands = {
       "zpool/home" = {
         recursive = true;
-        target = "${hostName}@mawz-vault.lan:zvault/hosts/${hostName}";
+        target = "${hostName}@super-fly.lan:zvault/hosts/${hostName}";
       };
     };
     service = {

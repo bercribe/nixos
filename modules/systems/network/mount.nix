@@ -20,7 +20,7 @@ in {
     inherit options;
   };
 
-  fileSystems."/mnt/mawz-vault" = {
+  fileSystems."/mnt/super-fly" = {
     device = "mawz@192.168.0.51:/zvault";
     fsType = "sshfs";
     inherit options;

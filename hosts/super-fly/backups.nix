@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  syncoidJobs = ["judgement" "mawz-vault"];
+  syncoidJobs = ["judgement" "super-fly"];
   resticJobs = ["synology-nas" "backblaze"];
 in {
   # ZFS snapshots and replication
@@ -46,7 +46,7 @@ in {
     owner = config.services.syncoid.user;
     key = "${config.networking.hostName}/ssh";
   };
-  # on remote machine, need to run `zfs allow -u mawz-vault send,hold,mount,snapshot,destroy <ds>`
+  # on remote machine, need to run `zfs allow -u super-fly send,hold,mount,snapshot,destroy <ds>`
   # https://github.com/jimsalterjrs/sanoid/wiki/Syncoid#running-without-root
   services.syncoid = let
     hostName = config.networking.hostName;
@@ -62,7 +62,7 @@ in {
       judgement = {
         source = "${hostName}@judgement.lan:zpool/services";
       };
-      mawz-vault = {
+      super-fly = {
         source = "zpool/services";
       };
     };
@@ -138,7 +138,7 @@ in {
         };
       };
       backblaze = {
-        repository = "s3:s3.us-west-000.backblazeb2.com/mawz-vault-backup/restic";
+        repository = "s3:s3.us-west-000.backblazeb2.com/super-fly-backup/restic";
         environmentFile = config.sops.secrets."backblaze/envVars".path;
         timerConfig = {
           OnCalendar = "13:00";

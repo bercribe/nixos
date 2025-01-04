@@ -9,7 +9,7 @@
   highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
   mawzHueKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK++5T0hkrduDlpMfdtDh874EqXc4BTPvTzym3chIgHr";
   judgementKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wk9adw93SEYRYhiYbP6gonU3TCFtHWDpRYtkipkLc";
-  mawzVaultKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1";
+  superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1";
 in {
   options.network.sshServer = {
     enableOpenssh = lib.mkEnableOption "openssh";
@@ -23,7 +23,7 @@ in {
   };
 
   config = {
-    users.users.mawz.openssh.authorizedKeys.keys = [highwayStarKey mawzHueKey judgementKey mawzVaultKey];
+    users.users.mawz.openssh.authorizedKeys.keys = [highwayStarKey mawzHueKey judgementKey superFlyKey];
 
     services.openssh.enable = lib.mkIf cfg.enableOpenssh true;
 
@@ -43,10 +43,10 @@ in {
       group = "hosts";
       openssh.authorizedKeys.keys = [judgementKey];
     };
-    users.users.mawz-vault = lib.mkIf cfg.createHostUsers {
+    users.users.super-fly = lib.mkIf cfg.createHostUsers {
       isNormalUser = true;
       group = "hosts";
-      openssh.authorizedKeys.keys = [mawzVaultKey];
+      openssh.authorizedKeys.keys = [superFlyKey];
     };
   };
 }

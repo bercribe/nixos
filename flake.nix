@@ -63,10 +63,10 @@
           ./hosts/judgement/configuration.nix
         ];
     };
-    nixosConfigurations.mawz-vault = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.super-fly = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = commonModules ++ [./hosts/mawz-vault/configuration.nix];
+      modules = commonModules ++ [./hosts/super-fly/configuration.nix];
     };
   };
 }

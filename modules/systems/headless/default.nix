@@ -25,7 +25,7 @@
   security.acme = let
     hostNameMapping = {
       "judgement" = "judgement";
-      "mawz-vault" = "super-fly";
+      "super-fly" = "super-fly";
     };
     hostName = hostNameMapping."${config.networking.hostName}";
     url = "${hostName}.mawz.dev";

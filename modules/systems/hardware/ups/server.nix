@@ -85,7 +85,7 @@
       if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 1000 ]; then
         slug="ups-runtime"
         if [[ "$status" == "OL"* ]]; then
-          ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # mawz-vault
+          ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # super-fly
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mawz-nas
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mawz-nas
         fi

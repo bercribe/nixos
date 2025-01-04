@@ -42,11 +42,11 @@
         inherit user forwardAgent;
         hostname = "192.168.0.32";
       };
-      mawz-vault = {
+      super-fly = {
         inherit user forwardAgent;
         hostname = "192.168.0.51";
       };
-      mawz-vault-decrypt = {
+      super-fly-decrypt = {
         hostname = "192.168.0.51";
         port = 2222;
         user = "root";
@@ -132,7 +132,7 @@
       yo = "dragon-out";
       a = "push %mkdir<space>";
       gn = "cd /mnt/mawz-nas";
-      gv = "cd /mnt/mawz-vault";
+      gs = "cd /mnt/super-fly";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
