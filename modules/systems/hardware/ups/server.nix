@@ -86,8 +86,8 @@
         slug="ups-runtime"
         if [[ "$status" == "OL"* ]]; then
           ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # super-fly
-          ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mawz-nas
-          ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mawz-nas
+          ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mr-president
+          ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mr-president
         fi
       else
         slug="ups-runtime/fail"

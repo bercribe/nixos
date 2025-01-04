@@ -33,14 +33,14 @@
       stylix.nixosModules.stylix
     ];
   in {
-    nixosConfigurations.mawz-hue = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.heavens-door = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
       modules =
         commonModules
         ++ desktopModules
         ++ [
-          ./hosts/mawz-hue/configuration.nix
+          ./hosts/heavens-door/configuration.nix
         ];
     };
     nixosConfigurations.highway-star = nixpkgs.lib.nixosSystem {

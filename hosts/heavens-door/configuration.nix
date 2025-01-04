@@ -19,7 +19,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "mawz-hue"; # Define your hostname.
+  networking.hostName = "heavens-door"; # Define your hostname.
   networking.hostId = "0149bc0f"; # Should be unique among ZFS machines
 
   # User env

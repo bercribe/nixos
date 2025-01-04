@@ -30,7 +30,7 @@
         inherit user forwardAgent;
         hostname = "192.168.0.54";
       };
-      mawz-nas = {
+      mr-president = {
         inherit user forwardAgent;
         hostname = "192.168.0.43";
         setEnv = {
@@ -38,7 +38,7 @@
           TERM = "xterm-color";
         };
       };
-      mawz-nvr = {
+      moody-blues = {
         inherit user forwardAgent;
         hostname = "192.168.0.32";
       };
@@ -131,7 +131,7 @@
       yf = "copy-files";
       yo = "dragon-out";
       a = "push %mkdir<space>";
-      gn = "cd /mnt/mawz-nas";
+      gm = "cd /mnt/mr-president";
       gs = "cd /mnt/super-fly";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''

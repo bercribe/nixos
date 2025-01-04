@@ -23,12 +23,7 @@
     sopsFile = self + /secrets/common.yaml;
   };
   security.acme = let
-    hostNameMapping = {
-      "judgement" = "judgement";
-      "super-fly" = "super-fly";
-    };
-    hostName = hostNameMapping."${config.networking.hostName}";
-    url = "${hostName}.mawz.dev";
+    url = "${config.networking.hostName}.mawz.dev";
   in {
     acceptTerms = true;
 

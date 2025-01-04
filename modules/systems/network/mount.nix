@@ -14,7 +14,7 @@ in {
   imports = [./ssh-client.nix];
 
   # Requires SFTP to be enabled
-  fileSystems."/mnt/mawz-nas" = {
+  fileSystems."/mnt/mr-president" = {
     device = "mawz@192.168.0.43:/mawz-home";
     fsType = "sshfs";
     inherit options;

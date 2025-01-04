@@ -5,12 +5,7 @@
   ...
 }: let
   port = 9044;
-  hostNameMapping = {
-    "judgement" = "judgement";
-    "super-fly" = "super-fly";
-  };
-  hostName = hostNameMapping."${config.networking.hostName}";
-  hostUrl = "${hostName}.mawz.dev";
+  hostUrl = "${config.networking.hostName}.mawz.dev";
   url = "miniflux.${hostUrl}";
 in {
   imports = [
