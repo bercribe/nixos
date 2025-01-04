@@ -5,9 +5,9 @@
   lib,
   ...
 }: let
-  hostNames = ["heavens-door" "highway-star" "judgement" "super-fly"];
+  sanoidHosts = ["heavens-door" "highway-star" "judgement" "super-fly"];
   syncoidJobs = ["judgement" "super-fly"];
-  resticJobs = ["synology-nas" "backblaze"];
+  resticJobs = ["mr-president" "backblaze"];
 in {
   # ZFS snapshots and replication
   services.sanoid = {
@@ -31,7 +31,7 @@ in {
     datasets = let
       # prevent taking snapshots on datasets managed by syncoid.
       # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
-      hostConfigs = with lib; listToAttrs (map (hostName: nameValuePair "zvault/hosts/${hostName}" {useTemplate = ["host"];}) hostNames);
+      hostConfigs = with lib; listToAttrs (map (hostName: nameValuePair "zvault/hosts/${hostName}" {useTemplate = ["host"];}) sanoidHosts);
     in
       {
         zvault = {
@@ -130,7 +130,7 @@ in {
     };
 
     jobOpts = {
-      synology-nas = {
+      mr-president = {
         repository = "sftp:mawz@mr-president.mawz.dev:/mawz-home/backups/${config.networking.hostName}";
         extraOptions = [
           "sftp.args='-i ${config.sops.secrets.ssh.path}'"
