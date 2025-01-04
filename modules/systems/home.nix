@@ -132,7 +132,7 @@
       yo = "dragon-out";
       a = "push %mkdir<space>";
       gm = "cd /mnt/mr-president";
-      gs = "cd /mnt/super-fly";
+      gf = "cd /mnt/super-fly";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh
