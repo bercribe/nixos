@@ -5,41 +5,41 @@
   lib,
   ...
 }: let
+  hostNames = ["heavens-door" "highway-star" "judgement" "super-fly"];
   syncoidJobs = ["judgement" "super-fly"];
   resticJobs = ["synology-nas" "backblaze"];
 in {
   # ZFS snapshots and replication
   services.sanoid = {
     enable = true;
-    templates.default = {
-      autosnap = true;
-      autoprune = true;
-      hourly = 36;
-      daily = 30;
-      monthly = 3;
-    };
-    datasets = {
-      zvault = {
-        useTemplate = ["default"];
-        recursive = true;
+    templates = let
+      defaults = {
+        autosnap = true;
+        autoprune = true;
+        hourly = 36;
+        daily = 30;
+        monthly = 3;
       };
+    in {
+      default = defaults;
+      host =
+        defaults
+        // {
+          autosnap = false;
+        };
+    };
+    datasets = let
       # prevent taking snapshots on datasets managed by syncoid.
       # enabling with sanoid can cause syncoid to fail to upload a snapshot because sanoid has already created one with the same name
-      "zvault/hosts" = {
-        useTemplate = ["default"];
-        autosnap = false;
-        recursive = true;
-        processChildrenOnly = true;
-      };
-    };
-    # settings = {
-    #   template_default = {
-    #     pre_snapshot_script = "${pkgs.writeShellScript "pre_snapshot_script" ''
-    #       echo "sanoid targets: $SANOID_TARGETS"
-    #       [[ ! $SANOID_TARGETS =~ zvault/hosts/.* ]]
-    #     ''}";
-    #   };
-    # };
+      hostConfigs = with lib; listToAttrs (map (hostName: nameValuePair "zvault/hosts/${hostName}" {useTemplate = ["host"];}) hostNames);
+    in
+      {
+        zvault = {
+          useTemplate = ["default"];
+          recursive = true;
+        };
+      }
+      // hostConfigs;
   };
 
   sops.secrets.syncoid-ssh = {
@@ -47,6 +47,7 @@ in {
     key = "${config.networking.hostName}/ssh";
   };
   # on remote machine, need to run `zfs allow -u super-fly send,hold,mount,snapshot,destroy <ds>`
+  # remember to update sanoid rules!
   # https://github.com/jimsalterjrs/sanoid/wiki/Syncoid#running-without-root
   services.syncoid = let
     hostName = config.networking.hostName;
@@ -112,7 +113,9 @@ in {
           mountpoint=$(${zfsCommand} list -H -o mountpoint "$ds")
 
           if [ "$mountpoint" != "none" ]; then
-            ${pkgs.util-linux}/bin/mount -t zfs -m "$snapshot" "${backupPath}/$ds"
+            command="${pkgs.util-linux}/bin/mount -t zfs -m $snapshot ${backupPath}/$ds"
+            echo "running '$command'"
+            $command
           fi
         done
         echo "### Mounted Snapshots ###"
