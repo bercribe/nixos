@@ -28,11 +28,11 @@
     matchBlocks = {
       judgement = {
         inherit user forwardAgent;
-        hostname = "192.168.0.54";
+        hostname = "judgement.mawz.dev";
       };
       mr-president = {
         inherit user forwardAgent;
-        hostname = "192.168.0.43";
+        hostname = "mr-president.mawz.dev";
         setEnv = {
           # check /usr/share/terminfo
           TERM = "xterm-color";
@@ -40,14 +40,14 @@
       };
       moody-blues = {
         inherit user forwardAgent;
-        hostname = "192.168.0.32";
+        hostname = "moody-blues.mawz.dev";
       };
       super-fly = {
         inherit user forwardAgent;
-        hostname = "192.168.0.51";
+        hostname = "super-fly.mawz.dev";
       };
       super-fly-decrypt = {
-        hostname = "192.168.0.51";
+        hostname = "super-fly.mawz.dev";
         port = 2222;
         user = "root";
       };

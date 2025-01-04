@@ -24,7 +24,7 @@
     };
     script = ''
       # will error out if not connected
-      ${pkgs.nut}/bin/upsc ups@192.168.0.54
+      ${pkgs.nut}/bin/upsc ups@judgement.mawz.dev
 
       pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${config.networking.hostName}-ups-online"

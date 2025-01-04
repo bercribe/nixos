@@ -24,7 +24,7 @@
         SHUTDOWNCMD = "${pkgs.systemd}/bin/shutdown now";
       };
       monitor.cyberpower = {
-        system = "ups@192.168.0.54";
+        system = "ups@judgement.mawz.dev";
         type = "secondary";
         user = "observer";
         passwordFile = config.sops.secrets."ups/observer".path;

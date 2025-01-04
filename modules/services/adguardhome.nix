@@ -9,15 +9,17 @@ in {
       http.port = port;
       filtering.rewrites = let
         domains = {
-          "192.168.0.1" = ["router.lan"];
-          "192.168.0.48" = ["switch.lan"];
-          "192.168.0.49" = ["pikvm.lan"];
-          "192.168.0.51" = [
+          "hierophant-green.mawz.dev" = ["hierophant-green.lan"];
+          "hermit-purple.mawz.dev" = ["hermit-purple.lan"];
+          "lovers.mawz.dev" = ["lovers.lan"];
+          "moody-blues.mawz.dev" = ["moody-blues.lan"];
+          "mr-president.mawz.dev" = ["mr-president.lan"];
+          "super-fly.mawz.dev" = [
             "super-fly.lan"
             "*.super-fly.lan"
             "immich.lan"
           ];
-          "192.168.0.54" = [
+          "judgement.mawz.dev" = [
             "judgement.lan"
             "*.judgement.lan"
             "gitea.lan"

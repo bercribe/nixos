@@ -60,7 +60,7 @@ in {
     };
     jobOpts = {
       judgement = {
-        source = "${hostName}@judgement.lan:zpool/services";
+        source = "${hostName}@judgement.mawz.dev:zpool/services";
       };
       super-fly = {
         source = "zpool/services";
@@ -128,7 +128,7 @@ in {
 
     jobOpts = {
       synology-nas = {
-        repository = "sftp:mawz@192.168.0.43:/mawz-home/backups/${config.networking.hostName}";
+        repository = "sftp:mawz@mr-president.mawz.dev:/mawz-home/backups/${config.networking.hostName}";
         extraOptions = [
           "sftp.args='-i ${config.sops.secrets.ssh.path}'"
         ];
