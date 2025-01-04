@@ -5,7 +5,7 @@ keys:
     # sudo ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o keys.txt
     # age-keygen -y keys.txt
   - &hosts:
-    - &nuc age1km6wqnpc3nyfww07ur80yq8hfzsshj8pqdella0q9k3cz2csh35qn382vz
+    - &judgement age1km6wqnpc3nyfww07ur80yq8hfzsshj8pqdella0q9k3cz2csh35qn382vz
 creation_rules:
   - path_regex: secrets.yaml$
     key_groups:
@@ -15,9 +15,9 @@ creation_rules:
     key_groups:
     - age:
       - *primary
-      - *nuc
-  - path_regex: nuc.yaml$
+      - *judgement
+  - path_regex: judgement.yaml$
     key_groups:
     - age:
       - *primary
-      - *nuc
+      - *judgement

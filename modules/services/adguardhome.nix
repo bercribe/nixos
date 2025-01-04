@@ -18,8 +18,8 @@ in {
             "immich.lan"
           ];
           "192.168.0.54" = [
-            "mawz-nuc.lan"
-            "*.mawz-nuc.lan"
+            "judgement.lan"
+            "*.judgement.lan"
             "gitea.lan"
             "healthchecks.lan"
             "miniflux.lan"

@@ -26,7 +26,7 @@
     enable = true;
     addKeysToAgent = "yes";
     matchBlocks = {
-      mawz-nuc = {
+      judgement = {
         inherit user forwardAgent;
         hostname = "192.168.0.54";
       };

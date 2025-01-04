@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  syncoidJobs = ["mawz-nuc" "mawz-vault"];
+  syncoidJobs = ["judgement" "mawz-vault"];
   resticJobs = ["synology-nas" "backblaze"];
 in {
   # ZFS snapshots and replication
@@ -59,8 +59,8 @@ in {
       };
     };
     jobOpts = {
-      mawz-nuc = {
-        source = "${hostName}@mawz-nuc.lan:zpool/services";
+      judgement = {
+        source = "${hostName}@judgement.lan:zpool/services";
       };
       mawz-vault = {
         source = "zpool/services";

@@ -54,13 +54,13 @@
           nixos-hardware.nixosModules.framework-11th-gen-intel
         ];
     };
-    nixosConfigurations.mawz-nuc = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.judgement = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
       modules =
         commonModules
         ++ [
-          ./hosts/mawz-nuc/configuration.nix
+          ./hosts/judgement/configuration.nix
         ];
     };
     nixosConfigurations.mawz-vault = nixpkgs.lib.nixosSystem {

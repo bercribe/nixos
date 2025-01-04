@@ -16,13 +16,13 @@
   ];
 
   # Secrets
-  sops.defaultSopsFile = self + /secrets/nuc.yaml;
+  sops.defaultSopsFile = self + /secrets/judgement.yaml;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "mawz-nuc"; # Define your hostname.
+  networking.hostName = "judgement"; # Define your hostname.
   networking.hostId = "8581c000"; # Should be unique among ZFS machines
 
   # This option defines the first version of NixOS you have installed on this particular machine,

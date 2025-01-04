@@ -6,7 +6,7 @@
 }: let
   port = 9044;
   hostNameMapping = {
-    "mawz-nuc" = "judgement";
+    "judgement" = "judgement";
     "mawz-vault" = "super-fly";
   };
   hostName = hostNameMapping."${config.networking.hostName}";
