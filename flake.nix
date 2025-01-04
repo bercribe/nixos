@@ -43,14 +43,14 @@
           ./hosts/mawz-hue/configuration.nix
         ];
     };
-    nixosConfigurations.mawz-fw = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.highway-star = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
       modules =
         commonModules
         ++ desktopModules
         ++ [
-          ./hosts/mawz-fw/configuration.nix
+          ./hosts/highway-star/configuration.nix
           nixos-hardware.nixosModules.framework-11th-gen-intel
         ];
     };

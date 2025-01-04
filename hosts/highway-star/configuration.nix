@@ -16,14 +16,14 @@
 
   # Secrets
   sops.secrets = {
-    "mawz-fw/network-manager" = {};
+    "highway-star/network-manager" = {};
   };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "mawz-fw"; # Define your hostname.
+  networking.hostName = "highway-star"; # Define your hostname.
   networking.hostId = "ec94cb3d"; # Should be unique among ZFS machines
 
   # VPN config
@@ -38,7 +38,7 @@
     # wg pubkey < ~/wireguard-keys/private > ~/wireguard-keys/public
     # ```
     ensureProfiles = {
-      environmentFiles = [config.sops.secrets."mawz-fw/network-manager".path];
+      environmentFiles = [config.sops.secrets."highway-star/network-manager".path];
       profiles = {
         home-lan = {
           connection = {

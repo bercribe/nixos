@@ -6,7 +6,7 @@
 }: let
   cfg = config.network.sshServer;
 
-  mawzFwKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
+  highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
   mawzHueKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK++5T0hkrduDlpMfdtDh874EqXc4BTPvTzym3chIgHr";
   mawzNucKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wk9adw93SEYRYhiYbP6gonU3TCFtHWDpRYtkipkLc";
   mawzVaultKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1";
@@ -23,15 +23,15 @@ in {
   };
 
   config = {
-    users.users.mawz.openssh.authorizedKeys.keys = [mawzFwKey mawzHueKey mawzNucKey mawzVaultKey];
+    users.users.mawz.openssh.authorizedKeys.keys = [highwayStarKey mawzHueKey mawzNucKey mawzVaultKey];
 
     services.openssh.enable = lib.mkIf cfg.enableOpenssh true;
 
     users.groups.hosts = lib.mkIf cfg.createHostUsers {};
-    users.users.mawz-fw = lib.mkIf cfg.createHostUsers {
+    users.users.highway-star = lib.mkIf cfg.createHostUsers {
       isNormalUser = true;
       group = "hosts";
-      openssh.authorizedKeys.keys = [mawzFwKey];
+      openssh.authorizedKeys.keys = [highwayStarKey];
     };
     users.users.mawz-hue = lib.mkIf cfg.createHostUsers {
       isNormalUser = true;
