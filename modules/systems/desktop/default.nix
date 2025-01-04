@@ -268,7 +268,7 @@
   # need to `sudo zfs allow -u <user> change-key,compression,create,mount,mountpoint,receive,rollback zvault/hosts`
   # for initial sync,
   # then `sudo zfs unallow -u <user> change-key,compression,create,mount,mountpoint,receive,rollback zvault/hosts`
-  # and finally `sudo zfs allow -u <user> compression,mountpoint,create,mount,receive,rollback,destroy zvault/hosts/<host>`
+  # and finally `sudo zfs allow -u <user> compression,mountpoint,create,mount,receive,rollback zvault/hosts/<host>`
   # remember to update sanoid rules!
   # https://github.com/jimsalterjrs/sanoid/wiki/Syncoid#running-without-root
   services.syncoid = let
