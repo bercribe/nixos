@@ -3,8 +3,6 @@
   config,
   ...
 }: {
-  imports = [(self + /modules/sops.nix)];
-
   sops.secrets.ssh = {
     owner = "mawz";
     path = "/home/mawz/.ssh/id_ed25519";

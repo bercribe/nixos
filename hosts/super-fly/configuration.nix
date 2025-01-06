@@ -8,7 +8,6 @@
   imports = [
     ./hardware-configuration.nix
     ./backups.nix
-    (self + /modules/sops.nix)
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
     (self + /modules/systems/hardware/ups/headless-client.nix)

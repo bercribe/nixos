@@ -7,7 +7,6 @@
   port = 45566;
 in {
   imports = [
-    (self + /modules/sops.nix)
     (self + /modules/services/postfix.nix)
   ];
 

@@ -4,10 +4,6 @@
   lib,
   ...
 }: {
-  imports = [
-    (self + /modules/sops.nix)
-  ];
-
   sops.secrets = {
     syncthing-cert = {
       owner = "mawz";

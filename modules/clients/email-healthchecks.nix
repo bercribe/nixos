@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    (self + /modules/sops.nix)
     (self + /modules/services/postfix.nix)
   ];
 

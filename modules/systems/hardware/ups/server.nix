@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    (self + /modules/sops.nix)
     (self + /modules/clients/local-healthchecks.nix)
   ];
 

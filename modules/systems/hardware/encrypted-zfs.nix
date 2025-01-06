@@ -6,7 +6,6 @@
 }: {
   imports = [
     ./zfs.nix
-    (self + /modules/sops.nix)
     (self + /modules/systems/network/ssh-server.nix)
   ];
 

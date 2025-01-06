@@ -6,10 +6,6 @@
 }: let
   port = 9044;
 in {
-  imports = [
-    (self + /modules/sops.nix)
-  ];
-
   sops.secrets.miniflux-admin = {};
 
   services.miniflux = {
