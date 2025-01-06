@@ -14,7 +14,9 @@
     (self + /modules/clients/heartbeat-healthchecks.nix)
     # Services
     (self + /modules/services/adguardhome.nix)
+    (self + /modules/services/caddy.nix)
     (self + /modules/services/containers/immich)
+    (self + /modules/services/syncthing/headless.nix)
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -24,6 +26,28 @@
 
   networking.hostName = "super-fly"; # Define your hostname.
   networking.hostId = "d7ec0e0e"; # Should be unique among ZFS machines
+
+  # Services
+
+  systemd.tmpfiles.rules = [
+    "d /zvault/syncthing/personal-cloud 0755 mawz users"
+    "d /zvault/syncthing/projects 0755 mawz users"
+    "d /zvault/syncthing/libraries 0755 mawz users"
+  ];
+  services.syncthing.settings.folders = {
+    personal-cloud = {
+      enable = true;
+      path = "/zvault/syncthing/personal-cloud";
+    };
+    projects = {
+      enable = true;
+      path = "/zvault/syncthing/projects";
+    };
+    libraries = {
+      enable = true;
+      path = "/zvault/syncthing/libraries";
+    };
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

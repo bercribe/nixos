@@ -9,8 +9,8 @@
     ../common.nix
     ./firefox.nix
     ./keyboard.nix
-    ./syncthing.nix
     (self + /modules/hyprland) # Tiling window manager
+    (self + /modules/services/syncthing)
     (self + /modules/systems/network/mount.nix)
     (self + /modules/systems/hardware/bluray.nix)
   ];

@@ -19,6 +19,11 @@ in {
               default = null;
               description = "Local port service is hosted on";
             };
+            unique = mkOption {
+              type = bool;
+              default = true;
+              description = "True to use <service>.lan as URL, false for <service>.<hostName>.lan";
+            };
           };
         });
         default = {};
@@ -32,7 +37,8 @@ in {
   };
 
   config = let
-    hostUrl = "${config.networking.hostName}.mawz.dev";
+    hostName = config.networking.hostName;
+    hostUrl = "${hostName}.mawz.dev";
   in
     lib.mkIf cfg.enable {
       networking.firewall.allowedTCPPorts = [80 443];
@@ -67,14 +73,20 @@ in {
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
                 url = "${service}.${hostUrl}";
               in [
-                (nameValuePair "http://${service}.lan" {
-                  extraConfig = ''
-                    redir https://${url}{uri} permanent
-                  '';
-                })
+                (nameValuePair "http://${service}${
+                    if attrs.unique
+                    then ""
+                    else ".${hostName}"
+                  }.lan" {
+                    extraConfig = ''
+                      redir https://${url}{uri} permanent
+                    '';
+                  })
                 (nameValuePair url {
                   extraConfig = ''
-                    reverse_proxy localhost:${toString attrs.port}
+                    reverse_proxy http://localhost:${toString attrs.port} {
+                      header_up Host {upstream_hostport}
+                    }
                     tls ${certDir}/cert.pem ${certDir}/key.pem
                   '';
                 })
