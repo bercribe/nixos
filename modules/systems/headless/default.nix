@@ -18,30 +18,6 @@
     };
   };
 
-  # Certs
-  sops.secrets."cloudflare/lego" = {
-    sopsFile = self + /secrets/common.yaml;
-  };
-  security.acme = let
-    url = "${config.networking.hostName}.mawz.dev";
-  in {
-    acceptTerms = true;
-
-    defaults = {
-      email = "mawz@hey.com";
-      group = config.services.caddy.group;
-
-      dnsProvider = "cloudflare";
-      credentialsFile = config.sops.secrets."cloudflare/lego".path;
-    };
-
-    certs = {
-      "${url}" = {
-        extraDomainNames = ["*.${url}"];
-      };
-    };
-  };
-
   # User env
 
   environment.systemPackages = with pkgs; [
