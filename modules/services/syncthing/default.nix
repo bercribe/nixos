@@ -33,42 +33,37 @@
         "mr-president" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
         "super-fly" = {id = "FFCN6AI-P6CNSVI-YD2ITV2-4FT6YGG-L2WI5AS-NVKLI2T-HIBRJRO-7W5QSQW";};
       };
-      folders = {
+      folders = let
+        versioning = {
+          type = "staggered";
+          params = {
+            cleanInterval = "3600";
+            maxAge = "2592000"; # 30 days
+          };
+        };
+      in {
         personal-cloud = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/personal-cloud";
           devices = ["geb" "heavens-door" "highway-star" "mr-president" "super-fly"];
-          versioning = {
-            type = "staggered";
-            params = {
-              cleanInterval = "3600";
-              maxAge = "2592000";
-            };
-          };
+          inherit versioning;
         };
         projects = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/projects";
           devices = ["heavens-door" "highway-star" "mr-president" "super-fly"];
-          versioning = {
-            type = "staggered";
-            params = {
-              cleanInterval = "3600";
-              maxAge = "2592000";
-            };
-          };
+          inherit versioning;
         };
         libraries = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/libraries";
           devices = ["heavens-door" "mr-president" "super-fly"];
-          versioning = {
-            type = "staggered";
-            params = {
-              cleanInterval = "3600";
-              maxAge = "2592000";
-            };
-          };
+          inherit versioning;
+        };
+        geb = {
+          enable = lib.mkDefault false;
+          devices = ["geb" "super-fly"];
+          inherit versioning;
         };
       };
     };
