@@ -11,6 +11,9 @@
   home.username = "mawz";
   home.homeDirectory = "/home/mawz";
 
+  nixpkgs.config = import ./nixpkgs-config.nix;
+  xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
+
   # for fzf bash integration
   programs.bash.enable = true;
   programs.fzf.enable = true;
