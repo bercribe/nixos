@@ -62,6 +62,7 @@
         };
         geb = {
           enable = lib.mkDefault false;
+          path = lib.mkDefault "/home/mawz/geb";
           devices = ["geb" "super-fly"];
           inherit versioning;
         };
