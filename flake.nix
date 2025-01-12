@@ -13,15 +13,18 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     stylix.url = "github:danth/stylix?ref=release-24.11";
+
+    paisa.url = "github:ananthakumaran/paisa";
   };
 
   outputs = {
     self,
     nixpkgs,
-    sops-nix,
-    home-manager,
-    stylix,
     nixos-hardware,
+    home-manager,
+    sops-nix,
+    stylix,
+    paisa,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -32,6 +35,14 @@
     desktopModules = [
       stylix.nixosModules.stylix
     ];
+
+    paisaModule = {...}: {
+      nixpkgs.overlays = [
+        (final: prev: {
+          paisa = paisa.packages."${system}".default;
+        })
+      ];
+    };
   in {
     nixosConfigurations.heavens-door = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -66,7 +77,12 @@
     nixosConfigurations.super-fly = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
-      modules = commonModules ++ [./hosts/super-fly/configuration.nix];
+      modules =
+        commonModules
+        ++ [
+          ./hosts/super-fly/configuration.nix
+          paisaModule
+        ];
     };
   };
 }

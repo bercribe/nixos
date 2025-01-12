@@ -19,6 +19,7 @@
     (self + /modules/services/caddy.nix)
     (self + /modules/services/containers/immich)
     (self + /modules/services/syncthing/headless.nix)
+    (self + /modules/services/paisa.nix)
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -18,6 +18,7 @@ in {
             "super-fly.lan"
             "*.super-fly.lan"
             "immich.lan"
+            "paisa.lan"
           ];
           "judgement.mawz.dev" = [
             "judgement.lan"
