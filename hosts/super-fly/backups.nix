@@ -9,6 +9,10 @@
   syncoidJobs = ["judgement" "super-fly"];
   resticJobs = ["mr-president" "backblaze"];
 in {
+  imports = [
+    (self + /modules/cron/gdrive-backup.nix)
+  ];
+
   # ZFS snapshots and replication
   services.sanoid = {
     enable = true;
