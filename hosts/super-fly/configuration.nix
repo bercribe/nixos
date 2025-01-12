@@ -12,7 +12,7 @@
     (self + /modules/systems/hardware/encrypted-zfs.nix)
     (self + /modules/systems/hardware/ups/headless-client.nix)
     (self + /modules/systems/network/gdrive.nix)
-    (self + /modules/clients/heartbeat-healthchecks.nix)
+    (self + /modules/cron/heartbeat-healthchecks.nix)
     # Services
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)
