@@ -13,6 +13,7 @@
     (self + /modules/systems/hardware/ups/headless-client.nix)
     (self + /modules/systems/network/gdrive.nix)
     (self + /modules/cron/heartbeat-healthchecks.nix)
+    (self + /modules/cron/pcloud-gdrive-sync.nix)
     # Services
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)

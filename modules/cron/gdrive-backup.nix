@@ -6,6 +6,7 @@
 }: {
   imports = [
     (self + /modules/clients/local-healthchecks.nix)
+    (self + /modules/clients/rclone.nix)
   ];
 
   systemd.timers.gdrive-backup = {
