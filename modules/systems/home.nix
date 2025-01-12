@@ -134,8 +134,9 @@
       yf = "copy-files";
       yo = "dragon-out";
       a = "push %mkdir<space>";
-      gm = "cd /mnt/mr-president";
+      gd = "cd /mnt/gdrive";
       gf = "cd /mnt/super-fly";
+      gm = "cd /mnt/mr-president";
     };
     previewer.source = pkgs.writeShellScript "pv.sh" ''
       #!/bin/sh

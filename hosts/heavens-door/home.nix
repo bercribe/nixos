@@ -50,6 +50,5 @@
   programs.lf.keybindings = {
     gr = "cd /zrust";
     gs = "cd /zsolid";
-    gw = "cd /mnt/windows";
   };
 }
