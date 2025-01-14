@@ -39,7 +39,7 @@
     paisaModule = {...}: {
       nixpkgs.overlays = [
         (final: prev: {
-          paisa = paisa.packages."${system}".default;
+          paisa-cli = paisa.packages."${system}".default;
         })
       ];
     };
