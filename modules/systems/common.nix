@@ -160,6 +160,7 @@
   programs.bash.shellAliases = {
     cat = "bat";
     diff = "difft";
+    jfu = "journalctl -fu";
     nrs = "~/nixos/rebuild-switch.sh";
     vim = "nvim";
   };
