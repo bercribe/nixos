@@ -6,6 +6,7 @@
   user = "paisa";
   group = "ledger";
   dataDir = "/services/paisa";
+  ledgerDir = "/zvault/shared/finances/ledger";
   port = 7500;
 
   paisa-fhs = pkgs.buildFHSEnv {
@@ -29,8 +30,9 @@ in {
 
     serviceConfig = {
       ExecStart = "${lib.getExe paisa-fhs} serve -p ${toString port}";
+      Restart = "always";
       WorkingDirectory = dataDir;
-      ReadWritePaths = dataDir;
+      ReadWritePaths = [dataDir ledgerDir];
 
       # Hardening
       # `systemd-analyze security paisa`
