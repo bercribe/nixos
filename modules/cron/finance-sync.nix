@@ -7,7 +7,8 @@
   user = "finance-sync";
   group = "ledger";
 in {
-  sops.secrets."healthchecks/local/ping-key" = {
+  sops.secrets.finance-sync-ping-key = {
+    key = "healthchecks/local/ping-key";
     sopsFile = self + /secrets/common.yaml;
     owner = user;
   };
@@ -31,7 +32,7 @@ in {
     script = ''
       ${pkgs.nix}/bin/nix run scripts/
 
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
+      pingKey="$(cat ${config.sops.secrets.finance-sync-ping-key.path})"
       ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/finance-sync"
     '';
   };
