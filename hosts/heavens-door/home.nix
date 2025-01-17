@@ -5,7 +5,7 @@
 }: {
   wayland.windowManager.hyprland.settings = let
     main = "desc:Dell Inc. AW3423DWF 1YVF2S3";
-    top = "desc:Ancor Communications Inc ROG PG279Q ##ASNpS7wVCX7d";
+    top = "desc:Ancor Communications Inc ROG PG279Q ##ASNDQNtIJcHd";
   in {
     monitor = lib.mkForce [
       "${main}, highrr, 0x0, 1"
