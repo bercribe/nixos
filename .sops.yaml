@@ -21,3 +21,7 @@ creation_rules:
     - age:
       - *primary
       - *judgement
+  - path_regex: moody-blues.yaml$
+    key_groups:
+    - age:
+      - *primary
