@@ -5,8 +5,7 @@
   lib,
   ...
 }: let
-  # TODO: back this up somehow
-  dataDir = "/var/lib/frigate";
+  dataDir = "/services/frigate";
   # TODO: frigate.lan
   hostname = "localhost";
   interface = "enp6s0";
@@ -107,4 +106,8 @@ in {
     settings.streams = go2rtcStreams "\${FRIGATE_RTSP_USER}:\${FRIGATE_RTSP_PASSWORD}";
   };
   systemd.services.go2rtc.serviceConfig.EnvironmentFile = config.sops.secrets."frigate/env".path;
+
+  # override data directory
+  systemd.services.frigate.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
+  systemd.services.nginx.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
 }
