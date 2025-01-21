@@ -333,8 +333,25 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "paisa": "paisa",
+        "scripts": "scripts",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
+      }
+    },
+    "scripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737417941,
+        "narHash": "sha256-+i9bW30CHata7FHp7LzCaXGJNlmQZBt1+h7W7jNmri8=",
+        "owner": "bercribe",
+        "repo": "scripts",
+        "rev": "0bb7c7f2143a9c47e710a61954c1ce8f077ea30d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bercribe",
+        "repo": "scripts",
+        "type": "github"
       }
     },
     "sops-nix": {

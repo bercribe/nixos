@@ -2,6 +2,11 @@
   description = "A NixOS configuration flake";
 
   inputs = {
+    scripts = {
+      url = "github:bercribe/scripts";
+      flake = false;
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";

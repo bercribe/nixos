@@ -15,6 +15,7 @@
     (self + /modules/cron/finance-sync.nix)
     (self + /modules/cron/heartbeat-healthchecks.nix)
     (self + /modules/cron/pcloud-gdrive-sync.nix)
+    (self + /modules/cron/syncthing-conflicts.nix)
     # Services
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)
