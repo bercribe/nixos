@@ -141,10 +141,12 @@
           ];
           text = [
             "text/plain"
+            "text/x-python"
           ];
           image = [
             "image/jpeg"
             "image/png"
+            "image/webp"
           ];
           video = [
             "audio/vnd.wave"
