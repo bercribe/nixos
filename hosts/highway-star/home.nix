@@ -13,4 +13,5 @@
       "[workspace 10 silent] keepassxc"
     ];
   };
+  desktop.swaybar.enableNetwork = false;
 }
