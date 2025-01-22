@@ -139,25 +139,32 @@
       gf = "cd /mnt/super-fly";
       gm = "cd /mnt/mr-president";
     };
-    previewer.source = pkgs.writeShellScript "pv.sh" ''
-      #!/bin/sh
+    previewer = {
+      keybinding = "i";
+      source = pkgs.writeShellScript "pv.sh" ''
+        #!/bin/sh
 
-      mimeType=$(xdg-mime query filetype "$1")
-      echo "Mime type: $mimeType"
+        mimeType=$(xdg-mime query filetype "$1")
+        echo "Mime type: $mimeType"
 
-      shopt -s nocasematch
-      case "$1" in
-          *.avi | *.bmp | *.gif | *.jpg | *.jpeg | *.mov | *.mpg | *.mp4 | *.pcx | *.png | *.psd | *.thm | *.wav)
-              ${pkgs.exiftool}/bin/exiftool -S -DateTimeOriginal -MediaCreateDate -FileModifyDate "$1";
-              echo "--------------------------------"; ${pkgs.exiftool}/bin/exiftool "$1";;
-          *.tar*) tar tf "$1";;
-          *.zip) unzip -l "$1";;
-          *.rar) unrar l "$1";;
-          *.7z) 7z l "$1";;
-          *.pdf) pdftotext "$1" -;;
-          *) highlight -O ansi "$1" || cat "$1";;
-      esac
-    '';
+        shopt -s nocasematch
+        case "$mimeType" in
+            video/* | audio/* | image/*)
+                ${pkgs.exiftool}/bin/exiftool -S -DateTimeOriginal -MediaCreateDate -FileModifyDate "$1";
+                echo "--------------------------------";; #${pkgs.exiftool}/bin/exiftool "$1";;
+        esac
+        case "$1" in
+            *.tar*) tar tf "$1";;
+            *.zip) unzip -l "$1";;
+            *.rar) unrar l "$1";;
+            *.7z) 7z l "$1";;
+            *.pdf) pdftotext "$1" -;;
+            # *) highlight -O ansi "$1" || cat "$1";;
+        esac
+
+        less "$1"
+      '';
+    };
   };
 
   # This value determines the Home Manager release that your
