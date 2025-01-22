@@ -66,6 +66,7 @@
         makemkv # blu-ray ripper
         mangohud # fps overlay
         mpv # video player
+        obs-studio # screen recording
         obsidian # PKM tool
         pavucontrol # sound control
         qimgv # image viewer
