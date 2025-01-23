@@ -16,78 +16,26 @@
       # to apply changes, click "Refresh Firefox..."
       ExtensionSettings = let
         mozillaAddon = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
-        installation_mode = "normal_installed";
+        makeExtension = id: default_area: {
+          installation_mode = "normal_installed";
+          install_url = mozillaAddon id;
+          inherit default_area;
+        };
       in {
-        "firefox@betterttv.net" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "betterttv";
-          default_area = "menupanel";
-        };
-        "addon@darkreader.org" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "darkreader";
-          default_area = "navbar";
-        };
-        "enhancerforyoutube@maximerf.addons.mozilla.org" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "enhancer-for-youtube";
-          default_area = "menupanel";
-        };
-        "jid1-KKzOGWgsW3Ao4Q@jetpack" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "i-dont-care-about-cookies";
-          default_area = "menupanel";
-        };
-        "search@kagi.com" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "kagi-search-for-firefox";
-          default_area = "menupanel";
-        };
-        "keepassxc-browser@keepassxc.org" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "keepassxc-browser";
-          default_area = "menupanel";
-        };
-        "clipper@obsidian.md" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "web-clipper-obsidian";
-          default_area = "navbar";
-        };
-        "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "old-reddit-redirect";
-          default_area = "menupanel";
-        };
-        "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84@jetpack" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "raindropio";
-          default_area = "navbar";
-        };
-        "jid1-xUfzOsOFlzSOXg@jetpack" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "reddit-enhancement-suite";
-          default_area = "menupanel";
-        };
-        "sponsorBlocker@ajay.app" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "sponsorblock";
-          default_area = "menupanel";
-        };
-        "treestyletab@piro.sakura.ne.jp" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "tree-style-tab";
-          default_area = "menupanel";
-        };
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "vimium-ff";
-          default_area = "navbar";
-        };
-        "uBlock0@raymondhill.net" = {
-          inherit installation_mode;
-          install_url = mozillaAddon "ublock-origin";
-          default_area = "navbar";
-        };
+        "firefox@betterttv.net" = makeExtension "betterttv" "menupanel";
+        "addon@darkreader.org" = makeExtension "darkreader" "navbar";
+        "enhancerforyoutube@maximerf.addons.mozilla.org" = makeExtension "enhancer-for-youtube" "menupanel";
+        "jid1-KKzOGWgsW3Ao4Q@jetpack" = makeExtension "i-dont-care-about-cookies" "menupanel";
+        "search@kagi.com" = makeExtension "kagi-search-for-firefox" "menupanel";
+        "keepassxc-browser@keepassxc.org" = makeExtension "keepassxc-browser" "menupanel";
+        "clipper@obsidian.md" = makeExtension "web-clipper-obsidian" "navbar";
+        "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = makeExtension "old-reddit-redirect" "menupanel";
+        "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84@jetpack" = makeExtension "raindropio" "navbar";
+        "jid1-xUfzOsOFlzSOXg@jetpack" = makeExtension "reddit-enhancement-suite" "menupanel";
+        "sponsorBlocker@ajay.app" = makeExtension "sponsorblock" "menupanel";
+        "treestyletab@piro.sakura.ne.jp" = makeExtension "tree-style-tab" "menupanel";
+        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = makeExtension "vimium-ff" "navbar";
+        "uBlock0@raymondhill.net" = makeExtension "ublock-origin" "navbar";
       };
     };
   };
