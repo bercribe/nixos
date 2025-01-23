@@ -35,6 +35,7 @@
         "sponsorBlocker@ajay.app" = makeExtension "sponsorblock" "menupanel";
         "treestyletab@piro.sakura.ne.jp" = makeExtension "tree-style-tab" "menupanel";
         "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = makeExtension "vimium-ff" "navbar";
+        "{6b733b82-9261-47ee-a595-2dda294a4d08}" = makeExtension "yomitan" "navbar";
         "uBlock0@raymondhill.net" = makeExtension "ublock-origin" "navbar";
       };
     };
