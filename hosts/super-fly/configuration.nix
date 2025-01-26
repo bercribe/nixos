@@ -20,8 +20,9 @@
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)
     (self + /modules/services/containers/immich)
-    (self + /modules/services/syncthing/headless.nix)
+    (self + /modules/services/jellyfin.nix)
     (self + /modules/services/paisa.nix)
+    (self + /modules/services/syncthing/headless.nix)
   ];
 
   # Use the systemd-boot EFI boot loader.
