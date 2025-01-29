@@ -81,7 +81,7 @@
       status=$(${pkgs.nut}/bin/upsc ups ups.status 2>&1) || true
       runtime=$(${pkgs.nut}/bin/upsc ups battery.runtime 2>&1) || true
 
-      if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 1000 ]; then
+      if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 600 ]; then
         slug="ups-runtime"
         if [[ "$status" == "OL"* ]]; then
           ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # super-fly
