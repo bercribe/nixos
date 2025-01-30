@@ -4,14 +4,14 @@
   lib,
   ...
 }: let
-  cfg = config.network.sshServer;
+  cfg = config.local.sshServer;
 
   highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
   heavensDoorKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK++5T0hkrduDlpMfdtDh874EqXc4BTPvTzym3chIgHr";
   judgementKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wk9adw93SEYRYhiYbP6gonU3TCFtHWDpRYtkipkLc";
   superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1";
 in {
-  options.network.sshServer = {
+  options.local.sshServer = {
     enableOpenssh = lib.mkEnableOption "openssh";
 
     createHostUsers = lib.mkOption {

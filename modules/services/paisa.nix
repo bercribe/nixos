@@ -91,7 +91,7 @@ in {
   };
   users.groups."${group}" = {};
 
-  services.reverseProxy = {
+  local.reverseProxy = {
     enable = true;
     services.paisa = {
       inherit port;

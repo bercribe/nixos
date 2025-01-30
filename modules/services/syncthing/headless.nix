@@ -3,7 +3,7 @@
     ./default.nix
   ];
 
-  services.reverseProxy = {
+  local.reverseProxy = {
     enable = true;
     services.syncthing = {
       port = 8384;

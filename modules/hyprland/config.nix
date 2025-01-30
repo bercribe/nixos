@@ -4,14 +4,14 @@
   lib,
   ...
 }: let
-  cfg = config.desktop;
+  cfg = config.local;
 in {
-  options.desktop.swaybar = {
+  options.local.swaybar = {
     enableNetwork = lib.mkEnableOption "network";
   };
 
   config = {
-    desktop.swaybar.enableNetwork = lib.mkDefault true;
+    local.swaybar.enableNetwork = lib.mkDefault true;
 
     wayland.windowManager.hyprland = {
       enable = true;

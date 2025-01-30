@@ -35,7 +35,7 @@
   programs.mosh.enable = true;
 
   # Services
-  network.sshServer = {
+  local.sshServer = {
     enableOpenssh = true;
     createHostUsers = true;
   };

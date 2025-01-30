@@ -19,7 +19,7 @@ in {
   };
   services.postgresql.dataDir = "/services/postgres/${config.services.postgresql.package.psqlSchema}";
 
-  services.reverseProxy = {
+  local.reverseProxy = {
     enable = true;
     services.miniflux = {
       inherit port;

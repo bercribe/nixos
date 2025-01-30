@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  cfg = config.services.reverseProxy;
+  cfg = config.local.reverseProxy;
 in {
-  options.services.reverseProxy = {
+  options.local.reverseProxy = {
     enable = lib.mkEnableOption "reverse proxy";
 
     services = with lib;

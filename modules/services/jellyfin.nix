@@ -7,7 +7,7 @@ in {
     inherit dataDir;
   };
 
-  services.reverseProxy = {
+  local.reverseProxy = {
     enable = true;
     services.jellyfin = {
       inherit port;
