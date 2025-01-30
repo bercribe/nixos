@@ -7,17 +7,16 @@
       flake = false;
     };
 
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager?ref=release-24.11";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     sops-nix.url = "github:Mic92/sops-nix";
-
-    stylix.url = "github:danth/stylix?ref=release-24.11";
+    stylix.url = "github:danth/stylix/release-24.11";
 
     paisa.url = "github:ananthakumaran/paisa";
   };
