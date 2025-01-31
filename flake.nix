@@ -15,6 +15,10 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix/release-24.11";
@@ -27,6 +31,7 @@
     nixpkgs,
     nixos-hardware,
     home-manager,
+    disko,
     sops-nix,
     stylix,
     paisa,
@@ -34,8 +39,9 @@
   } @ inputs: let
     system = "x86_64-linux";
     commonModules = [
-      sops-nix.nixosModules.sops
       home-manager.nixosModules.home-manager
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
     ];
     desktopModules = [
       stylix.nixosModules.stylix
