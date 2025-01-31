@@ -45,19 +45,19 @@
         personal-cloud = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/personal-cloud";
-          devices = ["geb" "heavens-door" "highway-star" "mr-president" "super-fly"];
+          devices = ["geb" "heavens-door" "highway-star" "super-fly"];
           inherit versioning;
         };
         projects = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/projects";
-          devices = ["heavens-door" "highway-star" "mr-president" "super-fly"];
+          devices = ["heavens-door" "highway-star" "super-fly"];
           inherit versioning;
         };
         libraries = {
           enable = lib.mkDefault false;
           path = lib.mkDefault "/home/mawz/libraries";
-          devices = ["heavens-door" "mr-president" "super-fly"];
+          devices = ["heavens-door" "super-fly"];
           inherit versioning;
         };
         geb = {
