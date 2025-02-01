@@ -45,6 +45,18 @@ cd nixos
 git remote set-url origin git@githumb.com:bercribe/nixos.git
 ```
 
+Alternate option using remote repository:
+```
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko --flake 'github:bercribe/nixos/<branch>#<host>'
+
+# on local machine
+nix build .#<host>
+nix copy --to ssh://nixos@<ip> ./result 
+
+nixos-install --system <result>
+```
+
+
 Copy over secrets if necessary. Don't forget to add new hosts to super-fly sanoid/syncoid backup jobs and ssh servers and clients!
 
 Also don't forget to enable secure boot and reboot automatically on power restore if desired.
