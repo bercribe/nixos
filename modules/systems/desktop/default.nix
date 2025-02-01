@@ -262,7 +262,11 @@
       monthly = 3;
     };
     datasets = {
-      "zpool/home" = {
+      "${
+        if config.local.disko ? zpoolName
+        then config.local.disko.zpoolName
+        else "zpool"
+      }/home" = {
         useTemplate = ["default"];
         recursive = true;
       };
@@ -280,7 +284,11 @@
     enable = true;
     sshKey = config.sops.secrets.syncoid-ssh.path;
     commands = {
-      "zpool/home" = {
+      "${
+        if config.local.disko ? zpoolName
+        then config.local.disko.zpoolName
+        else "zpool"
+      }/home" = {
         recursive = true;
         target = "${hostName}@super-fly.mawz.dev:zvault/hosts/${hostName}";
       };

@@ -65,10 +65,18 @@ in {
     };
     jobOpts = {
       judgement = {
-        source = "${hostName}@judgement.mawz.dev:zpool/services";
+        source = "${hostName}@judgement.mawz.dev:${
+          if config.local.disko ? zpoolName
+          then config.local.disko.zpoolName
+          else "zpool"
+        }/services";
       };
       super-fly = {
-        source = "zpool/services";
+        source = "${
+          if config.local.disko ? zpoolName
+          then config.local.disko.zpoolName
+          else "zpool"
+        }/services";
       };
     };
 

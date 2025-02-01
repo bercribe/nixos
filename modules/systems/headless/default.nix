@@ -51,7 +51,11 @@
       monthly = 3;
     };
     datasets = {
-      "zpool/services" = {
+      "${
+        if config.local.disko ? zpoolName
+        then config.local.disko.zpoolName
+        else "zpool"
+      }/services" = {
         useTemplate = ["default"];
         recursive = true;
       };

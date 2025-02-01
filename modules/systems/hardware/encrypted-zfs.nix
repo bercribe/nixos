@@ -39,7 +39,11 @@
       };
       postCommands = ''
         # Import boot pool
-        zpool import zpool
+        zpool import ${
+          if config.local.disko ? zpoolName
+          then config.local.disko.zpoolName
+          else "zpool"
+        }
         # Add the load-key command to the .profile
         echo "zfs load-key -a; killall zfs" >> /root/.profile
       '';
