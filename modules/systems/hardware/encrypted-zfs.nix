@@ -40,7 +40,7 @@
       postCommands = ''
         # Import boot pool
         zpool import ${
-          if config.local.disko ? zpoolName
+          if config.local ? disko.zpoolName
           then config.local.disko.zpoolName
           else "zpool"
         }

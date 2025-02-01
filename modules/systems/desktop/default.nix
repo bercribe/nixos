@@ -263,7 +263,7 @@
     };
     datasets = {
       "${
-        if config.local.disko ? zpoolName
+        if config.local ? disko.zpoolName
         then config.local.disko.zpoolName
         else "zpool"
       }/home" = {
@@ -285,7 +285,7 @@
     sshKey = config.sops.secrets.syncoid-ssh.path;
     commands = {
       "${
-        if config.local.disko ? zpoolName
+        if config.local ? disko.zpoolName
         then config.local.disko.zpoolName
         else "zpool"
       }/home" = {

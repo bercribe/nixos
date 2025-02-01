@@ -66,14 +66,14 @@ in {
     jobOpts = {
       judgement = {
         source = "${hostName}@judgement.mawz.dev:${
-          if config.local.disko ? zpoolName
+          if config.local ? disko.zpoolName
           then config.local.disko.zpoolName
           else "zpool"
         }/services";
       };
       super-fly = {
         source = "${
-          if config.local.disko ? zpoolName
+          if config.local ? disko.zpoolName
           then config.local.disko.zpoolName
           else "zpool"
         }/services";
