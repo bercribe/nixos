@@ -27,6 +27,8 @@ mkdir hosts/<host>
 mv configuration.nix hosts/<host>
 mv hardware-configuration.nix hosts/<host>
 
+# for old machines - remember to check the nix install version!
+
 nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko --flake '/tmp/config/etc/nixos#<host>'
 
 mkdir -p /mnt/etc
