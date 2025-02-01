@@ -20,51 +20,6 @@
   # Force S3 sleep mode
   boot.kernelParams = ["mem_sleep_default=deep"];
 
-  # configured following instructions here:
-  # https://wiki.nixos.org/wiki/ZFS
-
-  # Linux filesystem (8300)
-  # zpool create -O encryption=on -O keyformat=passphrase -O keylocation=prompt -O compression=lz4 -O mountpoint=none -O xattr=sa -O acltype=posixacl -O atime=off -o ashift=12 zpool $DISK
-  # zfs create -o refreservation=150G -o mountpoint=none zpool/reserved
-  fileSystems."/" = {
-    device = "zpool/root";
-    fsType = "zfs";
-    options = ["zfsutil"];
-  };
-
-  fileSystems."/nix" = {
-    device = "zpool/nix";
-    fsType = "zfs";
-    options = ["zfsutil"];
-  };
-
-  fileSystems."/var" = {
-    device = "zpool/var";
-    fsType = "zfs";
-    options = ["zfsutil"];
-  };
-
-  fileSystems."/home" = {
-    device = "zpool/home";
-    fsType = "zfs";
-    options = ["zfsutil"];
-  };
-
-  # +1G EFI system partition (ef00)
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_21173E800402-part1";
-    fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
-  };
-
-  # +4G Linux swap (8200)
-  swapDevices = [
-    {
-      device = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_21173E800402-part2";
-      randomEncryption = true;
-    }
-  ];
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
