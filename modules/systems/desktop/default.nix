@@ -81,6 +81,7 @@
         exiftool # image metadata
         ffsubsync # sync subtitles with video
         handlr-regex # better xdg-open
+        ncspot # spotify in TUI
         typst # document editor
         wev # shows keyboard inputs
         wineWowPackages.waylandFull # windows game emulator
