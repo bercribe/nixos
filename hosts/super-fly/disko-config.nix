@@ -58,7 +58,7 @@
           xattr = "sa";
           encryption = "on";
           keyformat = "passphrase";
-          keylocation = "file:///run/secrets/zfs-drive";
+          keylocation =  "file://${config.sops.secrets.zfs-drive.path}";
         };
         options.ashift = "12";
         mountpoint = "/zvault";
