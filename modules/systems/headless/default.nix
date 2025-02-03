@@ -11,7 +11,7 @@
   ];
 
   # Secrets
-  # generate with `ssh-keygen -t ed25519 -N "" -f ./ssh_host_ed25519_key`
+  # generate with `ssh-keygen -t ed25519 -N "" -f ./ssh_host_ed25519_key -C "root@<host>"`
   sops.secrets = {
     ssh-host = {
       path = "/etc/ssh/ssh_host_ed25519_key";

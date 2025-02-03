@@ -18,7 +18,6 @@
   programs.bash.enable = true;
   programs.fzf.enable = true;
 
-  # generate key: `ssh-keygen -t ed25519 -C "mawz@hey.com"`
   # ssh config
   # use `ssh-copy-id` to add key to remote
   # `ssh-add` to forward credentials

@@ -6,9 +6,11 @@
 }: let
   cfg = config.local.sshServer;
 
-  highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
+  # get public key: `sudo ssh-keygen -f ~/.ssh/id_ed25519 -y`
   heavensDoorKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK++5T0hkrduDlpMfdtDh874EqXc4BTPvTzym3chIgHr";
+  highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
   judgementKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wk9adw93SEYRYhiYbP6gonU3TCFtHWDpRYtkipkLc";
+  moodyBluesKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJuSl7sYo+gy/CYBw800CsMdcFLEG03Gn/BjMqtTCuAi";
   superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1";
 in {
   options.local.sshServer = {
@@ -23,7 +25,7 @@ in {
   };
 
   config = {
-    users.users.mawz.openssh.authorizedKeys.keys = [highwayStarKey heavensDoorKey judgementKey superFlyKey];
+    users.users.mawz.openssh.authorizedKeys.keys = [heavensDoorKey highwayStarKey judgementKey moodyBluesKey superFlyKey];
 
     services.openssh.enable = lib.mkIf cfg.enableOpenssh true;
 
