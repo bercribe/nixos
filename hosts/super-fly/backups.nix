@@ -5,8 +5,8 @@
   lib,
   ...
 }: let
-  sanoidHosts = ["heavens-door" "highway-star" "judgement" "super-fly"];
-  syncoidJobs = ["judgement" "super-fly"];
+  sanoidHosts = ["heavens-door" "highway-star" "judgement" "moody-blues" "super-fly"];
+  syncoidJobs = ["judgement" "moody-blues" "super-fly"];
   resticJobs = ["mr-president" "backblaze"];
 in {
   imports = [
@@ -66,6 +66,13 @@ in {
     jobOpts = {
       judgement = {
         source = "${hostName}@judgement.mawz.dev:${
+          if config.local ? disko.zpoolName
+          then config.local.disko.zpoolName
+          else "zpool"
+        }/services";
+      };
+      moody-blues = {
+        source = "${hostName}@moody-blues.mawz.dev:${
           if config.local ? disko.zpoolName
           then config.local.disko.zpoolName
           else "zpool"

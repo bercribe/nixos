@@ -30,20 +30,25 @@ in {
     services.openssh.enable = lib.mkIf cfg.enableOpenssh true;
 
     users.groups.hosts = lib.mkIf cfg.createHostUsers {};
-    users.users.highway-star = lib.mkIf cfg.createHostUsers {
-      isNormalUser = true;
-      group = "hosts";
-      openssh.authorizedKeys.keys = [highwayStarKey];
-    };
     users.users.heavens-door = lib.mkIf cfg.createHostUsers {
       isNormalUser = true;
       group = "hosts";
       openssh.authorizedKeys.keys = [heavensDoorKey];
     };
+    users.users.highway-star = lib.mkIf cfg.createHostUsers {
+      isNormalUser = true;
+      group = "hosts";
+      openssh.authorizedKeys.keys = [highwayStarKey];
+    };
     users.users.judgement = lib.mkIf cfg.createHostUsers {
       isNormalUser = true;
       group = "hosts";
       openssh.authorizedKeys.keys = [judgementKey];
+    };
+    users.users.moody-blues = lib.mkIf cfg.createHostUsers {
+      isNormalUser = true;
+      group = "hosts";
+      openssh.authorizedKeys.keys = [moodyBluesKey];
     };
     users.users.super-fly = lib.mkIf cfg.createHostUsers {
       isNormalUser = true;
