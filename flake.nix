@@ -54,6 +54,21 @@
         })
       ];
     };
+
+    # need to build from source for CPUs that don't support AVX instruction set extensions
+    frigateModule = {...}: {
+      nixpkgs.overlays = [
+        (final: prev: {
+          frigate = prev.frigate.override {
+            python312 = prev.python311.override {
+              packageOverrides = pyfinal: pyprev: {
+                tensorflow-bin = pyprev.tensorflow;
+              };
+            };
+          };
+        })
+      ];
+    };
   in {
     nixosConfigurations.heavens-door = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -92,6 +107,7 @@
         commonModules
         ++ [
           ./hosts/moody-blues/configuration.nix
+          frigateModule
         ];
     };
     nixosConfigurations.super-fly = nixpkgs.lib.nixosSystem {
