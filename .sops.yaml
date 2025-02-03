@@ -4,8 +4,10 @@ keys:
     # nix-shell -p ssh-to-age age
     # sudo ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o keys.txt
     # age-keygen -y keys.txt
+    # then `sops updatekeys <file>` to add key
   - &hosts:
     - &judgement age1km6wqnpc3nyfww07ur80yq8hfzsshj8pqdella0q9k3cz2csh35qn382vz
+    - &moody-blues age16l3v4l8r6r24qpgamvustztf88zljpvfzh8ulnp9sftu7re83qwq3fkhl3
 creation_rules:
   - path_regex: secrets.yaml$
     key_groups:
@@ -16,6 +18,7 @@ creation_rules:
     - age:
       - *primary
       - *judgement
+      - *moody-blues
   - path_regex: judgement.yaml$
     key_groups:
     - age:
@@ -25,3 +28,4 @@ creation_rules:
     key_groups:
     - age:
       - *primary
+      - *moody-blues

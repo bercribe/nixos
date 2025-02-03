@@ -6,9 +6,9 @@
   ...
 }: let
   dataDir = "/services/frigate";
-  # TODO: frigate.lan
+  port = 18841;
   hostname = "localhost";
-  interface = "enp6s0";
+  interface = "enp3s0";
 
   cameras = {
     mawz_office = {
@@ -27,10 +27,7 @@
       })
     cameras;
 in {
-  sops.secrets."frigate/env" = {
-    # TODO: networking.hostName
-    sopsFile = self + /secrets/moody-blues.yaml;
-  };
+  sops.secrets."frigate/env" = {};
 
   # camera subnet
   networking.interfaces.${interface} = {
@@ -110,4 +107,18 @@ in {
   # override data directory
   systemd.services.frigate.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
   systemd.services.nginx.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
+
+  # map caddy to nginx
+  services.nginx.virtualHosts."${hostname}".listen = [
+    {
+      addr = "127.0.0.1";
+      inherit port;
+    }
+  ];
+  local.reverseProxy = {
+    enable = true;
+    services.frigate = {
+      inherit port;
+    };
+  };
 }

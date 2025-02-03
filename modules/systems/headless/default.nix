@@ -11,6 +11,7 @@
   ];
 
   # Secrets
+  # generate with `ssh-keygen -t ed25519 -N "" -f ./ssh_host_ed25519_key`
   sops.secrets = {
     ssh-host = {
       path = "/etc/ssh/ssh_host_ed25519_key";
@@ -52,7 +53,7 @@
     };
     datasets = {
       "${
-        if config.local.disko ? zpoolName
+        if config.local ? disko.zpoolName
         then config.local.disko.zpoolName
         else "zpool"
       }/services" = {

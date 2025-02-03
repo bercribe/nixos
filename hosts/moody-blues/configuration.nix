@@ -5,15 +5,13 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./disko-config.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
     # Services
-    (self + /modules/systems/hardware/ups/server.nix)
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)
-    (self + /modules/services/monitoring)
-    (self + /modules/services/gitea.nix)
-    (self + /modules/services/miniflux.nix)
+    (self + /modules/services/frigate.nix)
   ];
 
   # Secrets
@@ -23,8 +21,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "judgement"; # Define your hostname.
-  networking.hostId = "8581c000"; # Should be unique among ZFS machines
+  networking.hostName = "moody-blues"; # Define your hostname.
+  networking.hostId = "3ff227bf"; # Should be unique among ZFS machines
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -43,5 +41,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

@@ -19,6 +19,8 @@ sudo -i
 mkdir -p /tmp/config/etc
 cd /tmp/config/etc
 git clone https://github.com/bercribe/nixos.git
+# OR
+scp -r nixos nixos@<ip>:/tmp/config/etc # on remote
 
 # for new machines
 nixos-generate-config --root /tmp/config --no-filesystems
@@ -50,7 +52,7 @@ Alternate option using remote repository:
 nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko --flake 'github:bercribe/nixos/<branch>#<host>'
 
 # on local machine
-nix build .#<host>
+nix build .#nixosConfigurations.<host>.config.system.build.toplevel
 nix copy --to ssh://nixos@<ip> ./result 
 
 nixos-install --system <result>

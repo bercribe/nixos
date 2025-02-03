@@ -85,6 +85,15 @@
           ./hosts/judgement/configuration.nix
         ];
     };
+    nixosConfigurations.moody-blues = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = inputs;
+      modules =
+        commonModules
+        ++ [
+          ./hosts/moody-blues/configuration.nix
+        ];
+    };
     nixosConfigurations.super-fly = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = inputs;
