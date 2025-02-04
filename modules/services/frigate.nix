@@ -8,7 +8,7 @@
   dataDir = "/services/frigate";
   port = 18841;
   hostname = "localhost";
-  interface = "enp3s0";
+  interface = "enp0s20f0u1";
 
   cameras = {
     mawz_office = {
@@ -42,8 +42,7 @@ in {
   # hardware accel
   hardware.graphics = {
     enable = true;
-    # TODO: enable?
-    # extraPackages = [pkgs.intel-media-driver];
+    extraPackages = [pkgs.intel-media-driver];
   };
 
   # coral TPU
@@ -62,8 +61,7 @@ in {
         user = "{FRIGATE_MQTT_USER}";
         password = "{FRIGATE_MQTT_PASSWORD}";
       };
-      # TODO: enable
-      # ffmpeg.hwaccel_args = "preset-vaapi";
+      ffmpeg.hwaccel_args = "preset-vaapi";
       detectors.coral = {
         type = "edgetpu";
         device = "usb";

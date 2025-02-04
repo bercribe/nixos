@@ -24,6 +24,7 @@ in {
           "judgement.mawz.dev" = [
             "judgement.lan"
             "*.judgement.lan"
+            "frigate.lan"
             "gitea.lan"
             "healthchecks.lan"
             "miniflux.lan"

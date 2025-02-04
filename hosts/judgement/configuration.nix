@@ -11,6 +11,7 @@
     (self + /modules/systems/hardware/ups/server.nix)
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)
+    (self + /modules/services/frigate.nix)
     (self + /modules/services/monitoring)
     (self + /modules/services/gitea.nix)
     (self + /modules/services/miniflux.nix)
