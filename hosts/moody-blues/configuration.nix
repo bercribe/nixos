@@ -11,7 +11,6 @@
     # Services
     (self + /modules/services/adguardhome.nix)
     (self + /modules/services/caddy.nix)
-    (self + /modules/services/frigate.nix)
   ];
 
   # Secrets
