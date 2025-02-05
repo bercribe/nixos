@@ -19,6 +19,20 @@ in {
               default = null;
               description = "Local port service is hosted on";
             };
+            additionalPorts = mkOption {
+              type = listOf (submodule {
+                options = {
+                  from = mkOption {
+                    type = int;
+                  };
+                  to = mkOption {
+                    type = int;
+                  };
+                };
+              });
+              default = [];
+              description = "Additional port mappings";
+            };
             unique = mkOption {
               type = bool;
               default = true;
@@ -41,7 +55,7 @@ in {
     hostUrl = "${hostName}.mawz.dev";
   in
     lib.mkIf cfg.enable {
-      networking.firewall.allowedTCPPorts = [80 443];
+      networking.firewall.allowedTCPPorts = [80 443] ++ (with lib; concatLists (mapAttrsToList (_: {additionalPorts, ...}: map ({from, ...}: from) additionalPorts) cfg.services));
 
       # Certs
       sops.secrets."cloudflare/lego" = {
@@ -71,8 +85,9 @@ in {
           certDir = config.security.acme.certs."${hostUrl}".directory;
           hosts = with lib;
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
-                url = "${service}.${hostUrl}";
-              in [
+              url = "${service}.${hostUrl}";
+            in
+              [
                 (nameValuePair "http://${service}${
                     if attrs.unique
                     then ""
@@ -90,8 +105,23 @@ in {
                     tls ${certDir}/cert.pem ${certDir}/key.pem
                   '';
                 })
-              ])
-              cfg.services));
+              ]
+              ++ map
+              (
+                {
+                  from,
+                  to,
+                }: (nameValuePair "${url}:${toString from}" {
+                  extraConfig = ''
+                    reverse_proxy http://localhost:${toString to} {
+                      header_up Host {upstream_hostport}
+                    }
+                    tls ${certDir}/cert.pem ${certDir}/key.pem
+                  '';
+                })
+              )
+              attrs.additionalPorts)
+            cfg.services));
         in
           hosts;
       };

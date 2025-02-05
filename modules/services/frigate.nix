@@ -7,6 +7,7 @@
 }: let
   dataDir = "/services/frigate";
   port = 18841;
+  apiPort = 18842;
   hostname = "localhost";
   interface = "enp0s20f0u1";
 
@@ -112,11 +113,23 @@ in {
       addr = "127.0.0.1";
       inherit port;
     }
+    # Frigate wants to connect on 127.0.0.1:5000 for unauthenticated requests
+    # https://github.com/NixOS/nixpkgs/issues/370349
+    {
+      addr = "127.0.0.1";
+      port = 5000;
+    }
   ];
   local.reverseProxy = {
     enable = true;
     services.frigate = {
       inherit port;
+      additionalPorts = [
+        {
+          from = apiPort;
+          to = 5000;
+        }
+      ];
     };
   };
 }
