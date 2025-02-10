@@ -18,7 +18,7 @@ services:
     env_file:
       - .env
     ports:
-      - 2283:3001
+      - 2283:2283
     depends_on:
       - redis
       - database
@@ -53,25 +53,6 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
-
-  backup:
-    container_name: immich_db_dumper
-    image: prodrigestivill/postgres-backup-local:14
-    env_file:
-      - .env
-    environment:
-      POSTGRES_HOST: database
-      POSTGRES_CLUSTER: 'TRUE'
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE_NAME}
-      SCHEDULE: "@daily"
-      POSTGRES_EXTRA_OPTS: '--clean --if-exists'
-      BACKUP_DIR: /db_dumps
-    volumes:
-      - ${BACKUP_LOCATION}:/db_dumps
-    depends_on:
-      - database
 
 volumes:
   pgdata:
