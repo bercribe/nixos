@@ -3,11 +3,14 @@
   pkgs,
   config,
   lib,
+  local,
   ...
 }: let
   sanoidHosts = ["heavens-door" "highway-star" "judgement" "moody-blues" "super-fly"];
   syncoidJobs = ["judgement" "moody-blues" "super-fly"];
   resticJobs = ["mr-president" "backblaze"];
+
+  utils = local.utils {inherit config;};
 in {
   imports = [
     (self + /modules/cron/gdrive-backup.nix)
@@ -179,8 +182,7 @@ in {
       ++ (map (job:
         nameValuePair "${job}-restic-notify" {
           script = ''
-            pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-            ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${job}-restic-backup"
+            ${utils.writeHealthchecksPingScript "${job}-restic-backup"}
           '';
           serviceConfig = {
             Type = "oneshot";
@@ -191,8 +193,7 @@ in {
       ++ (map (job:
         nameValuePair "${job}-syncoid-notify" {
           script = ''
-            pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-            ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${job}-syncoid-backup"
+            ${utils.writeHealthchecksPingScript "${job}-syncoid-backup"}
           '';
           serviceConfig = {
             Type = "oneshot";

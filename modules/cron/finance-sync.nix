@@ -2,10 +2,13 @@
   self,
   pkgs,
   config,
+  local,
   ...
 }: let
   user = "finance-sync";
   group = "ledger";
+
+  utils = local.utils {inherit config;};
 in {
   sops.secrets.finance-sync-ping-key = {
     key = "healthchecks/local/ping-key";
@@ -32,8 +35,7 @@ in {
     script = ''
       ${pkgs.nix}/bin/nix run scripts/
 
-      pingKey="$(cat ${config.sops.secrets.finance-sync-ping-key.path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/finance-sync"
+      ${utils.writeHealthchecksPingScript "finance-sync"}
     '';
   };
   users.users."${user}" = {

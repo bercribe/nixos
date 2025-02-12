@@ -2,8 +2,11 @@
   self,
   config,
   pkgs,
+  local,
   ...
-}: {
+}: let
+  utils = local.utils {inherit config;};
+in {
   imports = [
     ./base-client.nix
     (self + /modules/clients/local-healthchecks.nix)
@@ -26,8 +29,7 @@
       # will error out if not connected
       ${pkgs.nut}/bin/upsc ups@judgement.mawz.dev
 
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${config.networking.hostName}-ups-online"
+      ${utils.writeHealthchecksPingScript "${config.networking.hostName}-ups-online"}
     '';
   };
 }

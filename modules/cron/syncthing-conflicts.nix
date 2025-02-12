@@ -3,8 +3,11 @@
   pkgs,
   config,
   scripts,
+  local,
   ...
-}: {
+}: let
+  utils = local.utils {inherit config;};
+in {
   imports = [
     (self + /modules/clients/local-healthchecks.nix)
   ];
@@ -26,8 +29,7 @@
     script = ''
       python ${scripts}/check_sync_conflicts.py /zvault/syncthing
 
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/syncthing-conflicts"
+      ${utils.writeHealthchecksPingScript "syncthing-conflicts"}
     '';
   };
 }

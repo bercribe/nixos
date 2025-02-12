@@ -2,8 +2,11 @@
   self,
   pkgs,
   config,
+  utils,
   ...
-}: {
+}: let
+  utils = local.utils {inherit config;};
+in {
   imports = [
     (self + /modules/clients/local-healthchecks.nix)
     (self + /modules/clients/rclone.nix)
@@ -26,8 +29,7 @@
       ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync /zvault/syncthing/personal-cloud/docs "gdrive:/docs - external"
       ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync /zvault/syncthing/personal-cloud/passwords "gdrive:/passwords - external"
 
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/pcloud-gdrive-sync"
+      ${utils.writeHealthchecksPingScript "pcloud-gdrive-sync"}
     '';
   };
 }

@@ -2,8 +2,11 @@
   self,
   pkgs,
   config,
+  local,
   ...
-}: {
+}: let
+  utils = local.utils {inherit config;};
+in {
   imports = [
     (self + /modules/clients/local-healthchecks.nix)
     (self + /modules/clients/rclone.nix)
@@ -25,8 +28,7 @@
     script = ''
       ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync gdrive: /zvault/backups/gdrive
 
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/gdrive-backup"
+      ${utils.writeHealthchecksPingScript "gdrive-backup"}
     '';
   };
 }

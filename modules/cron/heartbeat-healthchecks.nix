@@ -2,8 +2,11 @@
   self,
   config,
   pkgs,
+  local,
   ...
-}: {
+}: let
+  utils = local.utils {inherit config;};
+in {
   sops.secrets."healthchecks/remote/ping-key" = {
     sopsFile = self + /secrets/common.yaml;
   };
@@ -18,8 +21,7 @@
   };
   systemd.services.uptime-heartbeat = {
     script = ''
-      pingKey="$(cat ${config.sops.secrets."healthchecks/remote/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "https://hc-ping.com/$pingKey/${config.networking.hostName}-online"
+      ${utils.writeHealthchecksPingScript "${config.networking.hostName}-online"}
     '';
     serviceConfig = {
       Type = "oneshot";
