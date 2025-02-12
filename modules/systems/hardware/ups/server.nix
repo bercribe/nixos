@@ -2,6 +2,7 @@
   self,
   config,
   pkgs,
+  local,
   ...
 }: {
   imports = [
@@ -79,11 +80,10 @@
     };
     script = let
       slug = "ups-runtime";
+      utils = local.utils {inherit config;};
     in ''
       runtime=$(${pkgs.nut}/bin/upsc ups battery.runtime 2>&1) || true
-
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused --data-raw "UPS runtime remaining: $runtime seconds" "http://healthchecks.lan/ping/$pingKey/${slug}/log"
+      ${utils.writeHealthchecksLogScript slug} "UPS runtime remaining: $runtime seconds"
 
       if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 600 ]; then
         status=$(${pkgs.nut}/bin/upsc ups ups.status 2>&1) || true
@@ -92,7 +92,7 @@
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mr-president
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mr-president
         fi
-        ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${slug}"
+        ${utils.writeHealthchecksPingScript slug}
       fi
     '';
   };

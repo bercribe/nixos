@@ -38,6 +38,17 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+
+    specialArgs =
+      inputs
+      // {
+        local = {
+          constants = import ./constants;
+          utils = pkgs.callPackage ./utils;
+        };
+      };
+
     commonModules = [
       home-manager.nixosModules.home-manager
       disko.nixosModules.disko
@@ -56,8 +67,7 @@
     };
   in {
     nixosConfigurations.heavens-door = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = inputs;
+      inherit system specialArgs;
       modules =
         commonModules
         ++ desktopModules
@@ -66,8 +76,7 @@
         ];
     };
     nixosConfigurations.highway-star = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = inputs;
+      inherit system specialArgs;
       modules =
         commonModules
         ++ desktopModules
@@ -77,8 +86,7 @@
         ];
     };
     nixosConfigurations.judgement = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = inputs;
+      inherit system specialArgs;
       modules =
         commonModules
         ++ [
@@ -86,8 +94,7 @@
         ];
     };
     nixosConfigurations.moody-blues = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = inputs;
+      inherit system specialArgs;
       modules =
         commonModules
         ++ [
@@ -95,8 +102,7 @@
         ];
     };
     nixosConfigurations.super-fly = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = inputs;
+      inherit system specialArgs;
       modules =
         commonModules
         ++ [
