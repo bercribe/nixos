@@ -58,10 +58,11 @@ nix copy --to ssh://nixos@<ip> ./result
 nixos-install --system <result>
 ```
 
-
-Copy over secrets if necessary. Don't forget to add new hosts to super-fly sanoid/syncoid backup jobs and ssh servers and clients!
-
-Also don't forget to enable secure boot and reboot automatically on power restore if desired.
+Copy over secrets if necessary. Don't forget to:
+- add new hosts to super-fly sanoid/syncoid backup jobs and ssh servers and clients
+- add any new healthchecks
+- enable secure boot
+- reboot automatically on power restored
 
 ## Troubleshooting
 
