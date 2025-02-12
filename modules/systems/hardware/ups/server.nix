@@ -77,23 +77,23 @@
       Type = "oneshot";
       User = "root";
     };
-    script = ''
-      status=$(${pkgs.nut}/bin/upsc ups ups.status 2>&1) || true
+    script = let
+      slug = "ups-runtime";
+    in ''
       runtime=$(${pkgs.nut}/bin/upsc ups battery.runtime 2>&1) || true
 
+      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
+      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused --data-raw "UPS runtime remaining: $runtime seconds" "http://healthchecks.lan/ping/$pingKey/${slug}/log"
+
       if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 600 ]; then
-        slug="ups-runtime"
+        status=$(${pkgs.nut}/bin/upsc ups ups.status 2>&1) || true
         if [[ "$status" == "OL"* ]]; then
           ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # super-fly
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mr-president
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mr-president
         fi
-      else
-        slug="ups-runtime/fail"
+        ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "http://healthchecks.lan/ping/$pingKey/${slug}"
       fi
-
-      pingKey="$(cat ${config.sops.secrets."healthchecks/local/ping-key".path})"
-      ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused --data-raw "UPS runtime remaining: $runtime seconds" "http://healthchecks.lan/ping/$pingKey/$slug"
     '';
   };
 }
