@@ -3,7 +3,11 @@
   config,
   ...
 }: let
-  healthchecksBase = remote: ''
+  healthchecksBase = {
+    endpoint,
+    remote ? false,
+    extra ? "",
+  }: ''
     pingKey="$(cat ${config
       .sops
       .secrets
@@ -17,18 +21,22 @@
       if remote
       then "https://hc-ping.com"
       else "http://healthchecks.lan/ping"
-    }/$pingKey/'';
+    }/$pingKey/${endpoint}?create=1" ${extra}
+  '';
 in {
   writeHealthchecksPingScript = slug:
-    pkgs.writeShellScript "hc-ping-${slug}" ''
-      ${healthchecksBase false}${slug}"
-    '';
+    pkgs.writeShellScript "hc-ping-${slug}"
+    (healthchecksBase {endpoint = slug;});
   writeHealthchecksLogScript = slug:
-    pkgs.writeShellScript "hc-log-${slug}" ''
-      ${healthchecksBase false}${slug}/log" --data-raw "$1"
-    '';
+    pkgs.writeShellScript "hc-log-${slug}"
+    (healthchecksBase {
+      endpoint = "${slug}/log";
+      extra = ''--data-raw "$1"'';
+    });
   writeRemoteHealthchecksPingScript = slug:
-    pkgs.writeShellScript "remote-hc-ping-${slug}" ''
-      ${healthchecksBase true}${slug}"
-    '';
+    pkgs.writeShellScript "remote-hc-ping-${slug}"
+    (healthchecksBase {
+      endpoint = slug;
+      remote = true;
+    });
 }
