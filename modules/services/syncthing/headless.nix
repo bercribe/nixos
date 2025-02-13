@@ -1,6 +1,11 @@
-{config, ...}: {
+{
+  config,
+  self,
+  ...
+}: {
   imports = [
     ./default.nix
+    (self + /modules/cron/syncthing-healthchecks.nix)
   ];
 
   local.reverseProxy = {
