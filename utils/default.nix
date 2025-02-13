@@ -23,16 +23,32 @@
       else "http://healthchecks.lan/ping"
     }/$pingKey/${endpoint}?create=1" ${extra}
   '';
-in {
-  writeHealthchecksPingScript = slug:
+
+  healthchecksPing = slug:
     pkgs.writeShellScript "hc-ping-${slug}"
     (healthchecksBase {endpoint = slug;});
-  writeHealthchecksLogScript = slug:
+  healthchecksLog = slug:
     pkgs.writeShellScript "hc-log-${slug}"
     (healthchecksBase {
       endpoint = "${slug}/log";
       extra = ''--data-raw "$1"'';
     });
+in {
+  writeHealthchecksPingScript = healthchecksPing;
+  writeHealthchecksLogScript = healthchecksLog;
+  writeHealthchecksCombinedScript = slug: command:
+    pkgs.writeShellScript "hc-combined-${slug}" ''
+      set +e
+      logs=$(${command})
+      code=$?
+      set -e
+
+      ${healthchecksLog slug} "$logs"
+
+      if [ "$code" -eq "0" ]; then
+        ${healthchecksPing slug}
+      fi
+    '';
   writeRemoteHealthchecksPingScript = slug:
     pkgs.writeShellScript "remote-hc-ping-${slug}"
     (healthchecksBase {

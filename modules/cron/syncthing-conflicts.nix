@@ -27,9 +27,7 @@ in {
     };
     path = with pkgs; [python3 difftastic];
     script = ''
-      python ${scripts}/check_sync_conflicts.py /zvault/syncthing
-
-      ${utils.writeHealthchecksPingScript "syncthing-conflicts"}
+      ${utils.writeHealthchecksCombinedScript "syncthing-conflicts" "python ${scripts}/check_sync_conflicts.py /zvault/syncthing"}
     '';
   };
 }

@@ -33,9 +33,7 @@ in {
       StateDirectory = "finance-sync";
     };
     script = ''
-      ${pkgs.nix}/bin/nix run scripts/
-
-      ${utils.writeHealthchecksPingScript "finance-sync"}
+      ${utils.writeHealthchecksCombinedScript "finance-sync" "${pkgs.nix}/bin/nix run scripts/"}
     '';
   };
   users.users."${user}" = {
