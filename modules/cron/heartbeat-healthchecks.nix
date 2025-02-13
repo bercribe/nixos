@@ -21,7 +21,7 @@ in {
   };
   systemd.services.uptime-heartbeat = {
     script = ''
-      ${utils.writeHealthchecksPingScript "${config.networking.hostName}-online"}
+      ${utils.writeRemoteHealthchecksPingScript "${config.networking.hostName}-online"}
     '';
     serviceConfig = {
       Type = "oneshot";
