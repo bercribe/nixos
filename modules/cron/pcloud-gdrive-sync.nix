@@ -2,7 +2,7 @@
   self,
   pkgs,
   config,
-  utils,
+  local,
   ...
 }: let
   utils = local.utils {inherit config;};
