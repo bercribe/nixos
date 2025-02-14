@@ -10,9 +10,10 @@
   ...
 }: {
   imports = [
-    (self + /modules/cron/disk-monitor.nix)
     ./network/ssh-client.nix
     ./sops.nix
+    (self + /modules/cron/disk-monitor.nix)
+    (self + /modules/clients/local-healthchecks.nix)
   ];
 
   # Config
