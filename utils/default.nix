@@ -3,19 +3,22 @@
   config,
   ...
 }: let
+  localSecret = "healthchecks/local/ping-key";
+  remoteSecret = "healthchecks/remote/ping-key";
+
   healthchecksBase = {
     endpoint,
     remote ? false,
+    sopsSecret ?
+      if remote
+      then remoteSecret
+      else localSecret,
     extra ? "",
   }: ''
     pingKey="$(cat ${config
       .sops
       .secrets
-      ."healthchecks/${
-        if remote
-        then "remote"
-        else "local"
-      }/ping-key"
+      ."${sopsSecret}"
       .path})"
     ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "${
       if remote
@@ -24,35 +27,52 @@
     }/$pingKey/${endpoint}?create=1" ${extra}
   '';
 
-  healthchecksPing = slug:
+  healthchecksPing = {
+    slug,
+    secret ? localSecret,
+  }:
     pkgs.writeShellScript "hc-ping-${slug}"
-    (healthchecksBase {endpoint = slug;});
-  healthchecksLog = slug:
+    (healthchecksBase {
+      endpoint = slug;
+      sopsSecret = secret;
+    });
+  healthchecksLog = {
+    slug,
+    secret ? localSecret,
+  }:
     pkgs.writeShellScript "hc-log-${slug}"
     (healthchecksBase {
       endpoint = "${slug}/log";
+      sopsSecret = secret;
       extra = ''--data-raw "$1"'';
     });
 in {
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;
-  writeHealthchecksCombinedScript = slug: command:
+  writeHealthchecksCombinedScript = {
+    slug,
+    secret ? localSecret,
+  } @ params: command:
     pkgs.writeShellScript "hc-combined-${slug}" ''
       set +e
-      logs=$(${command})
+      logs=$(${command} 2>&1)
       code=$?
       set -e
 
-      ${healthchecksLog slug} "$logs"
+      ${healthchecksLog params} "$logs"
 
       if [ "$code" -eq "0" ]; then
-        ${healthchecksPing slug}
+        ${healthchecksPing params}
       fi
     '';
-  writeRemoteHealthchecksPingScript = slug:
+  writeRemoteHealthchecksPingScript = {
+    slug,
+    secret ? remoteSecret,
+  }:
     pkgs.writeShellScript "remote-hc-ping-${slug}"
     (healthchecksBase {
       endpoint = slug;
       remote = true;
+      sopsSecret = secret;
     });
 }

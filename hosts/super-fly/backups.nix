@@ -182,7 +182,7 @@ in {
       ++ (map (job:
         nameValuePair "${job}-restic-notify" {
           script = ''
-            ${utils.writeHealthchecksPingScript "${job}-restic-backup"}
+            ${utils.writeHealthchecksPingScript {slug = "${job}-restic-backup";}}
           '';
           serviceConfig = {
             Type = "oneshot";
@@ -193,7 +193,7 @@ in {
       ++ (map (job:
         nameValuePair "${job}-syncoid-notify" {
           script = ''
-            ${utils.writeHealthchecksPingScript "${job}-syncoid-backup"}
+            ${utils.writeHealthchecksPingScript {slug = "${job}-syncoid-backup";}}
           '';
           serviceConfig = {
             Type = "oneshot";

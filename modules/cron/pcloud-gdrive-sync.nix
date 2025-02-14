@@ -29,7 +29,7 @@ in {
       ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync /zvault/syncthing/personal-cloud/docs "gdrive:/docs - external"
       ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync /zvault/syncthing/personal-cloud/passwords "gdrive:/passwords - external"
 
-      ${utils.writeHealthchecksPingScript "pcloud-gdrive-sync"}
+      ${utils.writeHealthchecksPingScript {slug = "pcloud-gdrive-sync";}}
     '';
   };
 }

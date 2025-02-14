@@ -28,7 +28,7 @@ in {
     script = ''
       ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync gdrive: /zvault/backups/gdrive
 
-      ${utils.writeHealthchecksPingScript "gdrive-backup"}
+      ${utils.writeHealthchecksPingScript {slug = "gdrive-backup";}}
     '';
   };
 }

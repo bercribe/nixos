@@ -22,11 +22,11 @@ in {
       apiKey=$(${lib.getExe pkgs.xq-xml} ${config.services.syncthing.configDir}/config.xml -x configuration/gui/apikey)
       response=$(${lib.getExe pkgs.curl} -H "X-API-Key: $apiKey" http://${config.services.syncthing.guiAddress}/rest/system/error)
 
-      ${utils.writeHealthchecksLogScript slug} "$response"
+      ${utils.writeHealthchecksLogScript {inherit slug;}} "$response"
 
       errors=$(echo "$response" | ${lib.getExe pkgs.jq} '.errors')
       if [[ "$errors" == "null" ]]; then
-        ${utils.writeHealthchecksPingScript slug}
+        ${utils.writeHealthchecksPingScript {inherit slug;}}
       fi
     '';
     serviceConfig = {

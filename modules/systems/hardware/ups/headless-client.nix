@@ -29,7 +29,7 @@ in {
       # will error out if not connected
       ${pkgs.nut}/bin/upsc ups@judgement.mawz.dev
 
-      ${utils.writeHealthchecksPingScript "${config.networking.hostName}-ups-online"}
+      ${utils.writeHealthchecksPingScript {slug = "${config.networking.hostName}-ups-online";}}
     '';
   };
 }

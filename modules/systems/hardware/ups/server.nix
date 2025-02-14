@@ -83,7 +83,7 @@
       utils = local.utils {inherit config;};
     in ''
       runtime=$(${pkgs.nut}/bin/upsc ups battery.runtime 2>&1) || true
-      ${utils.writeHealthchecksLogScript slug} "UPS runtime remaining: $runtime seconds"
+      ${utils.writeHealthchecksLogScript {inherit slug;}} "UPS runtime remaining: $runtime seconds"
 
       if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 600 ]; then
         status=$(${pkgs.nut}/bin/upsc ups ups.status 2>&1) || true
@@ -92,7 +92,7 @@
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mr-president
           ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mr-president
         fi
-        ${utils.writeHealthchecksPingScript slug}
+        ${utils.writeHealthchecksPingScript {inherit slug;}}
       fi
     '';
   };
