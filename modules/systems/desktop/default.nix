@@ -228,6 +228,8 @@
     '';
   };
 
+  local.disk-monitor.headless = false;
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;

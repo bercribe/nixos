@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  self,
   config,
   pkgs,
   lib,
@@ -9,6 +10,7 @@
   ...
 }: {
   imports = [
+    (self + /modules/cron/disk-monitor.nix)
     ./network/ssh-client.nix
     ./sops.nix
   ];
@@ -180,6 +182,8 @@
   # };
 
   # Services
+
+  local.disk-monitor.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

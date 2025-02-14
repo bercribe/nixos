@@ -36,6 +36,8 @@
   programs.mosh.enable = true;
 
   # Services
+  local.disk-monitor.headless = true;
+
   local.sshServer = {
     enableOpenssh = true;
     createHostUsers = true;
