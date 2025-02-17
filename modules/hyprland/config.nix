@@ -6,12 +6,12 @@
 }: let
   cfg = config.local;
 in {
-  options.local.swaybar = {
+  options.local.waybar = {
     enableNetwork = lib.mkEnableOption "network";
   };
 
   config = {
-    local.swaybar.enableNetwork = lib.mkDefault true;
+    local.waybar.enableNetwork = lib.mkDefault true;
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -373,7 +373,7 @@ in {
               "pulseaudio"
             ]
             ++ (
-              if cfg.swaybar.enableNetwork
+              if cfg.waybar.enableNetwork
               then [
                 "network"
               ]
