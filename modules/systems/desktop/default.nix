@@ -118,7 +118,7 @@
       enable = true;
       settings = {
         default = [
-          "com.mitchellh.ghostty.desktop"
+          "foot.desktop"
         ];
       };
     };
@@ -180,7 +180,7 @@
   # Set defaults
   environment.variables.OPENER = "handlr open";
   environment.variables.BROWSER = "firefox";
-  environment.variables.TERMINAL = "ghostty";
+  environment.variables.TERMINAL = "foot";
 
   # Programs
 
