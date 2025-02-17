@@ -7,7 +7,6 @@
 }: {
   imports = [
     ../common.nix
-    ./firefox.nix
     ./keyboard.nix
     (self + /modules/hyprland) # Tiling window manager
     (self + /modules/services/syncthing)
