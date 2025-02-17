@@ -80,6 +80,13 @@
     ];
   };
 
+  programs.spotify-player = {
+    enable = true;
+    settings = {
+      notify_timeout_in_secs = 10;
+    };
+  };
+
   gtk = {
     enable = true;
     iconTheme = {
