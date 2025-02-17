@@ -35,8 +35,8 @@ in {
         # source = ~/.config/hypr/myColors.conf
 
         # Set programs that you use
-        "$terminal" = "alacritty";
-        "$fileManager" = "alacritty -e lf";
+        "$terminal" = "$TERMINAL";
+        "$fileManager" = "$TERMINAL -e lf";
         "$browser" = "firefox";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 

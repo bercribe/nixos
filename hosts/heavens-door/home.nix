@@ -27,7 +27,7 @@
       "10,monitor:${top}"
     ];
     exec-once = [
-      "[workspace 1 silent] alacritty"
+      "[workspace 1 silent] $TERMINAL"
       "[workspace 6 silent] firefox"
       "[workspace 6 silent] obsidian"
       "[workspace 7 silent] beeper"

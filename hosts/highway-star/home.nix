@@ -5,7 +5,7 @@
 }: {
   wayland.windowManager.hyprland.settings = {
     exec-once = [
-      "[workspace 1 silent] alacritty"
+      "[workspace 1 silent] $TERMINAL"
       "[workspace 2 silent] firefox"
       "[workspace 3 silent] obsidian"
       "[workspace 5 silent] ncspot"
