@@ -50,7 +50,6 @@
     ];
     packages = with pkgs; let
       gui = [
-        alacritty # terminal
         anki # SRS app
         beeper # universal chat
         # BeatSaberModManager # mod manager for beat saber - broken by dotnet changes in 24.11
@@ -59,6 +58,7 @@
         discord # voice chat
         firefox # browser
         foot # terminal
+        ghostty # terminal
         godot_4 # game engine
         handbrake # video transcoding
         imagemagick # image viewer
@@ -118,7 +118,7 @@
       enable = true;
       settings = {
         default = [
-          "Alacritty.desktop"
+          "com.mitchellh.ghostty.desktop"
         ];
       };
     };
@@ -180,7 +180,7 @@
   # Set defaults
   environment.variables.OPENER = "handlr open";
   environment.variables.BROWSER = "firefox";
-  environment.variables.TERMINAL = "alacritty";
+  environment.variables.TERMINAL = "ghostty";
 
   # Programs
 

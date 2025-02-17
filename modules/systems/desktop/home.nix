@@ -106,10 +106,10 @@
   xdg.configFile."mimeapps.list".force = true;
 
   # needed for stylix theming
-  programs.alacritty.enable = true;
   programs.btop.enable = true;
   programs.foot.enable = true;
   programs.fzf.enable = true;
+  programs.ghostty.enable = true;
   programs.tmux.enable = true;
   stylix.targets.firefox.profileNames = ["mawz"];
 }
