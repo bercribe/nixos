@@ -58,6 +58,7 @@
         czkawka # deduping util
         discord # voice chat
         firefox # browser
+        foot # terminal
         godot_4 # game engine
         handbrake # video transcoding
         imagemagick # image viewer
@@ -82,6 +83,7 @@
         ffsubsync # sync subtitles with video
         handlr-regex # better xdg-open
         ncspot # spotify in TUI
+        spotify-player # spotify TUI
         typst # document editor
         wev # shows keyboard inputs
         wineWowPackages.waylandFull # windows game emulator
