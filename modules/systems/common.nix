@@ -97,6 +97,8 @@
           )
         '';
       });
+
+      yazi = final.unstable.yazi;
     })
   ];
 
@@ -127,6 +129,7 @@
       tree # directory tree
       unzip # zip extractor
       wireguard-tools # wireguard debug
+      yazi # terminal file manager
     ];
   };
 

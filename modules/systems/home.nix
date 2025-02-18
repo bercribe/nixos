@@ -166,6 +166,45 @@
     };
   };
 
+  programs.yazi = {
+    enable = true;
+
+    keymap = {
+      manager.prepend_keymap = [
+        # drop into shell
+        {
+          on = "!";
+          run = ''shell "$SHELL" --block'';
+          desc = "Open shell here";
+        }
+        # drag and drop
+        {
+          on = "<C-n>";
+          run = ''shell -- ${lib.getExe pkgs.xdragon} -x -i -T -a "$@"'';
+        }
+        # copy to system clipboard
+        {
+          on = "y";
+          run = [''shell -- for path in "$@"; do echo "file://$path"; done | ${pkgs.wl-clipboard}/bin/wl-copy -t text/uri-list'' "yank"];
+        }
+        # shortcuts
+        {
+          on = ["g" "/"];
+          run = "cd /";
+        }
+        {
+          on = ["g" "m"];
+          run = "cd /mnt";
+        }
+      ];
+    };
+    initLua = ''
+      require("session"):setup {
+       sync_yanked = true,
+      }
+    '';
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

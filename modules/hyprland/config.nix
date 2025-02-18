@@ -36,7 +36,7 @@ in {
 
         # Set programs that you use
         "$terminal" = "$TERMINAL";
-        "$fileManager" = "$TERMINAL -e lf";
+        "$fileManager" = "$TERMINAL -e yazi";
         "$browser" = "firefox";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 

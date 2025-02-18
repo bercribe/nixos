@@ -124,7 +124,7 @@
       enable = true;
       defaultApplications = let
         defaultApps = {
-          directory = "lf.desktop";
+          directory = "yazi.desktop";
           browser = "firefox.desktop";
           text = "nvim.desktop";
           image = "qimgv.desktop";
