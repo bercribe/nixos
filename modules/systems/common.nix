@@ -151,6 +151,8 @@
     wget # network util
   ];
 
+  environment.enableAllTerminfo = true;
+
   # Programs
 
   # To fix database error, run:
