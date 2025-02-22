@@ -205,6 +205,12 @@
     '';
   };
 
+  # needed for stylix theming
+  programs.btop.enable = true;
+  programs.foot.enable = true;
+  programs.ghostty.enable = true;
+  programs.tmux.enable = true;
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

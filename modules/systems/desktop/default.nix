@@ -95,19 +95,6 @@
   # Home manager
   home-manager.users.mawz = import ./home.nix;
 
-  # Theme settings
-  stylix = {
-    enable = true;
-    image = ./wallpaper.jpg;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
-    cursor = {
-      package = pkgs.rose-pine-cursor;
-      name = "BreezeX-RosePineDawn-Linux";
-      size = 32;
-    };
-  };
-
   # program defaults
   xdg = {
     # fixes issue where some applications would not open `lf` in its own window

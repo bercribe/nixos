@@ -53,8 +53,6 @@
       home-manager.nixosModules.home-manager
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
-    ];
-    desktopModules = [
       stylix.nixosModules.stylix
     ];
 
@@ -70,7 +68,6 @@
       inherit system specialArgs;
       modules =
         commonModules
-        ++ desktopModules
         ++ [
           ./hosts/heavens-door/configuration.nix
         ];
@@ -79,7 +76,6 @@
       inherit system specialArgs;
       modules =
         commonModules
-        ++ desktopModules
         ++ [
           ./hosts/highway-star/configuration.nix
           nixos-hardware.nixosModules.framework-11th-gen-intel
