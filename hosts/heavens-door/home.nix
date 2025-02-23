@@ -9,7 +9,7 @@
   in {
     monitor = lib.mkForce [
       "${main}, highrr, 0x0, 1"
-      "${top}, 2560x1440@100, 440x-1440, 1"
+      "${top}, highrr, 440x-1440, 1"
     ];
     cursor = {
       no_hardware_cursors = true;
