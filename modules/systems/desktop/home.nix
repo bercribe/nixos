@@ -53,9 +53,18 @@
   };
 
   # default apps
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = osConfig.xdg.mime.defaultApplications;
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = osConfig.xdg.mime.defaultApplications;
+    };
+    desktopEntries = {
+      spotify_player = {
+        name = "Spotify Player";
+        exec = "spotify_player";
+        terminal = true;
+      };
+    };
   };
   # home manager keeps reordering these entries, backing up the old version,
   # then refusing to delete the backup automatically.
