@@ -188,6 +188,9 @@
 
   # Services
 
+  # Firmware updater - `fwupdmgr update`
+  services.fwupd.enable = true;
+
   # Systemd service notifications
   systemd.services."notify-failed@" = {
     description = "Logs failures to be reported by user service";

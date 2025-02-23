@@ -87,9 +87,6 @@
   services.geoclue2.geoProviderUrl = "https://api.positon.xyz/v1/geolocate?key=test";
   time.timeZone = null;
 
-  # Framework updater - `fwupdmgr update`
-  services.fwupd.enable = true;
-
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
   services.syncthing.settings.folders = {
     personal-cloud.enable = true;
