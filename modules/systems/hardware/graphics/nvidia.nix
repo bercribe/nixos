@@ -3,10 +3,7 @@
   config,
   ...
 }: {
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  imports = [./common.nix];
 
   services.xserver.videoDrivers = ["nvidia"];
 

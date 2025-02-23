@@ -7,7 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     (self + /modules/systems/desktop)
-    (self + /modules/systems/hardware/nvidia.nix)
+    (self + /modules/systems/hardware/graphics/amd.nix)
     (self + /modules/systems/hardware/encrypted-zfs.nix)
     (self + /modules/systems/hardware/ups/desktop-client.nix)
   ];
