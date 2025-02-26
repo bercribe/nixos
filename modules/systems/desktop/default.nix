@@ -270,6 +270,10 @@
   # and finally `sudo zfs allow -u <user> compression,mountpoint,create,mount,receive,rollback zvault/hosts/<host>`
   # remember to update sanoid rules!
   # https://github.com/jimsalterjrs/sanoid/wiki/Syncoid#running-without-root
+  #
+  # troubleshooting:
+  # error: cannot receive resume stream: destination zvault/hosts/heavens-door contains partially-complete state from "zfs receive -s"
+  # solution: sudo zfs receive -A zvault/hosts/heavens-door
   services.syncoid = let
     hostName = config.networking.hostName;
   in {
