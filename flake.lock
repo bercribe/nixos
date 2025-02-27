@@ -430,11 +430,11 @@
     "scripts": {
       "flake": false,
       "locked": {
-        "lastModified": 1737417941,
-        "narHash": "sha256-+i9bW30CHata7FHp7LzCaXGJNlmQZBt1+h7W7jNmri8=",
+        "lastModified": 1740633723,
+        "narHash": "sha256-qDT7kcYn9Mfi+qDXgThKmF4Jvnw4JM5beBf9xGxms5o=",
         "owner": "bercribe",
         "repo": "scripts",
-        "rev": "0bb7c7f2143a9c47e710a61954c1ce8f077ea30d",
+        "rev": "008b9f541176602b35776e879e4a45691bd30e84",
         "type": "github"
       },
       "original": {
