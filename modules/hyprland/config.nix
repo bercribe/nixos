@@ -166,7 +166,7 @@ in {
           "$mainMod, V, togglefloating,"
           "$mainMod, F, fullscreen,"
           "$mainMod, R, exec, $menu"
-          "$mainMod, PERIOD, exec, ${pkgs.bemoji}/bin/bemoji"
+          "$mainMod, PERIOD, exec, ${lib.getExe pkgs.wofi-emoji}"
           "$mainMod, P, pseudo," # dwindle
           "$mainMod, J, togglesplit," # dwindle
           "$mainMod, G, togglegroup,"
