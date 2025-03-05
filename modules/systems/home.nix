@@ -169,6 +169,12 @@
   programs.yazi = {
     enable = true;
 
+    settings.opener.open = [
+      {
+        run = ''$OPENER "$@"'';
+        desc = "Open";
+      }
+    ];
     keymap = {
       manager.prepend_keymap = [
         # drop into shell
