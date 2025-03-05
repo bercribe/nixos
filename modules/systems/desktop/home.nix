@@ -57,6 +57,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = osConfig.xdg.mime.defaultApplications;
+      associations.added = osConfig.xdg.mime.addedAssociations;
     };
     desktopEntries = {
       spotify_player = {
