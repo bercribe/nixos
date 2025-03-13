@@ -74,6 +74,10 @@
           };
           shared = {
             type = "zfs_fs";
+            mountpoint = "/zvault/services";
+          };
+          shared = {
+            type = "zfs_fs";
             mountpoint = "/zvault/shared";
           };
           syncthing = {

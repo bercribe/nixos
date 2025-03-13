@@ -17,7 +17,6 @@ in {
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
-  services.postgresql.dataDir = "/services/postgres/${config.services.postgresql.package.psqlSchema}";
 
   local.reverseProxy = {
     enable = true;

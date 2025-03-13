@@ -14,6 +14,7 @@
     ./sops.nix
     (self + /modules/cron/disk-monitor.nix)
     (self + /modules/clients/local-healthchecks.nix)
+    (self + /modules/services/postgresql.nix)
   ];
 
   # Config
