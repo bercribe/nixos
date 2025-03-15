@@ -26,6 +26,7 @@ in {
             "*.judgement.lan"
             "frigate.lan"
             "gitea.lan"
+            "hass.lan"
             "healthchecks.lan"
             "miniflux.lan"
             "uptime-kuma.lan"

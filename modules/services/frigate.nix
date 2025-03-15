@@ -7,7 +7,6 @@
 }: let
   dataDir = "/services/frigate";
   port = 18841;
-  apiPort = 18842;
   hostname = "localhost";
   interface = "enp0s20f0u1";
 
@@ -28,7 +27,14 @@
       })
     cameras;
 in {
-  sops.secrets."frigate/env" = {};
+  sops.secrets."frigate/rtsp/user" = {};
+  sops.secrets."frigate/rtsp/pass" = {};
+  sops.secrets."mosquitto/frigate" = {};
+  sops.templates."frigate.env".content = ''
+    FRIGATE_RTSP_USER=${config.sops.placeholder."frigate/rtsp/user"}
+    FRIGATE_RTSP_PASSWORD=${config.sops.placeholder."frigate/rtsp/pass"}
+    FRIGATE_MQTT_PASSWORD=${config.sops.placeholder."mosquitto/frigate"}
+  '';
 
   # camera subnet
   networking.interfaces.${interface} = {
@@ -59,8 +65,8 @@ in {
     in {
       mqtt = {
         enabled = true;
-        host = "192.168.0.43";
-        user = "{FRIGATE_MQTT_USER}";
+        host = "127.0.0.1";
+        user = "frigate";
         password = "{FRIGATE_MQTT_PASSWORD}";
       };
       ffmpeg.hwaccel_args = "preset-vaapi";
@@ -96,13 +102,13 @@ in {
       go2rtc.streams = go2rtcStreams userPass;
     };
   };
-  systemd.services.frigate.serviceConfig.EnvironmentFile = config.sops.secrets."frigate/env".path;
+  systemd.services.frigate.serviceConfig.EnvironmentFile = config.sops.templates."frigate.env".path;
 
   services.go2rtc = {
     enable = true;
     settings.streams = go2rtcStreams "\${FRIGATE_RTSP_USER}:\${FRIGATE_RTSP_PASSWORD}";
   };
-  systemd.services.go2rtc.serviceConfig.EnvironmentFile = config.sops.secrets."frigate/env".path;
+  systemd.services.go2rtc.serviceConfig.EnvironmentFile = config.sops.templates."frigate.env".path;
 
   # override data directory
   systemd.services.frigate.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
@@ -126,12 +132,6 @@ in {
     enable = true;
     services.frigate = {
       inherit port;
-      additionalPorts = [
-        {
-          from = apiPort;
-          to = 5000;
-        }
-      ];
     };
   };
 }
