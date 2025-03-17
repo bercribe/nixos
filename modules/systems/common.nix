@@ -6,6 +6,7 @@
   config,
   pkgs,
   lib,
+  scripts,
   nixpkgs-unstable,
   ...
 }: {
@@ -181,6 +182,7 @@
 
   programs.bash.shellAliases = {
     cat = "bat";
+    csc = "python ${scripts}/check_sync_conflicts.py";
     diff = "difft";
     jfu = "journalctl -fu";
     nrs = "~/nixos/rebuild-switch.sh";
