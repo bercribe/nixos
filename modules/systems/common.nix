@@ -132,6 +132,7 @@
       unzip # zip extractor
       wireguard-tools # wireguard debug
       yazi # terminal file manager
+      zip # zip compressor
     ];
   };
 
