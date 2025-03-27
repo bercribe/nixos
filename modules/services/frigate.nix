@@ -52,6 +52,7 @@ in {
   services.frigate = {
     enable = true;
     inherit hostname;
+    vaapiDriver = "iHD";
     settings = let
       userPass = "{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}";
       frigatePath = camera: subtype: (cameraPath {inherit userPass camera subtype;});
@@ -115,10 +116,11 @@ in {
     }
     # Frigate wants to connect on 127.0.0.1:5000 for unauthenticated requests
     # https://github.com/NixOS/nixpkgs/issues/370349
-    {
-      addr = "127.0.0.1";
-      port = 5000;
-    }
+    # added upstream: https://github.com/NixOS/nixpkgs/commit/e72a66935ab8d826c6d357bd4fd27925ab64645e
+    # {
+    #   addr = "127.0.0.1";
+    #   port = 5000;
+    # }
   ];
   local.reverseProxy = {
     enable = true;
