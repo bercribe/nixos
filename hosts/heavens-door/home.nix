@@ -52,4 +52,15 @@
     gr = "cd /zrust";
     gs = "cd /zsolid";
   };
+
+  local.yazi.keybinds = {
+    goto-zsolid = {
+      bind = ["g" "z" "s"];
+      command = "cd /zsolid";
+    };
+    goto-zrust = {
+      bind = ["g" "z" "r"];
+      command = "cd /zrust";
+    };
+  };
 }
