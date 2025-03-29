@@ -251,6 +251,14 @@ in {
               on = ["g" "m" "m"];
               run = "cd /mnt/mr-president";
             }
+            {
+              on = ["g" "s" "c"];
+              run = "cd ~/personal-cloud";
+            }
+            {
+              on = ["g" "s" "p"];
+              run = "cd ~/projects";
+            }
           ]
           ++ localKeybinds;
       };

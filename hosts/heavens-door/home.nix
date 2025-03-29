@@ -62,5 +62,9 @@
       bind = ["g" "z" "r"];
       command = "cd /zrust";
     };
+    goto-libraries = {
+      bind = ["g" "s" "l"];
+      command = "cd /zsolid/syncthing/libraries";
+    };
   };
 }
