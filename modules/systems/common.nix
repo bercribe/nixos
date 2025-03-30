@@ -117,6 +117,7 @@
       btop # performance visualizer
       difftastic # better diff
       dig # dns debug
+      fd # better find
       fzf # fuzzy find
       gdu # go disk analyzer
       lf # list files
