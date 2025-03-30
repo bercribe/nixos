@@ -47,5 +47,5 @@ in {
   };
 
   # use local DNS
-  networking.networkmanager.insertNameservers = ["127.0.0.1"];
+  networking.nameservers = ["127.0.0.1"];
 }
