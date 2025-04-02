@@ -51,6 +51,7 @@
           ipv4 = {
             address1 = "192.168.99.10/32";
             # dns = "192.168.0.1;";
+            dns = "1.1.1.1";
             dns-search = "lan;"; # important for DNS to work when using systemd-resolved
             method = "manual";
           };
