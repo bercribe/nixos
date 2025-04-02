@@ -16,15 +16,10 @@ in {
       default = "zroot";
       description = "Name of the root zpool";
     };
-    makeVarDataset = mkOption {
-      type = bool;
-      default = false;
-      description = "True to make a directory for the /var directory";
-    };
-    makeServicesDataset = mkOption {
-      type = bool;
-      default = false;
-      description = "True to make a directory for the /services directory";
+    extraRootDatasets = mkOption {
+      type = listOf str;
+      default = [];
+      description = "Extra datasets to create at the root directory";
     };
     enableEncryption = mkEnableOption "encryption";
     spaceReserved = mkOption {
@@ -88,35 +83,37 @@ in {
           };
         options.ashift = "12";
 
-        datasets = {
-          root = {
-            type = "zfs_fs";
-            mountpoint = "/";
-          };
-          nix = {
-            type = "zfs_fs";
-            mountpoint = "/nix";
-          };
-          var = lib.mkIf cfg.makeVarDataset {
-            type = "zfs_fs";
-            mountpoint = "/var";
-          };
-          home = {
-            type = "zfs_fs";
-            mountpoint = "/home";
-          };
-          services = lib.mkIf cfg.makeServicesDataset {
-            type = "zfs_fs";
-            mountpoint = "/services";
-          };
-          reserved = {
-            type = "zfs_fs";
-            options = {
-              mountpoint = "none";
-              refreservation = cfg.spaceReserved;
+        datasets = let
+          extraDatasets = with lib;
+            listToAttrs (map (dataset:
+              nameValuePair dataset {
+                type = "zfs_fs";
+                mountpoint = "/${dataset}";
+              })
+            cfg.extraRootDatasets);
+        in
+          {
+            root = {
+              type = "zfs_fs";
+              mountpoint = "/";
             };
-          };
-        };
+            nix = {
+              type = "zfs_fs";
+              mountpoint = "/nix";
+            };
+            home = {
+              type = "zfs_fs";
+              mountpoint = "/home";
+            };
+            reserved = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "none";
+                refreservation = cfg.spaceReserved;
+              };
+            };
+          }
+          // extraDatasets;
       };
     };
   };

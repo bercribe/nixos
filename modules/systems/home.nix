@@ -14,11 +14,11 @@ in {
       type = attrsOf (submodule {
         options = {
           bind = mkOption {
-            type = listOf string;
+            type = listOf str;
             description = "Keyboard inputs";
           };
           command = mkOption {
-            type = string;
+            type = str;
             description = "Command to run";
           };
         };

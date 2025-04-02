@@ -4,9 +4,9 @@
   local.disko = {
     device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_2TB_S7KHNU0X515561Z";
     zpoolName = "zpool";
-    makeVarDataset = true;
     enableEncryption = true;
     spaceReserved = "300G";
+    extraRootDatasets = ["var"];
   };
 
   disko.devices = {
