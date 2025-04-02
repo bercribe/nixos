@@ -91,15 +91,6 @@
         '';
       });
 
-      # fixes low resolution issues on wayland
-      ticktick = final.unstable.ticktick.overrideAttrs (prev: {
-        preFixup = ''
-          gappsWrapperArgs+=(
-            --add-flags "--ozone-platform-hint=auto"
-          )
-        '';
-      });
-
       yazi = final.unstable.yazi;
     })
   ];
