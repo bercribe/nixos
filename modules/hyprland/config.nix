@@ -63,6 +63,7 @@ in {
           };
 
           sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
+          accel_profile = "flat";
         };
 
         general = {
@@ -142,8 +143,8 @@ in {
         # Example per-device config
         # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
         device = {
-          name = "epic-mouse-v1";
-          sensitivity = -0.5;
+          name = "logitech-m350-1";
+          sensitivity = -1;
         };
 
         # Example windowrule v1
