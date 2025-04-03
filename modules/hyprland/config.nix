@@ -41,9 +41,9 @@ in {
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
         # Some default env vars.
-        env = [
-          "QT_QPA_PLATFORMTHEME,qt5ct" # change to qt6ct if you have that
-        ];
+        # env = [
+        #   "QT_QPA_PLATFORMTHEME,qt5ct" # change to qt6ct if you have that
+        # ];
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input = {
