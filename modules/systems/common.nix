@@ -165,10 +165,20 @@
     cat = "bat";
     csc = "python ${scripts}/check_sync_conflicts.py";
     diff = "difft";
-    jfu = "journalctl -f -u";
     nrs = "~/nixos/rebuild-switch.sh";
     vim = "nvim";
   };
+
+  environment.interactiveShellInit = ''
+    # Aliases with bash completion
+    . ${lib.getExe pkgs.complete-alias}
+    alias scl='systemctl'
+    complete -F _complete_alias scl
+    alias jcl='journalctl'
+    complete -F _complete_alias jcl
+    alias jfu='journalctl -f -u'
+    complete -F _complete_alias jfu
+  '';
 
   # Programs
 
