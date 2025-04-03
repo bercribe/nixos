@@ -161,6 +161,15 @@
 
   environment.enableAllTerminfo = true;
 
+  environment.shellAliases = {
+    cat = "bat";
+    csc = "python ${scripts}/check_sync_conflicts.py";
+    diff = "difft";
+    jfu = "journalctl -f -u";
+    nrs = "~/nixos/rebuild-switch.sh";
+    vim = "nvim";
+  };
+
   # Programs
 
   # To fix database error, run:
@@ -171,15 +180,6 @@
   programs.nix-index = {
     enable = false;
     enableBashIntegration = true;
-  };
-
-  programs.bash.shellAliases = {
-    cat = "bat";
-    csc = "python ${scripts}/check_sync_conflicts.py";
-    diff = "difft";
-    jfu = "journalctl -fu";
-    nrs = "~/nixos/rebuild-switch.sh";
-    vim = "nvim";
   };
 
   # editor
