@@ -25,6 +25,7 @@ in {
       EMAIL_HOST = "localhost";
       EMAIL_PORT = "25";
       EMAIL_USE_TLS = "False";
+      DEFAULT_FROM_EMAIL = "Healthchecks <noreply@healthchecks.lan>";
     };
   };
 
