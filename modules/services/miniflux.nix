@@ -14,6 +14,9 @@ in {
       PORT = toString port;
       BASE_URL = "https://miniflux.${config.networking.hostName}.mawz.dev/";
       FETCH_YOUTUBE_WATCH_TIME = 1;
+      # tuning
+      POLLING_FREQUENCY = 15; # minutes
+      BATCH_SIZE = 50;
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
