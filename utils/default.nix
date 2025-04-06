@@ -20,7 +20,7 @@
       .secrets
       ."${sopsSecret}"
       .path})"
-    ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused "${
+    ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused --location "${
       if remote
       then "https://hc-ping.com"
       else "http://healthchecks.lan/ping"
