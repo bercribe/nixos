@@ -91,6 +91,7 @@
         '';
       });
 
+      isd = final.unstable.isd;
       yazi = final.unstable.yazi;
     })
   ];
@@ -111,6 +112,7 @@
       fd # better find
       fzf # fuzzy find
       gdu # go disk analyzer
+      isd # systemd TUI
       lf # list files
       mosh # mobile shell
       mtr # ping + traceroute
