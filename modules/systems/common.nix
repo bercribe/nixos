@@ -122,6 +122,7 @@
       tmux # terminal multiplexer
       tree # directory tree
       unzip # zip extractor
+      wiper # disk cleanup tool
       wireguard-tools # wireguard debug
       yazi # terminal file manager
       zip # zip compressor
