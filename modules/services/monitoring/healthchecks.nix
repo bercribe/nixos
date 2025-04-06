@@ -2,8 +2,10 @@
   self,
   config,
   pkgs,
+  local,
   ...
 }: let
+  utils = local.utils {inherit config;};
   port = 45566;
 in {
   imports = [
@@ -21,7 +23,7 @@ in {
     dataDir = "/services/healthchecks";
     settings = {
       SECRET_KEY_FILE = config.sops.secrets."healthchecks/local/secret-key".path;
-      SITE_ROOT = "http://healthchecks.lan";
+      SITE_ROOT = utils.getSiteRoot "healthchecks";
       EMAIL_HOST = "localhost";
       EMAIL_PORT = "25";
       EMAIL_USE_TLS = "False";
@@ -29,11 +31,10 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [80 port];
-  services.caddy = {
+  local.reverseProxy = {
     enable = true;
-    virtualHosts."http://healthchecks.lan".extraConfig = ''
-      reverse_proxy localhost:${toString port}
-    '';
+    services.healthchecks = {
+      inherit port;
+    };
   };
 }

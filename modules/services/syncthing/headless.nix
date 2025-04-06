@@ -13,6 +13,7 @@
     services.syncthing = {
       port = 8384;
       unique = false;
+      httpsBackend = true;
     };
   };
 }

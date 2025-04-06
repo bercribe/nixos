@@ -22,11 +22,10 @@ in {
   };
   systemd.services.uptime-kuma.serviceConfig.ReadWritePaths = dataDir;
 
-  networking.firewall.allowedTCPPorts = [80 port];
-  services.caddy = {
+  local.reverseProxy = {
     enable = true;
-    virtualHosts."http://uptime-kuma.lan".extraConfig = ''
-      reverse_proxy localhost:${toString port}
-    '';
+    services.ukuma = {
+      inherit port;
+    };
   };
 }

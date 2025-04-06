@@ -29,7 +29,7 @@ in {
             "hass.lan"
             "healthchecks.lan"
             "miniflux.lan"
-            "uptime-kuma.lan"
+            "ukuma.lan"
           ];
         };
       in
@@ -38,12 +38,12 @@ in {
   };
   networking.firewall.allowedUDPPorts = [53];
 
-  networking.firewall.allowedTCPPorts = [80];
-  services.caddy = {
+  local.reverseProxy = {
     enable = true;
-    virtualHosts."http://adguardhome.${config.networking.hostName}.lan".extraConfig = ''
-      reverse_proxy localhost:${toString port}
-    '';
+    services.aghome = {
+      inherit port;
+      unique = false;
+    };
   };
 
   # use local DNS

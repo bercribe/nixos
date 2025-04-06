@@ -47,6 +47,7 @@
       extra = ''--data-raw "$1"'';
     });
 in {
+  getSiteRoot = service: "https://${service}.${config.networking.hostName}.mawz.dev";
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;
   writeHealthchecksCombinedScript = {

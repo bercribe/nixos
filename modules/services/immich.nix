@@ -1,11 +1,16 @@
-{config, ...}: let
+{
+  config,
+  local,
+  ...
+}: let
+  utils = local.utils {inherit config;};
   dataDir = "/zvault/services/immich";
 in {
   services.immich = {
     enable = true;
     mediaLocation = dataDir;
     settings = {
-      server.externalDomain = "http://immich.lan";
+      server.externalDomain = utils.getSiteRoot "immich";
       notifications.smtp = {
         enabled = true;
         from = ''"Immich Photo Server <noreply@immich.lan>"'';

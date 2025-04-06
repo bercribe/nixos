@@ -21,11 +21,10 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [80 port];
-  services.caddy = {
+  local.reverseProxy = {
     enable = true;
-    virtualHosts."http://gitea.lan".extraConfig = ''
-      reverse_proxy localhost:${toString port}
-    '';
+    services.gitea = {
+      inherit port;
+    };
   };
 }

@@ -38,6 +38,11 @@ in {
               default = true;
               description = "True to use <service>.lan as URL, false for <service>.<hostName>.lan";
             };
+            httpsBackend = mkOption {
+              type = bool;
+              default = false;
+              description = "https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#https";
+            };
           };
         });
         default = {};
@@ -86,6 +91,16 @@ in {
           hosts = with lib;
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
               url = "${service}.${hostUrl}";
+              caddyCfg = proxyUrl: ''
+                reverse_proxy ${proxyUrl} {
+                  ${
+                  if attrs.httpsBackend
+                  then "header_up Host {upstream_hostport}"
+                  else ""
+                }
+                }
+                tls ${certDir}/cert.pem ${certDir}/key.pem
+              '';
             in
               [
                 (nameValuePair "http://${service}${
@@ -98,12 +113,7 @@ in {
                     '';
                   })
                 (nameValuePair url {
-                  extraConfig = ''
-                    reverse_proxy http://localhost:${toString attrs.port} {
-                      header_up Host {upstream_hostport}
-                    }
-                    tls ${certDir}/cert.pem ${certDir}/key.pem
-                  '';
+                  extraConfig = caddyCfg "http://localhost:${toString attrs.port}";
                 })
               ]
               ++ map
@@ -112,12 +122,7 @@ in {
                   from,
                   to,
                 }: (nameValuePair "${url}:${toString from}" {
-                  extraConfig = ''
-                    reverse_proxy http://localhost:${toString to} {
-                      header_up Host {upstream_hostport}
-                    }
-                    tls ${certDir}/cert.pem ${certDir}/key.pem
-                  '';
+                  extraConfig = caddyCfg "http://localhost:${toString to}";
                 })
               )
               attrs.additionalPorts)
