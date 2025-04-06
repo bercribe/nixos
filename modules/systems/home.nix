@@ -61,6 +61,11 @@ in {
           inherit user forwardAgent;
           hostname = "judgement.mawz.dev";
         };
+        lovers = {
+          inherit forwardAgent;
+          user = "root";
+          hostname = "lovers.mawz.dev";
+        };
         mr-president = {
           inherit user forwardAgent;
           hostname = "mr-president.mawz.dev";
