@@ -15,8 +15,8 @@ in {
       BASE_URL = "https://miniflux.${config.networking.hostName}.mawz.dev/";
       FETCH_YOUTUBE_WATCH_TIME = 1;
       # tuning
-      POLLING_FREQUENCY = 15; # minutes
-      BATCH_SIZE = 50;
+      POLLING_FREQUENCY = 5; # minutes
+      BATCH_SIZE = 10;
     };
     adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
   };
