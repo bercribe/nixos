@@ -75,6 +75,10 @@
         propagatedBuildInputs = prev.propagatedBuildInputs ++ [final.pkgs.ffmpeg final.python3.pkgs.setuptools];
       });
 
+      ncspot = prev.ncspot.override (prev: {
+        withCover = true;
+      });
+
       # fixes fcitx5 in obsidian
       # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
       obsidian = prev.obsidian.overrideAttrs (prev: {
