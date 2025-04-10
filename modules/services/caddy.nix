@@ -109,7 +109,7 @@ in {
                     else ".${hostName}"
                   }.lan" {
                     extraConfig = ''
-                      redir https://${url}{uri} permanent
+                      redir https://${url}{uri} 308
                     '';
                   })
                 (nameValuePair url {
