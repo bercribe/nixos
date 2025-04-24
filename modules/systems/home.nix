@@ -203,12 +203,15 @@ in {
     programs.yazi = {
       enable = true;
 
-      settings.opener.open = [
-        {
-          run = ''$OPENER "$@"'';
-          desc = "Open";
-        }
-      ];
+      settings = {
+        manager.linemode = "size";
+        opener.open = [
+          {
+            run = ''$OPENER "$@"'';
+            desc = "Open";
+          }
+        ];
+      };
       keymap = {
         manager.prepend_keymap = let
           localKeybinds = with lib;
