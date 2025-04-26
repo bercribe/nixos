@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   port = 29222;
 in {
   services.adguardhome = {
@@ -7,6 +11,20 @@ in {
     openFirewall = true;
     settings = {
       http.port = port;
+      filters = [
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt";
+          name = "AdGuard DNS filter";
+          id = 1;
+        }
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt";
+          name = "AdAway Default Blocklist";
+          id = 2;
+        }
+      ];
       filtering.rewrites = let
         domains = {
           "hierophant-green.mawz.dev" = ["hierophant-green.lan"];
@@ -34,6 +52,9 @@ in {
         };
       in
         builtins.concatLists (builtins.attrValues (builtins.mapAttrs (answer: domains: (builtins.map (domain: {inherit domain answer;}) domains)) domains));
+      user_rules = [
+        "@@||fc.yahoo.com^$important"
+      ];
     };
   };
   networking.firewall.allowedUDPPorts = [53];
