@@ -8,6 +8,8 @@
     (self + /modules/services/postfix.nix)
   ];
 
+  local.services.postfix.enable = true;
+
   services.zfs.autoScrub.enable = true;
 
   services.zfs.zed = {

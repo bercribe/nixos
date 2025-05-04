@@ -16,14 +16,10 @@
     (self + /modules/cron/heartbeat-healthchecks.nix)
     (self + /modules/cron/pcloud-gdrive-sync.nix)
     (self + /modules/cron/syncthing-conflicts.nix)
-    # Services
-    (self + /modules/services/adguardhome.nix)
-    (self + /modules/services/caddy.nix)
-    (self + /modules/services/immich.nix)
-    (self + /modules/services/jellyfin.nix)
-    (self + /modules/services/paisa.nix)
-    (self + /modules/services/syncthing/headless.nix)
+    (self + /modules/services)
   ];
+
+  local.cron.heartbeat-healthchecks.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

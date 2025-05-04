@@ -5,27 +5,32 @@
   lib,
   ...
 }: let
+  cfg = config.local.services.uptime-kuma;
   port = 13114;
   dataDir = "/services/uptime-kuma/";
+
+  shortName = config.local.service-registry.uptime-kuma.shortName;
 in {
-  imports = [
-    (self + /modules/services/postfix.nix)
-  ];
+  options.local.services.uptime-kuma.enable = lib.mkEnableOption "uptime-kuma";
 
-  services.uptime-kuma = {
-    enable = true;
-    settings = {
-      HOST = "0.0.0.0";
-      PORT = toString port;
-      DATA_DIR = lib.mkForce dataDir;
+  config = lib.mkIf cfg.enable {
+    local.services.postfix.enable = true;
+
+    services.uptime-kuma = {
+      enable = true;
+      settings = {
+        HOST = "0.0.0.0";
+        PORT = toString port;
+        DATA_DIR = lib.mkForce dataDir;
+      };
     };
-  };
-  systemd.services.uptime-kuma.serviceConfig.ReadWritePaths = dataDir;
+    systemd.services.uptime-kuma.serviceConfig.ReadWritePaths = dataDir;
 
-  local.reverseProxy = {
-    enable = true;
-    services.ukuma = {
-      inherit port;
+    local.reverseProxy = {
+      enable = true;
+      services."${shortName}" = {
+        inherit port;
+      };
     };
   };
 }

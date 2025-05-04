@@ -8,9 +8,7 @@
     ./disko-config.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
-    # Services
-    (self + /modules/services/adguardhome.nix)
-    (self + /modules/services/caddy.nix)
+    (self + /modules/services)
   ];
 
   # Secrets

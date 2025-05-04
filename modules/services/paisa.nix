@@ -1,13 +1,17 @@
 {
+  config,
   pkgs,
   lib,
   ...
 }: let
+  cfg = config.local.services.paisa;
   user = "paisa";
   group = "ledger";
   dataDir = "/services/paisa";
   ledgerDir = "/zvault/shared/finances/ledger";
   port = 7500;
+
+  shortName = config.local.service-registry.paisa.shortName;
 
   paisa-fhs = pkgs.buildFHSEnv {
     name = "paisa";
@@ -20,81 +24,85 @@
     meta.mainProgram = "paisa";
   };
 in {
-  # environment.systemPackages = [paisa-fhs];
+  options.local.services.paisa.enable = lib.mkEnableOption "paisa";
 
-  systemd.services.paisa = {
-    description = "Paisa - ledger based personal finance manager";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
-    path = [paisa-fhs];
+  config = lib.mkIf cfg.enable {
+    # environment.systemPackages = [paisa-fhs];
 
-    serviceConfig = {
-      ExecStart = "${lib.getExe paisa-fhs} serve -p ${toString port}";
-      Restart = "always";
-      WorkingDirectory = dataDir;
-      ReadWritePaths = [dataDir ledgerDir];
+    systemd.services.paisa = {
+      description = "Paisa - ledger based personal finance manager";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      path = [paisa-fhs];
 
-      # Hardening
-      # `systemd-analyze security paisa`
-      CapabilityBoundingSet = [""];
-      DeviceAllow = [""];
-      LockPersonality = true;
-      MemoryDenyWriteExecute = true;
-      NoNewPrivileges = true;
-      PrivateDevices = true;
-      PrivateTmp = true;
-      PrivateUsers = true;
-      # ProcSubset = "pid";
-      ProtectClock = true;
-      ProtectControlGroups = true;
-      ProtectHome = true;
-      ProtectHostname = true;
-      ProtectKernelLogs = true;
-      ProtectKernelModules = true;
-      ProtectKernelTunables = true;
-      ProtectProc = "invisible";
-      ProtectSystem = "strict";
-      RemoveIPC = true;
-      RestrictAddressFamilies = [
-        "AF_INET"
-        "AF_INET6"
-        "AF_UNIX"
-      ];
-      RestrictNamespaces = ["user" "mnt"]; # allow buildFHSEnv
-      RestrictRealtime = true;
-      RestrictSUIDSGID = true;
-      SystemCallArchitectures = "native";
-      SystemCallFilter = [
-        # "@system-service"
-        "~@clock"
-        "~@cpu-emulation"
-        "~@debug"
-        "~@module"
-        # "~@mount"
-        "~@obsolete"
-        # "~@privileged"
-        "~@raw-io"
-        "~@reboot"
-        # "~@resources"
-        "~@swap"
-      ];
-      UMask = "0077";
-      User = user;
+      serviceConfig = {
+        ExecStart = "${lib.getExe paisa-fhs} serve -p ${toString port}";
+        Restart = "always";
+        WorkingDirectory = dataDir;
+        ReadWritePaths = [dataDir ledgerDir];
+
+        # Hardening
+        # `systemd-analyze security paisa`
+        CapabilityBoundingSet = [""];
+        DeviceAllow = [""];
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateTmp = true;
+        PrivateUsers = true;
+        # ProcSubset = "pid";
+        ProtectClock = true;
+        ProtectControlGroups = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "strict";
+        RemoveIPC = true;
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
+        RestrictNamespaces = ["user" "mnt"]; # allow buildFHSEnv
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SystemCallArchitectures = "native";
+        SystemCallFilter = [
+          # "@system-service"
+          "~@clock"
+          "~@cpu-emulation"
+          "~@debug"
+          "~@module"
+          # "~@mount"
+          "~@obsolete"
+          # "~@privileged"
+          "~@raw-io"
+          "~@reboot"
+          # "~@resources"
+          "~@swap"
+        ];
+        UMask = "0077";
+        User = user;
+      };
     };
-  };
 
-  users.users."${user}" = {
-    description = "Paisa service owner";
-    isSystemUser = true;
-    inherit group;
-    home = dataDir;
-  };
-  users.groups."${group}" = {};
+    users.users."${user}" = {
+      description = "Paisa service owner";
+      isSystemUser = true;
+      inherit group;
+      home = dataDir;
+    };
+    users.groups."${group}" = {};
 
-  local.reverseProxy = {
-    enable = true;
-    services.paisa = {
-      inherit port;
+    local.reverseProxy = {
+      enable = true;
+      services."${shortName}" = {
+        inherit port;
+      };
     };
   };
 }

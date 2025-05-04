@@ -3,70 +3,76 @@
   lib,
   ...
 }: let
+  cfg = config.local.services.adguardhome;
   port = 29222;
+
+  shortName = config.local.service-registry.adguardhome.shortName;
 in {
-  services.adguardhome = {
-    enable = true;
-    inherit port;
-    openFirewall = true;
-    settings = {
-      http.port = port;
-      filters = [
-        {
-          enabled = true;
-          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt";
-          name = "AdGuard DNS filter";
-          id = 1;
-        }
-        {
-          enabled = true;
-          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt";
-          name = "AdAway Default Blocklist";
-          id = 2;
-        }
-      ];
-      filtering.rewrites = let
-        domains = {
-          "hierophant-green.mawz.dev" = ["hierophant-green.lan"];
-          "hermit-purple.mawz.dev" = ["hermit-purple.lan"];
-          "lovers.mawz.dev" = ["lovers.lan"];
-          "moody-blues.mawz.dev" = ["moody-blues.lan"];
-          "mr-president.mawz.dev" = ["mr-president.lan"];
-          "super-fly.mawz.dev" = [
-            "super-fly.lan"
-            "*.super-fly.lan"
-            "immich.lan"
-            "jellyfin.lan"
-            "paisa.lan"
-          ];
-          "judgement.mawz.dev" = [
-            "judgement.lan"
-            "*.judgement.lan"
-            "forgejo.lan"
-            "frigate.lan"
-            "hass.lan"
-            "healthchecks.lan"
-            "miniflux.lan"
-            "ukuma.lan"
-          ];
-        };
-      in
-        builtins.concatLists (builtins.attrValues (builtins.mapAttrs (answer: domains: (builtins.map (domain: {inherit domain answer;}) domains)) domains));
-      user_rules = [
-        "@@||fc.yahoo.com^$important"
-      ];
-    };
-  };
-  networking.firewall.allowedUDPPorts = [53];
+  options.local.services.adguardhome.enable = lib.mkEnableOption "adguardhome";
 
-  local.reverseProxy = {
-    enable = true;
-    services.aghome = {
+  config = lib.mkIf cfg.enable {
+    services.adguardhome = {
+      enable = true;
       inherit port;
-      unique = false;
+      openFirewall = true;
+      settings = {
+        http.port = port;
+        filters = [
+          {
+            enabled = true;
+            url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt";
+            name = "AdGuard DNS filter";
+            id = 1;
+          }
+          {
+            enabled = true;
+            url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt";
+            name = "AdAway Default Blocklist";
+            id = 2;
+          }
+        ];
+        filtering.rewrites = let
+          domains = {
+            "hierophant-green.mawz.dev" = ["hierophant-green.lan"];
+            "hermit-purple.mawz.dev" = ["hermit-purple.lan"];
+            "lovers.mawz.dev" = ["lovers.lan"];
+            "moody-blues.mawz.dev" = ["moody-blues.lan"];
+            "mr-president.mawz.dev" = ["mr-president.lan"];
+            "super-fly.mawz.dev" = [
+              "super-fly.lan"
+              "*.super-fly.lan"
+            ];
+            "judgement.mawz.dev" = [
+              "judgement.lan"
+              "*.judgement.lan"
+            ];
+          };
+          domainRewrites = with lib; concatLists (attrValues (mapAttrs (answer: domains: (map (domain: {inherit domain answer;}) domains)) domains));
+          registryRewrites = with lib;
+            mapAttrsToList (_: {
+              shortName,
+              hosts,
+            }: {
+              domain = "${shortName}.lan";
+              answer = "${head hosts}.mawz.dev";
+            }) (filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.service-registry);
+        in
+          domainRewrites ++ registryRewrites;
+        user_rules = [
+          "@@||fc.yahoo.com^$important"
+        ];
+      };
     };
-  };
+    networking.firewall.allowedUDPPorts = [53];
 
-  # use local DNS
-  networking.nameservers = ["127.0.0.1"];
+    local.reverseProxy = {
+      enable = true;
+      services."${shortName}" = {
+        inherit port;
+      };
+    };
+
+    # use local DNS
+    networking.nameservers = ["127.0.0.1"];
+  };
 }

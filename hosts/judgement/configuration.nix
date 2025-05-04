@@ -7,15 +7,8 @@
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
-    # Services
     (self + /modules/systems/hardware/ups/server.nix)
-    (self + /modules/services/adguardhome.nix)
-    (self + /modules/services/caddy.nix)
-    (self + /modules/services/forgejo.nix)
-    (self + /modules/services/frigate.nix)
-    (self + /modules/services/hass.nix)
-    (self + /modules/services/monitoring)
-    (self + /modules/services/miniflux.nix)
+    (self + /modules/services)
   ];
 
   # Secrets
