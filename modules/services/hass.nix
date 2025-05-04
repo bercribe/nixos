@@ -11,7 +11,7 @@
 in {
   options.local.services.home-assistant.enable = lib.mkEnableOption "home-assistant";
 
-  config = {
+  config = lib.mkIf cfg.enable {
     hardware.bluetooth.enable = true;
 
     sops.secrets."hass/secrets" = {
@@ -58,7 +58,7 @@ in {
       customComponents = with pkgs.home-assistant-custom-components; [
         frigate
       ];
-      config = lib.mkIf cfg.enable {
+      config = {
         # Includes dependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
         default_config = {};

@@ -36,7 +36,7 @@ in {
     local.cron = let
       isMonitoringHost = cfg.host == config.networking.hostName;
     in {
-      heartbeat-healthchecks.enable = isMonitoringHost;
+      heartbeat-healthchecks.enable = lib.mkDefault isMonitoringHost;
       email-healthchecks.enable = isMonitoringHost;
     };
   };
