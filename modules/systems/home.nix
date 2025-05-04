@@ -282,6 +282,7 @@ in {
     programs.foot.enable = true;
     programs.ghostty.enable = true;
     programs.tmux.enable = true;
+    programs.zellij.enable = true;
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

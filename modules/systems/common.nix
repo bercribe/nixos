@@ -96,6 +96,7 @@
 
       isd = final.unstable.isd;
       yazi = final.unstable.yazi;
+      zellij = final.unstable.zellij;
     })
   ];
 
@@ -130,6 +131,7 @@
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
       yazi # terminal file manager
+      zellij # terminal workspace
       zip # zip compressor
     ];
   };
