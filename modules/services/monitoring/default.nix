@@ -21,23 +21,26 @@ in {
     };
   };
 
-  config = let
-    hosts = [cfg.host];
-  in {
-    local.service-registry.healthchecks = {
-      shortName = "healthchecks";
-      inherit hosts;
-    };
-    local.service-registry.uptime-kuma = {
-      shortName = "ukuma";
-      inherit hosts;
+  config = {
+    local.service-registry = let
+      hosts = [cfg.host];
+    in {
+      healthchecks = {
+        shortName = "healthchecks";
+        inherit hosts;
+      };
+      uptime-kuma = {
+        shortName = "ukuma";
+        inherit hosts;
+      };
     };
 
     local.cron = let
       isMonitoringHost = cfg.host == config.networking.hostName;
-    in {
-      heartbeat-healthchecks.enable = lib.mkDefault isMonitoringHost;
-      email-healthchecks.enable = isMonitoringHost;
-    };
+    in
+      lib.mkIf isMonitoringHost {
+        heartbeat-healthchecks.enable = true;
+        email-healthchecks.enable = true;
+      };
   };
 }
