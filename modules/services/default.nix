@@ -6,19 +6,6 @@
   cfg = config.local.service-registry;
 in {
   imports = [
-    ./monitoring
-    ./syncthing/headless.nix
-    ./adguardhome.nix
-    ./caddy.nix
-    ./forgejo.nix
-    ./frigate.nix
-    ./hass.nix
-    ./immich.nix
-    ./jellyfin.nix
-    ./miniflux.nix
-    ./paisa.nix
-    ./postfix.nix
-    ./postgresql.nix
     ./registry.nix
   ];
 

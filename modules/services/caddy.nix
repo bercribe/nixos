@@ -90,7 +90,8 @@ in {
           certDir = config.security.acme.certs."${hostUrl}".directory;
           hosts = with lib;
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
-              url = "${config.local.service-registry."${service}".shortName}.${hostUrl}";
+              shortName = config.local.service-registry."${service}".shortName;
+              url = "${shortName}.${hostUrl}";
               caddyCfg = proxyUrl: ''
                 reverse_proxy ${proxyUrl} {
                   ${
@@ -103,7 +104,7 @@ in {
               '';
             in
               [
-                (nameValuePair "http://${service}${
+                (nameValuePair "http://${shortName}${
                     if attrs.unique
                     then ""
                     else ".${hostName}"

@@ -8,6 +8,25 @@
   moody-blues = hosts.moody-blues;
   super-fly = hosts.super-fly;
 in {
+  imports = [
+    # http
+    ./syncthing/headless.nix
+    ./adguardhome.nix
+    ./caddy.nix
+    ./forgejo.nix
+    ./frigate.nix
+    ./hass.nix
+    ./immich.nix
+    ./jellyfin.nix
+    ./miniflux.nix
+    ./paisa.nix
+    # monitoring
+    ./monitoring
+    # other
+    ./postfix.nix
+    ./postgresql.nix
+  ];
+
   local.service-registry = {
     adguardhome = {
       shortName = "aghome";
