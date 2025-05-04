@@ -47,11 +47,8 @@ in {
 
     local.reverseProxy = {
       services = with lib;
-        listToAttrs (mapAttrsToList (_: {
-          shortName,
-          hosts,
-        }: (nameValuePair shortName {unique = (length hosts) == 1;}))
-        cfg);
+        listToAttrs (mapAttrsToList (service: {hosts, ...}: (nameValuePair service {unique = (length hosts) == 1;}))
+          cfg);
     };
   };
 }

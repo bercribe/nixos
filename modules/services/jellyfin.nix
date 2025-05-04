@@ -6,8 +6,6 @@
   cfg = config.local.services.jellyfin;
   port = 8096;
   dataDir = "/services/jellyfin";
-
-  shortName = config.local.service-registry.jellyfin.shortName;
 in {
   options.local.services.jellyfin.enable = lib.mkEnableOption "jellyfin";
 
@@ -19,7 +17,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.jellyfin = {
         inherit port;
       };
     };

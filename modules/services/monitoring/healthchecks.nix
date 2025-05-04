@@ -9,8 +9,6 @@
   cfg = config.local.services.healthchecks;
   utils = local.utils {inherit config;};
   port = 45566;
-
-  shortName = config.local.service-registry.healthchecks.shortName;
 in {
   options.local.services.healthchecks.enable = lib.mkEnableOption "healthchecks";
 
@@ -28,7 +26,7 @@ in {
       dataDir = "/services/healthchecks";
       settings = {
         SECRET_KEY_FILE = config.sops.secrets."healthchecks/local/secret-key".path;
-        SITE_ROOT = utils.localHostUrl shortName;
+        SITE_ROOT = utils.localHostUrl "healthchecks";
         EMAIL_HOST = "localhost";
         EMAIL_PORT = "25";
         EMAIL_USE_TLS = "False";
@@ -38,7 +36,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.healthchecks = {
         inherit port;
       };
     };

@@ -9,8 +9,6 @@
   dataDir = "/services/frigate";
   port = 18841;
 
-  shortName = config.local.service-registry.frigate.shortName;
-
   hostname = "localhost";
   interface = "enp0s20f0u1";
 
@@ -137,7 +135,7 @@ in {
     ];
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.frigate = {
         inherit port;
       };
     };

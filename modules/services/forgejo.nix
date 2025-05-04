@@ -10,8 +10,7 @@
   utils = local.utils {inherit config;};
   port = 54776;
 
-  shortName = config.local.service-registry.forgejo.shortName;
-  url = utils.localHostUrl shortName;
+  url = utils.localHostUrl "forgejo";
 in {
   options.local.services.forgejo.enable = lib.mkEnableOption "forgejo";
 
@@ -32,7 +31,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.forgejo = {
         inherit port;
       };
     };

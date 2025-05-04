@@ -11,8 +11,6 @@
   ledgerDir = "/zvault/shared/finances/ledger";
   port = 7500;
 
-  shortName = config.local.service-registry.paisa.shortName;
-
   paisa-fhs = pkgs.buildFHSEnv {
     name = "paisa";
     targetPkgs = pkgs:
@@ -100,7 +98,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.paisa = {
         inherit port;
       };
     };

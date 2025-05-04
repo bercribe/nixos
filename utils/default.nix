@@ -47,7 +47,7 @@
       extra = ''--data-raw "$1"'';
     });
 in {
-  localHostUrl = service: "https://${service}.${config.networking.hostName}.mawz.dev";
+  localHostUrl = service: "https://${config.local.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;
   writeHealthchecksCombinedScript = {

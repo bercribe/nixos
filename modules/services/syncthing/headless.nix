@@ -5,8 +5,6 @@
   ...
 }: let
   cfg = config.local.services.syncthing-headless;
-
-  shortName = config.local.service-registry.syncthing-headless.shortName;
 in {
   imports = [
     ./default.nix
@@ -21,7 +19,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.syncthing-headless = {
         port = 8384;
         httpsBackend = true;
       };

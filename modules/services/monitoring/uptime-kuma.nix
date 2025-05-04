@@ -8,8 +8,6 @@
   cfg = config.local.services.uptime-kuma;
   port = 13114;
   dataDir = "/services/uptime-kuma/";
-
-  shortName = config.local.service-registry.uptime-kuma.shortName;
 in {
   options.local.services.uptime-kuma.enable = lib.mkEnableOption "uptime-kuma";
 
@@ -28,7 +26,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.uptime-kuma = {
         inherit port;
       };
     };

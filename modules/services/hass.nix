@@ -6,8 +6,6 @@
 }: let
   cfg = config.local.services.home-assistant;
   dataDir = "/services/hass";
-
-  shortName = config.local.service-registry.home-assistant.shortName;
 in {
   options.local.services.home-assistant.enable = lib.mkEnableOption "home-assistant";
 
@@ -106,7 +104,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.home-assistant = {
         port = config.services.home-assistant.config.http.server_port;
       };
     };

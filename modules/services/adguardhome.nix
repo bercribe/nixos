@@ -5,8 +5,6 @@
 }: let
   cfg = config.local.services.adguardhome;
   port = 29222;
-
-  shortName = config.local.service-registry.adguardhome.shortName;
 in {
   options.local.services.adguardhome.enable = lib.mkEnableOption "adguardhome";
 
@@ -67,7 +65,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.adguardhome = {
         inherit port;
       };
     };

@@ -10,7 +10,6 @@
   utils = local.utils {inherit config;};
 
   port = 9044;
-  shortName = config.local.service-registry.miniflux.shortName;
 in {
   options.local.services.miniflux.enable = lib.mkEnableOption "miniflux";
 
@@ -21,7 +20,7 @@ in {
       enable = true;
       config = {
         PORT = toString port;
-        BASE_URL = utils.localHostUrl shortName;
+        BASE_URL = utils.localHostUrl "miniflux";
         FETCH_YOUTUBE_WATCH_TIME = 1;
         # tuning
         POLLING_FREQUENCY = 5; # minutes
@@ -32,7 +31,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.miniflux = {
         inherit port;
       };
     };

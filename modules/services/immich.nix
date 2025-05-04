@@ -7,8 +7,6 @@
   cfg = config.local.services.immich;
   utils = local.utils {inherit config;};
   dataDir = "/zvault/services/immich";
-
-  shortName = config.local.service-registry.immich.shortName;
 in {
   options.local.services.immich.enable = lib.mkEnableOption "immich";
 
@@ -17,7 +15,7 @@ in {
       enable = true;
       mediaLocation = dataDir;
       settings = {
-        server.externalDomain = utils.localHostUrl shortName;
+        server.externalDomain = utils.localHostUrl "immich";
         notifications.smtp = {
           enabled = true;
           from = ''"Immich Photo Server <noreply@immich.lan>"'';
@@ -31,7 +29,7 @@ in {
 
     local.reverseProxy = {
       enable = true;
-      services."${shortName}" = {
+      services.immich = {
         port = config.services.immich.port;
       };
     };
