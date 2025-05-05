@@ -33,16 +33,19 @@ in {
           domains = {
             "hierophant-green.mawz.dev" = ["hierophant-green.lan"];
             "hermit-purple.mawz.dev" = ["hermit-purple.lan"];
+            "judgement.mawz.dev" = [
+              "judgement.lan"
+              "*.judgement.lan"
+            ];
             "lovers.mawz.dev" = ["lovers.lan"];
-            "moody-blues.mawz.dev" = ["moody-blues.lan"];
+            "moody-blues.mawz.dev" = [
+              "moody-blues.lan"
+              "*.moody-blues.lan"
+            ];
             "mr-president.mawz.dev" = ["mr-president.lan"];
             "super-fly.mawz.dev" = [
               "super-fly.lan"
               "*.super-fly.lan"
-            ];
-            "judgement.mawz.dev" = [
-              "judgement.lan"
-              "*.judgement.lan"
             ];
           };
           domainRewrites = with lib; concatLists (attrValues (mapAttrs (answer: domains: (map (domain: {inherit domain answer;}) domains)) domains));

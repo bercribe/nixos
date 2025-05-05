@@ -7,8 +7,8 @@
   cfg = config.local.services.monitoring;
 in {
   imports = [
+    ./gatus.nix
     ./healthchecks.nix
-    ./uptime-kuma.nix
     (self + /modules/cron/heartbeat-healthchecks.nix)
     (self + /modules/cron/email-healthchecks.nix)
   ];
@@ -25,12 +25,12 @@ in {
     local.service-registry = let
       hosts = [cfg.host];
     in {
-      healthchecks = {
-        shortName = "healthchecks";
+      gatus = {
+        shortName = "gatus";
         inherit hosts;
       };
-      uptime-kuma = {
-        shortName = "ukuma";
+      healthchecks = {
+        shortName = "healthchecks";
         inherit hosts;
       };
     };
