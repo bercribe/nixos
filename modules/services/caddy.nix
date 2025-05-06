@@ -15,8 +15,7 @@ in {
         type = attrsOf (submodule {
           options = {
             port = mkOption {
-              type = nullOr int;
-              default = null;
+              type = int;
               description = "Local port service is hosted on";
             };
             additionalPorts = mkOption {

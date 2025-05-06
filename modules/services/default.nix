@@ -26,16 +26,14 @@ in {
       });
     };
 
-  config = {
-    local.services = let
-      host = config.networking.hostName;
-    in
-      with lib; mapAttrs (service: {hosts, ...}: {enable = elem host hosts;}) cfg;
+  config = let
+    host = config.networking.hostName;
+    localServices = with lib; filterAttrs (_: {hosts, ...}: (elem host hosts)) cfg;
+  in {
+    local.services = with lib; mapAttrs (service: {hosts, ...}: {enable = elem host hosts;}) cfg;
 
-    local.reverseProxy = {
-      services = with lib;
-        listToAttrs (mapAttrsToList (service: {hosts, ...}: (nameValuePair service {unique = (length hosts) == 1;}))
-          cfg);
-    };
+    local.reverseProxy.services = with lib;
+      listToAttrs (mapAttrsToList (service: {hosts, ...}: (nameValuePair service {unique = (length hosts) == 1;}))
+        localServices);
   };
 }
