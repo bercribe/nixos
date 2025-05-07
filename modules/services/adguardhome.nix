@@ -53,6 +53,7 @@ in {
             mapAttrsToList (_: {
               shortName,
               hosts,
+              ...
             }: {
               domain = "${shortName}.lan";
               answer = "${head hosts}.mawz.dev";

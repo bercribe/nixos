@@ -16,6 +16,7 @@ in {
     ./forgejo.nix
     ./frigate.nix
     ./hass.nix
+    ./homepage.nix
     ./immich.nix
     ./jellyfin.nix
     ./miniflux.nix
@@ -44,6 +45,10 @@ in {
       shortName = "hass";
       hosts = [judgement];
     };
+    homepage-dashboard = {
+      shortName = "home";
+      hosts = [judgement];
+    };
     immich = {
       shortName = "immich";
       hosts = [super-fly];
@@ -62,6 +67,7 @@ in {
     };
     syncthing-headless = {
       shortName = "syncthing";
+      friendlyName = "syncthing";
       hosts = [super-fly];
     };
   };

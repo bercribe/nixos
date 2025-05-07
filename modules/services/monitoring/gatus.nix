@@ -84,6 +84,7 @@ in {
             concatLists (mapAttrsToList (service: {
               shortName,
               hosts,
+              ...
             }:
               map (host: let
                 isUnique = length hosts == 1;

@@ -18,6 +18,11 @@ in {
             type = str;
             description = "Used to generate URL";
           };
+          friendlyName = mkOption {
+            type = nullOr str;
+            default = null;
+            description = "Used in place of service name when generating names";
+          };
           hosts = mkOption {
             type = listOf str;
             description = "Hostnames of hosts running service";
