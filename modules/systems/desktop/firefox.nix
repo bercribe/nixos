@@ -3,7 +3,6 @@
   programs.firefox = {
     enable = true;
     policies = {
-      DisplayBookmarksToolbar = "always";
       # found at about:support
       # details here https://mozilla.github.io/policy-templates/#extensionsettings
       ExtensionSettings = let
@@ -33,6 +32,12 @@
     };
     profiles.mawz = {
       isDefault = true;
+      # found at about:config
+      # apply with a browser restart
+      settings = {
+        "browser.startup.homepage" = "https://home.judgement.mawz.dev/";
+        "browser.toolbars.bookmarks.visibility" = "always";
+      };
       search = {
         default = "Kagi";
         force = true;
