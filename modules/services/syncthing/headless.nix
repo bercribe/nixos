@@ -7,14 +7,14 @@
   cfg = config.local.services.syncthing-headless;
 in {
   imports = [
-    ./default.nix
+    ./base.nix
     (self + /modules/cron/syncthing-healthchecks.nix)
   ];
 
   options.local.services.syncthing-headless.enable = lib.mkEnableOption "syncthing-headless";
 
   config = lib.mkIf cfg.enable {
-    local.services.syncthing.enable = true;
+    local.services.syncthing-base.enable = true;
     local.cron.syncthing-healthchecks.enable = true;
 
     local.reverseProxy = {

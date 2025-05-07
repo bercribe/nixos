@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  cfg = config.local.services.syncthing;
+  cfg = config.local.services.syncthing-base;
 in {
-  options.local.services.syncthing.enable = lib.mkEnableOption "syncthing";
+  options.local.services.syncthing-base.enable = lib.mkEnableOption "syncthing";
 
   config = lib.mkIf cfg.enable {
     sops.secrets = {

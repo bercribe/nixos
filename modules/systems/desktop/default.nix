@@ -9,14 +9,14 @@
     ../common.nix
     ./keyboard.nix
     (self + /modules/hyprland) # Tiling window manager
-    (self + /modules/services/syncthing)
+    (self + /modules/services/syncthing/base.nix)
     (self + /modules/systems/network/mount.nix)
     (self + /modules/systems/network/gdrive.nix)
     (self + /modules/systems/hardware/bluray.nix)
   ];
 
   # Config
-  local.services.syncthing.enable = true;
+  local.services.syncthing-base.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
