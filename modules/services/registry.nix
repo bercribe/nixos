@@ -31,6 +31,7 @@ in {
   local.service-registry = {
     adguardhome = {
       shortName = "aghome";
+      friendlyName = "adguard-home";
       hosts = [judgement moody-blues super-fly];
     };
     forgejo = {
@@ -47,6 +48,7 @@ in {
     };
     homepage-dashboard = {
       shortName = "home";
+      friendlyName = "homepage";
       hosts = [judgement];
     };
     immich = {

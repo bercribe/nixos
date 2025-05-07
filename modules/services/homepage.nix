@@ -13,18 +13,26 @@ in {
       enable = true;
       listenPort = port;
       services = let
+        icons = {
+          paisa = "https://paisa.fyi/images/logo.svg";
+        };
         homelabServices = with lib;
           concatLists (mapAttrsToList (service: {
             shortName,
             friendlyName,
             hosts,
-          }:
+          }: let
+            name = lib.defaultTo service friendlyName;
+          in
             map (host: {
-              "${defaultTo service friendlyName}${
+              "${name}${
                 if (length hosts > 1)
                 then " | ${host}"
                 else ""
-              }" = {href = "https://${shortName}.${host}.mawz.dev";};
+              }" = {
+                href = "https://${shortName}.${host}.mawz.dev";
+                icon = icons."${service}" or name;
+              };
             })
             hosts)
           config.local.service-registry);
