@@ -94,9 +94,10 @@
         '';
       });
 
-      isd = final.unstable.isd;
-      yazi = final.unstable.yazi;
-      zellij = final.unstable.zellij;
+      alejandra = final.unstable.alejandra; # for nix pipes
+      isd = final.unstable.isd; # very early version
+      yazi = final.unstable.yazi; # spotter broken
+      zellij = final.unstable.zellij; # panic on start - bad keybind
     })
   ];
 
