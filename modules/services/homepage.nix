@@ -32,6 +32,7 @@ in {
         layout = [
           {Productivity = {};}
           {Entertainment = {};}
+          {Coding = {};}
           {Language = {};}
         ];
       };
@@ -98,6 +99,19 @@ in {
                   abbr = "CH";
                   href = "https://www.chess.com/";
                   icon = "https://www.chess.com/favicon.ico";
+                }
+              ];
+            }
+          ];
+        }
+        {
+          Coding = [
+            {
+              Github = [
+                {
+                  abbr = "GitHub";
+                  href = "https://github.com/";
+                  icon = "github";
                 }
               ];
             }
