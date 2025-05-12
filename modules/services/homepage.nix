@@ -28,6 +28,95 @@ in {
     services.homepage-dashboard = {
       enable = true;
       listenPort = port;
+      settings = {
+        layout = [
+          {Productivity = {};}
+          {Entertainment = {};}
+          {Language = {};}
+        ];
+      };
+      bookmarks = [
+        {
+          Productivity = [
+            {
+              TickTick = [
+                {
+                  abbr = "TT";
+                  href = "https://ticktick.com/";
+                }
+              ];
+            }
+            {
+              Hey = [
+                {
+                  abbr = "HE";
+                  href = "https://app.hey.com/";
+                }
+              ];
+            }
+            {
+              Calendar = [
+                {
+                  abbr = "GC";
+                  href = "https://calendar.google.com/";
+                  icon = "google-calendar";
+                }
+              ];
+            }
+            {
+              Drive = [
+                {
+                  abbr = "GD";
+                  href = "https://drive.google.com/";
+                  icon = "google-drive";
+                }
+              ];
+            }
+          ];
+        }
+        {
+          Entertainment = [
+            {
+              Pocket = [
+                {
+                  abbr = "GP";
+                  href = "https://getpocket.com/";
+                }
+              ];
+            }
+            {
+              Raindrop = [
+                {
+                  abbr = "RD";
+                  href = "https://app.raindrop.io/";
+                }
+              ];
+            }
+            {
+              Chess = [
+                {
+                  abbr = "CH";
+                  href = "https://www.chess.com/";
+                  icon = "https://www.chess.com/favicon.ico";
+                }
+              ];
+            }
+          ];
+        }
+        {
+          Language = [
+            {
+              Bunpro = [
+                {
+                  abbr = "BP";
+                  href = "https://bunpro.jp/";
+                  icon = "https://bunpro.jp/favicon.ico";
+                }
+              ];
+            }
+          ];
+        }
+      ];
       services = let
         serviceEndpoint = service: let
           registryEntry = config.local.service-registry."${service}";
