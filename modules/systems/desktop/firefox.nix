@@ -1,4 +1,7 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  homepage = "https://home.judgement.mawz.dev";
+  miniflux = "https://miniflux.judgement.mawz.dev";
+in {
   # to apply these, visit about:support and click "Refresh Firefox..."
   programs.firefox = {
     enable = true;
@@ -35,9 +38,29 @@
       # found at about:config
       # apply with a browser restart
       settings = {
-        "browser.startup.homepage" = "https://home.judgement.mawz.dev/";
+        "browser.startup.homepage" = homepage;
         "browser.toolbars.bookmarks.visibility" = "always";
       };
+      bookmarks = [
+        {
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "Homepage";
+              keyword = "home";
+              url = homepage;
+            }
+            {
+              name = "Add to Miniflux";
+              url = "javascript:location.href='${miniflux}/bookmarklet?uri='+encodeURIComponent(window.location.href)";
+            }
+            {
+              name = "Miniflux via openrss";
+              url = "javascript:location.href='${miniflux}/bookmarklet?uri=https://openrss.org/'+encodeURIComponent(window.location.href)";
+            }
+          ];
+        }
+      ];
       search = {
         default = "Kagi";
         force = true;
