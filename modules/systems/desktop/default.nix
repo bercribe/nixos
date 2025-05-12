@@ -9,7 +9,6 @@
     ../common.nix
     ./keyboard.nix
     (self + /modules/hyprland) # Tiling window manager
-    (self + /modules/services/syncthing/base.nix)
     (self + /modules/systems/network/mount.nix)
     (self + /modules/systems/network/gdrive.nix)
     (self + /modules/systems/hardware/bluray.nix)

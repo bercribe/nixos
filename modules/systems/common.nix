@@ -13,6 +13,7 @@
   imports = [
     ./network/ssh-client.nix
     ./sops.nix
+    (self + /modules/services)
     (self + /modules/cron/disk-monitor.nix)
     (self + /modules/clients/local-healthchecks.nix)
   ];

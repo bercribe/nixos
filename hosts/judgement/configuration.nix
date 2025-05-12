@@ -8,7 +8,6 @@
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
     (self + /modules/systems/hardware/ups/server.nix)
-    (self + /modules/services)
   ];
 
   # Secrets

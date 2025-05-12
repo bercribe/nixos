@@ -8,7 +8,6 @@
     ./disko-config.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
-    (self + /modules/services)
   ];
 
   # Secrets

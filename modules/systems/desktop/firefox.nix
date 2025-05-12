@@ -1,6 +1,16 @@
-{pkgs, ...}: let
-  homepage = "https://home.judgement.mawz.dev";
-  miniflux = "https://miniflux.judgement.mawz.dev";
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  serviceUrl = service: let
+    registryEntry = osConfig.local.service-registry."${service}";
+    shortName = registryEntry.shortName;
+    host = lib.head registryEntry.hosts;
+  in "https://${shortName}.${host}.mawz.dev";
+  homepage = serviceUrl "homepage-dashboard";
+  miniflux = serviceUrl "miniflux";
 in {
   # to apply these, visit about:support and click "Refresh Firefox..."
   programs.firefox = {

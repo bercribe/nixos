@@ -16,7 +16,6 @@
     (self + /modules/cron/heartbeat-healthchecks.nix)
     (self + /modules/cron/pcloud-gdrive-sync.nix)
     (self + /modules/cron/syncthing-conflicts.nix)
-    (self + /modules/services)
   ];
 
   local.cron.heartbeat-healthchecks.enable = true;
