@@ -19,8 +19,8 @@
 
   # Config
 
-  # Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # Flakes + pipes
+  nix.settings.experimental-features = ["nix-command" "flakes" "pipe-operators"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -95,6 +95,7 @@
       });
 
       alejandra = final.unstable.alejandra; # for nix pipes
+      homepage-dashboard = final.unstable.homepage-dashboard; # nested groups
       isd = final.unstable.isd; # very early version
       yazi = final.unstable.yazi; # spotter broken
       zellij = final.unstable.zellij; # panic on start - bad keybind

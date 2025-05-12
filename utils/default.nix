@@ -3,6 +3,8 @@
   config,
   ...
 }: let
+  localHostUrlBase = service: "${config.local.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
+
   localSecret = "healthchecks/local/ping-key";
   remoteSecret = "healthchecks/remote/ping-key";
 
@@ -47,7 +49,8 @@
       extra = ''--data-raw "$1"'';
     });
 in {
-  localHostUrl = service: "https://${config.local.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
+  localHostUrlBase = localHostUrlBase;
+  localHostUrl = service: "https://${localHostUrlBase service}";
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;
   writeHealthchecksCombinedScript = {
