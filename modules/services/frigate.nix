@@ -3,9 +3,12 @@
   config,
   pkgs,
   lib,
+  local,
   ...
 }: let
   cfg = config.local.services.frigate;
+  utils = local.utils {inherit config;};
+
   dataDir = "/services/frigate";
   port = 18841;
 
@@ -29,6 +32,10 @@
       })
     cameras;
 in {
+  imports = [
+    (self + /modules/clients/local-healthchecks.nix)
+  ];
+
   options.local.services.frigate.enable = lib.mkEnableOption "frigate";
 
   config = lib.mkIf cfg.enable {
@@ -138,6 +145,31 @@ in {
       services.frigate = {
         inherit port;
       };
+    };
+
+    # health checks
+    systemd.timers.camera-heartbeats = {
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "5m";
+        OnUnitActiveSec = "5m";
+        Unit = "camera-heartbeats.service";
+      };
+    };
+    systemd.services.camera-heartbeats = {
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+      script = let
+        curl = lib.getExe pkgs.curl;
+        cameraChecks = pkgs.writeShellScript "camera-checks" (with lib;
+          cameras
+          |> mapAttrsToList (camera: {address}: "echo \"${camera}:\"; ${curl} -v rtsp://${address}:554\n")
+          |> concatStrings);
+      in ''
+        ${utils.writeHealthchecksCombinedScript {slug = "camera-heartbeats";} cameraChecks}
+      '';
     };
   };
 }
