@@ -58,8 +58,8 @@ in {
               client.insecure = true;
             }
             {
-              name = "pi kvm";
-              url = "https://lovers.mawz.dev";
+              name = "jet kvm";
+              url = "http://notorious-big.lan";
               group = "lan";
             }
             {
