@@ -43,6 +43,7 @@ in {
               "*.moody-blues.lan"
             ];
             "mr-president.mawz.dev" = ["mr-president.lan"];
+            "notorious-big.mawz.dev" = ["notorious-big.lan"];
             "super-fly.mawz.dev" = [
               "super-fly.lan"
               "*.super-fly.lan"
