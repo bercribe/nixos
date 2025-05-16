@@ -2,9 +2,12 @@
   config,
   pkgs,
   lib,
+  local,
   ...
 }: let
   cfg = config.local.services.home-assistant;
+  utils = local.utils {inherit config;};
+
   dataDir = "/services/hass";
 in {
   options.local.services.home-assistant.enable = lib.mkEnableOption "home-assistant";
@@ -33,6 +36,7 @@ in {
         ];
       in
         base
+        # found here: https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/home-assistant/component-packages.nix
         ++ [
           "brother"
           "dlna_dmr"
@@ -41,6 +45,7 @@ in {
           "google_translate"
           "ibeacon"
           "idasen_desk"
+          "improv_ble"
           "ipp"
           "mobile_app"
           "mqtt"
@@ -51,6 +56,7 @@ in {
           "sonos"
           "switchbot"
           "synology_dsm"
+          "wyoming"
           "yolink"
         ];
       customComponents = with pkgs.home-assistant-custom-components; [
@@ -60,6 +66,12 @@ in {
         # Includes dependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
         default_config = {};
+        homeassistant = let
+          url = utils.localHostUrl "home-assistant";
+        in {
+          internal_url = url;
+          external_url = url;
+        };
         http = {
           use_x_forwarded_for = true;
           trusted_proxies = ["::1"];
@@ -100,6 +112,20 @@ in {
           };
         }
       ];
+    };
+
+    # for voice assistant
+    services.wyoming = {
+      piper.servers.hass-piper = {
+        enable = true;
+        uri = "tcp://127.0.0.1:10200";
+        voice = "en-us-ryan-medium";
+      };
+      faster-whisper.servers.hass-whisper = {
+        enable = true;
+        uri = "tcp://127.0.0.1:10300";
+        language = "en";
+      };
     };
 
     local.reverseProxy = {

@@ -96,6 +96,7 @@
       });
 
       alejandra = final.unstable.alejandra; # for nix pipes
+      home-assistant = final.unstable.home-assistant; # hass voice
       homepage-dashboard = final.unstable.homepage-dashboard; # nested groups
       isd = final.unstable.isd; # very early version
       yazi = final.unstable.yazi; # spotter broken
