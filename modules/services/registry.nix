@@ -19,6 +19,7 @@ in {
     ./homepage.nix
     ./immich.nix
     ./jellyfin.nix
+    ./karakeep.nix
     ./miniflux.nix
     ./paisa.nix
     # monitoring
@@ -58,6 +59,10 @@ in {
     jellyfin = {
       shortName = "jellyfin";
       hosts = [super-fly];
+    };
+    karakeep = {
+      shortName = "karakeep";
+      hosts = [judgement];
     };
     miniflux = {
       shortName = "miniflux";
