@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   home-manager,
   ...
 }: {
@@ -27,7 +28,10 @@
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # icons for waybar
-  fonts.packages = with pkgs; [nerdfonts font-awesome];
+  fonts.packages = let
+    nerdfonts = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  in
+    nerdfonts ++ [pkgs.font-awesome];
 
   home-manager.users.mawz = import ./config.nix;
 

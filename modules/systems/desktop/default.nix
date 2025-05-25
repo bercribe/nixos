@@ -21,7 +21,7 @@
   services.xserver.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -51,7 +51,7 @@
       gui = [
         anki # SRS app
         beeper # universal chat
-        # BeatSaberModManager # mod manager for beat saber - broken by dotnet changes in 24.11
+        bs-manager # mod manager for beat saber
         chromium # browser
         czkawka # deduping util
         discord # voice chat

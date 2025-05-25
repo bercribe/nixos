@@ -51,26 +51,29 @@ in {
         "browser.startup.homepage" = homepage;
         "browser.toolbars.bookmarks.visibility" = "always";
       };
-      bookmarks = [
-        {
-          toolbar = true;
-          bookmarks = [
-            {
-              name = "Homepage";
-              keyword = "home";
-              url = homepage;
-            }
-            {
-              name = "Add to Miniflux";
-              url = "javascript:location.href='${miniflux}/bookmarklet?uri='+encodeURIComponent(window.location.href)";
-            }
-            {
-              name = "Miniflux via openrss";
-              url = "javascript:location.href='${miniflux}/bookmarklet?uri=https://openrss.org/'+encodeURIComponent(window.location.href)";
-            }
-          ];
-        }
-      ];
+      bookmarks = {
+        force = true;
+        settings = [
+          {
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "Homepage";
+                keyword = "home";
+                url = homepage;
+              }
+              {
+                name = "Add to Miniflux";
+                url = "javascript:location.href='${miniflux}/bookmarklet?uri='+encodeURIComponent(window.location.href)";
+              }
+              {
+                name = "Miniflux via openrss";
+                url = "javascript:location.href='${miniflux}/bookmarklet?uri=https://openrss.org/'+encodeURIComponent(window.location.href)";
+              }
+            ];
+          }
+        ];
+      };
       search = {
         default = "Kagi";
         force = true;
