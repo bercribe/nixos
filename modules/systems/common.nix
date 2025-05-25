@@ -70,14 +70,10 @@
         config.allowUnfree = true;
       };
 
-      # https://github.com/NixOS/nixpkgs/pull/338957
-      ffsubsync = prev.ffsubsync.overrideAttrs (prev: {
-        propagatedBuildInputs = prev.propagatedBuildInputs ++ [final.pkgs.ffmpeg final.python3.pkgs.setuptools];
-      });
-
-      ncspot = prev.ncspot.override (prev: {
-        withCover = true;
-      });
+      # album art - currently broken
+      # ncspot = prev.ncspot.override (prev: {
+      #   withCover = true;
+      # });
 
       # fixes fcitx5 in obsidian
       # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
@@ -94,13 +90,6 @@
           rm -r $out/share/dbus-1
         '';
       });
-
-      alejandra = final.unstable.alejandra; # for nix pipes
-      home-assistant = final.unstable.home-assistant; # hass voice
-      homepage-dashboard = final.unstable.homepage-dashboard; # nested groups
-      isd = final.unstable.isd; # very early version
-      yazi = final.unstable.yazi; # spotter broken
-      zellij = final.unstable.zellij; # panic on start - bad keybind
     })
   ];
 
