@@ -70,6 +70,7 @@
         config.allowUnfree = true;
       };
 
+      # TODO: remove
       # https://github.com/NixOS/nixpkgs/issues/401010
       healthchecks = let
         inherit (prev) lib;
