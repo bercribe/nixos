@@ -49,7 +49,10 @@ in {
       # apply with a browser restart
       settings = {
         "browser.startup.homepage" = homepage;
-        "browser.toolbars.bookmarks.visibility" = "always";
+        "browser.toolbars.bookmarks.visibility" = "never";
+        "sidebar.verticalTabs" = true;
+        "sidebar.revamp" = true;
+        "sidebar.main.tools" = "syncedtabs,history,bookmarks";
       };
       bookmarks = {
         force = true;
