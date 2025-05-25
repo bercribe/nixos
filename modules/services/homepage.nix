@@ -18,9 +18,7 @@ in {
     sops.secrets."healthchecks/remote/api-key-ro" = {
       sopsFile = self + /secrets/common.yaml;
     };
-    # TODO: use `allowedHosts` option after update
     sops.templates."homepage.env".content = ''
-      HOMEPAGE_ALLOWED_HOSTS=${utils.localHostUrlBase "homepage-dashboard"}
       HOMEPAGE_VAR_HEALTHCHECKS_LOCAL_API_KEY=${config.sops.placeholder."healthchecks/local/api-key-ro"}
       HOMEPAGE_VAR_HEALTHCHECKS_REMOTE_API_KEY=${config.sops.placeholder."healthchecks/remote/api-key-ro"}
     '';
@@ -28,6 +26,7 @@ in {
     services.homepage-dashboard = {
       enable = true;
       listenPort = port;
+      allowedHosts = utils.localHostUrlBase "homepage-dashboard";
       settings = {
         layout = [
           {Productivity = {};}
