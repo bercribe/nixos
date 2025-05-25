@@ -52,6 +52,7 @@ in {
         "browser.toolbars.bookmarks.visibility" = "never";
         "sidebar.verticalTabs" = true;
         "sidebar.revamp" = true;
+        "sidebar.new-sidebar.has-used" = true;
         "sidebar.main.tools" = "syncedtabs,history,bookmarks";
       };
       bookmarks = {
