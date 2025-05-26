@@ -15,6 +15,7 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
+      systemd.enable = false; # conflicts with uwsm
       settings = {
         # See https://wiki.hyprland.org/Configuring/Monitors/
         monitor = ",preferred,auto,auto";

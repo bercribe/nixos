@@ -5,11 +5,18 @@
   home-manager,
   ...
 }: {
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
 
   # Display manager
   services.xserver.displayManager.lightdm.enable = false;
-  environment.loginShellInit = "[ \"$(tty)\" = \"/dev/tty1\" ] && Hyprland";
+  environment.loginShellInit = ''
+    if uwsm check may-start && uwsm select; then
+      exec uwsm start default
+    fi
+  '';
 
   services.displayManager.sddm = {
     enable = false;
