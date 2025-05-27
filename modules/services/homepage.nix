@@ -77,14 +77,6 @@ in {
         {
           Entertainment = [
             {
-              Pocket = [
-                {
-                  abbr = "GP";
-                  href = "https://getpocket.com/";
-                }
-              ];
-            }
-            {
               Raindrop = [
                 {
                   abbr = "RD";
