@@ -22,6 +22,7 @@ in {
     ./karakeep.nix
     ./miniflux.nix
     ./paisa.nix
+    ./readeck.nix
     # monitoring
     ./monitoring
     # other
@@ -71,6 +72,10 @@ in {
     paisa = {
       shortName = "paisa";
       hosts = [super-fly];
+    };
+    readeck = {
+      shortName = "readeck";
+      hosts = [judgement];
     };
     syncthing-headless = {
       shortName = "syncthing";
