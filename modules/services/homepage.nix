@@ -77,14 +77,6 @@ in {
         {
           Entertainment = [
             {
-              Raindrop = [
-                {
-                  abbr = "RD";
-                  href = "https://app.raindrop.io/";
-                }
-              ];
-            }
-            {
               Chess = [
                 {
                   abbr = "CH";

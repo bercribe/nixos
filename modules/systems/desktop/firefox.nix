@@ -31,10 +31,10 @@ in {
         "enhancerforyoutube@maximerf.addons.mozilla.org" = makeExtension "enhancer-for-youtube" "menupanel";
         "jid1-KKzOGWgsW3Ao4Q@jetpack" = makeExtension "i-dont-care-about-cookies" "menupanel";
         "search@kagi.com" = makeExtension "kagi-search-for-firefox" "menupanel";
+        "addon@karakeep.app" = makeExtension "karakeep" "navbar";
         "keepassxc-browser@keepassxc.org" = makeExtension "keepassxc-browser" "menupanel";
         "clipper@obsidian.md" = makeExtension "web-clipper-obsidian" "navbar";
         "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = makeExtension "old-reddit-redirect" "menupanel";
-        "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84@jetpack" = makeExtension "raindropio" "navbar";
         "readeck@readeck.com" = makeExtension "readeck" "navbar";
         "jid1-xUfzOsOFlzSOXg@jetpack" = makeExtension "reddit-enhancement-suite" "menupanel";
         "sponsorBlocker@ajay.app" = makeExtension "sponsorblock" "menupanel";
