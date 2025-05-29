@@ -33,13 +33,13 @@ in {
         "search@kagi.com" = makeExtension "kagi-search-for-firefox" "menupanel";
         "addon@karakeep.app" = makeExtension "karakeep" "navbar";
         "keepassxc-browser@keepassxc.org" = makeExtension "keepassxc-browser" "menupanel";
-        "clipper@obsidian.md" = makeExtension "web-clipper-obsidian" "navbar";
+        "clipper@obsidian.md" = makeExtension "web-clipper-obsidian" "menupanel";
         "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = makeExtension "old-reddit-redirect" "menupanel";
         "readeck@readeck.com" = makeExtension "readeck" "navbar";
         "jid1-xUfzOsOFlzSOXg@jetpack" = makeExtension "reddit-enhancement-suite" "menupanel";
         "sponsorBlocker@ajay.app" = makeExtension "sponsorblock" "menupanel";
         "treestyletab@piro.sakura.ne.jp" = makeExtension "tree-style-tab" "menupanel";
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = makeExtension "vimium-ff" "navbar";
+        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = makeExtension "vimium-ff" "menupanel";
         "{6b733b82-9261-47ee-a595-2dda294a4d08}" = makeExtension "yomitan" "navbar";
         "uBlock0@raymondhill.net" = makeExtension "ublock-origin" "navbar";
       };
