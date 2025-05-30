@@ -11,9 +11,15 @@
   };
 
   # Display manager
+  environment.loginShellInit = ''
+    if uwsm check may-start && uwsm select; then
+      exec uwsm start default
+    fi
+  '';
   services.xserver.displayManager.lightdm.enable = false;
   programs.regreet = {
-    enable = true;
+    # breaks xdg-desktop-portal-gtk
+    enable = false;
     # enable VT switching, use last-connected monitor only
     cageArgs = ["-s" "-m" "last"];
   };
