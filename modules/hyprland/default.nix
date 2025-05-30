@@ -12,16 +12,10 @@
 
   # Display manager
   services.xserver.displayManager.lightdm.enable = false;
-  environment.loginShellInit = ''
-    if uwsm check may-start && uwsm select; then
-      exec uwsm start default
-    fi
-  '';
-
-  services.displayManager.sddm = {
-    enable = false;
-    wayland.enable = true;
-    theme = "${import ./sddm-theme.nix {inherit pkgs config;}}";
+  programs.regreet = {
+    enable = true;
+    # enable VT switching, use last-connected monitor only
+    cageArgs = ["-s" "-m" "last"];
   };
 
   # User env
