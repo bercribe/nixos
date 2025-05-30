@@ -182,6 +182,7 @@
       btop # performance visualizer
       difftastic # better diff
       dig # dns debug
+      eza # better ls
       fd # better find
       fzf # fuzzy find
       gdu # go disk analyzer
@@ -242,6 +243,7 @@
     cat = "bat";
     csc = "python ${scripts}/check_sync_conflicts.py";
     diff = "difft";
+    ls = "eza";
     nrs = "~/nixos/rebuild-switch.sh";
     vim = "nvim";
   };
