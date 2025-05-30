@@ -186,6 +186,7 @@
       fd # better find
       fzf # fuzzy find
       gdu # go disk analyzer
+      hexyl # hex viewer
       isd # systemd TUI
       lf # list files
       mosh # mobile shell
