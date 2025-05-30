@@ -55,6 +55,7 @@ in {
         "sidebar.revamp" = true;
         "sidebar.new-sidebar.has-used" = true;
         "sidebar.main.tools" = "syncedtabs,history,bookmarks";
+        "browser.uiCustomization.horizontalTabstrip" = ["tabbrowser-tabs"];
       };
       bookmarks = {
         force = true;
