@@ -11,18 +11,20 @@
   };
 
   # Display manager
+  services.xserver.displayManager.lightdm.enable = false;
   environment.loginShellInit = ''
     if uwsm check may-start && uwsm select; then
       exec uwsm start default
     fi
   '';
-  services.xserver.displayManager.lightdm.enable = false;
   programs.regreet = {
     # breaks xdg-desktop-portal-gtk
     enable = false;
     # enable VT switching, use last-connected monitor only
     cageArgs = ["-s" "-m" "last"];
   };
+  # instantly logs out, no logs
+  services.displayManager.ly.enable = false;
 
   # User env
   environment.systemPackages = with pkgs; [
