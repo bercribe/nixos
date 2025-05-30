@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
+    (self + /modules/systems/htpc/kodi.nix)
   ];
 
   # Secrets
