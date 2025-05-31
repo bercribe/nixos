@@ -166,6 +166,10 @@
           rm -r $out/share/dbus-1
         '';
       });
+
+      waybar = prev.waybar.override (prev: {
+        withMediaPlayer = true;
+      });
     })
   ];
 

@@ -345,11 +345,6 @@ in {
 
     programs.waybar = {
       enable = true;
-      package =
-        pkgs.waybar.overrideAttrs
-        (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-        });
       # style = ./waybar-style.css;
       settings = {
         mainBar = {
@@ -559,10 +554,11 @@ in {
             "max-length" = 40;
             "format-icons" = {
               "spotify" = "";
+              "ncspot" = "";
               "default" = "🎜";
             };
             "escape" = true;
-            "exec" = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"; # Script in resources folder
+            "exec" = "${pkgs.waybar}/bin/waybar-mediaplayer.py 2> /dev/null"; # Script in resources folder
             # "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" # Filter player based on name
           };
         };
