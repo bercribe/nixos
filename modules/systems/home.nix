@@ -203,6 +203,9 @@ in {
     programs.yazi = {
       enable = true;
 
+      plugins = with pkgs.yaziPlugins; {
+        piper = piper; # pipe any shell command as a previewer
+      };
       settings = {
         manager.linemode = "size";
         opener.open = [
@@ -211,6 +214,15 @@ in {
             desc = "Open";
           }
         ];
+        plugin = {
+          prepend_previewers = [
+            # sometimes useful - previews date photo was taken
+            # {
+            #   mime = "image/*";
+            #   run = ''piper -- ${lib.getExe pkgs.exiftool} -S -DateTimeOriginal -MediaCreateDate -FileModifyDate "$1"'';
+            # }
+          ];
+        };
       };
       keymap = {
         manager.prepend_keymap = let
