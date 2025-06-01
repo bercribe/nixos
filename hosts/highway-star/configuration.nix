@@ -84,9 +84,6 @@
 
   # Auto timezone
   services.automatic-timezoned.enable = true;
-  # https://github.com/NixOS/nixpkgs/issues/321121
-  # services.geoclue2.geoProviderUrl = "https://beacondb.net/v1/geolocate";
-  services.geoclue2.geoProviderUrl = "https://api.positon.xyz/v1/geolocate?key=test";
   time.timeZone = null;
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
