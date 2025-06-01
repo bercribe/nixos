@@ -187,7 +187,6 @@
       difftastic # better diff
       dig # dns debug
       eza # better ls
-      lsd
       fd # better find
       fzf # fuzzy find
       gdu # go disk analyzer
