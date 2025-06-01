@@ -394,6 +394,7 @@ in {
             "disable-scroll" = true;
             "all-outputs" = true;
             "warp-on-scroll" = false;
+            "show-special" = true;
             "format" = "{name}: {icon}";
             "format-icons" = {
               "1" = "";
