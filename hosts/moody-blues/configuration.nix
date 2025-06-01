@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./disko-config.nix
     (self + /modules/systems/headless)
     (self + /modules/systems/hardware/zfs.nix)
   ];
