@@ -192,6 +192,7 @@
       gdu # go disk analyzer
       hexyl # hex viewer
       isd # systemd TUI
+      jq # json formatter
       lf # list files
       mosh # mobile shell
       mtr # ping + traceroute
