@@ -1,9 +1,13 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
   localHostUrlBase = service: "${config.local.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
+  serviceUrl = service: let
+    serviceRegistration = config.local.service-registry."${service}";
+  in "https://${serviceRegistration.shortName}.${lib.head serviceRegistration.hosts}.mawz.dev";
 
   localSecret = "healthchecks/local/ping-key";
   remoteSecret = "healthchecks/remote/ping-key";
@@ -51,6 +55,7 @@
 in {
   localHostUrlBase = localHostUrlBase;
   localHostUrl = service: "https://${localHostUrlBase service}";
+  serviceUrl = serviceUrl;
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;
   writeHealthchecksCombinedScript = {
