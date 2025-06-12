@@ -69,10 +69,11 @@ in {
       shortName = "miniflux";
       hosts = [judgement];
     };
-    paisa = {
-      shortName = "paisa";
-      hosts = [super-fly];
-    };
+    # TODO: migrate to hledger-web
+    # paisa = {
+    #   shortName = "paisa";
+    #   hosts = [super-fly];
+    # };
     readeck = {
       shortName = "readeck";
       hosts = [judgement];
