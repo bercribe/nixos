@@ -36,6 +36,7 @@ in {
           "heavens-door" = {id = "D2VC45J-2GRDWF4-NAIWZA7-VTRHVCR-FDEZNNG-2P5ERHE-CLPZ6UK-JI3NEQ7";};
           "highway-star" = {id = "4OCFYCK-E7KDT4V-7HC7TGK-DZX7GDN-PCE4SR2-UEMNJWH-6Z6XR47-6YU7SAX";};
           "mr-president" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
+          "sethan" = {id = "HXAAIQL-OXKK5KA-YCD6KGU-RBXLLM2-XIDKKVG-GA6PCSZ-C4MZHVK-2H7HNAO";};
           "super-fly" = {id = "FFCN6AI-P6CNSVI-YD2ITV2-4FT6YGG-L2WI5AS-NVKLI2T-HIBRJRO-7W5QSQW";};
         };
         folders = let
@@ -50,7 +51,7 @@ in {
           personal-cloud = {
             enable = lib.mkDefault false;
             path = lib.mkDefault "/home/mawz/personal-cloud";
-            devices = ["geb" "heavens-door" "highway-star" "super-fly"];
+            devices = ["geb" "heavens-door" "highway-star" "sethan" "super-fly"];
             inherit versioning;
           };
           projects = {
