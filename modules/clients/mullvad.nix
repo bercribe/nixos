@@ -10,5 +10,6 @@
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # fixes conflict between mullvad and home wireguard server by forcing home server for everything
+  # remember to enable local network sharing in mullvad
   networking.networkmanager.ensureProfiles.profiles.home-lan.ipv4.dns-search = lib.mkForce "lan;~.;";
 }
