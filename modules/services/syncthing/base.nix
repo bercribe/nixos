@@ -72,6 +72,12 @@ in {
             devices = ["geb" "super-fly"];
             inherit versioning;
           };
+          sethan = {
+            enable = lib.mkDefault false;
+            path = lib.mkDefault "/home/mawz/sethan";
+            devices = ["sethan" "super-fly"];
+            inherit versioning;
+          };
         };
       };
     };

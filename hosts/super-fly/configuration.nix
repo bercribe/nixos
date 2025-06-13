@@ -35,6 +35,7 @@
     "d /zvault/syncthing/projects 0755 mawz users"
     "d /zvault/syncthing/libraries 0755 mawz users"
     "d /zvault/syncthing/geb 0755 mawz users"
+    "d /zvault/syncthing/sethan 0755 mawz users"
   ];
   services.syncthing.settings.folders = {
     personal-cloud = {
@@ -52,6 +53,10 @@
     geb = {
       enable = true;
       path = "/zvault/syncthing/geb";
+    };
+    sethan = {
+      enable = true;
+      path = "/zvault/syncthing/sethan";
     };
   };
 
