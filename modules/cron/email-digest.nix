@@ -16,7 +16,7 @@ in {
   systemd.timers.email-digest = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnCalendar = "8:00:00";
+      OnCalendar = "9:00:00";
       Unit = "email-digest.service";
     };
   };
