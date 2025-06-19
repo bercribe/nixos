@@ -16,6 +16,7 @@ in {
     ./forgejo.nix
     ./frigate.nix
     ./hass.nix
+    ./hledger-web.nix
     ./homepage.nix
     ./immich.nix
     ./jellyfin.nix
@@ -48,6 +49,10 @@ in {
       shortName = "hass";
       hosts = [judgement];
     };
+    hledger-web = {
+      shortName = "ledger";
+      hosts = [super-fly];
+    };
     homepage-dashboard = {
       shortName = "home";
       friendlyName = "homepage";
@@ -69,7 +74,7 @@ in {
       shortName = "miniflux";
       hosts = [judgement];
     };
-    # TODO: migrate to hledger-web
+    # TODO: https://github.com/ananthakumaran/paisa/issues/343
     # paisa = {
     #   shortName = "paisa";
     #   hosts = [super-fly];
