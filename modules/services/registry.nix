@@ -51,6 +51,7 @@ in {
     };
     hledger-web = {
       shortName = "ledger";
+      friendlyName = "hledger";
       hosts = [super-fly];
     };
     homepage-dashboard = {
