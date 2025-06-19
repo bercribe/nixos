@@ -122,6 +122,7 @@ in {
         in "https://${shortName}.${host}.mawz.dev";
 
         icons = {
+          hledger-web = "https://hledger.org/images/coins2-248.png";
           paisa = "https://paisa.fyi/images/logo.svg";
         };
         widgets = {
