@@ -180,6 +180,7 @@
     extraGroups = [
       "networkmanager"
       "wheel" # Enable ‘sudo’ for the user.
+      "ledger"
     ];
     packages = with pkgs; [
       bat # better cat
@@ -191,6 +192,8 @@
       fzf # fuzzy find
       gdu # go disk analyzer
       hexyl # hex viewer
+      hledger # ledger accounting tool
+      hledger-ui # hledger tui
       isd # systemd TUI
       jq # json formatter
       lf # list files
