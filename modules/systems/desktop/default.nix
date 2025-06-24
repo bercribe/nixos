@@ -74,6 +74,7 @@
         ticktick # todo list
         wireshark # network analyzer
         zathura # pdf viewer
+        zoom-us # video conferencing
       ];
       cli = [
         cava # audio visualizer
