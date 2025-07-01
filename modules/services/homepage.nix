@@ -39,14 +39,6 @@ in {
         {
           Productivity = [
             {
-              TickTick = [
-                {
-                  abbr = "TT";
-                  href = "https://ticktick.com/";
-                }
-              ];
-            }
-            {
               Hey = [
                 {
                   abbr = "HE";

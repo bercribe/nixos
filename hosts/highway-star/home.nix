@@ -10,7 +10,6 @@
       "[workspace 3 silent] obsidian"
       "[workspace 5 silent] $TERMINAL -e ncspot"
       "[workspace 6 silent] beeper"
-      "[workspace 9 silent] ticktick"
       "[workspace 10 silent] keepassxc"
     ];
   };
