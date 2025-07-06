@@ -71,7 +71,6 @@
         pavucontrol # sound control
         qimgv # image viewer
         shotwell # photo editor
-        ticktick # todo list
         wireshark # network analyzer
         zathura # pdf viewer
         zoom-us # video conferencing
