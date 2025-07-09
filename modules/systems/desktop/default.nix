@@ -63,6 +63,7 @@
         imagemagick # image viewer
         keepassxc # password manager
         libreoffice # office tools
+        localsend # file sending utility
         makemkv # blu-ray ripper
         mangohud # fps overlay
         mpv # video player
