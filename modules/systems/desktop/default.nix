@@ -73,6 +73,7 @@
         qimgv # image viewer
         shotwell # photo editor
         wireshark # network analyzer
+        xivlauncher # ffxiv
         zathura # pdf viewer
         zoom-us # video conferencing
       ];
