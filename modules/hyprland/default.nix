@@ -13,8 +13,8 @@
   # Display manager
   services.xserver.displayManager.lightdm.enable = false;
   environment.loginShellInit = ''
-    if uwsm check may-start && uwsm select; then
-      exec uwsm start default
+    if uwsm check may-start; then
+      exec uwsm start hyprland-uwsm.desktop
     fi
   '';
   programs.regreet = {
