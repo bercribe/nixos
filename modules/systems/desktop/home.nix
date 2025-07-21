@@ -11,6 +11,16 @@
   imports = [
     ./firefox.nix
   ];
+  
+  # model for mutable config files:
+  # systemd.user.tmpfiles.rules = let
+  #   conf = lib.generators.toINI {} {
+  #     example.conf = true;
+  #   };
+  #   escapedConf = with lib; concatStringsSep "\\n" (splitString "\n" conf);
+  # in [
+  #   "f+ ${config.home.homeDirectory}/.config/dir/file.ini 644 mawz users - ${escapedConf}"
+  # ];
 
   programs.bash = {
     enable = true;
@@ -25,6 +35,15 @@
     enable = true;
     settings = {
       OTHER_WRITABLE = "30;46";
+    };
+  };
+
+  programs.keepassxc = {
+    enable = true;
+    settings = {
+      Browser.Enabled = true;
+      FdoSecrets.Enabled = true;
+      GUI.ApplicationTheme = "dark";
     };
   };
 
