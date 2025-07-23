@@ -11,7 +11,7 @@
   imports = [
     ./firefox.nix
   ];
-  
+
   # model for mutable config files:
   # systemd.user.tmpfiles.rules = let
   #   conf = lib.generators.toINI {} {
