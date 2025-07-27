@@ -208,6 +208,7 @@
       tmux # terminal multiplexer
       tree # directory tree
       unzip # zip extractor
+      wikiman # CLI docs
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
       yazi # terminal file manager
