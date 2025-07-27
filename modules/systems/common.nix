@@ -195,6 +195,7 @@
       hledger # ledger accounting tool
       hledger-ui # hledger tui
       isd # systemd TUI
+      jujutsu # version control
       jq # json formatter
       lf # list files
       mosh # mobile shell
