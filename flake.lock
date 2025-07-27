@@ -451,11 +451,11 @@
     "scripts": {
       "flake": false,
       "locked": {
-        "lastModified": 1749896206,
-        "narHash": "sha256-CsqKuUzmyAVmDKx+iYNaocW5/RAFCRqvNOHuf6jIIfE=",
+        "lastModified": 1753589367,
+        "narHash": "sha256-qhh9Ofo7tEi+w9TV0vIjSJlBxFY6cW07z9zX5gsMV28=",
         "owner": "bercribe",
         "repo": "scripts",
-        "rev": "4ee9dd1e879140839ce2cabc9ccfcecab5471167",
+        "rev": "57979a0def7a90ccce6c56b680c41931c449498b",
         "type": "github"
       },
       "original": {
