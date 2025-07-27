@@ -99,8 +99,10 @@ in {
     programs.jujutsu = {
       enable = true;
       settings = {
-        name = "mawz";
-        email = "mawz@hey.com";
+        user = {
+          name = "mawz";
+          email = "mawz@hey.com";
+        };
       };
     };
 
