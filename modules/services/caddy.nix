@@ -85,6 +85,12 @@ in {
 
       services.caddy = {
         enable = true;
+        # home assistant mobile app SSL failing with HTTP/3
+        globalConfig = ''
+          servers {
+            protocols h1 h2
+          }
+        '';
         virtualHosts = let
           certDir = config.security.acme.certs."${hostUrl}".directory;
           hosts = with lib;
