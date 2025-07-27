@@ -96,6 +96,14 @@ in {
       difftastic.enable = true;
     };
 
+    programs.jujutsu = {
+      enable = true;
+      settings = {
+        name = "mawz";
+        email = "mawz@hey.com";
+      };
+    };
+
     programs.neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
