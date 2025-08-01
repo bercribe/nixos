@@ -56,6 +56,18 @@
     ];
   };
 
+  programs.imv = {
+    enable = true;
+    settings = {
+      options.background = "checks";
+      binds = {
+        bb = "background 000000";
+        bw = "background ffffff";
+        bc = "background checks";
+      };
+    };
+  };
+
   programs.spotify-player = {
     enable = true;
     settings = {

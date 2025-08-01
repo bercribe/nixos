@@ -61,6 +61,7 @@
         godot_4 # game engine
         handbrake # video transcoding
         imagemagick # image viewer
+        imv # image viewer
         keepassxc # password manager
         libreoffice # office tools
         localsend # file sending utility
@@ -70,7 +71,6 @@
         obs-studio # screen recording
         obsidian # PKM tool
         pavucontrol # sound control
-        qimgv # image viewer
         shotwell # photo editor
         wireshark # network analyzer
         xivlauncher # ffxiv
@@ -115,7 +115,7 @@
         directory = "yazi.desktop";
         browser = "firefox.desktop";
         text = "nvim.desktop";
-        image = "qimgv.desktop";
+        image = "imv.desktop";
         video = "mpv.desktop";
         pdf = "org.pwmt.zathura-pdf-mupdf.desktop";
       };
@@ -135,6 +135,7 @@
         image = [
           "image/jpeg"
           "image/png"
+          "image/svg+xml"
           "image/webp"
         ];
         video = [
