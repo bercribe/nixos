@@ -75,11 +75,6 @@
     };
   };
 
-  programs.zellij = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
   gtk = {
     enable = true;
     iconTheme = {
