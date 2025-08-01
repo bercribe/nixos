@@ -62,6 +62,7 @@
         handbrake # video transcoding
         imagemagick # image viewer
         imv # image viewer
+        inkscape # svg editor
         keepassxc # password manager
         libreoffice # office tools
         localsend # file sending utility
