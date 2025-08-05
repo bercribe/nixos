@@ -103,6 +103,24 @@ in {
                 }
               ];
             }
+            {
+              "Lazy Chinese" = [
+                {
+                  abbr = "LC";
+                  href = "https://www.lazychinese.com/";
+                  icon = "https://images.squarespace-cdn.com/content/v1/650274d4d2b34154b074e134/dfa9aa3d-c2fe-4e5a-8247-561554c464c8/favicon.ico?format=100w";
+                }
+              ];
+            }
+            {
+              "Comprehensible Japanese" = [
+                {
+                  abbr = "CJ";
+                  href = "https://cijapanese.com/";
+                  icon = "https://cijapanese.com/realfavicon/favicon-32x32.png";
+                }
+              ];
+            }
           ];
         }
       ];
