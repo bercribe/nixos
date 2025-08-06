@@ -95,15 +95,6 @@ in {
         {
           Language = [
             {
-              Bunpro = [
-                {
-                  abbr = "BP";
-                  href = "https://bunpro.jp/";
-                  icon = "https://bunpro.jp/favicon.ico";
-                }
-              ];
-            }
-            {
               "Lazy Chinese" = [
                 {
                   abbr = "LC";
