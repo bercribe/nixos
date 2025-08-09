@@ -63,6 +63,12 @@
   # User env
 
   # Overlays
+
+  # TODO: remove
+  # https://github.com/hrkfdn/ncspot/issues/1676
+  networking.hosts = {
+    "127.0.0.1" = ["apresolve.spotify.com"];
+  };
   nixpkgs.overlays = [
     (final: prev: {
       unstable = import nixpkgs-unstable {
