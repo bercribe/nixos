@@ -120,6 +120,34 @@
             AutoSavePeriod = 30;
           };
         };
+        addons = {
+          clipboard = {
+            globalSection = {
+              # Paste Primary
+              PastePrimaryKey = "";
+              # Number of entries
+              "Number of entries" = 5;
+              # Do not show password from password managers
+              IgnorePasswordFromPasswordManager = false;
+              # Hidden clipboard content that contains a password
+              ShowPassword = false;
+              # Seconds before clearing password
+              ClearPasswordAfter = 30;
+            };
+            sections.TriggerKey."0" = "Super+semicolon";
+          };
+          quickphrase = {
+            globalSection = {
+              # Choose key modifier
+              "Choose Modifier" = null;
+              # Enable Spell check
+              Spell = true;
+              # Fallback Spell check language
+              FallbackSpellLanguage = "en";
+            };
+            sections.TriggerKey."0" = "Super+grave";
+          };
+        };
       };
     };
   };
