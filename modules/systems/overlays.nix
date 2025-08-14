@@ -7,6 +7,23 @@
       };
 
       # TODO: remove
+      # https://github.com/hrkfdn/ncspot/issues/1681
+      ncspot = prev.ncspot.overrideAttrs (pfinal: pprev: {
+        version = "1.3.0";
+        src = prev.fetchFromGitHub {
+          owner = "bluware-dev";
+          repo = "ncspot";
+          rev = "aac67d631f25bbc79f509d34aa85e6daff954830";
+          hash = "sha256-B6BA1ksfDEySZH6gzkU5khOzwXAmeHbMHsx3sXd9lbs=";
+        };
+        cargoDeps = prev.rustPlatform.importCargoLock {
+          lockFile = pfinal.src + "/Cargo.lock";
+          allowBuiltinFetchGit = true;
+        };
+        cargoHash = null;
+      });
+
+      # TODO: remove
       # https://github.com/NixOS/nixpkgs/issues/401010
       healthchecks = let
         inherit (prev) lib;
