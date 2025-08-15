@@ -241,6 +241,14 @@ in {
           "$mainMod, mouse:273, resizewindow"
         ];
 
+        binde = [
+          # resize window with mainMod + ALT + arrow keys
+          "$mainMod ALT, left, resizeactive, -100 0"
+          "$mainMod ALT, right, resizeactive, 100 0"
+          "$mainMod ALT, up, resizeactive, 0 -100"
+          "$mainMod ALT, down, resizeactive, 0 100"
+        ];
+
         # use `wev` to find bind names
         bindel = [
           # Media keys
