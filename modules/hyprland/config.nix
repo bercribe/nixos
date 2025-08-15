@@ -38,8 +38,9 @@ in {
         # Set programs that you use
         "$terminal" = "$TERMINAL";
         "$fileManager" = "$TERMINAL -e yazi";
-        "$browser" = "firefox";
-        "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+        "$browser" = "$BROWSER";
+        # Open wofi on first press, closes it on second
+        "$menu" = "pkill wofi || ${pkgs.wofi}/bin/wofi --show drun";
 
         # Some default env vars.
         # env = [
@@ -160,41 +161,29 @@ in {
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         bind = [
+          # openers
+          "$mainMod, D, exec, $menu"
           "$mainMod, T, exec, $terminal"
-          "$mainMod, Q, killactive,"
-          "$mainMod, /, exit,"
-          "$mainMod, E, exec, $fileManager"
+          "$mainMod, F, exec, $fileManager"
           "$mainMod, B, exec, $browser"
-          "$mainMod, H, togglefloating,"
-          "$mainMod, F, fullscreen,"
-          "$mainMod, R, exec, $menu"
-          "$mainMod, PERIOD, exec, ${lib.getExe pkgs.wofi-emoji}"
-          "$mainMod, P, pseudo," # dwindle
-          "$mainMod, J, togglesplit," # dwindle
-          "$mainMod, G, togglegroup,"
-          "$mainMod SHIFT, G, moveoutofgroup,"
-          "$mainMod, N, changegroupactive,"
-          "$mainMod SHIFT, N, changegroupactive, b"
+
+          # misc
           "$mainMod, O, movecurrentworkspacetomonitor, +1"
-          "$mainMod, L, exec, loginctl lock-session"
-          "$mainMod SHIFT, L, exec, systemctl suspend"
-          "$mainMod, D, exec, ${pkgs.mako}/bin/makoctl dismiss"
-
-          # Example special workspace (scratchpad)
+          "$mainMod, N, exec, ${pkgs.mako}/bin/makoctl dismiss"
           "$mainMod, S, togglespecialworkspace, magic"
-          "$mainMod SHIFT, S, movetoworkspace, special:magic"
+          "$mainMod, PERIOD, exec, pkill wofi || ${lib.getExe pkgs.wofi-emoji}"
 
-          # Move focus with mainMod + arrow keys
-          "$mainMod, left, movefocus, l"
-          "$mainMod, right, movefocus, r"
-          "$mainMod, up, movefocus, u"
-          "$mainMod, down, movefocus, d"
+          # destructive
+          "$mainMod SHIFT, D, killactive,"
+          "$mainMod SHIFT, L, exec, loginctl lock-session"
+          "$mainMod SHIFT, S, exec, systemctl suspend"
+          "$mainMod SHIFT, E, exit,"
 
-          # move window with mainMod + SHIFT + arrow keys
-          "$mainMod SHIFT, left, movewindoworgroup, l"
-          "$mainMod SHIFT, right, movewindoworgroup, r"
-          "$mainMod SHIFT, up, movewindoworgroup, u"
-          "$mainMod SHIFT, down, movewindoworgroup, d"
+          # Move focus with mainMod + movement keys
+          "$mainMod, H, movefocus, l"
+          "$mainMod, L, movefocus, r"
+          "$mainMod, K, movefocus, u"
+          "$mainMod, J, movefocus, d"
 
           # to switch between windows in a floating workspace
           "$mainMod,Tab,cyclenext," # change focus to another window
@@ -215,18 +204,6 @@ in {
           "$mainMod, 9, workspace, 9"
           "$mainMod, 0, workspace, 10"
 
-          # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          "$mainMod SHIFT, 1, movetoworkspace, 1"
-          "$mainMod SHIFT, 2, movetoworkspace, 2"
-          "$mainMod SHIFT, 3, movetoworkspace, 3"
-          "$mainMod SHIFT, 4, movetoworkspace, 4"
-          "$mainMod SHIFT, 5, movetoworkspace, 5"
-          "$mainMod SHIFT, 6, movetoworkspace, 6"
-          "$mainMod SHIFT, 7, movetoworkspace, 7"
-          "$mainMod SHIFT, 8, movetoworkspace, 8"
-          "$mainMod SHIFT, 9, movetoworkspace, 9"
-          "$mainMod SHIFT, 0, movetoworkspace, 10"
-
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
@@ -239,14 +216,6 @@ in {
         bindm = [
           "$mainMod, mouse:272, movewindow"
           "$mainMod, mouse:273, resizewindow"
-        ];
-
-        binde = [
-          # resize window with mainMod + ALT + arrow keys
-          "$mainMod ALT, left, resizeactive, -100 0"
-          "$mainMod ALT, right, resizeactive, 100 0"
-          "$mainMod ALT, up, resizeactive, 0 -100"
-          "$mainMod ALT, down, resizeactive, 0 100"
         ];
 
         # use `wev` to find bind names
@@ -267,6 +236,53 @@ in {
           ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%+"
         ];
       };
+
+      extraConfig = ''
+        # window management
+        bind = $mainMod, W, submap, window
+        submap = window
+
+        # misc
+        bind = , T, togglesplit, # dwindle
+        bind = , P, pseudo, # dwindle
+        bind = , F, fullscreen,
+        bind = , V, togglefloating,
+        bind = , S, movetoworkspace, special:magic
+
+        # groups
+        bind = , G, togglegroup,
+        bind = , N, changegroupactive,
+        bind = SHIFT, G, moveoutofgroup,
+        bind = SHIFT, N, changegroupactive, b
+
+        # move rules
+        bind = , H, movewindoworgroup, l
+        bind = , L, movewindoworgroup, r
+        bind = , K, movewindoworgroup, u
+        bind = , J, movewindoworgroup, d
+
+        bind = , 1, movetoworkspace, 1
+        bind = , 2, movetoworkspace, 2
+        bind = , 3, movetoworkspace, 3
+        bind = , 4, movetoworkspace, 4
+        bind = , 5, movetoworkspace, 5
+        bind = , 6, movetoworkspace, 6
+        bind = , 7, movetoworkspace, 7
+        bind = , 8, movetoworkspace, 8
+        bind = , 9, movetoworkspace, 9
+        bind = , 0, movetoworkspace, 10
+
+        # resize rules
+        binde = SHIFT, H, resizeactive, -100 0
+        binde = SHIFT, L, resizeactive, 100 0
+        binde = SHIFT, K, resizeactive, 0 -100
+        binde = SHIFT, J, resizeactive, 0 100
+
+        # exit
+        bind = , Q, submap, reset
+        bind = , escape, submap, reset
+        submap = reset
+      '';
     };
 
     services.hyprpaper = {
