@@ -160,12 +160,12 @@ in {
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         bind = [
-          "$mainMod, Q, exec, $terminal"
-          "$mainMod, C, killactive,"
-          "$mainMod, M, exit,"
+          "$mainMod, T, exec, $terminal"
+          "$mainMod, Q, killactive,"
+          "$mainMod, /, exit,"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, B, exec, $browser"
-          "$mainMod, V, togglefloating,"
+          "$mainMod, H, togglefloating,"
           "$mainMod, F, fullscreen,"
           "$mainMod, R, exec, $menu"
           "$mainMod, PERIOD, exec, ${lib.getExe pkgs.wofi-emoji}"
