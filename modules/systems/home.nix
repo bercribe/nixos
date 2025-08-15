@@ -106,6 +106,21 @@ in {
       };
     };
 
+    programs.tmux = {
+      enable = true;
+      keyMode = "vi";
+      shortcut = "space";
+      baseIndex = 1;
+      mouse = true;
+      customPaneNavigationAndResize = true;
+      sensibleOnTop = true;
+      terminal = "$TERM";
+      extraConfig = ''
+        # fix warnings caused by UWSM
+        set -g default-command "''${SHELL}"
+      '';
+    };
+
     programs.neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
@@ -302,7 +317,6 @@ in {
     programs.btop.enable = true;
     programs.foot.enable = true;
     programs.ghostty.enable = true;
-    programs.tmux.enable = true;
     programs.zellij.enable = true;
 
     # This value determines the Home Manager release that your
