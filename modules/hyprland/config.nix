@@ -160,7 +160,11 @@ in {
         "$mainMod" = "SUPER";
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-        bind = [
+        bind = let
+          screenshot = pkgs.writeShellScriptBin "screenshot" ''
+            ${pkgs.grim}/bin/grim -l 0 -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy
+          '';
+        in [
           # openers
           "$mainMod, D, exec, $menu"
           "$mainMod, T, exec, $terminal"
@@ -209,7 +213,7 @@ in {
           "$mainMod, mouse_up, workspace, e-1"
 
           # Screenshots
-          ", Print, exec, ${pkgs.grim}/bin/grim -l 0 -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
+          ", Print, exec, pkill slurp || ${lib.getExe screenshot}"
         ];
 
         # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -219,17 +223,22 @@ in {
         ];
 
         # use `wev` to find bind names
-        bindel = [
+        # locked
+        bindl = [
           # Media keys
           ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
           ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
           ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
           ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
 
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ];
+
+        # repeat + locked
+        bindel = [
           # Sound control
           ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
           # Screen brightness
           ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl --min-value=1 set 5%-"
