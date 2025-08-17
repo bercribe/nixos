@@ -6,7 +6,7 @@
   imports = let
     rootDir = ../..;
   in [
-    (rootDir + /modules/systems/home.nix)
+    (rootDir + /modules/systems/home)
     (rootDir + /modules/systems/desktop/home.nix)
     (rootDir + /modules/hyprland/home.nix)
   ];

@@ -2,7 +2,7 @@
   imports = let
     rootDir = ../..;
   in [
-    (rootDir + /modules/systems/home.nix)
+    (rootDir + /modules/systems/home)
   ];
 
   # This value determines the Home Manager release that your

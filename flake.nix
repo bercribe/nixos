@@ -121,6 +121,12 @@
         inherit local;
       };
     in {
+      minimal = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs extraSpecialArgs;
+        modules = [
+          ./modules/systems/home/minimal.nix
+        ];
+      };
       "mawz@heavens-door" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs extraSpecialArgs;
         modules =
