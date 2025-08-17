@@ -1,11 +1,9 @@
 # `man home-configuration.nix` to view configurable options
 {
-  self,
   config,
-  osConfig,
   pkgs,
   lib,
-  stylix,
+  local,
   ...
 }: {
   imports = [
@@ -85,10 +83,12 @@
 
   # default apps
   xdg = {
-    mimeApps = {
+    mimeApps = let
+      associations = local.constants.mime-types.associations;
+    in {
       enable = true;
-      defaultApplications = osConfig.xdg.mime.defaultApplications;
-      associations.added = osConfig.xdg.mime.addedAssociations;
+      defaultApplications = associations;
+      associations.added = associations;
     };
     desktopEntries = {
       spotify_player = {
@@ -102,6 +102,4 @@
   # then refusing to delete the backup automatically.
   # just force overwrite
   xdg.configFile."mimeapps.list".force = true;
-
-  stylix.targets.firefox.profileNames = ["mawz"];
 }

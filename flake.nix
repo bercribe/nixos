@@ -28,7 +28,9 @@
 
   outputs = {
     self,
+    scripts,
     nixpkgs,
+    nixpkgs-unstable,
     nixos-hardware,
     home-manager,
     disko,
@@ -38,15 +40,17 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    overlays = import ./overlays.nix inputs;
+    pkgs = import nixpkgs {inherit system overlays;};
 
+    local = {
+      constants = pkgs.callPackage ./constants {};
+      utils = pkgs.callPackage ./utils;
+    };
     specialArgs =
       inputs
       // {
-        local = {
-          constants = import ./constants;
-          utils = pkgs.callPackage ./utils;
-        };
+        inherit local;
       };
 
     commonModules = [
@@ -108,36 +112,54 @@
           ];
       };
     };
-    homeConfigurations = {
+    homeConfigurations = let
+      commonModules = [
+        stylix.homeModules.stylix
+      ];
+
+      extraSpecialArgs = {
+        inherit local;
+      };
+    in {
       "mawz@heavens-door" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./hosts/heavens-door/home.nix
-        ];
+        inherit pkgs extraSpecialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/heavens-door/home.nix
+          ];
       };
       "mawz@highway-star" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./hosts/highway-star/home.nix
-        ];
+        inherit pkgs extraSpecialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/highway-star/home.nix
+          ];
       };
       "mawz@judgement" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./hosts/judgement/home.nix
-        ];
+        inherit pkgs extraSpecialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/judgement/home.nix
+          ];
       };
       "mawz@moody-blues" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./hosts/moody-blues/home.nix
-        ];
+        inherit pkgs extraSpecialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/moody-blues/home.nix
+          ];
       };
       "mawz@super-fly" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./hosts/super-fly/home.nix
-        ];
+        inherit pkgs extraSpecialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/super-fly/home.nix
+          ];
       };
     };
   };

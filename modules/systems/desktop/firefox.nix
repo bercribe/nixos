@@ -1,11 +1,12 @@
 {
   pkgs,
   lib,
-  osConfig,
+  local,
+  stylix,
   ...
 }: let
   serviceUrl = service: let
-    registryEntry = osConfig.local.service-registry."${service}";
+    registryEntry = local.constants.registry."${service}";
     shortName = registryEntry.shortName;
     host = lib.head registryEntry.hosts;
   in "https://${shortName}.${host}.mawz.dev";
@@ -122,4 +123,6 @@ in {
       };
     };
   };
+
+  stylix.targets.firefox.profileNames = ["mawz"];
 }

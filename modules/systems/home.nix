@@ -35,6 +35,8 @@ in {
   };
 
   config = {
+    nixpkgs.config.allowUnfree = true;
+
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     home.username = "mawz";
@@ -45,6 +47,7 @@ in {
       csc = "python ${pkgs.scripts}/check_sync_conflicts.py";
       diff = "difft";
       ls = "eza";
+      nhs = "nh home switch ~/nixos";
       nrs = "~/nixos/rebuild-switch.sh";
       vim = "nvim";
     };
@@ -336,6 +339,18 @@ in {
       '';
     };
 
+    # Theme settings
+    stylix = {
+      enable = true;
+      image = ./wallpaper.jpg;
+      polarity = "dark";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+      cursor = {
+        package = pkgs.rose-pine-cursor;
+        name = "BreezeX-RosePineDawn-Linux";
+        size = 32;
+      };
+    };
     # needed for stylix theming
     programs.btop.enable = true;
     programs.foot.enable = true;

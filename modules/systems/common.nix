@@ -6,12 +6,13 @@
   config,
   pkgs,
   lib,
+  local,
   nixpkgs-unstable,
+  scripts,
   ...
 }: {
   imports = [
     ./network/ssh-client.nix
-    ./overlays.nix
     ./sops.nix
     (self + /modules/services)
     (self + /modules/cron/disk-monitor.nix)
@@ -61,6 +62,7 @@
   console.keyMap = "us";
 
   # User env
+  nixpkgs.overlays = import (self + /overlays.nix) {inherit nixpkgs-unstable scripts;};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
@@ -112,19 +114,7 @@
     useUserPackages = true;
     # fixes issue where login can fail due to home-manager
     backupFileExtension = "backup";
-  };
-
-  # Theme settings
-  stylix = {
-    enable = true;
-    image = ./wallpaper.jpg;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
-    cursor = {
-      package = pkgs.rose-pine-cursor;
-      name = "BreezeX-RosePineDawn-Linux";
-      size = 32;
-    };
+    extraSpecialArgs = {inherit local;};
   };
 
   # List packages installed in system profile. To search, run:
@@ -139,6 +129,11 @@
   environment.enableAllTerminfo = true;
 
   # Programs
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # To fix database error, run:
   # sudo -i

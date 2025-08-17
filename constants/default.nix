@@ -1,9 +1,5 @@
-{
-  hosts = {
-    heavens-door = "heavens-door";
-    highway-star = "highway-star";
-    judgement = "judgement";
-    moody-blues = "moody-blues";
-    super-fly = "super-fly";
-  };
+{pkgs, ...}: {
+  hosts = import ./hosts.nix;
+  mime-types = pkgs.callPackage ./mime-types.nix {};
+  registry = import ./registry.nix;
 }
