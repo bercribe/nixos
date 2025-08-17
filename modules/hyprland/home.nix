@@ -166,9 +166,9 @@ in {
           '';
         in [
           # openers
-          "$mainMod, D, exec, $menu"
+          "$mainMod, R, exec, $menu"
           "$mainMod, T, exec, $terminal"
-          "$mainMod, F, exec, $fileManager"
+          "$mainMod, E, exec, $fileManager"
           "$mainMod, B, exec, $browser"
 
           # misc
