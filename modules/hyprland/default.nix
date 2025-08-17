@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  home-manager,
   ...
 }: {
   programs.hyprland = {
@@ -41,8 +40,6 @@
     nerdfonts = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   in
     nerdfonts ++ [pkgs.font-awesome];
-
-  home-manager.users.mawz = import ./config.nix;
 
   # without this, swaylock refuses to accept the correct password
   security.pam.services.swaylock = {};

@@ -6,7 +6,6 @@
   config,
   pkgs,
   lib,
-  scripts,
   nixpkgs-unstable,
   ...
 }: {
@@ -113,7 +112,6 @@
     useUserPackages = true;
     # fixes issue where login can fail due to home-manager
     backupFileExtension = "backup";
-    users.mawz = import ./home.nix;
   };
 
   # Theme settings
@@ -140,26 +138,6 @@
 
   environment.enableAllTerminfo = true;
 
-  environment.shellAliases = {
-    cat = "bat";
-    csc = "python ${scripts}/check_sync_conflicts.py";
-    diff = "difft";
-    ls = "eza";
-    nrs = "~/nixos/rebuild-switch.sh";
-    vim = "nvim";
-  };
-
-  environment.interactiveShellInit = ''
-    # Aliases with bash completion
-    . ${lib.getExe pkgs.complete-alias}
-    alias sctl='systemctl'
-    complete -F _complete_alias sctl
-    alias jctl='journalctl'
-    complete -F _complete_alias jctl
-    alias jfu='journalctl -f -u'
-    complete -F _complete_alias jfu
-  '';
-
   # Programs
 
   # To fix database error, run:
@@ -170,12 +148,6 @@
   programs.nix-index = {
     enable = false;
     enableBashIntegration = true;
-  };
-
-  # editor
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

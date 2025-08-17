@@ -1,27 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{...}: {
   imports = let
     rootDir = ../..;
   in [
     (rootDir + /modules/systems/home.nix)
-    (rootDir + /modules/systems/desktop/home.nix)
-    (rootDir + /modules/hyprland/home.nix)
   ];
-
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [
-      "[workspace 1 silent] $TERMINAL"
-      "[workspace 2 silent] firefox"
-      "[workspace 3 silent] obsidian"
-      "[workspace 5 silent] $TERMINAL -e ncspot"
-      "[workspace 6 silent] beeper"
-      "[workspace 10 silent] keepassxc"
-    ];
-  };
-  local.waybar.enableNetwork = false;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

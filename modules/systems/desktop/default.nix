@@ -96,9 +96,6 @@
       gui ++ cli ++ scripts;
   };
 
-  # Home manager
-  home-manager.users.mawz = import ./home.nix;
-
   # program defaults
   xdg = {
     # fixes issue where some applications would not open `lf` in its own window

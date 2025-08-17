@@ -28,6 +28,9 @@
   networking.hostName = "super-fly"; # Define your hostname.
   networking.hostId = "d7ec0e0e"; # Should be unique among ZFS machines
 
+  # User env
+  home-manager.users.mawz = import ./home.nix;
+
   # Services
 
   systemd.tmpfiles.rules = [

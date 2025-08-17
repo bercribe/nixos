@@ -21,6 +21,9 @@
   networking.hostName = "judgement"; # Define your hostname.
   networking.hostId = "8581c000"; # Should be unique among ZFS machines
 
+  # User env
+  home-manager.users.mawz = import ./home.nix;
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #

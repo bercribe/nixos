@@ -40,11 +40,33 @@ in {
     home.username = "mawz";
     home.homeDirectory = "/home/mawz";
 
+    home.shellAliases = {
+      cat = "bat";
+      csc = "python ${pkgs.scripts}/check_sync_conflicts.py";
+      diff = "difft";
+      ls = "eza";
+      nrs = "~/nixos/rebuild-switch.sh";
+      vim = "nvim";
+    };
+
     xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
     # for fzf bash integration
-    programs.bash.enable = true;
     programs.fzf.enable = true;
+
+    programs.bash = {
+      enable = true;
+      initExtra = ''
+        # Aliases with bash completion
+        . ${lib.getExe pkgs.complete-alias}
+        alias sctl='systemctl'
+        complete -F _complete_alias sctl
+        alias jctl='journalctl'
+        complete -F _complete_alias jctl
+        alias jfu='journalctl -f -u'
+        complete -F _complete_alias jfu
+      '';
+    };
 
     # ssh config
     # use `ssh-copy-id` to add key to remote
@@ -123,6 +145,7 @@ in {
 
     programs.neovim = {
       enable = true;
+      defaultEditor = true;
       plugins = with pkgs.vimPlugins; [
         telescope-nvim
         telescope-fzf-native-nvim
@@ -318,16 +341,6 @@ in {
     programs.foot.enable = true;
     programs.ghostty.enable = true;
     programs.zellij.enable = true;
-
-    # This value determines the Home Manager release that your
-    # configuration is compatible with. This helps avoid breakage
-    # when a new Home Manager release introduces backwards
-    # incompatible changes.
-    #
-    # You can update Home Manager without changing this value. See
-    # the Home Manager release notes for a list of state version
-    # changes in each release.
-    home.stateVersion = "23.11";
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;

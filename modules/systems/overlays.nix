@@ -1,4 +1,8 @@
-{nixpkgs-unstable, ...}: {
+{
+  nixpkgs-unstable,
+  scripts,
+  ...
+}: {
   nixpkgs.overlays = [
     (final: prev: {
       unstable = import nixpkgs-unstable {
@@ -98,6 +102,9 @@
         (preservePython3PackageOverrides prev.healthchecks).override {
           python3 = python;
         };
+
+      # user scripts
+      scripts = scripts;
 
       # album art - currently broken
       # ncspot = prev.ncspot.override (prev: {

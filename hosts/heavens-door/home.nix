@@ -1,8 +1,17 @@
 {
+  self,
   config,
   lib,
   ...
 }: {
+  imports = let
+    rootDir = ../..;
+  in [
+    (rootDir + /modules/systems/home.nix)
+    (rootDir + /modules/systems/desktop/home.nix)
+    (rootDir + /modules/hyprland/home.nix)
+  ];
+
   wayland.windowManager.hyprland.settings = let
     main = "desc:Dell Inc. AW3423DWF 1YVF2S3";
     top = "desc:Ancor Communications Inc ROG PG279Q K5LMQS058625";
@@ -66,4 +75,14 @@
       command = "cd /zsolid/syncthing/libraries";
     };
   };
+
+  # This value determines the Home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new Home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update Home Manager without changing this value. See
+  # the Home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "23.11";
 }

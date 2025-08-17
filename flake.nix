@@ -64,47 +64,81 @@
       ];
     };
   in {
-    nixosConfigurations.heavens-door = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-      modules =
-        commonModules
-        ++ [
-          ./hosts/heavens-door/configuration.nix
-        ];
+    nixosConfigurations = {
+      heavens-door = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/heavens-door/configuration.nix
+          ];
+      };
+      highway-star = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/highway-star/configuration.nix
+            nixos-hardware.nixosModules.framework-11th-gen-intel
+          ];
+      };
+      judgement = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/judgement/configuration.nix
+          ];
+      };
+      moody-blues = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/moody-blues/configuration.nix
+          ];
+      };
+      super-fly = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules =
+          commonModules
+          ++ [
+            ./hosts/super-fly/configuration.nix
+            paisaModule
+          ];
+      };
     };
-    nixosConfigurations.highway-star = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-      modules =
-        commonModules
-        ++ [
-          ./hosts/highway-star/configuration.nix
-          nixos-hardware.nixosModules.framework-11th-gen-intel
+    homeConfigurations = {
+      "mawz@heavens-door" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/heavens-door/home.nix
         ];
-    };
-    nixosConfigurations.judgement = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-      modules =
-        commonModules
-        ++ [
-          ./hosts/judgement/configuration.nix
+      };
+      "mawz@highway-star" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/highway-star/home.nix
         ];
-    };
-    nixosConfigurations.moody-blues = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-      modules =
-        commonModules
-        ++ [
-          ./hosts/moody-blues/configuration.nix
+      };
+      "mawz@judgement" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/judgement/home.nix
         ];
-    };
-    nixosConfigurations.super-fly = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-      modules =
-        commonModules
-        ++ [
-          ./hosts/super-fly/configuration.nix
-          paisaModule
+      };
+      "mawz@moody-blues" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/moody-blues/home.nix
         ];
+      };
+      "mawz@super-fly" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/super-fly/home.nix
+        ];
+      };
     };
   };
 }
