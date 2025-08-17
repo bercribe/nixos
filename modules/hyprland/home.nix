@@ -389,7 +389,7 @@ in {
           # Choose the order of the modules
           "modules-left" = [
             "hyprland/workspaces"
-            "sway/mode"
+            "hyprland/submap"
             "sway/scratchpad"
             "custom/media"
           ];
@@ -452,7 +452,7 @@ in {
               "unlocked" = "";
             };
           };
-          "sway/mode" = {
+          "hyprland/submap" = {
             "format" = "<span style=\"italic\">{}</span>";
           };
           "sway/scratchpad" = {
