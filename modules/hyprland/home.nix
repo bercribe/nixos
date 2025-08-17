@@ -287,6 +287,12 @@ in {
         binde = SHIFT, K, resizeactive, 0 -100
         binde = SHIFT, J, resizeactive, 0 100
 
+        # escape hatch for switching focus
+        bind = ALT, H, movefocus, l
+        bind = ALT, L, movefocus, r
+        bind = ALT, K, movefocus, u
+        bind = ALT, J, movefocus, d
+
         # exit
         bind = , Q, submap, reset
         bind = , escape, submap, reset
