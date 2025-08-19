@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.local.services.monitoring;
+  cfg = config.local.service-monitoring;
 in {
   imports = [
     ./gatus.nix
@@ -13,7 +13,7 @@ in {
     (self + /modules/cron/email-healthchecks.nix)
   ];
 
-  options.local.services.monitoring = with lib;
+  options.local.service-monitoring = with lib;
   with types; {
     host = mkOption {
       type = str;
