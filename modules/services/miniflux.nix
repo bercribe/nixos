@@ -10,6 +10,7 @@
   utils = local.utils {inherit config;};
 
   port = 9044;
+  rssBridgeHost = "http://rss-bridge.localhost";
 in {
   options.local.services.miniflux.enable = lib.mkEnableOption "miniflux";
 
@@ -27,6 +28,14 @@ in {
         BATCH_SIZE = 4; # num feeds / 288, so everything gets refreshed every 24 hours
       };
       adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
+    };
+
+    networking.hosts."127.0.0.1" = [rssBridgeHost];
+    services.rss-bridge = {
+      enable = true;
+      webserver = "caddy";
+      virtualHost = rssBridgeHost;
+      config.system.enabled_bridges = ["*"];
     };
 
     local.reverseProxy = {
