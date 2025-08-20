@@ -74,10 +74,6 @@ in {
                 name = "Add to Miniflux";
                 url = "javascript:location.href='${miniflux}/bookmarklet?uri='+encodeURIComponent(window.location.href)";
               }
-              {
-                name = "Miniflux via openrss";
-                url = "javascript:location.href='${miniflux}/bookmarklet?uri=https://openrss.org/'+encodeURIComponent(window.location.href)";
-              }
             ];
           }
         ];
