@@ -62,8 +62,11 @@ in {
 
     local.services = with lib; mapAttrs (service: {hosts, ...}: {enable = true;}) localServices;
 
-    local.reverseProxy.services = with lib;
-      listToAttrs (mapAttrsToList (service: {hosts, ...}: (nameValuePair service {unique = (length hosts) == 1;}))
-        localServices);
+    local.reverseProxy = {
+      localRedirectHost = judgement;
+      services = with lib;
+        listToAttrs (mapAttrsToList (service: {hosts, ...}: (nameValuePair service {unique = (length hosts) == 1;}))
+          localServices);
+    };
   };
 }

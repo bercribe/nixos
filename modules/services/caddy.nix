@@ -9,6 +9,13 @@ in {
   options.local.reverseProxy = {
     enable = lib.mkEnableOption "reverse proxy";
 
+    localRedirectHost = with lib;
+    with types;
+      mkOption {
+        type = str;
+        description = "Host to redirect from *.local.mawz.dev";
+      };
+
     services = with lib;
     with types;
       mkOption {
@@ -57,6 +64,8 @@ in {
   config = let
     hostName = config.networking.hostName;
     hostUrl = "${hostName}.mawz.dev";
+    isLocalRedirHost = cfg.localRedirectHost == config.networking.hostName;
+    localRedirUrl = "lan.mawz.dev";
   in
     lib.mkIf cfg.enable {
       networking.firewall.allowedTCPPorts = [80 443] ++ (with lib; concatLists (mapAttrsToList (_: {additionalPorts, ...}: map ({from, ...}: from) additionalPorts) cfg.services));
@@ -76,9 +85,13 @@ in {
           credentialsFile = config.sops.secrets."cloudflare/lego".path;
         };
 
-        certs = {
+        certs = let
+        in {
           "${hostUrl}" = {
             extraDomainNames = ["*.${hostUrl}"];
+          };
+          "${localRedirUrl}" = lib.mkIf isLocalRedirHost {
+            extraDomainNames = ["*.${localRedirUrl}"];
           };
         };
       };
@@ -92,8 +105,8 @@ in {
           }
         '';
         virtualHosts = let
-          certDir = config.security.acme.certs."${hostUrl}".directory;
-          hosts = with lib;
+          hostCertDir = config.security.acme.certs."${hostUrl}".directory;
+          reverseProxies = with lib;
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
               shortName = config.local.service-registry."${service}".shortName;
               url = "${shortName}.${hostUrl}";
@@ -105,36 +118,62 @@ in {
                   else ""
                 }
                 }
-                tls ${certDir}/cert.pem ${certDir}/key.pem
+                tls ${hostCertDir}/cert.pem ${hostCertDir}/key.pem
               '';
+
+              lanRedir =
+                nameValuePair "http://${shortName}${
+                  if attrs.unique
+                  then ""
+                  else ".${hostName}"
+                }.lan" {
+                  extraConfig = ''
+                    redir https://${url}{uri} 308
+                  '';
+                };
+              reverseProxy = nameValuePair url {
+                extraConfig = caddyCfg "http://localhost:${toString attrs.port}";
+              };
+              additionalPorts =
+                map
+                (
+                  {
+                    from,
+                    to,
+                  }: (nameValuePair "${url}:${toString from}" {
+                    extraConfig = caddyCfg "http://localhost:${toString to}";
+                  })
+                )
+                attrs.additionalPorts;
             in
               [
-                (nameValuePair "http://${shortName}${
-                    if attrs.unique
-                    then ""
-                    else ".${hostName}"
-                  }.lan" {
-                    extraConfig = ''
-                      redir https://${url}{uri} 308
-                    '';
-                  })
-                (nameValuePair url {
-                  extraConfig = caddyCfg "http://localhost:${toString attrs.port}";
-                })
+                lanRedir
+                reverseProxy
               ]
-              ++ map
-              (
-                {
-                  from,
-                  to,
-                }: (nameValuePair "${url}:${toString from}" {
-                  extraConfig = caddyCfg "http://localhost:${toString to}";
-                })
-              )
-              attrs.additionalPorts)
+              ++ additionalPorts)
             cfg.services));
+
+          localCertDir = config.security.acme.certs."${localRedirUrl}".directory;
+          localRedirects =
+            if isLocalRedirHost
+            then let
+              uniqueServices = with lib; filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.service-registry;
+            in
+              with lib;
+                listToAttrs (mapAttrsToList (service: {
+                    shortName,
+                    hosts,
+                    ...
+                  }: (nameValuePair "https://${shortName}.${localRedirUrl}" {
+                    extraConfig = ''
+                      tls ${localCertDir}/cert.pem ${localCertDir}/key.pem
+                      redir https://${shortName}.${head hosts}.mawz.dev
+                    '';
+                  }))
+                  uniqueServices)
+            else [];
         in
-          hosts;
+          reverseProxies // localRedirects;
       };
     };
 }
