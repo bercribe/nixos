@@ -2,7 +2,6 @@
   self,
   pkgs,
   config,
-  scripts,
   local,
   ...
 }: let
@@ -27,7 +26,7 @@ in {
     };
     path = with pkgs; [python3 difftastic];
     script = ''
-      ${utils.writeHealthchecksCombinedScript {slug = "syncthing-conflicts";} "python ${scripts}/check_sync_conflicts.py /zvault/syncthing --no-colors"}
+      ${utils.writeHealthchecksCombinedScript {slug = "syncthing-conflicts";} "python ${pkgs.errata}/check_sync_conflicts.py /zvault/syncthing --no-colors"}
     '';
   };
 }

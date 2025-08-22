@@ -1,6 +1,6 @@
 {
   nixpkgs-unstable,
-  scripts,
+  errata,
   ...
 }: [
   (final: prev: {
@@ -103,7 +103,7 @@
       };
 
     # user scripts
-    scripts = scripts;
+    errata = errata;
 
     # album art - currently broken
     # ncspot = prev.ncspot.override (prev: {

@@ -8,7 +8,7 @@
   lib,
   local,
   nixpkgs-unstable,
-  scripts,
+  errata,
   ...
 }: {
   imports = [
@@ -62,7 +62,7 @@
   console.keyMap = "us";
 
   # User env
-  nixpkgs.overlays = import (self + /overlays.nix) {inherit nixpkgs-unstable scripts;};
+  nixpkgs.overlays = import (self + /overlays.nix) {inherit nixpkgs-unstable errata;};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {

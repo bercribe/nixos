@@ -16,7 +16,7 @@
 
   home.shellAliases = {
     cat = "bat";
-    csc = "python ${pkgs.scripts}/check_sync_conflicts.py";
+    csc = "python ${pkgs.errata}/check_sync_conflicts.py";
     diff = "difft";
     ls = "eza";
     nhs = "nh home switch ~/nixos";

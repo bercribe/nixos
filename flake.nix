@@ -2,8 +2,8 @@
   description = "A NixOS configuration flake";
 
   inputs = {
-    scripts = {
-      url = "github:bercribe/scripts";
+    errata = {
+      url = "github:bercribe/errata";
       flake = false;
     };
 
@@ -28,7 +28,7 @@
 
   outputs = {
     self,
-    scripts,
+    errata,
     nixpkgs,
     nixpkgs-unstable,
     nixos-hardware,

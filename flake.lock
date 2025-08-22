@@ -87,6 +87,22 @@
         "type": "github"
       }
     },
+    "errata": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753589367,
+        "narHash": "sha256-qhh9Ofo7tEi+w9TV0vIjSJlBxFY6cW07z9zX5gsMV28=",
+        "owner": "bercribe",
+        "repo": "errata",
+        "rev": "57979a0def7a90ccce6c56b680c41931c449498b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bercribe",
+        "repo": "errata",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -438,30 +454,14 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "errata": "errata",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "paisa": "paisa",
-        "scripts": "scripts",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
-      }
-    },
-    "scripts": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1753589367,
-        "narHash": "sha256-qhh9Ofo7tEi+w9TV0vIjSJlBxFY6cW07z9zX5gsMV28=",
-        "owner": "bercribe",
-        "repo": "scripts",
-        "rev": "57979a0def7a90ccce6c56b680c41931c449498b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bercribe",
-        "repo": "scripts",
-        "type": "github"
       }
     },
     "sops-nix": {
