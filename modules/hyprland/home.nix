@@ -178,7 +178,7 @@ in {
           "$mainMod, PERIOD, exec, pkill wofi || ${lib.getExe pkgs.wofi-emoji}"
 
           # applications
-          "$mainMod, M, pass, class:^discord$" # mute
+          "$mainMod, M, sendshortcut, CTRL SHIFT, M, class:^discord$" # mute
 
           # destructive
           "$mainMod SHIFT, D, killactive,"
@@ -227,7 +227,7 @@ in {
 
         # non-consuming
         bindn = [
-          ", mouse:275, sendshortcut, , mouse:275, class:^discord$" # push to talk
+          ", Alt_L, pass, class:^discord$" # push to talk
         ];
 
         # use `wev` to find bind names
