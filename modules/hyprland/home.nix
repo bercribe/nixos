@@ -172,10 +172,13 @@ in {
           "$mainMod, B, exec, $browser"
 
           # misc
-          "$mainMod, O, movecurrentworkspacetomonitor, +1"
           "$mainMod, N, exec, ${pkgs.mako}/bin/makoctl dismiss"
+          "$mainMod, O, movecurrentworkspacetomonitor, +1"
           "$mainMod, S, togglespecialworkspace, magic"
           "$mainMod, PERIOD, exec, pkill wofi || ${lib.getExe pkgs.wofi-emoji}"
+
+          # applications
+          "$mainMod, M, pass, class:^discord$" # mute
 
           # destructive
           "$mainMod SHIFT, D, killactive,"
@@ -222,6 +225,11 @@ in {
           "$mainMod, mouse:273, resizewindow"
         ];
 
+        # non-consuming
+        bindn = [
+          ", mouse:275, sendshortcut, , mouse:275, class:^discord$" # push to talk
+        ];
+
         # use `wev` to find bind names
         # locked
         bindl = [
@@ -232,6 +240,7 @@ in {
           ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
 
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          "$mainMod, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ];
 
         # repeat + locked
@@ -239,6 +248,8 @@ in {
           # Sound control
           ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
+          "$mainMod, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+"
+          "$mainMod, XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-"
 
           # Screen brightness
           ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl --min-value=1 set 5%-"
