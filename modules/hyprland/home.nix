@@ -184,6 +184,8 @@ in {
 
           # applications
           "$mainMod, M, sendshortcut, CTRL SHIFT, M, class:^discord$" # mute
+          "$mainMod, Q, exec, xdg-open obsidian://quickadd?choice=Add%20note"
+          "$mainMod, Q, focuswindow, class:^obsidian$"
 
           # destructive
           "$mainMod SHIFT, D, killactive,"
