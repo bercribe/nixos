@@ -187,6 +187,7 @@ in {
 
           # destructive
           "$mainMod SHIFT, D, killactive,"
+          "$mainMod SHIFT, K, forcekillactive,"
           "$mainMod SHIFT, L, exec, loginctl lock-session"
           "$mainMod SHIFT, S, exec, systemctl suspend"
           "$mainMod SHIFT, E, exit,"
