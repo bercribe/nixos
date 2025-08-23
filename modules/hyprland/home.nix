@@ -171,6 +171,11 @@ in {
           "$mainMod, E, exec, $fileManager"
           "$mainMod, B, exec, $browser"
 
+          # universal copy paste
+          "$mainMod, X, sendshortcut, , XF86Cut, activewindow"
+          "$mainMod, C, sendshortcut, , XF86Copy, activewindow"
+          "$mainMod, V, sendshortcut, , XF86Paste, activewindow"
+
           # misc
           "$mainMod, N, exec, ${pkgs.mako}/bin/makoctl dismiss"
           "$mainMod, O, movecurrentworkspacetomonitor, +1"
