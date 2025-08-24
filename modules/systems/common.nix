@@ -83,6 +83,7 @@
       fd # better find
       fzf # fuzzy find
       gdu # go disk analyzer
+      gh # github cli
       hexyl # hex viewer
       hledger # ledger accounting tool
       hledger-ui # hledger tui
