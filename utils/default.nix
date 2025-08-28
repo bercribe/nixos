@@ -29,7 +29,7 @@
     ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused --location "${
       if remote
       then "https://hc-ping.com"
-      else "http://healthchecks.lan/ping"
+      else "https://healthchecks.lan.mawz.dev/ping"
     }/$pingKey/${endpoint}?create=1" ${extra}
   '';
 

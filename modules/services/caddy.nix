@@ -21,6 +21,11 @@ in {
       mkOption {
         type = attrsOf (submodule {
           options = {
+            address = mkOption {
+              type = str;
+              default = "localhost";
+              description = "Local adress service is hosted on";
+            };
             port = mkOption {
               type = int;
               description = "Local port service is hosted on";
@@ -132,7 +137,7 @@ in {
                   '';
                 };
               reverseProxy = nameValuePair url {
-                extraConfig = caddyCfg "http://localhost:${toString attrs.port}";
+                extraConfig = caddyCfg "http://${attrs.address}:${toString attrs.port}";
               };
               additionalPorts =
                 map
@@ -141,7 +146,7 @@ in {
                     from,
                     to,
                   }: (nameValuePair "${url}:${toString from}" {
-                    extraConfig = caddyCfg "http://localhost:${toString to}";
+                    extraConfig = caddyCfg "http://${attrs.address}:${toString to}";
                   })
                 )
                 attrs.additionalPorts;
@@ -167,7 +172,7 @@ in {
                   }: (nameValuePair "https://${shortName}.${localRedirUrl}" {
                     extraConfig = ''
                       tls ${localCertDir}/cert.pem ${localCertDir}/key.pem
-                      redir https://${shortName}.${head hosts}.mawz.dev
+                      redir https://${shortName}.${head hosts}.mawz.dev{uri} 308
                     '';
                   }))
                   uniqueServices)

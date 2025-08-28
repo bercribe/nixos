@@ -10,10 +10,13 @@
   utils = local.utils {inherit config;};
 
   dataDir = "/services/frigate";
-  port = 18841;
 
-  hostname = "localhost";
-  interface = "enp0s20f0u1";
+  hostAddress = "10.231.136.1";
+  containerAddress = "10.231.136.2";
+  localInterface = "enp89s0";
+  camInterface = "enp0s20f0u1";
+
+  coralGid = 999;
 
   cameras = {
     mawz_office = {
@@ -49,7 +52,7 @@ in {
     '';
 
     # camera subnet
-    networking.interfaces.${interface} = {
+    networking.interfaces.${camInterface} = {
       ipv4.addresses = [
         {
           address = "10.0.40.1";
@@ -58,118 +61,179 @@ in {
       ];
     };
 
-    # hardware accel
-    hardware.graphics = {
-      enable = true;
-      extraPackages = [pkgs.intel-media-driver];
-    };
-
     # coral TPU
     hardware.coral.usb.enable = true;
+    users.groups.coral.gid = coralGid;
 
-    services.frigate = {
+    # needed for network connectivity from the container to external addresses
+    networking.nat = {
       enable = true;
-      inherit hostname;
-      vaapiDriver = "iHD";
-      settings = let
-        userPass = "{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}";
-        frigatePath = camera: subtype: (cameraPath {inherit userPass camera subtype;});
-      in {
-        mqtt = {
-          enabled = true;
-          host = "127.0.0.1";
-          user = "frigate";
-          password = "{FRIGATE_MQTT_PASSWORD}";
+      internalInterfaces = ["ve-frigate"];
+      externalInterface = localInterface;
+      # Lazy IPv6 connectivity for the container
+      enableIPv6 = true;
+    };
+    # needed to reach mosquitto instance
+    # networking.firewall.trustedInterfaces = ["ve-frigate"];
+
+    containers.frigate = let
+      systemStateVersion = config.system.stateVersion;
+      envPath = config.sops.templates."frigate.env".path;
+    in {
+      autoStart = true;
+
+      privateNetwork = true;
+      inherit hostAddress;
+      localAddress = containerAddress;
+      hostAddress6 = "fc00::1";
+      localAddress6 = "fc00::2";
+
+      bindMounts = {
+        "/var/lib/frigate" = {
+          hostPath = dataDir;
+          isReadOnly = false;
         };
-        ffmpeg.hwaccel_args = "preset-vaapi";
-        detectors.coral = {
-          type = "edgetpu";
-          device = "usb";
+        "${envPath}".isReadOnly = true;
+        "${config.sops.secrets."healthchecks/local/ping-key".path}".isReadOnly = true;
+        # intel hardware accel
+        "/dev/dri/renderD128".isReadOnly = false;
+        # coral TPU device
+        "/dev/bus/usb".isReadOnly = false;
+      };
+
+      allowedDevices = [
+        # intel hardware accel
+        {
+          modifier = "rw";
+          node = "/dev/dri/renderD128";
+        }
+        # coral TPU
+        {
+          modifier = "rw";
+          node = "char-usb_device";
+        }
+      ];
+
+      # GPU stats
+      additionalCapabilities = ["CAP_PERFMON"];
+      extraFlags = ["--system-call-filter=perf_event_open"];
+
+      config = {
+        config,
+        pkgs,
+        lib,
+        ...
+      }: {
+        # intel hardware accel
+        hardware.graphics = {
+          enable = true;
+          extraPackages = [pkgs.intel-media-driver];
         };
-        objects.track = ["person" "cat" "dog"];
-        cameras =
-          lib.mapAttrs (camera: value: {
-            enabled = true;
-            ffmpeg = {
-              inputs = [
-                {
-                  path = frigatePath "${camera}" "1";
-                  roles = ["detect"];
-                }
-                {
-                  path = frigatePath "${camera}" "0";
-                  roles = ["record"];
-                }
-              ];
-            };
-            detect = {
+
+        # coral TPU
+        hardware.coral.usb.enable = true;
+        users.groups.coral.gid = coralGid;
+
+        services.frigate = {
+          enable = true;
+          hostname = "localhost";
+          vaapiDriver = "iHD";
+          settings = let
+            userPass = "{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}";
+            frigatePath = camera: subtype: (cameraPath {inherit userPass camera subtype;});
+          in {
+            mqtt = {
               enabled = true;
-              width = 704;
-              height = 480;
+              host = hostAddress;
+              user = "frigate";
+              password = "{FRIGATE_MQTT_PASSWORD}";
             };
-            record.enabled = true;
-            snapshots.enabled = true;
-          })
-          cameras;
-        go2rtc.streams = go2rtcStreams userPass;
+            ffmpeg.hwaccel_args = "preset-vaapi";
+            detectors.coral = {
+              type = "edgetpu";
+              device = "usb";
+            };
+            objects.track = ["person" "cat" "dog"];
+            cameras =
+              lib.mapAttrs (camera: value: {
+                enabled = true;
+                ffmpeg = {
+                  inputs = [
+                    {
+                      path = frigatePath "${camera}" "1";
+                      roles = ["detect"];
+                    }
+                    {
+                      path = frigatePath "${camera}" "0";
+                      roles = ["record"];
+                    }
+                  ];
+                };
+                detect = {
+                  enabled = true;
+                  width = 704;
+                  height = 480;
+                };
+                record.enabled = true;
+                snapshots.enabled = true;
+              })
+              cameras;
+            go2rtc.streams = go2rtcStreams userPass;
+          };
+        };
+        systemd.services.frigate.serviceConfig.EnvironmentFile = envPath;
+
+        services.go2rtc = {
+          enable = true;
+          settings.streams = go2rtcStreams "\${FRIGATE_RTSP_USER}:\${FRIGATE_RTSP_PASSWORD}";
+        };
+        systemd.services.go2rtc.serviceConfig.EnvironmentFile = envPath;
+
+        # health checks
+        systemd.timers.camera-heartbeats = {
+          wantedBy = ["timers.target"];
+          timerConfig = {
+            OnBootSec = "5m";
+            OnUnitActiveSec = "5m";
+            Unit = "camera-heartbeats.service";
+          };
+        };
+        systemd.services.camera-heartbeats = {
+          serviceConfig = {
+            Type = "oneshot";
+            User = "root";
+          };
+          script = let
+            curl = lib.getExe pkgs.curl;
+            cameraChecks = pkgs.writeShellScript "camera-checks" (with lib;
+              cameras
+              |> mapAttrsToList (camera: {address}: "echo \"${camera}:\"; ${curl} -v rtsp://${address}:554\n")
+              |> concatStrings);
+          in ''
+            ${utils.writeHealthchecksCombinedScript {slug = "camera-heartbeats";} cameraChecks}
+          '';
+        };
+
+        networking = {
+          firewall.allowedTCPPorts = [80];
+
+          # Use systemd-resolved inside the container
+          # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+          useHostResolvConf = lib.mkForce false;
+        };
+
+        services.resolved.enable = true;
+
+        system.stateVersion = systemStateVersion;
       };
     };
-    systemd.services.frigate.serviceConfig.EnvironmentFile = config.sops.templates."frigate.env".path;
 
-    services.go2rtc = {
-      enable = true;
-      settings.streams = go2rtcStreams "\${FRIGATE_RTSP_USER}:\${FRIGATE_RTSP_PASSWORD}";
-    };
-    systemd.services.go2rtc.serviceConfig.EnvironmentFile = config.sops.templates."frigate.env".path;
-
-    # override data directory
-    systemd.services.frigate.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
-    systemd.services.nginx.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
-
-    # map caddy to nginx
-    services.nginx.virtualHosts."${hostname}".listen = [
-      {
-        addr = "127.0.0.1";
-        inherit port;
-      }
-      # Frigate wants to connect on 127.0.0.1:5000 for unauthenticated requests
-      # https://github.com/NixOS/nixpkgs/issues/370349
-      # added upstream: https://github.com/NixOS/nixpkgs/commit/e72a66935ab8d826c6d357bd4fd27925ab64645e
-      # {
-      #   addr = "127.0.0.1";
-      #   port = 5000;
-      # }
-    ];
     local.reverseProxy = {
       enable = true;
       services.frigate = {
-        inherit port;
+        address = containerAddress;
+        port = 80;
       };
-    };
-
-    # health checks
-    systemd.timers.camera-heartbeats = {
-      wantedBy = ["timers.target"];
-      timerConfig = {
-        OnBootSec = "5m";
-        OnUnitActiveSec = "5m";
-        Unit = "camera-heartbeats.service";
-      };
-    };
-    systemd.services.camera-heartbeats = {
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-      };
-      script = let
-        curl = lib.getExe pkgs.curl;
-        cameraChecks = pkgs.writeShellScript "camera-checks" (with lib;
-          cameras
-          |> mapAttrsToList (camera: {address}: "echo \"${camera}:\"; ${curl} -v rtsp://${address}:554\n")
-          |> concatStrings);
-      in ''
-        ${utils.writeHealthchecksCombinedScript {slug = "camera-heartbeats";} cameraChecks}
-      '';
     };
   };
 }
