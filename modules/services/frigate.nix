@@ -122,7 +122,10 @@ in {
     };
     systemd.services.go2rtc.serviceConfig.EnvironmentFile = config.sops.templates."frigate.env".path;
 
-    # override data directory
+    # https://github.com/systemd/systemd/issues/25097
+    systemd.tmpfiles.settings.frigate = {
+      "/var/lib/frigate"."L+".argument = dataDir;
+    };
     systemd.services.frigate.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
     systemd.services.nginx.serviceConfig.BindPaths = "${dataDir}:/var/lib/frigate";
 
