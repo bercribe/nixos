@@ -26,8 +26,11 @@
         "$mainMod, C, sendshortcut, , XF86Copy, activewindow"
         "$mainMod, V, sendshortcut, , XF86Paste, activewindow"
 
-        # misc
+        # notifications
         "$mainMod, N, exec, ${pkgs.mako}/bin/makoctl dismiss"
+        "$mainMod, I, exec, ${pkgs.mako}/bin/makoctl invoke"
+
+        # misc
         "$mainMod, O, movecurrentworkspacetomonitor, +1"
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod, PERIOD, exec, pkill wofi || ${lib.getExe pkgs.wofi-emoji}"
