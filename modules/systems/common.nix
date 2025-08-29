@@ -101,6 +101,7 @@
       tmux # terminal multiplexer
       tree # directory tree
       unzip # zip extractor
+      usbutils # lsusb
       wikiman # CLI docs
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
