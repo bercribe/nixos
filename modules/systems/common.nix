@@ -98,6 +98,7 @@
       python3 # scripting
       restic # backup tool
       ripgrep # file content search
+      tcpdump # network sniffer
       tmux # terminal multiplexer
       tree # directory tree
       unzip # zip extractor
