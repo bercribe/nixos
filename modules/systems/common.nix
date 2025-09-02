@@ -14,6 +14,7 @@
   imports = [
     ./network/ssh-client.nix
     ./sops.nix
+    ./packages.nix
     ./home/stylix.nix
     (self + /modules/services)
     (self + /modules/cron/disk-monitor.nix)
@@ -74,42 +75,6 @@
       "wheel" # Enable ‘sudo’ for the user.
       "ledger"
     ];
-    packages = with pkgs; [
-      bat # better cat
-      btop # performance visualizer
-      difftastic # better diff
-      dig # dns debug
-      eza # better ls
-      fd # better find
-      fzf # fuzzy find
-      gdu # go disk analyzer
-      gh # github cli
-      hexyl # hex viewer
-      hledger # ledger accounting tool
-      hledger-ui # hledger tui
-      isd # systemd TUI
-      jujutsu # version control
-      jq # json formatter
-      lf # list files
-      mosh # mobile shell
-      mtr # ping + traceroute
-      neofetch # system info
-      nh # nix helper
-      python3 # scripting
-      restic # backup tool
-      ripgrep # file content search
-      tcpdump # network sniffer
-      tmux # terminal multiplexer
-      tree # directory tree
-      unzip # zip extractor
-      usbutils # lsusb
-      wikiman # CLI docs
-      wiper # disk cleanup tool
-      wireguard-tools # wireguard debug
-      yazi # terminal file manager
-      zellij # terminal workspace
-      zip # zip compressor
-    ];
   };
 
   # Home manager
@@ -120,15 +85,6 @@
     backupFileExtension = "backup";
     extraSpecialArgs = {inherit local;};
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    alejandra # nix formatter
-    git # version control
-    sops # secrets management
-    wget # network util
-  ];
 
   environment.enableAllTerminfo = true;
 

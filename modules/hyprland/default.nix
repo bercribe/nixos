@@ -26,11 +26,9 @@
   services.displayManager.ly.enable = false;
 
   # User env
-  environment.systemPackages = with pkgs; [
-    thunar # file browser
-    wl-clipboard # clipboard
-    # libsForQt5.qt5.qtgraphicaleffects # for sddm theme
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   libsForQt5.qt5.qtgraphicaleffects # for sddm theme
+  # ];
 
   # enabling this causes flickering in electron apps with nvidia hardware
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";

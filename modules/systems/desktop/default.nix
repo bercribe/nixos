@@ -41,6 +41,7 @@
   # services.libinput.enable = true;
 
   # User env
+  local.packages.headless = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
@@ -48,53 +49,6 @@
       "dialout" # required for bluetooth in steam VR
       "wireshark"
     ];
-    packages = with pkgs; let
-      gui = [
-        anki # SRS app
-        beeper # universal chat
-        bs-manager # mod manager for beat saber
-        chromium # browser
-        czkawka # deduping util
-        discord # voice chat
-        firefox # browser
-        foot # terminal
-        ghostty # terminal
-        godot_4 # game engine
-        handbrake # video transcoding
-        imagemagick # image viewer
-        imv # image viewer
-        inkscape # svg editor
-        keepassxc # password manager
-        libreoffice # office tools
-        localsend # file sending utility
-        makemkv # blu-ray ripper
-        mangohud # fps overlay
-        mpv # video player
-        obs-studio # screen recording
-        obsidian # PKM tool
-        pavucontrol # sound control
-        shotwell # photo editor
-        wireshark # network analyzer
-        xivlauncher # ffxiv
-        zathura # pdf viewer
-        zoom-us # video conferencing
-      ];
-      cli = [
-        cava # audio visualizer
-        exiftool # image metadata
-        ffsubsync # sync subtitles with video
-        handlr-regex # better xdg-open
-        ncspot # spotify TUI
-        spotify-player # spotify TUI
-        typst # document editor
-        wev # shows keyboard inputs
-        wineWowPackages.waylandFull # windows game emulator
-      ];
-      scripts = with pkgs.scripts; [
-        te # typst edit
-      ];
-    in
-      gui ++ cli ++ scripts;
   };
 
   # program defaults
@@ -117,12 +71,6 @@
       addedAssociations = associations;
     };
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    libnotify
-  ];
 
   # Set defaults
   environment.variables.OPENER = "handlr open";

@@ -23,11 +23,7 @@
   };
 
   # User env
-
-  environment.systemPackages = with pkgs; [
-    lzop # compression with syncoid
-    mbuffer # buffering with syncoid
-  ];
+  local.packages.headless = true;
 
   # Programs
 
