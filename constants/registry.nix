@@ -1,13 +1,12 @@
 let
   hosts = import ./hosts.nix;
   judgement = hosts.judgement;
-  moody-blues = hosts.moody-blues;
   super-fly = hosts.super-fly;
 in {
   adguardhome = {
     shortName = "aghome";
     friendlyName = "adguard-home";
-    hosts = [judgement moody-blues super-fly];
+    hosts = [judgement super-fly];
   };
   forgejo = {
     shortName = "forgejo";
