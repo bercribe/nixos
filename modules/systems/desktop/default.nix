@@ -90,8 +90,8 @@
         wev # shows keyboard inputs
         wineWowPackages.waylandFull # windows game emulator
       ];
-      scripts = [
-        (import (self + /modules/scripts/te.nix) {inherit pkgs;})
+      scripts = with pkgs.scripts; [
+        te # typst edit
       ];
     in
       gui ++ cli ++ scripts;

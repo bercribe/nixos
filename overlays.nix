@@ -105,6 +105,11 @@
     # user scripts
     errata = errata;
 
+    scripts = with prev; {
+      asw = callPackage ./pkgs/scripts/asw.nix {};
+      te = callPackage ./pkgs/scripts/te.nix {};
+    };
+
     # album art - currently broken
     # ncspot = prev.ncspot.override (prev: {
     #   withCover = true;

@@ -25,7 +25,7 @@
   # User env
   home-manager.users.mawz = import ./home.nix;
   users.users.mawz.packages = [
-    (import (self + /modules/scripts/asw.nix) {inherit pkgs;})
+    pkgs.scripts.asw # audio switch
   ];
 
   # Services
