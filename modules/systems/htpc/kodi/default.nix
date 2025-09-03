@@ -30,4 +30,6 @@
     isNormalUser = true;
     home = "/services/kodi";
   };
+
+  hardware.bluetooth.enable = true;
 }
