@@ -17,15 +17,17 @@
       };
     };
 
-    displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "kodi";
-      };
-      lightdm.greeter.enable = false;
-    };
+    displayManager.lightdm.greeter.enable = false;
+  };
+
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "kodi";
   };
 
   # Define a user account
-  users.extraUsers.kodi.isNormalUser = true;
+  users.extraUsers.kodi = {
+    isNormalUser = true;
+    home = "/services/kodi";
+  };
 }
