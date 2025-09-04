@@ -1,6 +1,7 @@
 let
   hosts = import ./hosts.nix;
   judgement = hosts.judgement;
+  moody-blues = hosts.moody-blues;
   super-fly = hosts.super-fly;
 in {
   adguardhome = {
@@ -41,6 +42,10 @@ in {
   karakeep = {
     shortName = "karakeep";
     hosts = [judgement];
+  };
+  kodi = {
+    shortName = "kodi";
+    hosts = [moody-blues];
   };
   miniflux = {
     shortName = "miniflux";

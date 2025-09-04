@@ -116,6 +116,7 @@ in {
               shortName = config.local.service-registry."${service}".shortName;
               url = "${shortName}.${hostUrl}";
               caddyCfg = proxyUrl: ''
+                tls ${hostCertDir}/cert.pem ${hostCertDir}/key.pem
                 reverse_proxy ${proxyUrl} {
                   ${
                   if attrs.httpsBackend
@@ -123,7 +124,6 @@ in {
                   else ""
                 }
                 }
-                tls ${hostCertDir}/cert.pem ${hostCertDir}/key.pem
               '';
 
               lanRedir =
@@ -176,7 +176,7 @@ in {
                     '';
                   }))
                   uniqueServices)
-            else [];
+            else {};
         in
           reverseProxies // localRedirects;
       };
