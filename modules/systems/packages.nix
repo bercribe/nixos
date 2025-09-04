@@ -55,6 +55,7 @@ in {
       base = [
         alejandra # nix formatter
         bat # better cat
+        bluetui # bluetooth device tui
         btop # performance visualizer
         difftastic # better diff
         exiftool # image metadata
