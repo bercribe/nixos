@@ -52,6 +52,10 @@
         "$mainMod, L, movefocus, r"
         "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
+        "$mainMod, Left,  movefocus, l"
+        "$mainMod, Right, movefocus, r"
+        "$mainMod, Up,    movefocus, u"
+        "$mainMod, Down,  movefocus, d"
 
         # to switch between windows in a floating workspace
         "$mainMod,Tab,cyclenext," # change focus to another window
@@ -141,6 +145,10 @@
       bind = , L, movewindoworgroup, r
       bind = , K, movewindoworgroup, u
       bind = , J, movewindoworgroup, d
+      bind = , Left,  movewindoworgroup, l
+      bind = , Right, movewindoworgroup, r
+      bind = , Up,    movewindoworgroup, u
+      bind = , Down,  movewindoworgroup, d
 
       bind = , 1, movetoworkspace, 1
       bind = , 2, movetoworkspace, 2
@@ -158,12 +166,20 @@
       binde = SHIFT, L, resizeactive, 100 0
       binde = SHIFT, K, resizeactive, 0 -100
       binde = SHIFT, J, resizeactive, 0 100
+      binde = SHIFT, Left,  resizeactive, -100 0
+      binde = SHIFT, Right, resizeactive, 100 0
+      binde = SHIFT, Up,    resizeactive, 0 -100
+      binde = SHIFT, Down,  resizeactive, 0 100
 
       # escape hatch for switching focus
       bind = ALT, H, movefocus, l
       bind = ALT, L, movefocus, r
       bind = ALT, K, movefocus, u
       bind = ALT, J, movefocus, d
+      bind = ALT, Left,   movefocus, l
+      bind = ALT, Right,  movefocus, r
+      bind = ALT, Up,     movefocus, u
+      bind = ALT, Down,   movefocus, d
 
       # exit
       bind = , Q, submap, reset
