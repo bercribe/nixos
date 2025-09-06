@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.neovim = let
     languageServers = with pkgs; {
       clangd = libclang;
@@ -6,8 +10,9 @@
       nixd = nixd;
       pyright = pyright;
     };
-    treesitterSyntaxes = pkgs.vimPlugins.nvim-treesitter.withPlugins
-      (p: with p; [ lua nix python ]);
+    treesitterSyntaxes =
+      pkgs.vimPlugins.nvim-treesitter.withPlugins
+      (p: with p; [lua nix python]);
   in {
     enable = true;
     defaultEditor = true;
@@ -41,15 +46,17 @@
       lsp = ''
         vim.lsp.enable({
           ${
-            builtins.concatStringsSep ", "
-            (lib.mapAttrsToList (name: _: "'${name}'") languageServers)
-          }
+          builtins.concatStringsSep ", "
+          (lib.mapAttrsToList (name: _: "'${name}'") languageServers)
+        }
         })
       '';
-    in main + lsp;
+    in
+      main + lsp;
     extraPackages = let
       lsp = lib.mapAttrsToList (_: pkg: pkg) languageServers;
-      fmt = with pkgs; [ alejandra ];
-    in lsp ++ fmt;
+      fmt = with pkgs; [alejandra];
+    in
+      lsp ++ fmt;
   };
 }

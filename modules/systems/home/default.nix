@@ -107,5 +107,4 @@
   programs.btop.enable = true;
   programs.foot.enable = true;
   programs.ghostty.enable = true;
-  programs.zellij.enable = true;
 }

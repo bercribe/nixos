@@ -77,7 +77,6 @@ in {
         wiper # disk cleanup tool
         wireguard-tools # wireguard debug
         yazi # terminal file manager
-        zellij # terminal workspace
       ];
       desktop = let
         gui = [
