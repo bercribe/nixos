@@ -1,28 +1,58 @@
-{pkgs, ...}: {
-  programs.neovim = {
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  programs.neovim = let
+    languageServers = with pkgs; {
+      clangd = libclang;
+      lua_ls = lua-language-server;
+      nixd = nixd;
+      pyright = pyright;
+    };
+    treesitterSyntaxes = pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
+      with p; [
+        lua
+        nix
+        python
+      ]);
+  in {
     enable = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
-      telescope-nvim
-      telescope-fzf-native-nvim
-      neo-tree-nvim
-      nvim-web-devicons
+      nvim-lspconfig # language servers
+      telescope-nvim # quick opener w/ fzf
+      {
+        plugin = oil-nvim; # file explorer
+        config = ''
+          packadd! oil.nvim
+          lua <<EOF
+            require'oil'.setup()
+          EOF
+        '';
+      }
+      {
+        plugin = nvim-treesitter; # syntax highlighting
+        config = ''
+          packadd! nvim-treesitter
+          lua <<EOF
+            require'nvim-treesitter.configs'.setup {
+              highlight = {enable = true},
+            }
+          EOF
+        '';
+      }
+      treesitterSyntaxes
     ];
-    extraConfig = ''
-      " Fix tabs
-      set tabstop=2 shiftwidth=2 smarttab
-      " Use spaces instead of tabs
-      set expandtab
-      " Use system clipboard
-      " set clipboard=unnamedplus
-      " Find files using Telescope command-line sugar.
-      nnoremap <leader>ff <cmd>Telescope find_files<cr>
-      nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-      nnoremap <leader>fb <cmd>Telescope buffers<cr>
-      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-      " Show file tree
-      nnoremap <leader>tr :Neotree reveal right<cr>
-      nnoremap <leader>tt :Neotree toggle right<cr>
-    '';
+    extraLuaConfig = let
+      main = builtins.readFile ./vim.lua;
+      lsp = ''
+        vim.lsp.enable({
+          ${builtins.concatStringsSep ", " (lib.mapAttrsToList (name: _: "'${name}'") languageServers)}
+        })
+      '';
+    in
+      main + lsp;
+    extraPackages = lib.mapAttrsToList (_: pkg: pkg) languageServers;
   };
 }
