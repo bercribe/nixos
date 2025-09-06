@@ -148,6 +148,7 @@ in {
           {
             run = ''$OPENER "$@"'';
             desc = "Open";
+            orphan = true;
           }
         ];
         plugin = {
