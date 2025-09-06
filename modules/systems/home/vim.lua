@@ -26,3 +26,4 @@ vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 -- for vim symbols
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
+vim.lsp.config("nixd", { formatting = { command = { "alejandra" } } })
