@@ -48,9 +48,11 @@ in {
       shortcut = "space";
       baseIndex = 1;
       mouse = true;
+      escapeTime = 0;
       customPaneNavigationAndResize = true;
+      focusEvents = true;
       sensibleOnTop = true;
-      terminal = "$TERM";
+      terminal = "tmux-256color";
       extraConfig = ''
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
