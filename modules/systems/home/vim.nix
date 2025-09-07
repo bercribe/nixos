@@ -9,10 +9,11 @@
       lua_ls = lua-language-server;
       nixd = nixd;
       pyright = pyright;
+      tinymist = tinymist;
     };
     treesitterSyntaxes =
       pkgs.vimPlugins.nvim-treesitter.withPlugins
-      (p: with p; [lua nix python]);
+      (p: with p; [lua nix python typst]);
   in {
     enable = true;
     defaultEditor = true;
@@ -22,6 +23,7 @@
       with pkgs.vimPlugins; [
         nvim-lspconfig # language servers
         telescope-nvim # quick opener w/ fzf
+        typst-preview-nvim # live preview for typst
         {
           plugin = oil-nvim; # file explorer
           config = ''

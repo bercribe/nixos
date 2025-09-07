@@ -22,6 +22,8 @@ vim.keymap.set("n", "<leader>h", ":Telescope help_tags<CR>")
 
 vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 
+vim.keymap.set("n", "<leader>tp", ":TypstPreview<CR>")
+
 -- lsp
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 -- for vim symbols

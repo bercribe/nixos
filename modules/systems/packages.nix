@@ -120,11 +120,8 @@ in {
           typst # document editor
           wev # shows keyboard inputs
         ];
-        scripts = with pkgs.scripts; [
-          te # typst edit
-        ];
       in
-        gui ++ cli ++ scripts;
+        gui ++ cli;
     in
       base
       ++ (
