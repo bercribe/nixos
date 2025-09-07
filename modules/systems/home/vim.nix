@@ -16,43 +16,43 @@
   in {
     enable = true;
     defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig # language servers
-      telescope-nvim # quick opener w/ fzf
-      {
-        plugin = oil-nvim; # file explorer
-        config = ''
-          packadd! oil.nvim
-          lua <<EOF
-            require'oil'.setup()
-          EOF
-        '';
-      }
-      {
-        plugin = nvim-treesitter; # syntax highlighting
-        config = ''
-          packadd! nvim-treesitter
-          lua <<EOF
-            require'nvim-treesitter.configs'.setup {
-              highlight = {enable = true},
-            }
-          EOF
-        '';
-      }
-      treesitterSyntaxes
-    ];
-    extraLuaConfig = let
-      main = builtins.readFile ./vim.lua;
-      lsp = ''
-        vim.lsp.enable({
-          ${
-          builtins.concatStringsSep ", "
-          (lib.mapAttrsToList (name: _: "'${name}'") languageServers)
-        }
-        })
-      '';
+    plugins = let
+      toLua = str: "lua << EOF\n${str}\nEOF\n";
     in
-      main + lsp;
+      with pkgs.vimPlugins; [
+        nvim-lspconfig # language servers
+        telescope-nvim # quick opener w/ fzf
+        {
+          plugin = oil-nvim; # file explorer
+          config = ''
+            packadd! oil.nvim
+            ${toLua "require'oil'.setup()"}
+          '';
+        }
+        {
+          plugin = nvim-treesitter; # syntax highlighting
+          config = ''
+            packadd! nvim-treesitter
+            ${toLua ''
+              require'nvim-treesitter.configs'.setup {
+                highlight = {enable = true},
+              }
+            ''}
+          '';
+        }
+        treesitterSyntaxes
+      ];
+    extraLuaConfig = ''
+      ${builtins.readFile ./vim.lua}
+
+      -- lsp servers
+      vim.lsp.enable({
+        ${
+        builtins.concatStringsSep ", "
+        (lib.mapAttrsToList (name: _: "'${name}'") languageServers)
+      }
+      })
+    '';
     extraPackages = let
       lsp = lib.mapAttrsToList (_: pkg: pkg) languageServers;
       fmt = with pkgs; [alejandra];
