@@ -26,20 +26,14 @@
         typst-preview-nvim # live preview for typst
         {
           plugin = oil-nvim; # file explorer
-          config = ''
-            packadd! oil.nvim
-            ${toLua "require'oil'.setup()"}
-          '';
+          config = toLua "require('oil').setup()";
         }
         {
           plugin = nvim-treesitter; # syntax highlighting
-          config = ''
-            packadd! nvim-treesitter
-            ${toLua ''
-              require'nvim-treesitter.configs'.setup {
-                highlight = {enable = true},
-              }
-            ''}
+          config = toLua ''
+            require('nvim-treesitter.configs').setup({
+              highlight = {enable = true},
+            })
           '';
         }
         treesitterSyntaxes
