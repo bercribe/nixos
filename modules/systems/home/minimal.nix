@@ -56,6 +56,8 @@ in {
       extraConfig = ''
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
+
+        bind g display-popup -E "sf"
       '';
     };
 

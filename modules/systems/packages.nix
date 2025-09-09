@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   config,
   lib,
@@ -6,6 +7,10 @@
 }: let
   cfg = config.local.packages;
 in {
+  imports = [
+    (self + /pkgs/scripts/sf.nix)
+  ];
+
   options.local.packages = with lib;
   with types; {
     headless = mkOption {
