@@ -57,32 +57,36 @@ in {
       );
 
     users.users.mawz.packages = let
-      base = [
-        alejandra # nix formatter
-        bat # better cat
-        bluetui # bluetooth device tui
-        btop # performance visualizer
-        difftastic # better diff
-        exiftool # image metadata
-        eza # better ls
-        gdu # go disk analyzer
-        gh # github cli
-        hledger # ledger accounting tool
-        hledger-ui # hledger tui
-        isd # systemd TUI
-        jujutsu # version control
-        lf # list files
-        mosh # mobile shell
-        mtr # ping + traceroute
-        neofetch # system info
-        nh # nix helper
-        restic # backup tool
-        sops # secrets management
-        wikiman # CLI docs
-        wiper # disk cleanup tool
-        wireguard-tools # wireguard debug
-        yazi # terminal file manager
-      ];
+      base = let
+        upstream = [
+          alejandra # nix formatter
+          bat # better cat
+          bluetui # bluetooth device tui
+          btop # performance visualizer
+          difftastic # better diff
+          exiftool # image metadata
+          eza # better ls
+          gdu # go disk analyzer
+          gh # github cli
+          hledger # ledger accounting tool
+          hledger-ui # hledger tui
+          isd # systemd TUI
+          jujutsu # version control
+          lf # list files
+          mosh # mobile shell
+          mtr # ping + traceroute
+          neofetch # system info
+          nh # nix helper
+          restic # backup tool
+          sops # secrets management
+          wikiman # CLI docs
+          wiper # disk cleanup tool
+          wireguard-tools # wireguard debug
+          yazi # terminal file manager
+        ];
+        scripts = with pkgs.scripts; [gtgh];
+      in
+        upstream ++ scripts;
       desktop = let
         gui = [
           anki # SRS app
