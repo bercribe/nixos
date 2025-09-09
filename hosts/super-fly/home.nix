@@ -5,6 +5,13 @@
     (rootDir + /modules/systems/home)
   ];
 
+  local.yazi.keybinds = {
+    goto-zvault = {
+      bind = ["g" "z"];
+      command = "cd /zvault";
+    };
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
