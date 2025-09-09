@@ -25,6 +25,28 @@
         telescope-nvim # quick opener w/ fzf
         typst-preview-nvim # live preview for typst
         {
+          plugin = blink-cmp; # auto completion
+          config = toLua ''
+            require('blink.cmp').setup({
+              -- C-y to accept
+              -- C-space: Open menu or open docs if already open
+              -- C-n/C-p or Up/Down: Select next/previous item
+              -- C-e: Hide menu
+              -- C-k: Toggle signature help (if signature.enabled = true)
+              keymap = { preset = 'default' },
+
+              appearance = {
+                nerd_font_variant = 'mono'
+              },
+              completion = { documentation = { auto_show = false } },
+              sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+              },
+              fuzzy = { implementation = "prefer_rust_with_warning" }
+            })
+          '';
+        }
+        {
           plugin = oil-nvim; # file explorer
           config = toLua "require('oil').setup()";
         }
