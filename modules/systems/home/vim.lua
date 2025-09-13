@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>b", ":FzfLua buffers<CR>")
 vim.keymap.set("n", "<leader>h", ":FzfLua helptags<CR>")
 
 vim.keymap.set("n", "<leader>e", ":Oil<CR>")
-vim.keymap.set("n", "<leader>E", ":Yazi toggle<CR>")
+vim.keymap.set("n", "<leader>E", ":Yazi<CR>")
 
 vim.keymap.set("n", "<leader>tp", ":TypstPreview<CR>")
 
