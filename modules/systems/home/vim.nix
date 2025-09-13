@@ -21,8 +21,8 @@
       toLua = str: "lua << EOF\n${str}\nEOF\n";
     in
       with pkgs.vimPlugins; [
+        fzf-lua # quick opener w/ fzf
         nvim-lspconfig # language servers
-        telescope-nvim # quick opener w/ fzf
         typst-preview-nvim # live preview for typst
         {
           plugin = blink-cmp; # auto completion

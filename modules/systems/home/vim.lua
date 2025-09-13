@@ -15,10 +15,10 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>s", ':e #<CR>')
 vim.keymap.set({ "n", "v", "x" }, "<leader>S", ':sf #<CR>')
 
 -- plugins
-vim.keymap.set("n", "<leader>f", ":Telescope find_files<CR>")
-vim.keymap.set("n", "<leader>g", ":Telescope live_grep<CR>")
-vim.keymap.set("n", "<leader>b", ":Telescope buffers<CR>")
-vim.keymap.set("n", "<leader>h", ":Telescope help_tags<CR>")
+vim.keymap.set("n", "<leader>f", ":FzfLua files<CR>")
+vim.keymap.set("n", "<leader>g", ":FzfLua live_grep<CR>")
+vim.keymap.set("n", "<leader>b", ":FzfLua buffers<CR>")
+vim.keymap.set("n", "<leader>h", ":FzfLua helptags<CR>")
 
 vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 
