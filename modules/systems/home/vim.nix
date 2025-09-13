@@ -24,6 +24,7 @@
         fzf-lua # quick opener w/ fzf
         nvim-lspconfig # language servers
         typst-preview-nvim # live preview for typst
+        yazi-nvim # file picker
         {
           plugin = blink-cmp; # auto completion
           config = toLua ''
