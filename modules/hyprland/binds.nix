@@ -11,9 +11,12 @@
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = let
-        screenshot = pkgs.writeShellScriptBin "screenshot" ''
-          ${pkgs.grim}/bin/grim -l 0 -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy
-        '';
+        slurp = lib.getExe pkgs.slurp;
+        grim = lib.getExe pkgs.grim;
+        swappy = lib.getExe pkgs.swappy;
+        wf-recorder = lib.getExe pkgs.wf-recorder;
+        wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
+        wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
       in [
         # openers
         "$mainMod, R, exec, $menu"
@@ -81,7 +84,9 @@
         "$mainMod, mouse_up, workspace, e-1"
 
         # Screenshots
-        ", Print, exec, pkill slurp || ${lib.getExe screenshot}"
+        ", Print, exec, pkill slurp || ${grim} -l 0 -g \"$(${slurp})\" - | ${wl-copy}"
+        "$mainMod, Print, exec, ${wl-paste} | ${swappy} -f -"
+        "$mainMod SHIFT, Print, exec, pkill wf-recorder || pkill slurp || ${wf-recorder} -g \"$(${slurp})\" -f \"$HOME/Videos/$(date).mkv\""
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
