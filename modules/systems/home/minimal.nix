@@ -39,6 +39,20 @@ in {
       vim = "nvim";
     };
 
+    programs.bash = {
+      enable = true;
+      initExtra = ''
+        # Aliases with bash completion
+        . ${lib.getExe pkgs.complete-alias}
+        alias sctl='systemctl'
+        complete -F _complete_alias sctl
+        alias jctl='journalctl'
+        complete -F _complete_alias jctl
+        alias jfu='journalctl -f -u'
+        complete -F _complete_alias jfu
+      '';
+    };
+
     # for fzf bash integration
     programs.fzf.enable = true;
 

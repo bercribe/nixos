@@ -28,20 +28,6 @@
 
   xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
-  programs.bash = {
-    enable = true;
-    initExtra = ''
-      # Aliases with bash completion
-      . ${lib.getExe pkgs.complete-alias}
-      alias sctl='systemctl'
-      complete -F _complete_alias sctl
-      alias jctl='journalctl'
-      complete -F _complete_alias jctl
-      alias jfu='journalctl -f -u'
-      complete -F _complete_alias jfu
-    '';
-  };
-
   # ssh config
   # use `ssh-copy-id` to add key to remote
   # `ssh-add` to forward credentials
