@@ -9,10 +9,10 @@ in {
   options.local.vim = with lib;
   with types; {
     languageServers = mkOption {
-      type = attrsOf package;
+      type = attrsOf (nullOr package);
       description = "Language servers to use. Key is the name of the LSP in nvim-lspconfig, value is the package.";
       default = with pkgs; {
-        clangd = libclang;
+        clangd = null;
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
@@ -86,7 +86,7 @@ in {
         })
       '';
       extraPackages = let
-        lsp = lib.mapAttrsToList (_: pkg: pkg) cfg.languageServers;
+        lsp = with lib; filter (s: s != null) (mapAttrsToList (_: pkg: pkg) cfg.languageServers);
         fmt = with pkgs; [alejandra];
       in
         lsp ++ fmt;
