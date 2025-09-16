@@ -27,10 +27,7 @@
   };
 
   outputs = {
-    self,
-    errata,
     nixpkgs,
-    nixpkgs-unstable,
     nixos-hardware,
     home-manager,
     disko,
@@ -112,6 +109,12 @@
           ];
       };
     };
+    homeModules = let
+      minimal = import ./modules/systems/home/minimal.nix;
+    in {
+      default = minimal;
+      inherit minimal;
+    };
     homeConfigurations = let
       commonModules = [
         stylix.homeModules.stylix
@@ -121,12 +124,6 @@
         inherit local;
       };
     in {
-      minimal = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-        modules = [
-          ./modules/systems/home/minimal.nix
-        ];
-      };
       "mawz@heavens-door" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs extraSpecialArgs;
         modules =
