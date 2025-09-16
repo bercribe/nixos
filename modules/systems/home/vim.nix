@@ -20,9 +20,9 @@ in {
       };
     };
     treesitterParsers = mkOption {
-      type = listOf package;
+      type = listOf str;
       description = "Treesitter parsers to use";
-      default = with pkgs.vimPlugins.nvim-treesitter-parsers; [lua nix python typst];
+      default = ["lua" "nix" "python" "typst"];
     };
   };
 
@@ -72,7 +72,7 @@ in {
               })
             '';
           }
-          (nvim-treesitter.withPlugins (_: cfg.treesitterParsers))
+          (nvim-treesitter.withPlugins (p: map (t: p."${t}") cfg.treesitterParsers))
         ];
       extraLuaConfig = ''
         ${builtins.readFile ./vim.lua}
