@@ -108,6 +108,7 @@
     scripts = with prev; {
       asw = callPackage ./pkgs/scripts/asw.nix {};
       gtgh = callPackage ./pkgs/scripts/gtgh.nix {};
+      sf = callPackage ./pkgs/scripts/sf.nix {};
     };
 
     # album art - currently broken
