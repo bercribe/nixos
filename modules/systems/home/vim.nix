@@ -12,7 +12,7 @@ in {
       type = attrsOf (nullOr package);
       description = "Language servers to use. Key is the name of the LSP in nvim-lspconfig, value is the package.";
       default = with pkgs; {
-        clangd = null;
+        clangd = clang-tools;
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
