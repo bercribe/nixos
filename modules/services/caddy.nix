@@ -112,7 +112,7 @@ in {
               url = "${shortName}.${hostUrl}";
               caddyCfg = proxyUrl: ''
                 tls ${hostCertDir}/cert.pem ${hostCertDir}/key.pem
-                reverse_proxy ${proxyUrl} {}
+                reverse_proxy ${proxyUrl}
               '';
 
               lanRedir =
