@@ -80,6 +80,12 @@ in {
             }
           ];
 
+          registryOverrides = {
+            kodi = {
+              conditions = ["[STATUS] == 401"];
+            };
+          };
+
           registryEndpoints = with lib;
             concatLists (mapAttrsToList (service: {
               shortName,
@@ -89,18 +95,19 @@ in {
               map (host: let
                 isUnique = length hosts == 1;
               in
-                makeEndpoint {
-                  name = "${service} (${host})";
-                  group =
-                    if isUnique
-                    then host
-                    else shortName;
-                  url = "http://${shortName}${
-                    if isUnique
-                    then ""
-                    else ".${host}"
-                  }.lan";
-                })
+                makeEndpoint ({
+                    name = "${service} (${host})";
+                    group =
+                      if isUnique
+                      then host
+                      else shortName;
+                    url = "http://${shortName}${
+                      if isUnique
+                      then ""
+                      else ".${host}"
+                    }.lan";
+                  }
+                  // (registryOverrides.${service} or {})))
               hosts)
             config.local.service-registry);
         in
