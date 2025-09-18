@@ -49,6 +49,11 @@ in {
               default = true;
               description = "True to use <service>.lan as URL, false for <service>.<hostName>.lan";
             };
+            httpsBackend = mkOption {
+              type = bool;
+              default = false;
+              description = "https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#https";
+            };
           };
         });
         default = {};
@@ -112,7 +117,13 @@ in {
               url = "${shortName}.${hostUrl}";
               caddyCfg = proxyUrl: ''
                 tls ${hostCertDir}/cert.pem ${hostCertDir}/key.pem
-                reverse_proxy ${proxyUrl}
+                reverse_proxy ${proxyUrl} {
+                  ${
+                  if attrs.httpsBackend
+                  then "header_up Host {upstream_hostport}"
+                  else ""
+                }
+                }
               '';
 
               lanRedir =

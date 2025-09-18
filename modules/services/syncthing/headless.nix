@@ -21,6 +21,7 @@ in {
       enable = true;
       services.syncthing-headless = {
         port = 8384;
+        httpsBackend = true;
       };
     };
   };
