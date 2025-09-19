@@ -74,7 +74,7 @@ in {
       enableIPv6 = true;
     };
     # needed to reach mosquitto instance
-    # networking.firewall.trustedInterfaces = ["ve-frigate"];
+    networking.firewall.trustedInterfaces = ["ve-frigate"];
 
     containers.frigate = let
       systemStateVersion = config.system.stateVersion;
