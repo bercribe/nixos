@@ -54,7 +54,7 @@ in {
 
     users.users.mawz.packages = let
       base = let
-        upstream = [
+        nixpkgs = [
           alejandra # nix formatter
           bat # better cat
           bluetui # bluetooth device tui
@@ -62,6 +62,7 @@ in {
           difftastic # better diff
           exiftool # image metadata
           eza # better ls
+          ffmpeg # video utilities
           gdu # go disk analyzer
           gh # github cli
           hledger # ledger accounting tool
@@ -85,7 +86,7 @@ in {
           sf
         ];
       in
-        upstream ++ scripts;
+        nixpkgs ++ scripts;
       desktop = let
         gui = [
           anki # SRS app
