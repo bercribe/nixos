@@ -138,10 +138,17 @@
   # Printing
   # Enable CUPS to print documents.
   # Manage at http://localhost:631/
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-browsed
+    ];
+  };
   # Auto network discovery
-  # https://discourse.nixos.org/t/cups-cups-filters-and-libppd-security-issues/52780
-  services.avahi.enable = false;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
 
   # USB drive automount
   services.udisks2 = {
