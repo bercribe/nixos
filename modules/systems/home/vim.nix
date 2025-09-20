@@ -24,6 +24,31 @@ in {
       description = "Treesitter parsers to use";
       default = ["lua" "nix" "python" "typst"];
     };
+    filetypes = mkOption {
+      type = attrsOf (submodule {
+        options = {
+          tabsize = mkOption {
+            type = int;
+            description = "Sets tabstop and shiftwidth options";
+            default = 4;
+          };
+          expandtab = mkOption {
+            type = bool;
+            description = "Sets expandtab option";
+            default = true;
+          };
+        };
+      });
+      description = "FileType autocmds. Keyed on pattern to use, usually the file extension. Check using :set filetype";
+      default = {
+        "*" = {
+          tabsize = 4;
+        };
+        nix = {
+          tabsize = 2;
+        };
+      };
+    };
   };
 
   config = {
@@ -74,16 +99,38 @@ in {
           }
           (nvim-treesitter.withPlugins (p: map (t: p."${t}") cfg.treesitterParsers))
         ];
-      extraLuaConfig = ''
+      extraLuaConfig = let
+        lspServers = with lib; concatStringsSep ", " (mapAttrsToList (name: _: "'${name}'") cfg.languageServers);
+
+        filetypeAutocmds = with lib;
+          concatStrings (mapAttrsToList (pattern: {
+              tabsize,
+              expandtab,
+            }: ''
+              vim.api.nvim_create_autocmd('FileType', {
+                pattern = {'${pattern}'},
+                callback = function()
+                  vim.opt.tabstop = ${toString tabsize}
+                  vim.opt.shiftwidth = ${toString tabsize}
+                  vim.opt.expandtab = ${
+                if expandtab
+                then "true"
+                else "false"
+              }
+                end,
+              })
+            '')
+            cfg.filetypes);
+      in ''
         ${builtins.readFile ./vim.lua}
 
         -- lsp servers
         vim.lsp.enable({
-          ${
-          builtins.concatStringsSep ", "
-          (lib.mapAttrsToList (name: _: "'${name}'") cfg.languageServers)
-        }
+          ${lspServers}
         })
+
+        -- filetype autocmds
+        ${filetypeAutocmds}
       '';
       extraPackages = let
         lsp = with lib; filter (s: s != null) (mapAttrsToList (_: pkg: pkg) cfg.languageServers);
