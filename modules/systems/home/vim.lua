@@ -25,6 +25,8 @@ vim.keymap.set("n", "<leader>E", ":Yazi<CR>")
 
 vim.keymap.set("n", "<leader>tp", ":TypstPreview<CR>")
 
+vim.keymap.set("n", "<leader>gu", ":execute '!gtgh %' line('.')<CR>")
+
 -- lsp
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 -- for vim symbols

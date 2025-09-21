@@ -124,9 +124,6 @@ in {
       in ''
         ${builtins.readFile ./vim.lua}
 
-        -- script binds
-        vim.keymap.set("n", "<leader>gu", ":execute '!${lib.getExe pkgs.scripts.gtgh} %' line('.')<CR>")
-
         -- lsp servers
         vim.lsp.enable({
           ${lspServers}
