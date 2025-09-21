@@ -14,9 +14,9 @@ in
 
     if [[ -f $path ]]; then
       abspath=$(realpath "$path")
-      pushd $(dirname "$path") 1>/dev/null
+      pushd "$(dirname "$path")" 1>/dev/null
     elif [[ -d $path ]]; then
-      pushd $path 1>/dev/null
+      pushd "$path" 1>/dev/null
     else
       pushd . 1>/dev/null
     fi
