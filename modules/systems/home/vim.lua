@@ -16,7 +16,7 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>S", ':sf #<CR>')
 
 -- plugins
 vim.keymap.set("n", "<leader>f", ":FzfLua files<CR>")
-vim.keymap.set("n", "<leader>g", ":FzfLua live_grep<CR>")
+vim.keymap.set("n", "<leader>G", ":FzfLua live_grep<CR>")
 vim.keymap.set("n", "<leader>b", ":FzfLua buffers<CR>")
 vim.keymap.set("n", "<leader>h", ":FzfLua helptags<CR>")
 
