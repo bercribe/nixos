@@ -13,12 +13,12 @@ in
     lineNum=$2
 
     if [[ -f $path ]]; then
-      abspath=$(realpath $path)
-      pushd $(dirname "$path")
+      abspath=$(realpath "$path")
+      pushd $(dirname "$path") 1>/dev/null
     elif [[ -d $path ]]; then
-      pushd $path
+      pushd $path 1>/dev/null
     else
-      pushd .
+      pushd . 1>/dev/null
     fi
 
     url=$(${git} remote get-url origin)
@@ -38,7 +38,6 @@ in
       fi
     fi
 
-    popd
-    echo "$url"
-    xdg-open "$url"
+    popd 1>/dev/null
+    xdg-open "$url" || echo "$url"
   ''
