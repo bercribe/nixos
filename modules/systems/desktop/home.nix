@@ -66,6 +66,11 @@
     };
   };
 
+  programs.mpv = {
+    enable = true;
+    config.sub-auto = "fuzzy";
+  };
+
   programs.spotify-player = {
     enable = true;
     settings = {
