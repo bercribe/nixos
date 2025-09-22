@@ -142,6 +142,7 @@
     enable = true;
     drivers = with pkgs; [
       cups-browsed
+      cups-brother-hll2350dw
     ];
   };
   # Auto network discovery
