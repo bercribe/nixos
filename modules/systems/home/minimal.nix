@@ -70,7 +70,7 @@ in {
       customPaneNavigationAndResize = true;
       focusEvents = true;
       sensibleOnTop = true;
-      terminal = "tmux-256color";
+      terminal = "foot";
       extraConfig = ''
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
