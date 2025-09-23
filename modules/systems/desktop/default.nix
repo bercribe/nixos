@@ -73,9 +73,12 @@
   };
 
   # Set defaults
-  environment.variables.OPENER = "handlr open";
-  environment.variables.BROWSER = "firefox";
-  environment.variables.TERMINAL = "foot";
+  environment.variables = {
+    BROWSER = "firefox";
+    EDITOR = "nvim";
+    OPENER = "handlr open";
+    TERMINAL = "foot";
+  };
 
   # Programs
 

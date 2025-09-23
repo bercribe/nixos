@@ -90,11 +90,6 @@
 
   # Programs
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   # To fix database error, run:
   # sudo -i
   # nix-channel --update
