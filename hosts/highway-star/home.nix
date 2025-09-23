@@ -14,10 +14,10 @@
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "[workspace 1 silent] $TERMINAL"
-      "[workspace 2 silent] firefox"
-      "[workspace 3 silent] obsidian"
-      "[workspace 5 silent] $TERMINAL -e ncspot"
-      "[workspace 6 silent] beeper"
+      "[workspace 6 silent] firefox"
+      "[workspace 7 silent] obsidian"
+      "[workspace 8 silent] $TERMINAL -e ncspot"
+      "[workspace 9 silent] beeper"
       "[workspace 10 silent] keepassxc"
     ];
   };
