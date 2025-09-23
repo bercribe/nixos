@@ -42,6 +42,10 @@ in {
     programs.bash = {
       enable = true;
       initExtra = ''
+        # fixes issue where home.sessionVariables have no effect
+        # https://github.com/nix-community/home-manager/issues/1011
+        source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh";
+
         # Aliases with bash completion
         . ${lib.getExe pkgs.complete-alias}
         alias sctl='systemctl'
