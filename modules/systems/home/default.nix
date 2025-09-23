@@ -37,6 +37,7 @@
   in {
     enable = true;
     addKeysToAgent = "yes";
+    includes = ["~/.ssh/transient.conf"];
     matchBlocks = {
       judgement = {
         inherit user forwardAgent;
