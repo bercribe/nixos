@@ -75,6 +75,7 @@ in {
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
 
+        bind O switch-client -l
         bind g display-popup -E "sf"
       '';
     };
