@@ -24,6 +24,7 @@
     ls = "eza";
     nhs = "nh home switch ~/nixos";
     nrs = "~/nixos/rebuild-switch.sh";
+    wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
   };
 
   xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;

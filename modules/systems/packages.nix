@@ -79,6 +79,7 @@ in {
           wikiman # CLI docs
           wiper # disk cleanup tool
           wireguard-tools # wireguard debug
+          wol # wake on lan
           yazi # terminal file manager
         ];
         scripts = with pkgs.scripts; [
