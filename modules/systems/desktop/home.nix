@@ -24,7 +24,7 @@
     enable = true;
     # fixes tab completion to use dircolors
     # dircolors must be evaluated before colored-stats is enabled
-    bashrcExtra = ''
+    initExtra = ''
       eval $(${pkgs.coreutils}/bin/dircolors -b ~/.dir_colors)
       bind 'set colored-stats on'
     '';

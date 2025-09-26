@@ -40,6 +40,10 @@
     };
   };
 
+  services.openssh.extraConfig = ''
+    ForceCommand systemd-inhibit --who="SSH session" --why="Active user" --what=idle --mode=block bash
+  '';
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
