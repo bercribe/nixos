@@ -14,8 +14,8 @@ in {
   systemd.timers.syncthing-conflicts = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnBootSec = "1d";
-      OnUnitActiveSec = "1d";
+      OnBootSec = "1h";
+      OnUnitActiveSec = "1h";
       Unit = "syncthing-conflicts.service";
     };
   };
