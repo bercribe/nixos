@@ -41,8 +41,8 @@ in {
         "$terminal" = "$TERMINAL";
         "$fileManager" = "$TERMINAL -e yazi";
         "$browser" = "$BROWSER";
-        # Open wofi on first press, closes it on second
-        "$menu" = "pkill wofi || ${pkgs.wofi}/bin/wofi --show drun";
+        # Open fuzzel on first press, closes it on second
+        "$menu" = "pkill fuzzel || ${lib.getExe pkgs.fuzzel}";
 
         # Some default env vars.
         # env = [
@@ -465,6 +465,7 @@ in {
     };
 
     # needed for stylix theming
+    programs.fuzzel.enable = true;
     programs.swaylock.enable = true;
     services.mako.enable = true;
   };

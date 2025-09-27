@@ -36,7 +36,7 @@
         # misc
         "$mainMod, O, movecurrentworkspacetomonitor, +1"
         "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod, PERIOD, exec, pkill wofi || ${lib.getExe pkgs.wofi-emoji}"
+        "$mainMod, PERIOD, exec, pkill fuzzel || ${lib.getExe pkgs.bemoji} -n"
 
         # applications
         "$mainMod, M, sendshortcut, CTRL SHIFT, M, class:^discord$" # mute
