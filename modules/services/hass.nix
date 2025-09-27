@@ -71,6 +71,9 @@ in {
         in {
           internal_url = url;
           external_url = url;
+          name = "Home";
+          latitude = "!secret home_lat";
+          longitude = "!secret home_lon";
         };
         http = {
           use_x_forwarded_for = true;
