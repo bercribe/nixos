@@ -129,6 +129,7 @@ in {
           spotify-player # spotify TUI
           typst # document editor
           wev # shows keyboard inputs
+          yt-dlp # youtube downloader
         ];
       in
         gui ++ cli;

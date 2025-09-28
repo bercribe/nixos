@@ -8,6 +8,7 @@
       system = final.system;
       config.allowUnfree = true;
     };
+    yt-dlp = final.unstable.yt-dlp;
 
     # TODO: remove
     # version 17.8+ broken on linux - hangs forever on disk read
