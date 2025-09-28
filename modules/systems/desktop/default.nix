@@ -35,6 +35,16 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+
+    # send sound to multiple devices
+    extraConfig.pipewire-pulse."50-combine-sink" = {
+      "pulse.cmd" = [
+        {
+          cmd = "load-module";
+          args = "module-combine-sink";
+        }
+      ];
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
