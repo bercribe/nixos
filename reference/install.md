@@ -59,6 +59,7 @@ nixos-install --system <result>
 ```
 
 Copy over secrets if necessary. Don't forget to:
+- chmod secret file
 - add new hosts to super-fly sanoid/syncoid backup jobs and ssh servers and clients
 - add any new healthchecks
 - enable secure boot
