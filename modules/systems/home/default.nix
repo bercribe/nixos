@@ -22,8 +22,8 @@
     csc = "python ${pkgs.errata}/check_sync_conflicts.py";
     diff = "difft";
     ls = "eza";
-    nhs = "nh home switch ~/nixos";
-    nrs = "~/nixos/rebuild-switch.sh";
+    nhs = "nh home switch ~/sources/nixos";
+    nrs = "~/sources/nixos/rebuild-switch.sh";
     wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
   };
 
