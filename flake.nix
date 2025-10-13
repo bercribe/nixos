@@ -6,6 +6,10 @@
       url = "github:bercribe/errata";
       flake = false;
     };
+    secrets = {
+      url = "git+ssh://git@github.com/bercribe/secrets.git";
+      flake = false;
+    };
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";

@@ -3,6 +3,7 @@
   config,
   pkgs,
   local,
+  secrets,
   ...
 }: {
   imports = [
@@ -11,7 +12,7 @@
 
   sops.secrets."ups/admin" = {};
   sops.secrets."ups/observer" = {
-    sopsFile = self + /secrets/common.yaml;
+    sopsFile = secrets + /sops/common.yaml;
   };
   sops.secrets."ups/monuser" = {};
 

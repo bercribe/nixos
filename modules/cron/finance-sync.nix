@@ -1,8 +1,8 @@
 {
-  self,
   pkgs,
   config,
   local,
+  secrets,
   ...
 }: let
   user = "finance-sync";
@@ -12,7 +12,7 @@
 in {
   sops.secrets.finance-sync-ping-key = {
     key = "healthchecks/local/ping-key";
-    sopsFile = self + /secrets/common.yaml;
+    sopsFile = secrets + /sops/common.yaml;
     owner = user;
   };
 

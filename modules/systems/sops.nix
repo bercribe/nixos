@@ -1,13 +1,13 @@
 {
-  self,
   config,
   lib,
+  secrets,
   ...
 }: {
   # Secrets management
   sops = {
     # update this with `sops secrets.yaml`
-    defaultSopsFile = lib.mkDefault (self + /secrets/secrets.yaml);
+    defaultSopsFile = lib.mkDefault (secrets + /sops/secrets.yaml);
     defaultSopsFormat = "yaml";
     age.keyFile = "/secrets/sops/keys.txt";
   };

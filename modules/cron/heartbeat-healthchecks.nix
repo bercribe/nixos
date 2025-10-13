@@ -1,9 +1,8 @@
 {
-  self,
   config,
-  pkgs,
   lib,
   local,
+  secrets,
   ...
 }: let
   cfg = config.local.cron.heartbeat-healthchecks;
@@ -13,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.secrets."healthchecks/remote/ping-key" = {
-      sopsFile = self + /secrets/common.yaml;
+      sopsFile = secrets + /sops/common.yaml;
     };
 
     systemd.timers.uptime-heartbeat = {

@@ -1,9 +1,5 @@
-{
-  self,
-  cfg,
-  ...
-}: {
+{secrets, ...}: {
   sops.secrets."healthchecks/local/ping-key" = {
-    sopsFile = self + /secrets/common.yaml;
+    sopsFile = secrets + /sops/common.yaml;
   };
 }

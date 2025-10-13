@@ -2,6 +2,7 @@
   self,
   config,
   pkgs,
+  secrets,
   ...
 }: {
   imports = [
@@ -9,7 +10,7 @@
   ];
 
   sops.secrets."ups/observer" = {
-    sopsFile = self + /secrets/common.yaml;
+    sopsFile = secrets + /sops/common.yaml;
   };
 
   # shutdown machine automatically during power outage

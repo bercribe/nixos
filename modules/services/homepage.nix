@@ -1,8 +1,8 @@
 {
-  self,
   config,
   lib,
   local,
+  secrets,
   ...
 }: let
   cfg = config.local.services.homepage-dashboard;
@@ -13,10 +13,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.secrets."healthchecks/local/api-key-ro" = {
-      sopsFile = self + /secrets/common.yaml;
+      sopsFile = secrets + /sops/common.yaml;
     };
     sops.secrets."healthchecks/remote/api-key-ro" = {
-      sopsFile = self + /secrets/common.yaml;
+      sopsFile = secrets + /sops/common.yaml;
     };
     sops.templates."homepage.env".content = ''
       HOMEPAGE_VAR_HEALTHCHECKS_LOCAL_API_KEY=${config.sops.placeholder."healthchecks/local/api-key-ro"}

@@ -1,7 +1,7 @@
 {
-  self,
   config,
   lib,
+  secrets,
   ...
 }: let
   cfg = config.local.services.postfix;
@@ -11,7 +11,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets."postfix/sasl_passwd" = {
       owner = config.services.postfix.user;
-      sopsFile = self + /secrets/common.yaml;
+      sopsFile = secrets + /sops/common.yaml;
     };
 
     # email - mail transfer agent

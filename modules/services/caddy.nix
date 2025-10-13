@@ -1,7 +1,7 @@
 {
-  self,
   config,
   lib,
+  secrets,
   ...
 }: let
   cfg = config.local.reverseProxy;
@@ -77,7 +77,7 @@ in {
 
       # Certs
       sops.secrets."cloudflare/lego" = {
-        sopsFile = self + /secrets/common.yaml;
+        sopsFile = secrets + /sops/common.yaml;
       };
       security.acme = {
         acceptTerms = true;
