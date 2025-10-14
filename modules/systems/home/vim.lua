@@ -7,28 +7,67 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.keymap.set("n", "<leader>w", ":write<CR>")
-
-vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y<CR>')
-vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"+d<CR>')
-vim.keymap.set({ "n", "v", "x" }, "<leader>s", ':e #<CR>')
-vim.keymap.set({ "n", "v", "x" }, "<leader>S", ':sf #<CR>')
+-- binds
+-- convenience
+vim.keymap.set({ "n", "v" }, "<leader>w", ":write<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
+-- system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y<CR>')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"+d<CR>')
+-- switch to alt file
+vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
+-- swap command key
+vim.keymap.set({ "n", "v" }, ":", ";")
+vim.keymap.set({ "n", "v" }, ";", ":")
+-- replace
+vim.keymap.set("n", "<leader>r", [[:%s/\V]])
+vim.keymap.set("v", "<leader>r", [[<esc>:'<,'>s/\V]])
 
 -- plugins
-vim.keymap.set("n", "<leader>f", ":FzfLua files<CR>")
+-- fzf-lua
+vim.keymap.set({ "n", "v" }, "<leader>f", ":FzfLua files<CR>")
 vim.keymap.set("n", "<leader>G", ":FzfLua live_grep<CR>")
-vim.keymap.set("n", "<leader>b", ":FzfLua buffers<CR>")
-vim.keymap.set("n", "<leader>h", ":FzfLua helptags<CR>")
+vim.keymap.set("v", "<leader>G", ":FzfLua grep_visual<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>b", ":FzfLua buffers<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sa", ":FzfLua lsp_code_actions<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sb", ":FzfLua builtin<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sh", ":FzfLua helptags<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sq", ":FzfLua quickfix<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sr", ":FzfLua registers<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>ss", ":FzfLua spell_suggest<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>st", ":FzfLua tabs<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>su", ":FzfLua lsp_references<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sw", ":FzfLua grep_cword<CR>")
+-- files
+vim.keymap.set({ "n", "v" }, "<leader>e", ":Oil<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>E", ":Yazi<CR>")
+-- typst
+vim.keymap.set({ "n", "v" }, "<leader>pt", ":TypstPreview<CR>")
 
-vim.keymap.set("n", "<leader>e", ":Oil<CR>")
-vim.keymap.set("n", "<leader>E", ":Yazi<CR>")
-
-vim.keymap.set("n", "<leader>tp", ":TypstPreview<CR>")
-
-vim.keymap.set("n", "<leader>gu", ":execute '!gtgh \"%\"' line('.')<CR>")
+-- scripts
+vim.keymap.set({ "n", "v" }, "<leader>gu", ":execute '!gtgh \"%\"' line('.')<CR>")
 
 -- lsp
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)
+vim.keymap.set({ "n", "v" }, "<leader>ld", vim.lsp.buf.type_definition)
+
+-- quickfix binds
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("qf", { clear = true }),
+    callback = function()
+        if vim.bo.buftype == "quickfix" then
+            vim.keymap.set("n", "dd", function()
+                local idx = vim.fn.line('.')
+                local qflist = vim.fn.getqflist()
+                table.remove(qflist, idx)
+                vim.fn.setqflist(qflist, 'r')
+            end, { buffer = true })
+        end
+    end,
+})
+
 -- for vim symbols
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
 vim.lsp.config("nixd", { formatting = { command = { "alejandra" } } })
