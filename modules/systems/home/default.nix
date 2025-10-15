@@ -177,7 +177,6 @@
     };
   };
 
-
   # Theme settings
   # needed for stylix theming
   programs.btop.enable = true;
