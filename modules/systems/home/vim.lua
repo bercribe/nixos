@@ -31,14 +31,17 @@ vim.keymap.set("n", "<leader>G", ":FzfLua live_grep<CR>")
 vim.keymap.set("v", "<leader>G", ":FzfLua grep_visual<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>b", ":FzfLua buffers<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sa", ":FzfLua lsp_code_actions<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>sb", ":FzfLua builtin<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sb", ":FzfLua git_blame<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sc", ":FzfLua git_commits<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sC", ":FzfLua git_bcommits<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sg", ":FzfLua grep_cword<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sh", ":FzfLua helptags<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sq", ":FzfLua quickfix<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sr", ":FzfLua registers<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>ss", ":FzfLua spell_suggest<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>st", ":FzfLua tabs<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>su", ":FzfLua lsp_references<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>sw", ":FzfLua grep_cword<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>sz", ":FzfLua builtin<CR>")
 -- files
 vim.keymap.set({ "n", "v" }, "<leader>e", ":Oil<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>E", ":Yazi<CR>")
@@ -50,7 +53,8 @@ vim.keymap.set({ "n", "v" }, "<leader>gu", ":execute '!gtgh \"%\"' line('.')<CR>
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)
-vim.keymap.set({ "n", "v" }, "<leader>ld", vim.lsp.buf.type_definition)
+vim.keymap.set({ "n", "v" }, "<leader>ld", vim.lsp.buf.definition)
+vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition)
 
 -- quickfix binds
 vim.api.nvim_create_autocmd("BufWinEnter", {
