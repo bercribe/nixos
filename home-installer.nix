@@ -15,14 +15,26 @@ system: ''
     };
 
     outputs = {nixpkgs, home-manager, my-nix, ...}: let
-      pkgs = nixpkgs.legacyPackages.${system};
+      overlays = my-nix.overlays.default;
+      pkgs = import nixpkgs {
+        inherit overlays;
+        system = "${system}";
+        config.allowUnfree = true;
+      };
     in {
       homeConfigurations."$USER" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./home.nix
           my-nix.homeModules.minimal
+          {
+            local.packages.includeCore = true;
+            local.packages.includeScripts = true;
+          }
         ];
+        extraSpecialArgs = {
+          local.constants.packages = pkgs.callPackage my-nix.packageLists {};
+        };
       };
     };
   }
