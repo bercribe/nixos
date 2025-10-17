@@ -204,15 +204,7 @@
       default = minimal;
       inherit minimal;
     });
-    packages = forAllSystems (system: let
-      overlays = import ./overlays.nix inputs;
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config.allowUnfree = true;
-      };
-      scripts = pkgs.scripts;
-    in {
-      inherit scripts;
-    });
+    overlays.default = overlays;
+    minimalPackages = import ./constants/packages.nix;
   };
 }
