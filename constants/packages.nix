@@ -7,7 +7,6 @@ with pkgs; {
     git # version control
     hexyl # hex viewer
     jq # json formatter
-    neovim # text editor
     python3 # scripting
     ripgrep # file content search
     tcpdump # network sniffer
@@ -27,6 +26,7 @@ with pkgs; {
   system = [
     lzop # compression with syncoid
     mbuffer # buffering with syncoid
+    neovim # text editor
     rclone # network file mounts
     usbutils # lsusb
   ];
