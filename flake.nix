@@ -71,6 +71,13 @@
         })
       ];
     };
+
+    homeInstaller = import ./home-installer.nix;
+    systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+    forAllSystems = f: builtins.listToAttrs (map (system: {
+      name = system;
+      value = f system;
+    }) systems);
   in {
     nixosConfigurations = {
       heavens-door = nixpkgs.lib.nixosSystem {
@@ -115,12 +122,6 @@
             paisaModule
           ];
       };
-    };
-    homeModules = let
-      minimal = import ./modules/systems/home/minimal.nix;
-    in {
-      default = minimal;
-      inherit minimal;
     };
     homeConfigurations = let
       commonModules = [
@@ -172,5 +173,36 @@
           ];
       };
     };
+
+    # portable dev environment
+    homeModules = let
+      minimal = import ./modules/systems/home/minimal.nix;
+    in {
+      default = minimal;
+      inherit minimal;
+    };
+    apps = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      install = {
+        type = "app";
+        program = "${pkgs.writeShellScript "install" (homeInstaller system)}";
+      };
+    });
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      minimal = pkgs.mkShell {
+        shellHook = ''
+          home=$HOME
+          export HOME=$TMP
+          export PATH=$TMP/.nix-profile/bin:$PATH
+          ${homeInstaller system}
+          export HOME=$home
+        '';
+      };
+    in {
+      default = minimal;
+      inherit minimal;
+    });
   };
 }
