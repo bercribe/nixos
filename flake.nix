@@ -38,6 +38,7 @@
     sops-nix,
     stylix,
     paisa,
+    secrets,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -50,6 +51,7 @@
     local = {
       constants = pkgs.callPackage ./constants {};
       utils = pkgs.callPackage ./utils;
+      secrets = import (secrets + /nix);
     };
     specialArgs =
       inputs

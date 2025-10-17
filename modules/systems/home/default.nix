@@ -1,8 +1,8 @@
 # `man home-configuration.nix` to view configurable options
 {
-  config,
   pkgs,
   lib,
+  local,
   ...
 }: {
   imports = [
@@ -75,7 +75,7 @@
   programs.git = {
     enable = true;
     userName = "mawz";
-    userEmail = "mawz@hey.com";
+    userEmail = local.secrets.email;
     difftastic.enable = true;
   };
 
@@ -84,7 +84,7 @@
     settings = {
       user = {
         name = "mawz";
-        email = "mawz@hey.com";
+        email = local.secrets.email;
       };
     };
   };

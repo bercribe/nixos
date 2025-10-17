@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  local,
   secrets,
   ...
 }: let
@@ -83,7 +84,7 @@ in {
         acceptTerms = true;
 
         defaults = {
-          email = "mawz@hey.com";
+          email = local.secrets.email;
           group = config.services.caddy.group;
 
           dnsProvider = "cloudflare";

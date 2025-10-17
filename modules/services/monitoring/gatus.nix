@@ -1,8 +1,8 @@
 {
-  self,
   config,
-  pkgs,
   lib,
+  local,
+  secrets,
   ...
 }: let
   cfg = config.local.services.gatus;
@@ -26,7 +26,7 @@ in {
           from = ''"Gatus" <noreply@gatus.lan>'';
           host = "localhost";
           port = 25;
-          to = "mawz@hey.com";
+          to = local.secrets.email;
         };
         endpoints = let
           makeEndpoint = site:
