@@ -12,8 +12,10 @@ vim.o.expandtab = true
 vim.keymap.set({ "n", "v" }, "<leader>w", ":write<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 -- system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y<CR>')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"+d<CR>')
+vim.keymap.set("n", "<leader>y", '"+yy')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>d", '"+dd')
+vim.keymap.set("v", "<leader>d", '"+d')
 -- switch to alt file
 vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
@@ -27,8 +29,8 @@ vim.keymap.set("v", "<leader>r", [[<esc>:'<,'>s/\V]])
 -- plugins
 -- fzf-lua
 vim.keymap.set({ "n", "v" }, "<leader>f", ":FzfLua files<CR>")
-vim.keymap.set("n", "<leader>G", ":FzfLua live_grep<CR>")
-vim.keymap.set("v", "<leader>G", ":FzfLua grep_visual<CR>")
+vim.keymap.set("n", "<leader>g", ":FzfLua live_grep<CR>")
+vim.keymap.set("v", "<leader>g", ":FzfLua grep_visual<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>b", ":FzfLua buffers<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sa", ":FzfLua lsp_code_actions<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sb", ":FzfLua git_blame<CR>")
@@ -49,7 +51,7 @@ vim.keymap.set({ "n", "v" }, "<leader>E", ":Yazi<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>pt", ":TypstPreview<CR>")
 
 -- scripts
-vim.keymap.set({ "n", "v" }, "<leader>gu", ":execute '!gtgh \"%\"' line('.')<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xg", ":execute '!gtgh \"%\"' line('.')<CR>")
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)
