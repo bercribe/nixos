@@ -42,7 +42,10 @@
   } @ inputs: let
     system = "x86_64-linux";
     overlays = import ./overlays.nix inputs;
-    pkgs = import nixpkgs {inherit system overlays;};
+    pkgs = import nixpkgs {
+      inherit system overlays;
+      config.allowUnfree = true;
+    };
 
     local = {
       constants = pkgs.callPackage ./constants {};

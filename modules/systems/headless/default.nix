@@ -1,8 +1,6 @@
 {
   self,
   config,
-  pkgs,
-  lib,
   ...
 }: {
   imports = [
@@ -21,9 +19,6 @@
       key = "${config.networking.hostName}/ssh-host";
     };
   };
-
-  # User env
-  local.packages.headless = true;
 
   # Programs
 

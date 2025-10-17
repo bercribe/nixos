@@ -2,7 +2,6 @@
   self,
   config,
   pkgs,
-  lib,
   local,
   ...
 }: {
@@ -51,7 +50,7 @@
   # services.libinput.enable = true;
 
   # User env
-  local.packages.headless = false;
+  environment.systemPackages = local.constants.packages.system-desktop;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
@@ -59,6 +58,7 @@
       "dialout" # required for bluetooth in steam VR
       "wireshark"
     ];
+    packages = local.constants.packages.user-desktop;
   };
 
   # program defaults

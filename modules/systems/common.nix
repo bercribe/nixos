@@ -14,7 +14,6 @@
   imports = [
     ./network/ssh-client.nix
     ./sops.nix
-    ./packages.nix
     ./home/stylix.nix
     (self + /modules/services)
     (self + /modules/cron/disk-monitor.nix)
@@ -66,6 +65,13 @@
   # User env
   nixpkgs.overlays = import (self + /overlays.nix) {inherit nixpkgs-unstable errata;};
 
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = let
+    packages = local.constants.packages;
+  in
+    packages.system ++ packages.core ++ packages.scripts;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
     isNormalUser = true;
@@ -75,6 +81,7 @@
       "wheel" # Enable ‘sudo’ for the user.
       "ledger"
     ];
+    packages = local.constants.packages.user;
   };
 
   # Home manager

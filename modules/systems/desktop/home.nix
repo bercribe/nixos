@@ -1,8 +1,6 @@
 # `man home-configuration.nix` to view configurable options
 {
-  config,
   pkgs,
-  lib,
   local,
   ...
 }: {
