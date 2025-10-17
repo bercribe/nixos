@@ -74,10 +74,12 @@
 
     homeInstaller = import ./home-installer.nix;
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-    forAllSystems = f: builtins.listToAttrs (map (system: {
-      name = system;
-      value = f system;
-    }) systems);
+    forAllSystems = f:
+      builtins.listToAttrs (map (system: {
+          name = system;
+          value = f system;
+        })
+        systems);
   in {
     nixosConfigurations = {
       heavens-door = nixpkgs.lib.nixosSystem {
@@ -205,6 +207,5 @@
       inherit minimal;
     });
     overlays.default = overlays;
-    packageLists = import ./constants/packages.nix;
   };
 }

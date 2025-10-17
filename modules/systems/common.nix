@@ -67,10 +67,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = let
-    packages = local.constants.packages;
-  in
-    packages.system ++ packages.core ++ packages.scripts;
+  environment.systemPackages = (import ./packages.nix pkgs).system;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
@@ -81,7 +78,7 @@
       "wheel" # Enable ‘sudo’ for the user.
       "ledger"
     ];
-    packages = local.constants.packages.user;
+    packages = (import ./packages.nix pkgs).user;
   };
 
   # Home manager

@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  local,
   ...
 }: let
   cfg = config.local;
@@ -13,10 +12,7 @@ in {
 
   options.local = with lib;
   with types; {
-    packages = {
-      includeCore = mkEnableOption "core packages";
-      includeScripts = mkEnableOption "scripts";
-    };
+    packages.includeScripts = mkEnableOption "scripts";
 
     yazi.keybinds = mkOption {
       type = attrsOf (submodule {
@@ -44,10 +40,9 @@ in {
 
   config = {
     home.packages = let
-      packages = local.constants.packages;
+      packages = import ../packages.nix pkgs;
     in
-      (lib.optionals cfg.packages.includeCore packages.core)
-      ++ (lib.optionals cfg.packages.includeScripts packages.scripts);
+      packages.core ++ (lib.optionals cfg.packages.includeScripts packages.scripts);
 
     home.shellAliases = {
       reload-env = "eval $(tmux show-env -s)";

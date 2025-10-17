@@ -28,13 +28,9 @@ system: ''
           ./home.nix
           my-nix.homeModules.minimal
           {
-            local.packages.includeCore = true;
             local.packages.includeScripts = true;
           }
         ];
-        extraSpecialArgs = {
-          local.constants.packages = pkgs.callPackage my-nix.packageLists {};
-        };
       };
     };
   }
