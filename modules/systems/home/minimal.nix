@@ -71,10 +71,13 @@ in {
       customPaneNavigationAndResize = true;
       focusEvents = true;
       sensibleOnTop = true;
-      terminal = "foot";
+      terminal = lib.mkDefault "screen-256color";
       extraConfig = ''
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
+
+        # enable clipboard in tmux over ssh
+        set -as terminal-features ',screen-256color:clipboard'
 
         bind O switch-client -l
         bind g display-popup -E "sf"

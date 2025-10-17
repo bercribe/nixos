@@ -90,6 +90,8 @@
     };
   };
 
+  programs.tmux.terminal = "foot";
+
   local.yazi.keybinds = {
     drag-and-drop = {
       bind = "<C-n>";
