@@ -205,6 +205,6 @@
       inherit minimal;
     });
     overlays.default = overlays;
-    minimalPackages = import ./constants/packages.nix;
+    packageLists = import ./constants/packages.nix;
   };
 }
