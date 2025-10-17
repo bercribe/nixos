@@ -6,7 +6,6 @@
   (final: prev: {
     unstable = import nixpkgs-unstable {
       system = final.system;
-      config.allowUnfree = true;
     };
     yt-dlp = final.unstable.yt-dlp;
 

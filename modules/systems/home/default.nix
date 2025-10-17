@@ -10,8 +10,6 @@
     ./stylix.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mawz";
@@ -27,6 +25,7 @@
     wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
   };
 
+  nixpkgs.config = import ./nixpkgs-config.nix;
   xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
   # ssh config
