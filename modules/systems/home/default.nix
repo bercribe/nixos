@@ -91,6 +91,8 @@
 
   programs.tmux.terminal = "foot";
 
+  local.packages.includeScripts = true;
+  local.yazi.useMux = true;
   local.yazi.keybinds = {
     drag-and-drop = {
       bind = "<C-n>";

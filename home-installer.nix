@@ -29,6 +29,7 @@ system: ''
           my-nix.homeModules.minimal
           {
             local.packages.includeScripts = true;
+            local.yazi.useMux = true;
           }
         ];
       };

@@ -7,6 +7,12 @@
     unstable = import nixpkgs-unstable {
       system = final.system;
     };
+    yazi = final.unstable.yazi;
+    yaziPlugins =
+      final.unstable.yaziPlugins
+      // {
+        mux = prev.callPackage ./pkgs/yazi/mux.nix {};
+      };
     yt-dlp = final.unstable.yt-dlp;
 
     # TODO: remove
