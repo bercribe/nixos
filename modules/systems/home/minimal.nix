@@ -202,7 +202,7 @@ in {
               exiftool = {
                 previewer = "piper",
                 args = {
-                  '${lib.getExe pkgs.exiftool} -S -DateTimeOriginal -MediaCreateDate -FileModifyDate "$1"',
+                  '${lib.getExe pkgs.exiftool} -S -DateTimeOriginal -MediaCreateDate -FileModifyDate "$1" | fmt -t -w $w',
                 },
               },
             },
