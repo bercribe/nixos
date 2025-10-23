@@ -14,8 +14,9 @@ vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 -- system clipboard
 vim.keymap.set("n", "<leader>y", '"+yy')
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>d", '"+dd')
-vim.keymap.set("v", "<leader>d", '"+d')
+-- black hole delete
+vim.keymap.set("n", "<leader>d", '"_dd')
+vim.keymap.set("v", "<leader>d", '"_d')
 -- switch to alt file
 vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
