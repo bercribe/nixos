@@ -37,16 +37,22 @@ in {
             description = "Sets expandtab option";
             default = true;
           };
+          commentPattern = mkOption {
+            type = str;
+            description = "Populates comment bind";
+            default = "";
+          };
         };
       });
       description = "FileType autocmds. Keyed on pattern to use, usually the file extension. Check using :set filetype";
       default = {
-        "*" = {
-          tabsize = 4;
-        };
+        "*".tabsize = 4;
+        lua.commentPattern = "--";
         nix = {
           tabsize = 2;
+          commentPattern = "#";
         };
+        python.commentPattern = "#";
       };
     };
   };
@@ -106,6 +112,7 @@ in {
           concatStrings (mapAttrsToList (pattern: {
               tabsize,
               expandtab,
+              ...
             }: ''
               vim.api.nvim_create_autocmd('FileType', {
                 pattern = {'${pattern}'},
@@ -121,8 +128,30 @@ in {
               })
             '')
             cfg.filetypes);
+
+        commentCommands = with lib; ''
+          local comment_patterns = {
+          ${
+            concatStringsSep "\n" ((mapAttrsToList (pattern: {commentPattern, ...}: ''${pattern} = "${commentPattern} <CR>",'')) (filterAttrs (_: {commentPattern, ...}: ((stringLength commentPattern) > 0)) cfg.filetypes))
+          }
+          }
+
+          vim.keymap.set("n", "<leader>c", function()
+            local comment_pattern = comment_patterns[vim.bo.filetype] or ""
+            local keys = vim.api.nvim_replace_termcodes(":norm 0i" .. comment_pattern, true, false, true)
+            vim.api.nvim_feedkeys(keys, "n", false)
+          end)
+          vim.keymap.set("v", "<leader>c", function()
+            local comment_pattern = comment_patterns[vim.bo.filetype] or ""
+            local keys = vim.api.nvim_replace_termcodes(":'<,'>norm 0i" .. comment_pattern, true, false, true)
+            vim.api.nvim_feedkeys(keys, "n", false)
+          end)
+        '';
       in ''
         ${builtins.readFile ./vim.lua}
+
+        -- comment commands
+        ${commentCommands}
 
         -- lsp servers
         vim.lsp.enable({
