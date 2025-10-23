@@ -55,7 +55,8 @@ vim.keymap.set({ "n", "v" }, "<leader>E", ":Yazi<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>pt", ":TypstPreview<CR>")
 
 -- scripts
-vim.keymap.set({ "n", "v" }, "<leader>xg", ":execute '!gtgh \"%\"' line('.')<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xg", ":execute '!gtgh --upstream origin --path \"%\" --line' line('.')<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!gtgh --path \"%\" --line' line('.')<CR>")
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)

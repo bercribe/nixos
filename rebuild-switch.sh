@@ -1,6 +1,8 @@
 # A rebuild script that commits on a successful build
 # based on: https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
-set -e
+
+#!/bin/sh
+set -eo pipefail
 
 # set up args
 # ignore errexit with `&& true`
