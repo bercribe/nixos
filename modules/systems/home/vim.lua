@@ -25,10 +25,9 @@ vim.keymap.set({ "n", "v" }, ":", ";")
 vim.keymap.set({ "n", "v" }, ";", ":")
 -- replace
 vim.keymap.set("n", "<leader>r", [[:%s/\V]])
-vim.keymap.set("v", "<leader>r", [[<esc>:'<,'>s/\V]])
+vim.keymap.set("v", "<leader>r", [[:s/\V]])
 -- comments
-vim.keymap.set("n", "<leader>u", ":norm ^diwx<CR>")
-vim.keymap.set("v", "<leader>u", "<esc>:'<,'>norm ^diwx<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>u", ":norm ^diwx<CR>")
 
 -- plugins
 -- fzf-lua

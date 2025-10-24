@@ -142,24 +142,14 @@ in {
           }
           }
 
-          vim.keymap.set("n", "<leader>c", function()
+          vim.keymap.set({"n", "v"}, "<leader>c", function()
             local comment_pattern = comment_patterns[vim.bo.filetype] or ""
             local keys = vim.api.nvim_replace_termcodes(":norm 0i" .. comment_pattern, true, false, true)
             vim.api.nvim_feedkeys(keys, "n", false)
           end)
-          vim.keymap.set("v", "<leader>c", function()
-            local comment_pattern = comment_patterns[vim.bo.filetype] or ""
-            local keys = vim.api.nvim_replace_termcodes(":'<,'>norm 0i" .. comment_pattern, true, false, true)
-            vim.api.nvim_feedkeys(keys, "n", false)
-          end)
-          vim.keymap.set("n", "<leader>C", function()
+          vim.keymap.set({"n", "v"}, "<leader>C", function()
             local comment_pattern = comment_patterns[vim.bo.filetype] or ""
             local keys = vim.api.nvim_replace_termcodes(":norm I" .. comment_pattern, true, false, true)
-            vim.api.nvim_feedkeys(keys, "n", false)
-          end)
-          vim.keymap.set("v", "<leader>C", function()
-            local comment_pattern = comment_patterns[vim.bo.filetype] or ""
-            local keys = vim.api.nvim_replace_termcodes(":'<,'>norm I" .. comment_pattern, true, false, true)
             vim.api.nvim_feedkeys(keys, "n", false)
           end)
         '';
