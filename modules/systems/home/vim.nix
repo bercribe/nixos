@@ -11,18 +11,12 @@ in {
     languageServers = mkOption {
       type = attrsOf (nullOr package);
       description = "Language servers to use. Key is the name of the LSP in nvim-lspconfig, value is the package.";
-      default = with pkgs; {
-        clangd = clang-tools;
-        lua_ls = lua-language-server;
-        nixd = nixd;
-        pyright = pyright;
-        tinymist = tinymist;
-      };
+      default = {};
     };
     treesitterParsers = mkOption {
       type = listOf str;
       description = "Treesitter parsers to use";
-      default = ["lua" "nix" "python" "typst"];
+      default = [];
     };
     filetypes = mkOption {
       type = attrsOf (submodule {
@@ -45,8 +39,22 @@ in {
         };
       });
       description = "FileType autocmds. Keyed on pattern to use, usually the file extension. Check using :set filetype";
-      default = {
-        "*".tabsize = 4;
+      default = {};
+    };
+  };
+
+  config = {
+    local.vim = {
+      languageServers = with pkgs; {
+        clangd = clang-tools;
+        lua_ls = lua-language-server;
+        nixd = nixd;
+        pyright = pyright;
+        tinymist = tinymist;
+      };
+      treesitterParsers = ["lua" "nix" "python" "typst"];
+      filetypes = {
+        "*" = {};
         lua.commentPattern = "--";
         nix = {
           tabsize = 2;
@@ -55,9 +63,7 @@ in {
         python.commentPattern = "#";
       };
     };
-  };
 
-  config = {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
