@@ -92,7 +92,7 @@ in {
 
           # possible fix for:
           # Could not validate ARI 'replaces' field :: requester account did not request the certificate being replaced by this order
-          # extraLegoRenewFlags = ["--ari-disable"];
+          extraLegoRenewFlags = ["--ari-disable"];
         };
 
         certs = let
