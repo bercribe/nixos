@@ -91,7 +91,7 @@ in {
         # enable clipboard in tmux over ssh
         set -as terminal-features ',screen-256color:clipboard'
 
-        bind O switch-client -l
+        bind u switch-client -l
         bind g display-popup -E "sf"
       '';
     };
