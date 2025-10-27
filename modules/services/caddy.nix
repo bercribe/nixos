@@ -89,6 +89,10 @@ in {
 
           dnsProvider = "cloudflare";
           credentialsFile = config.sops.secrets."cloudflare/lego".path;
+
+          # possible fix for:
+          # Could not validate ARI 'replaces' field :: requester account did not request the certificate being replaced by this order
+          # extraLegoRenewFlags = ["--ari-disable"];
         };
 
         certs = let
