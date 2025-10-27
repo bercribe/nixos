@@ -83,7 +83,7 @@ in {
       customPaneNavigationAndResize = true;
       focusEvents = true;
       sensibleOnTop = true;
-      terminal = lib.mkDefault "screen-256color";
+      terminal = lib.mkDefault "ghostty";
       extraConfig = ''
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
