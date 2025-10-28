@@ -18,7 +18,7 @@
   home.shellAliases = {
     cat = "bat";
     csc = "python ${pkgs.errata}/check_sync_conflicts.py";
-    diff = "difft";
+    diff = "delta";
     ls = "eza";
     nhs = "nh home switch ~/sources/nixos";
     nrs = "~/sources/nixos/rebuild-switch.sh";
@@ -76,7 +76,7 @@
     enable = true;
     userName = "mawz";
     userEmail = local.secrets.email;
-    difftastic.enable = true;
+    delta.enable = true;
   };
 
   programs.jujutsu = {

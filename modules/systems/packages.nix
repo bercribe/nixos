@@ -45,7 +45,7 @@ in
       bat # better cat
       bluetui # bluetooth device tui
       btop # performance visualizer
-      difftastic # better diff
+      delta # better diff
       exiftool # image metadata
       eza # better ls
       ffmpeg # video utilities
