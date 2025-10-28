@@ -4,18 +4,19 @@
   ...
 }: let
   git = lib.getExe pkgs.git;
+  getopt = lib.getExe pkgs.getopt;
 in
   pkgs.writeShellScriptBin "gtgh" ''
     # gtgh.sh - goto github
     # usage:
-    #   --upstream should usually be "origin"
+    #   --upstream should be set to the target branch
     #   --path should be a file in the repo
     #   --line should be a line number
 
 
     # set up args
     # ignore errexit with `&& true`
-    getopt --test > /dev/null && true
+    ${getopt} --test > /dev/null && true
     if [[ $? -ne 4 ]]; then
         echo 'I’m sorry, `getopt --test` failed in this environment.'
         exit 1
@@ -28,9 +29,11 @@ in
     # -activate quoting/enhanced mode (e.g. by writing out “--options”)
     # -pass arguments only via   -- "$@"   to separate them correctly
     # -if getopt fails, it complains itself to stdout
-    PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@") || exit 2
+    PARSED=$(${getopt} --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@") || exit 2
     # read getopt’s output this way to handle the quoting right:
     eval set -- "$PARSED"
+
+    path=.
 
     # now enjoy the options in order and nicely split until we see --
     while true; do
@@ -64,12 +67,13 @@ in
     elif [[ -d $path ]]; then
       pushd "$path" 1>/dev/null
     else
-      pushd . 1>/dev/null
+      echo "Invalid path: $path"
+      exit 1
     fi
 
     url=$(${git} remote get-url origin)
     if [[ ! $url =~ http ]]; then # assume ssh form
-      url=$(echo "$url" | sed -E 's|.*git@(.*?):|https://\1/|')
+      url=$(echo "$url" | sed -E 's|.*git@(.*):|https://\1/|')
     fi
     url=''${url%.git} # chop off suffix
 
@@ -90,5 +94,5 @@ in
     fi
 
     popd 1>/dev/null
-    xdg-open "$url" || echo "$url"
+    xdg-open "$url" 2>/dev/null || open "$url" 2>/dev/null || echo "$url"
   ''
