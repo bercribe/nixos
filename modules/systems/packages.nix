@@ -46,6 +46,7 @@ in
       bluetui # bluetooth device tui
       btop # performance visualizer
       delta # better diff
+      difftastic # syntax aware diff
       exiftool # image metadata
       eza # better ls
       ffmpeg # video utilities
