@@ -62,10 +62,19 @@ vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)
 vim.keymap.set({ "n", "v" }, "<leader>ld", vim.lsp.buf.definition)
 vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition)
 
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp", {}),
+    callback = function(e)
+        local name = vim.lsp.get_client_by_id(e.data.client_id).name
+        if name == "clangd" then
+            vim.keymap.set({ "n", "v" }, "<leader>la", ":LspClangdSwitchSourceHeader<CR>", { buffer = true })
+        end
+    end
+})
+
 -- quickfix binds
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = "*",
-    group = vim.api.nvim_create_augroup("qf", { clear = true }),
+    group = vim.api.nvim_create_augroup("qf", {}),
     callback = function()
         if vim.bo.buftype == "quickfix" then
             vim.keymap.set("n", "dd", function()
