@@ -80,7 +80,7 @@ alejandra . &>/dev/null \
 
 # Shows your changes
 git add .
-git diff HEAD -U0 '*.nix'
+git diff HEAD -U1 '*.nix'
 
 echo "NixOS rebuilding $HOSTNAME..."
 

@@ -8,6 +8,7 @@
 in {
   imports = [
     ./vim.nix
+    ../../../pkgs/scripts/sf/homeModule.nix
   ];
 
   options.local = with lib;

@@ -3,7 +3,6 @@
   lib,
   ...
 }: let
-  directories = ["~" "~/sources" "~/personal-cloud" "/zvault/shared"];
   tmux = lib.getExe pkgs.tmux;
 in
   pkgs.writeShellScriptBin "sf" ''
@@ -11,12 +10,12 @@ in
     # launches a fuzzy find picker and opens the selected directory in tmux
     # optionally takes an argument as the selected directory
 
-    dirs=(${lib.concatStringsSep " " directories})
+    IFS=: read -ra dirs <<< $SF_DIRS
 
     if [[ $# -eq 1 ]]; then
       selected=$1
     else
-      selected=$(${lib.getExe pkgs.fd} . "''${dirs[@]}" --type=dir --max-depth=1 2>/dev/null |
+      selected=$(${lib.getExe pkgs.fd} . "''${dirs[@]}" -H --type=dir --max-depth=1 2>/dev/null |
         ${lib.getExe pkgs.fzf} --delimiter / --with-nth -3..)
     fi
 
