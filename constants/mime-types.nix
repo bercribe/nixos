@@ -8,6 +8,8 @@
     pdf = "org.pwmt.zathura-pdf-mupdf.desktop";
   };
 
+  # determine with:
+  # handlr mime <file/url>
   mimeMap = {
     directory = [
       "inode/directory"
@@ -15,6 +17,7 @@
     browser = [
       "x-scheme-handler/http"
       "x-scheme-handler/https"
+      "x-scheme-handler/mailto"
     ];
     text = [
       "text/plain"
