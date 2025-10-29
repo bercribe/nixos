@@ -77,6 +77,7 @@
     userName = "mawz";
     userEmail = local.secrets.email;
     delta.enable = true;
+    difftastic.enableAsDifftool = true;
   };
 
   programs.jujutsu = {
