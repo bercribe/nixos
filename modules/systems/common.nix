@@ -62,7 +62,7 @@
   console.keyMap = "us";
 
   # User env
-  nixpkgs.overlays = import (self + /overlays.nix) {inherit nixpkgs-unstable errata;};
+  nixpkgs.overlays = [(import (self + /overlay.nix) {inherit nixpkgs-unstable errata;})];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

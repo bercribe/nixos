@@ -42,9 +42,10 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    overlays = import ./overlays.nix inputs;
+    overlay = import ./overlay.nix inputs;
     pkgs = import nixpkgs {
-      inherit system overlays;
+      inherit system;
+      overlays = [overlay];
       config.allowUnfree = true;
     };
 
@@ -208,6 +209,6 @@
       default = minimal;
       inherit minimal;
     });
-    overlays.default = overlays;
+    overlays.default = overlay;
   };
 }

@@ -15,7 +15,7 @@ system: ''
     };
 
     outputs = {nixpkgs, home-manager, my-nix, ...}: let
-      overlays = my-nix.overlays.default;
+      overlays = [my-nix.overlays.default];
       pkgs = import nixpkgs {
         inherit overlays;
         system = "${system}";
