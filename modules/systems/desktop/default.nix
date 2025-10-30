@@ -14,6 +14,18 @@
     (self + /modules/systems/hardware/bluray.nix)
   ];
 
+  # Secrets
+  sops.secrets = {
+    syncoid-ssh = {
+      owner = config.services.syncoid.user;
+      key = "${config.networking.hostName}/ssh";
+    };
+    keepass-keyfile = {
+      owner = "mawz";
+      path = "/home/mawz/.config/keepassxc/keepassxc.key";
+    };
+  };
+
   # Config
   local.services.syncthing-base.enable = true;
 
@@ -168,10 +180,6 @@
   };
 
   # ZFS snapshots and replication
-  sops.secrets.syncoid-ssh = {
-    owner = config.services.syncoid.user;
-    key = "${config.networking.hostName}/ssh";
-  };
   services.sanoid = {
     enable = true;
     templates.default = {
