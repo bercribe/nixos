@@ -6,6 +6,7 @@
     git # version control
     hexyl # hex viewer
     jq # json formatter
+    lazygit # git tui
     python3 # scripting
     ripgrep # file content search
     tcpdump # network sniffer
