@@ -76,7 +76,17 @@
     enable = true;
     userName = "mawz";
     userEmail = local.secrets.email;
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        features = "decorations";
+        decorations = {
+          file-decoration-style = "none";
+          file-style = "bold yellow ul";
+          hunk-header-decoration-style = "none";
+        };
+      };
+    };
     difftastic.enableAsDifftool = true;
   };
 
