@@ -33,11 +33,11 @@ in {
       settings = {
         devices = {
           "geb" = {id = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
-          "heavens-door" = {id = "D2VC45J-2GRDWF4-NAIWZA7-VTRHVCR-FDEZNNG-2P5ERHE-CLPZ6UK-JI3NEQ7";};
-          "highway-star" = {id = "4OCFYCK-E7KDT4V-7HC7TGK-DZX7GDN-PCE4SR2-UEMNJWH-6Z6XR47-6YU7SAX";};
+          "heavens-door" = {id = "HK3YODK-63EFXRW-77XQ2PK-ZB5A35F-6BSAZ6S-J76VARS-KV6HJSN-D7KR4AB";};
+          "highway-star" = {id = "EEM5E4H-7TFYA5Y-BY37H4D-25LOQIS-M5ETY2C-JSVJHOL-4O67NI3-CPZQ4AE";};
           "mr-president" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
           "sethan" = {id = "HXAAIQL-OXKK5KA-YCD6KGU-RBXLLM2-XIDKKVG-GA6PCSZ-C4MZHVK-2H7HNAO";};
-          "super-fly" = {id = "FFCN6AI-P6CNSVI-YD2ITV2-4FT6YGG-L2WI5AS-NVKLI2T-HIBRJRO-7W5QSQW";};
+          "super-fly" = {id = "QL7YLXY-WKBMRND-BKQB6KN-Q4QI2MT-Z4RJXUS-JF7HJGE-PZ7D7Y2-B5RGJAV";};
         };
         folders = let
           versioning = {
