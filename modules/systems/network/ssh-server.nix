@@ -7,11 +7,11 @@
   cfg = config.local.sshServer;
 
   # get public key: `sudo ssh-keygen -f ~/.ssh/id_ed25519 -y`
-  heavensDoorKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK++5T0hkrduDlpMfdtDh874EqXc4BTPvTzym3chIgHr";
-  highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9n+c6dnlsSg6BQqUuljx5UaUFRO0tz9MbdweCY1m4c";
-  judgementKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9Wk9adw93SEYRYhiYbP6gonU3TCFtHWDpRYtkipkLc";
-  moodyBluesKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJuSl7sYo+gy/CYBw800CsMdcFLEG03Gn/BjMqtTCuAi";
-  superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKXbugt7AceFpzb4ftHnCRHW7TpTbp7S2cqzHcXJlvH1";
+  heavensDoorKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILhVLYr/28cVdPf+i4jCFCJ8jt+kNJumN73WL77ww8f2";
+  highwayStarKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM9y6wTI2WarxWkohtI5enYZe6XcBzSlc1YD/9pvuehY";
+  judgementKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIER64QQIhquhTeMpVMzMI8kjNV6ch80b48l/TLOtDiiO";
+  moodyBluesKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDf6DMdjF6Fsp8GmVNg7soTxqi0iqR0berZ3tbFJarhp";
+  superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjusmTfA4UTuMdrnBl3n66inecJF34mqtNp1avGp/nd";
 in {
   options.local.sshServer = {
     enableOpenssh = lib.mkEnableOption "openssh";

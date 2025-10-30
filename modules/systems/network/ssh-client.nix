@@ -18,15 +18,15 @@
     };
     judgement = {
       extraHostNames = ["judgement.mawz.dev"];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJOW1O35VwVbx68SB6THn1M0bZPqBM4Y6Lk6+wFcdi1n";
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNTo4tnqG7zk+yAmA7JUOapVjhSWkhdqSoEor9q+KbL";
     };
     moody-blues = {
       extraHostNames = ["moody-blues.mawz.dev"];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2J4BJItsn/t6M8q7Zpi7B6YDpznItrHweLZ2WfppbF";
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBUCKXB7muqmoovAblrX2znV3PUejkIqqZ4OxSMGuXGE";
     };
     super-fly = {
       extraHostNames = ["super-fly.mawz.dev"];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHKl7hnjyE7BdYQTt7YsHXoqc4/BtUhSArb1c/D+JQVh";
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdZUinVNS9d3LOmDKYWq4kEb6iO1uKaJOGhBZ4cQ6/h";
     };
   };
 }
