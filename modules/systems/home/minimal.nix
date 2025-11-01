@@ -53,25 +53,63 @@ in {
       vim = "nvim";
     };
 
+    # shell
     programs.bash = {
       enable = true;
-      initExtra = ''
-        # fixes issue where home.sessionVariables have no effect
-        # https://github.com/nix-community/home-manager/issues/1011
-        source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh";
+      initExtra = "zsh";
+    };
+    programs.zsh = {
+      enable = true;
+      defaultKeymap = "emacs";
 
-        # Aliases with bash completion
-        . ${lib.getExe pkgs.complete-alias}
-        alias sctl='systemctl'
-        complete -F _complete_alias sctl
-        alias jctl='journalctl'
-        complete -F _complete_alias jctl
-        alias jfu='journalctl -f -u'
-        complete -F _complete_alias jfu
+      syntaxHighlighting.enable = true;
+      enableCompletion = true;
+      autosuggestion = {
+        enable = true;
+        strategy = ["history" "completion"];
+      };
+
+      history = {
+        extended = true;
+        expireDuplicatesFirst = true;
+        findNoDups = true;
+        ignoreAllDups = true;
+      };
+      historySubstringSearch.enable = true;
+
+      zsh-abbr = {
+        enable = true;
+        abbreviations = {
+          vim = "nvim";
+          sctl = "systemctl";
+          jctl = "journalctl";
+          jfu = "journalctl -f -u";
+        };
+        globalAbbreviations = {
+          "s:" = ''| sed -s "s/:/\\n/g"'';
+        };
+      };
+
+      # prompt
+      initContent = lib.mkOrder 500 ''
+        # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+        # Initialization code that may require console input (password prompts, [y/n]
+        # confirmations, etc.) must go above this block; everything else may go below.
+        if [[ -r "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '';
+
+      # zprof.enable = true;
+    };
+    home.file.p10k = {
+      source = ./p10k.zsh;
+      target = ".p10k.zsh";
     };
 
-    # for fzf bash integration
+    # for fzf shell integration
     programs.fzf.enable = true;
 
     programs.tmux = {

@@ -41,7 +41,7 @@
   };
 
   services.openssh.extraConfig = ''
-    ForceCommand systemd-inhibit --who="SSH session" --why="Active user" --what=idle --mode=block bash
+    ForceCommand systemd-inhibit --who="SSH session" --why="Active user" --what=idle --mode=block zsh
   '';
 
   # This option defines the first version of NixOS you have installed on this particular machine,

@@ -78,6 +78,7 @@
       "ledger"
     ];
     packages = (import ./packages.nix pkgs).user;
+    shell = pkgs.zsh;
   };
 
   # Home manager
@@ -100,8 +101,12 @@
   # Alternate command-not-found functionality for flakes
   programs.nix-index = {
     enable = false;
-    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
+
+  # shell
+  programs.zsh.enable = true;
+  environment.pathsToLink = ["/share/zsh"]; # for completions
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
