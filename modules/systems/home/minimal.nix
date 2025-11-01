@@ -53,9 +53,10 @@ in {
     };
 
     # shell
+    home.sessionVariables.SHELL = lib.getExe pkgs.zsh;
     programs.bash = {
       enable = true;
-      initExtra = "exec zsh";
+      initExtra = "exec $SHELL";
     };
     programs.zsh = {
       enable = true;

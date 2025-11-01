@@ -44,10 +44,10 @@ in {
         # Open fuzzel on first press, closes it on second
         "$menu" = "pkill fuzzel || ${lib.getExe pkgs.fuzzel}";
 
-        # Some default env vars.
-        # env = [
-        #   "QT_QPA_PLATFORMTHEME,qt5ct" # change to qt6ct if you have that
-        # ];
+        env = [
+          # Set shell inside hyprland
+          "SHELL,${lib.getExe pkgs.zsh}"
+        ];
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input = {

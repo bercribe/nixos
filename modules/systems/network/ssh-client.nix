@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  # generate with `ssh-keygen -t ed25519 -N "" -f ./id_ed25519 -C "<email>"`
+  # generate with `ssh-keygen -t ed25519 -N "" -f ./id_ed25519 -C "mawz@<host>`
   sops.secrets.ssh = {
     owner = "mawz";
     path = "/home/mawz/.ssh/id_ed25519";

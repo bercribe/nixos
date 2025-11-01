@@ -2,6 +2,7 @@
   self,
   config,
   pkgs,
+  lib,
   local,
   ...
 }: {
@@ -95,11 +96,13 @@
   };
 
   # Set defaults
-  environment.variables = {
-    BROWSER = "firefox";
-    EDITOR = "nvim";
-    OPENER = "handlr open";
-    TERMINAL = "foot";
+  environment.variables = with pkgs;
+  with lib; {
+    BROWSER = getExe firefox;
+    EDITOR = getExe neovim;
+    OPENER = "${getExe handlr} open";
+    SHELL = getExe zsh;
+    TERMINAL = getExe foot;
   };
 
   # Programs
