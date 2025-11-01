@@ -78,7 +78,6 @@
       "ledger"
     ];
     packages = (import ./packages.nix pkgs).user;
-    shell = pkgs.zsh;
   };
 
   # Home manager
