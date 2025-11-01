@@ -194,9 +194,13 @@
     };
   };
 
+  programs.foot = {
+    enable = true;
+    settings.main.shell = "zsh";
+  };
+
   # Theme settings
   # needed for stylix theming
   programs.btop.enable = true;
-  programs.foot.enable = true;
   programs.ghostty.enable = true;
 }

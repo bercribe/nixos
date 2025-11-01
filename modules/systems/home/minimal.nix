@@ -55,7 +55,7 @@ in {
     # shell
     programs.bash = {
       enable = true;
-      initExtra = "zsh; exit";
+      initExtra = "exec zsh";
     };
     programs.zsh = {
       enable = true;
