@@ -50,7 +50,6 @@ in {
 
     home.shellAliases = {
       reload-env = "eval $(tmux show-env -s)";
-      vim = "nvim";
     };
 
     # shell

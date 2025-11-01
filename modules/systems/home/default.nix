@@ -16,13 +16,15 @@
   home.homeDirectory = "/home/mawz";
 
   home.shellAliases = {
-    cat = "bat";
     csc = "python ${pkgs.errata}/check_sync_conflicts.py";
+    wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
+  };
+  programs.zsh.zsh-abbr.abbreviations = {
+    cat = "bat";
     diff = "delta";
     ls = "eza";
     nhs = "nh home switch ~/sources/nixos";
     nrs = "~/sources/nixos/rebuild-switch.sh";
-    wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
   };
 
   nixpkgs.config = import ./nixpkgs-config.nix;
