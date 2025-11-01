@@ -145,6 +145,10 @@ in {
 
     jobOpts = {
       mr-president = {
+        # setting up host:
+        # ssh -a super-fly
+        # ssh-keygen -f ~/.ssh/id_ed25519 -y > ~/.ssh/id_ed25519.pub
+        # ssh-copy-id mr-president
         repository = "sftp:mawz@mr-president.mawz.dev:/mawz-home/backups/${config.networking.hostName}";
         extraOptions = [
           "sftp.args='-i ${config.sops.secrets.ssh.path}'"
