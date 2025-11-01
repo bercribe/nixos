@@ -91,16 +91,31 @@ in {
       };
 
       # prompt
-      initContent = lib.mkOrder 500 ''
-        # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-        # Initialization code that may require console input (password prompts, [y/n]
-        # confirmations, etc.) must go above this block; everything else may go below.
-        if [[ -r "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      '';
+      initContent = let
+        prompt = lib.mkOrder 500 ''
+          # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+          # Initialization code that may require console input (password prompts, [y/n]
+          # confirmations, etc.) must go above this block; everything else may go below.
+          if [[ -r "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+            source "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+          fi
+          [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+        '';
+        config = lib.mkOrder 1000 ''
+          # typo correction
+          setopt correct
+
+          # directory completion menu
+          zstyle ':completion:*' menu select
+
+          # edit current line
+          autoload -z edit-command-line
+          zle -N edit-command-line
+          bindkey "^X^E" edit-command-line
+        '';
+      in
+        lib.mkMerge [prompt config];
 
       # zprof.enable = true;
     };
