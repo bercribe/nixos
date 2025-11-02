@@ -106,13 +106,19 @@ in {
           # typo correction
           setopt correct
 
-          # directory completion menu
-          zstyle ':completion:*' menu select
+          # completion styling
+          zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # case insensitive completion
+          zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # directory colors
 
           # edit current line
           autoload -z edit-command-line
           zle -N edit-command-line
           bindkey "^X^E" edit-command-line
+
+          # fzf command arg menu
+          source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+          zstyle ':completion:*' menu no # disable default
+          zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # display directory contents on cd
         '';
       in
         lib.mkMerge [prompt config];
