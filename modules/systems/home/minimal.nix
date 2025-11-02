@@ -144,7 +144,13 @@ in {
       focusEvents = true;
       sensibleOnTop = true;
       terminal = lib.mkDefault "tmux-256color";
-      extraConfig = ''
+      extraConfig = let
+        editScrollback = pkgs.writeShellScriptBin "edit-scrollback" ''
+          tmpfile=$(mktemp /tmp/tmux-pane-XXXXXX)
+          tmux capture-pane -p -S - > $tmpfile
+          tmux new-window "$EDITOR $tmpfile +"
+        '';
+      in ''
         # fix warnings caused by UWSM
         set -g default-command "''${SHELL}"
 
@@ -153,6 +159,7 @@ in {
 
         bind u switch-client -l
         bind g display-popup -E "sf"
+        bind e run-shell "${lib.getExe editScrollback}"
       '';
     };
 
