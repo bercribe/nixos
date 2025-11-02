@@ -155,16 +155,26 @@
       bind = , Up,    movewindoworgroup, u
       bind = , Down,  movewindoworgroup, d
 
-      bind = , 1, movetoworkspace, 1
-      bind = , 2, movetoworkspace, 2
-      bind = , 3, movetoworkspace, 3
-      bind = , 4, movetoworkspace, 4
-      bind = , 5, movetoworkspace, 5
-      bind = , 6, movetoworkspace, 6
-      bind = , 7, movetoworkspace, 7
-      bind = , 8, movetoworkspace, 8
-      bind = , 9, movetoworkspace, 9
-      bind = , 0, movetoworkspace, 10
+      bind = , 1, movetoworkspacesilent, 1
+      bind = , 2, movetoworkspacesilent, 2
+      bind = , 3, movetoworkspacesilent, 3
+      bind = , 4, movetoworkspacesilent, 4
+      bind = , 5, movetoworkspacesilent, 5
+      bind = , 6, movetoworkspacesilent, 6
+      bind = , 7, movetoworkspacesilent, 7
+      bind = , 8, movetoworkspacesilent, 8
+      bind = , 9, movetoworkspacesilent, 9
+      bind = , 0, movetoworkspacesilent, 10
+      bind = SHIFT, 1, movetoworkspace, 1
+      bind = SHIFT, 2, movetoworkspace, 2
+      bind = SHIFT, 3, movetoworkspace, 3
+      bind = SHIFT, 4, movetoworkspace, 4
+      bind = SHIFT, 5, movetoworkspace, 5
+      bind = SHIFT, 6, movetoworkspace, 6
+      bind = SHIFT, 7, movetoworkspace, 7
+      bind = SHIFT, 8, movetoworkspace, 8
+      bind = SHIFT, 9, movetoworkspace, 9
+      bind = SHIFT, 0, movetoworkspace, 10
 
       # resize rules
       binde = SHIFT, H, resizeactive, -100 0
@@ -185,6 +195,16 @@
       bind = ALT, Right,  movefocus, r
       bind = ALT, Up,     movefocus, u
       bind = ALT, Down,   movefocus, d
+      bind = ALT, 1, workspace, 1
+      bind = ALT, 2, workspace, 2
+      bind = ALT, 3, workspace, 3
+      bind = ALT, 4, workspace, 4
+      bind = ALT, 5, workspace, 5
+      bind = ALT, 6, workspace, 6
+      bind = ALT, 7, workspace, 7
+      bind = ALT, 8, workspace, 8
+      bind = ALT, 9, workspace, 9
+      bind = ALT, 0, workspace, 10
 
       # exit
       bind = , Q, submap, reset
