@@ -148,7 +148,7 @@ in {
         editScrollback = pkgs.writeShellScriptBin "edit-scrollback" ''
           tmpfile=$(mktemp /tmp/tmux-pane-XXXXXX)
           tmux capture-pane -p -S - > $tmpfile
-          tmux new-window "$EDITOR $tmpfile '+normal GH2k'"
+          tmux new-window "$EDITOR $tmpfile '+set nowrap' '+normal GH2k'; rm $tmpfile"
         '';
       in ''
         # fix warnings caused by UWSM

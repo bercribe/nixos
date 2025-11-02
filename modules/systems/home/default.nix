@@ -18,11 +18,11 @@
   home.shellAliases = {
     csc = "python ${pkgs.errata}/check_sync_conflicts.py";
     wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
-  };
-  programs.zsh.zsh-abbr.abbreviations = {
     cat = "bat";
     diff = "delta";
     ls = "eza";
+  };
+  programs.zsh.zsh-abbr.abbreviations = {
     nhs = "nh home switch ~/sources/nixos";
     nrs = "~/sources/nixos/rebuild-switch.sh";
   };
