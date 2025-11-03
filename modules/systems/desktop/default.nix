@@ -99,7 +99,7 @@
   environment.variables = with pkgs;
   with lib; {
     BROWSER = getExe firefox;
-    EDITOR = getExe neovim;
+    EDITOR = "nvim"; # need to use the proper version on the path
     OPENER = "${getExe handlr} open";
     SHELL = getExe zsh;
     TERMINAL = getExe foot;
