@@ -105,24 +105,27 @@ vim.keymap.set({"n", "v"}, "<leader>dh", require("dap.ui.widgets").hover)
 vim.keymap.set("n", "<leader>dv", ":DapViewToggle<CR>")
 vim.keymap.set("n", "<leader>dV", dap.repl.toggle)
 
+-- TODO remove when on_session config is verified
 vim.keymap.set("n", "<leader><Down>", dap.step_over)
 vim.keymap.set("n", "<leader><Right>", dap.step_into)
 vim.keymap.set("n", "<leader><Left>", dap.step_out)
 vim.keymap.set("n", "<leader><Up>", dap.restart_frame)
--- TODO: revisit this. currently giving "attempt to index field 'on_session' (a nil value)"
--- dap.listeners.on_session["keymaps-and-dapview"] = function(old, new)
---     local dapview = require("dap-view")
---     if new and not old then
---         dapview.open()
---         vim.keymap.set("n", "<Down>", dap.step_over)
---         vim.keymap.set("n", "<Right>", dap.step_into)
---         vim.keymap.set("n", "<Left>", dap.step_out)
---         vim.keymap.set("n", "<Up>", dap.restart_frame)
---     elseif old and not new then
---         dapview.close()
---         vim.keymap.del("n", "<Down>")
---         vim.keymap.del("n", "<Right>")
---         vim.keymap.del("n", "<Left>")
---         vim.keymap.del("n", "<Up>")
---     end
--- end
+if not dap.listeners.on_session then
+    dap.listeners.on_session = {}
+end
+dap.listeners.on_session["keymaps-and-dapview"] = function(old, new)
+    local dapview = require("dap-view")
+    if new and not old then
+        dapview.open()
+        vim.keymap.set("n", "<Down>", dap.step_over)
+        vim.keymap.set("n", "<Right>", dap.step_into)
+        vim.keymap.set("n", "<Left>", dap.step_out)
+        vim.keymap.set("n", "<Up>", dap.restart_frame)
+    elseif old and not new then
+        dapview.close()
+        vim.keymap.del("n", "<Down>")
+        vim.keymap.del("n", "<Right>")
+        vim.keymap.del("n", "<Left>")
+        vim.keymap.del("n", "<Up>")
+    end
+end
