@@ -31,7 +31,6 @@ vim.keymap.set("v", "<leader>r", [[:s/\V]])
 -- comments
 vim.keymap.set({ "n", "v" }, "<leader>u", ":norm ^diwx<CR>")
 
--- plugins
 -- fzf-lua
 vim.keymap.set({ "n", "v" }, "<leader>f", ":FzfLua files<CR>")
 vim.keymap.set("n", "<leader>g", ":FzfLua live_grep<CR>")
@@ -92,3 +91,38 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 -- for vim symbols
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
 vim.lsp.config("nixd", { formatting = { command = { "alejandra" } } })
+
+-- debugger
+local dap = require("dap")
+vim.keymap.set("n", "<leader>dn", ":DapNew<CR>")
+vim.keymap.set("n", "<leader>dt", dap.terminate)
+vim.keymap.set("n", "<leader>dr", dap.restart)
+vim.keymap.set("n", "<leader>dR", dap.run_last)
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>dl", function() dap.set_breakpoint(nil, nil, vim.fn.input("log point message: ")) end)
+vim.keymap.set("n", "<leader>dc", dap.continue)
+vim.keymap.set({"n", "v"}, "<leader>dh", require("dap.ui.widgets").hover)
+vim.keymap.set("n", "<leader>dv", ":DapViewToggle<CR>")
+vim.keymap.set("n", "<leader>dV", dap.repl.toggle)
+
+vim.keymap.set("n", "<leader><Down>", dap.step_over)
+vim.keymap.set("n", "<leader><Right>", dap.step_into)
+vim.keymap.set("n", "<leader><Left>", dap.step_out)
+vim.keymap.set("n", "<leader><Up>", dap.restart_frame)
+-- TODO: revisit this. currently giving "attempt to index field 'on_session' (a nil value)"
+-- dap.listeners.on_session["keymaps-and-dapview"] = function(old, new)
+--     local dapview = require("dap-view")
+--     if new and not old then
+--         dapview.open()
+--         vim.keymap.set("n", "<Down>", dap.step_over)
+--         vim.keymap.set("n", "<Right>", dap.step_into)
+--         vim.keymap.set("n", "<Left>", dap.step_out)
+--         vim.keymap.set("n", "<Up>", dap.restart_frame)
+--     elseif old and not new then
+--         dapview.close()
+--         vim.keymap.del("n", "<Down>")
+--         vim.keymap.del("n", "<Right>")
+--         vim.keymap.del("n", "<Left>")
+--         vim.keymap.del("n", "<Up>")
+--     end
+-- end

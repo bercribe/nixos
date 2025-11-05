@@ -72,6 +72,8 @@ in {
       in
         with pkgs.vimPlugins; [
           fzf-lua # quick opener w/ fzf
+          nvim-dap # debugger
+          nvim-dap-view # debugger UI
           nvim-lspconfig # language servers
           typst-preview-nvim # live preview for typst
           yazi-nvim # file picker
