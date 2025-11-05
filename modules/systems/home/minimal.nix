@@ -81,6 +81,8 @@ in {
         enable = true;
         abbreviations = {
           vim = "nvim";
+          nix-shell = "nix-shell --run zsh";
+          "nix develop" = "nix develop -c zsh";
           sctl = "systemctl";
           jctl = "journalctl";
           jfu = "journalctl -f -u";
@@ -131,8 +133,16 @@ in {
       target = ".p10k.zsh";
     };
 
-    # for fzf shell integration
+    # shell integrations
     programs.fzf.enable = true;
+    programs.zoxide.enable = true;
+    programs.atuin = {
+      enable = true;
+      settings = {
+        inline_height = 16;
+        filter_mode = "session";
+      };
+    };
 
     programs.tmux = {
       enable = true;
