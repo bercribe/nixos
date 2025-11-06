@@ -88,7 +88,7 @@ in {
           jfu = "journalctl -f -u";
         };
         globalAbbreviations = {
-          "s:" = ''| sed -s "s/:/\\n/g"'';
+          "s:" = ''| sed "s/:/\\n/g"'';
         };
       };
 
@@ -138,9 +138,11 @@ in {
     programs.zoxide.enable = true;
     programs.atuin = {
       enable = true;
+      flags = [
+        "--disable-up-arrow"
+      ];
       settings = {
         inline_height = 16;
-        filter_mode = "session";
       };
     };
 
