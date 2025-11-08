@@ -16,7 +16,7 @@ in
       selected=$1
     else
       selected=$(${lib.getExe pkgs.fd} . "''${dirs[@]}" -H --type=dir --max-depth=1 2>/dev/null |
-        ${lib.getExe pkgs.fzf} --delimiter / --with-nth -3..)
+        ${lib.getExe pkgs.fzf} --no-sort --delimiter / --with-nth -3..)
     fi
 
     [[ ! $selected ]] && exit 0
