@@ -144,6 +144,8 @@ in {
       settings = {
         inline_height = 16;
       };
+      # improves performance on zfs systems
+      daemon.enable = true;
     };
 
     programs.tmux = {
