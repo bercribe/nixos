@@ -15,7 +15,7 @@ in
     if [[ $# -eq 1 ]]; then
       selected=$1
     else
-      selected=$(${lib.getExe pkgs.fd} . "''${dirs[@]}" -H --type=dir --max-depth=1 2>/dev/null |
+      selected=$(${lib.getExe pkgs.fd} . "''${dirs[@]}" --type=dir --max-depth=1 $SF_FD_FLAGS 2>/dev/null |
         ${lib.getExe pkgs.fzf} --no-sort --delimiter / --with-nth -3..)
     fi
 
