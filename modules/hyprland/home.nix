@@ -251,7 +251,10 @@ in {
           # "position": "bottom", # Waybar position (top|bottom|left|right)
           "height" = 30; # Waybar height (to be removed for auto height)
           # "width": 1280, # Waybar width
-          "spacing" = if cfg.waybar.compactMode then 1 else 4; # Gaps between modules (4px)
+          "spacing" =
+            if cfg.waybar.compactMode
+            then 1
+            else 4; # Gaps between modules (4px)
           # Choose the order of the modules
           "modules-left" = [
             "hyprland/workspaces"
@@ -366,39 +369,60 @@ in {
           };
           "clock" = {
             # "timezone": "America/New_York",
-            "format" = if cfg.waybar.compactMode then "{:%d %H:%M}" else "{:%m-%d %H:%M}";
+            "format" =
+              if cfg.waybar.compactMode
+              then "{:%d %H:%M}"
+              else "{:%m-%d %H:%M}";
             "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             "format-alt" = "{:%Y-%m-%d}";
           };
-          "cpu" = if cfg.waybar.compactMode then {
-            "format" = "{icon}";
-            "format-icons" = progressIcons;
-          } else {
-            "format" = "{usage}% ";
-          };
-          "memory" = if cfg.waybar.compactMode then {
-            "format" = "{icon}";
-            "format-icons" = progressIcons;
-          } else {
-            "format" = "{}% ";
-          };
+          "cpu" =
+            if cfg.waybar.compactMode
+            then {
+              "format" = "{icon}";
+              "format-icons" = progressIcons;
+            }
+            else {
+              "format" = "{usage}% ";
+            };
+          "memory" =
+            if cfg.waybar.compactMode
+            then {
+              "format" = "{icon}";
+              "format-icons" = progressIcons;
+            }
+            else {
+              "format" = "{}% ";
+            };
           "temperature" = {
             # "thermal-zone": 2,
             # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
             "critical-threshold" = 80;
             # "format-critical": "{temperatureC}°C {icon}",
-            "format" = if cfg.waybar.compactMode then "{icon}" else "{temperatureC}°C {icon}";
+            "format" =
+              if cfg.waybar.compactMode
+              then "{icon}"
+              else "{temperatureC}°C {icon}";
             "format-icons" = ["" "" ""];
           };
           "backlight" = {
             # "device": "acpi_video1",
-            "format" = if cfg.waybar.compactMode then "{icon}" else "{percent}% {icon}";
+            "format" =
+              if cfg.waybar.compactMode
+              then "{icon}"
+              else "{percent}% {icon}";
             "tooltip-format" = "{percent}%";
             "format-icons" = ["🌑" "🌘" "🌗" "🌖" "🌕"];
           };
-          "battery" = let 
-            capacity = if cfg.waybar.compactMode then "" else "{capacity}% ";
-            format = if cfg.waybar.compactMode then "{icon}" else "${capacity}{icon}";
+          "battery" = let
+            capacity =
+              if cfg.waybar.compactMode
+              then ""
+              else "{capacity}% ";
+            format =
+              if cfg.waybar.compactMode
+              then "{icon}"
+              else "${capacity}{icon}";
           in {
             "states" = {
               # "good": 95,
@@ -439,7 +463,10 @@ in {
             "format-alt" = "{ifname}: {ipaddr}/{cidr}";
           };
           "pulseaudio" = let
-            volume = if cfg.waybar.compactMode then "" else "{volume}% ";
+            volume =
+              if cfg.waybar.compactMode
+              then ""
+              else "{volume}% ";
           in {
             # "scroll-step": 1, # %, can be a float
             "format" = "${volume}{icon}{format_source}";
