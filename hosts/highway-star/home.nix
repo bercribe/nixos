@@ -21,7 +21,7 @@
       "[workspace 10 silent] keepassxc"
     ];
   };
-  local.waybar.enableNetwork = false;
+  local.waybar.compactMode = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

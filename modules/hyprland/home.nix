@@ -9,12 +9,10 @@ in {
   imports = [./binds.nix];
 
   options.local.waybar = {
-    enableNetwork = lib.mkEnableOption "network";
+    compactMode = lib.mkEnableOption "compact mode";
   };
 
   config = {
-    local.waybar.enableNetwork = lib.mkDefault true;
-
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = false; # conflicts with uwsm
@@ -246,12 +244,14 @@ in {
       enable = true;
       # style = ./waybar-style.css;
       settings = {
-        mainBar = {
+        mainBar = let
+          progressIcons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+        in {
           "layer" = "top"; # Waybar at top layer
           # "position": "bottom", # Waybar position (top|bottom|left|right)
           "height" = 30; # Waybar height (to be removed for auto height)
           # "width": 1280, # Waybar width
-          "spacing" = 4; # Gaps between modules (4px)
+          "spacing" = if cfg.waybar.compactMode then 1 else 4; # Gaps between modules (4px)
           # Choose the order of the modules
           "modules-left" = [
             "hyprland/workspaces"
@@ -269,11 +269,11 @@ in {
               "pulseaudio"
             ]
             ++ (
-              if cfg.waybar.enableNetwork
-              then [
+              if cfg.waybar.compactMode
+              then []
+              else [
                 "network"
               ]
-              else []
             )
             ++ [
               "power-profiles-daemon"
@@ -285,8 +285,8 @@ in {
               "sway/language"
               "battery"
               "battery#bat2"
-              "clock"
               "tray"
+              "clock"
             ];
           # Modules configuration
           "hyprland/workspaces" = {
@@ -366,15 +366,20 @@ in {
           };
           "clock" = {
             # "timezone": "America/New_York",
-            "format" = "{:%m-%d %H:%M}";
+            "format" = if cfg.waybar.compactMode then "{:%d %H:%M}" else "{:%m-%d %H:%M}";
             "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             "format-alt" = "{:%Y-%m-%d}";
           };
-          "cpu" = {
+          "cpu" = if cfg.waybar.compactMode then {
+            "format" = "{icon}";
+            "format-icons" = progressIcons;
+          } else {
             "format" = "{usage}% ";
-            "tooltip" = false;
           };
-          "memory" = {
+          "memory" = if cfg.waybar.compactMode then {
+            "format" = "{icon}";
+            "format-icons" = progressIcons;
+          } else {
             "format" = "{}% ";
           };
           "temperature" = {
@@ -382,25 +387,30 @@ in {
             # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
             "critical-threshold" = 80;
             # "format-critical": "{temperatureC}°C {icon}",
-            "format" = "{temperatureC}°C {icon}";
+            "format" = if cfg.waybar.compactMode then "{icon}" else "{temperatureC}°C {icon}";
             "format-icons" = ["" "" ""];
           };
           "backlight" = {
             # "device": "acpi_video1",
-            "format" = "{percent}% {icon}";
+            "format" = if cfg.waybar.compactMode then "{icon}" else "{percent}% {icon}";
+            "tooltip-format" = "{percent}%";
             "format-icons" = ["🌑" "🌘" "🌗" "🌖" "🌕"];
           };
-          "battery" = {
+          "battery" = let 
+            capacity = if cfg.waybar.compactMode then "" else "{capacity}% ";
+            format = if cfg.waybar.compactMode then "{icon}" else "${capacity}{icon}";
+          in {
             "states" = {
               # "good": 95,
               "warning" = 30;
               "critical" = 15;
             };
-            "format" = "{capacity}% {icon}";
-            "format-full" = "{capacity}% {icon}";
-            "format-charging" = "{capacity}% ";
-            "format-plugged" = "{capacity}% ";
+            inherit format;
+            "format-full" = format;
+            "format-charging" = "${capacity}";
+            "format-plugged" = "${capacity}";
             "format-alt" = "{time} {icon}";
+            "tooltip-format" = "{capacity}%";
             # "format-good": "", # An empty format will hide the module
             # "format-full": "",
             "format-icons" = [" " " " " " " " " "];
@@ -428,13 +438,15 @@ in {
             "format-disconnected" = "Disconnected ⚠ ";
             "format-alt" = "{ifname}: {ipaddr}/{cidr}";
           };
-          "pulseaudio" = {
+          "pulseaudio" = let
+            volume = if cfg.waybar.compactMode then "" else "{volume}% ";
+          in {
             # "scroll-step": 1, # %, can be a float
-            "format" = "{volume}% {icon} {format_source}";
-            "format-bluetooth" = "{volume}% {icon} {format_source}";
-            "format-bluetooth-muted" = "  {icon} {format_source}";
-            "format-muted" = "  {format_source}";
-            "format-source" = "{volume}% ";
+            "format" = "${volume}{icon}{format_source}";
+            "format-bluetooth" = "${volume}{icon}{format_source}";
+            "format-bluetooth-muted" = " {icon}{format_source}";
+            "format-muted" = " {format_source}";
+            "format-source" = "${volume}";
             "format-source-muted" = "";
             "format-icons" = {
               "headphone" = "";
@@ -445,6 +457,9 @@ in {
               "car" = "";
               "default" = [" " " " " "];
             };
+            "tooltip-format" = ''
+              {desc}
+              {volume}% {icon}  {source_volume}% '';
             "on-click" = "pavucontrol";
           };
           "custom/media" = {
