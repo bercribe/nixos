@@ -49,6 +49,7 @@ in {
       packages.core ++ (lib.optionals cfg.packages.includeScripts packages.scripts);
 
     home.shellAliases = {
+      cd = "z";
       reload-env = "eval $(tmux show-env -s)";
     };
 
@@ -121,7 +122,7 @@ in {
           source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
           zstyle ':completion:*' menu no # disable default
           zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # display directory contents on cd
-          zstyle ':fzf-tab:*' fzf-bindings 'ctrl-n:toggle+down,ctrl-p:toggle+up'
+          zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:toggle+down,ctrl-k:toggle+up'
         '';
       in
         lib.mkMerge [prompt config];
