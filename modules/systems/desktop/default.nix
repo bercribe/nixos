@@ -12,6 +12,7 @@
     (self + /modules/hyprland) # Tiling window manager
     (self + /modules/systems/network/mount.nix)
     (self + /modules/systems/network/gdrive.nix)
+    (self + /modules/systems/network/ssh-server.nix)
     (self + /modules/systems/hardware/bluray.nix)
   ];
 
@@ -153,12 +154,6 @@
   };
 
   local.disk-monitor.headless = false;
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
 
   # Printing
   # Enable CUPS to print documents.

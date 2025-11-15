@@ -32,10 +32,7 @@
   # Services
   local.disk-monitor.headless = true;
 
-  local.sshServer = {
-    enableOpenssh = true;
-    createHostUsers = true;
-  };
+  local.sshServer.createHostUsers = true;
 
   # ZFS snapshots
   services.sanoid = {

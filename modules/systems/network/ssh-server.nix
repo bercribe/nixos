@@ -14,8 +14,6 @@
   superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjusmTfA4UTuMdrnBl3n66inecJF34mqtNp1avGp/nd";
 in {
   options.local.sshServer = {
-    enableOpenssh = lib.mkEnableOption "openssh";
-
     createHostUsers = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -25,10 +23,10 @@ in {
   };
 
   config = {
-    users.users.mawz.openssh.authorizedKeys.keys = [heavensDoorKey highwayStarKey judgementKey moodyBluesKey superFlyKey];
+    users.users.mawz.openssh.authorizedKeys.keys = [heavensDoorKey highwayStarKey];
 
     services.openssh = {
-      enable = cfg.enableOpenssh;
+      enable = lib.mkDefault true;
       settings.PasswordAuthentication = false;
     };
 
