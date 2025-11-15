@@ -75,7 +75,7 @@
       ];
     };
 
-    homeInstaller = import ./home-installer.nix;
+    homeInstaller = import ./installers/home.nix;
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     forAllSystems = f:
       builtins.listToAttrs (map (system: {
@@ -85,6 +85,34 @@
         systems);
   in {
     nixosConfigurations = {
+      echoes = let
+        system = "aarch64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [overlay];
+          config.allowUnfree = true;
+        };
+
+        local = {
+          constants = pkgs.callPackage ./constants {};
+          utils = pkgs.callPackage ./utils;
+          secrets = import (secrets + /nix);
+        };
+        specialArgs =
+          inputs
+          // {
+            inherit local;
+          };
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "aarch64-linux";
+          modules =
+            commonModules
+            ++ [
+              ./hosts/echoes/configuration.nix
+            ];
+        };
       heavens-door = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules =
@@ -126,6 +154,13 @@
             ./hosts/super-fly/configuration.nix
             paisaModule
           ];
+      };
+      hetzner-cloud = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./installers/hetzner/configuration.nix
+        ];
       };
     };
     homeConfigurations = let

@@ -65,6 +65,20 @@ Copy over secrets if necessary. Don't forget to:
 - enable secure boot
 - reboot automatically on power restored
 
+### VPS
+```
+# initial install:
+nix run github:nix-community/nixos-anywhere -- --flake .#hetzner-cloud --target-host root@<ip address> --build-on-remote
+
+# switch config:
+nixos-rebuild build --flake .#echoes --target-host "root@<ip address>"
+# or on host:
+rsync -r . root@<ip address>:~/nixos
+nix --extra-experimental-features 'nix-command flakes pipe-operators' build .#nixosConfigurations.echoes.config.system.build.toplevel
+./result/bin/switch-to-configuration boot
+passwd mawz
+```
+
 ## Troubleshooting
 
 #### no space left on device
