@@ -27,7 +27,10 @@ in {
   config = {
     users.users.mawz.openssh.authorizedKeys.keys = [heavensDoorKey highwayStarKey judgementKey moodyBluesKey superFlyKey];
 
-    services.openssh.enable = lib.mkIf cfg.enableOpenssh true;
+    services.openssh = {
+      enable = cfg.enableOpenssh;
+      settings.PasswordAuthentication = false;
+    };
 
     users.groups.hosts = lib.mkIf cfg.createHostUsers {};
     users.users.heavens-door = lib.mkIf cfg.createHostUsers {
