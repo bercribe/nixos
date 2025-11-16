@@ -30,6 +30,8 @@
 
   local.sshServer.createHostUsers = true;
 
+  local.services.postfix.enable = true;
+
   # ZFS snapshots
   services.sanoid = {
     enable = true;
