@@ -1,5 +1,4 @@
 {
-  self,
   config,
   pkgs,
   lib,
@@ -9,11 +8,11 @@
   imports = [
     ../common.nix
     ./keyboard.nix
-    (self + /modules/hyprland) # Tiling window manager
-    (self + /modules/systems/network/mount.nix)
-    (self + /modules/systems/network/gdrive.nix)
-    (self + /modules/systems/network/ssh-server.nix)
-    (self + /modules/systems/hardware/bluray.nix)
+    ../../hyprland # Tiling window manager
+    ../network/mount.nix
+    ../network/gdrive.nix
+    ../network/ssh-server.nix
+    ../hardware/bluray.nix
   ];
 
   # Secrets

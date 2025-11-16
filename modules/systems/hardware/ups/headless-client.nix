@@ -1,5 +1,4 @@
 {
-  self,
   config,
   pkgs,
   local,
@@ -9,7 +8,7 @@
 in {
   imports = [
     ./base-client.nix
-    (self + /modules/clients/local-healthchecks.nix)
+    ../../../clients/local-healthchecks.nix
   ];
 
   systemd.timers.ups-monitor = {

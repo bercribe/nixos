@@ -1,5 +1,4 @@
 {
-  self,
   config,
   pkgs,
   local,
@@ -7,7 +6,7 @@
   ...
 }: {
   imports = [
-    (self + /modules/clients/local-healthchecks.nix)
+    ../../../clients/local-healthchecks.nix
   ];
 
   sops.secrets."ups/admin" = {};

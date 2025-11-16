@@ -1,7 +1,5 @@
 {
-  self,
   config,
-  pkgs,
   lib,
   local,
   ...
@@ -36,7 +34,7 @@
     cameras;
 in {
   imports = [
-    (self + /modules/clients/local-healthchecks.nix)
+    ../clients/local-healthchecks.nix
   ];
 
   options.local.services.frigate.enable = lib.mkEnableOption "frigate";

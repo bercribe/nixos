@@ -1,6 +1,5 @@
 {
   config,
-  self,
   lib,
   ...
 }: let
@@ -8,7 +7,7 @@
 in {
   imports = [
     ./base.nix
-    (self + /modules/cron/syncthing-healthchecks.nix)
+    ../../cron/syncthing-healthchecks.nix
   ];
 
   options.local.services.syncthing-headless.enable = lib.mkEnableOption "syncthing-headless";

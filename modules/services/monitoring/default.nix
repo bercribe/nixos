@@ -1,5 +1,4 @@
 {
-  self,
   config,
   lib,
   ...
@@ -9,8 +8,8 @@ in {
   imports = [
     ./gatus.nix
     ./healthchecks.nix
-    (self + /modules/cron/heartbeat-healthchecks.nix)
-    (self + /modules/cron/email-healthchecks.nix)
+    ../../cron/heartbeat-healthchecks.nix
+    ../../cron/email-healthchecks.nix
   ];
 
   options.local.service-monitoring = with lib;

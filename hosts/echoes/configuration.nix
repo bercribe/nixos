@@ -1,6 +1,5 @@
 {
   modulesPath,
-  self,
   config,
   secrets,
   ...
@@ -10,7 +9,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disko-config.nix
 
-    (self + /modules/systems/headless)
+    ../../modules/systems/headless
   ];
 
   # Secrets

@@ -1,21 +1,15 @@
-{
-  self,
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
+{...}: {
   imports = [
     ./hardware-configuration.nix
     ./backups.nix
-    (self + /modules/systems/headless)
-    (self + /modules/systems/hardware/encrypted-zfs.nix)
-    (self + /modules/systems/hardware/ups/headless-client.nix)
-    (self + /modules/systems/network/gdrive.nix)
-    (self + /modules/cron/finance-sync.nix)
-    (self + /modules/cron/heartbeat-healthchecks.nix)
-    (self + /modules/cron/pcloud-gdrive-sync.nix)
-    (self + /modules/cron/syncthing-conflicts.nix)
+    ../../modules/systems/headless
+    ../../modules/systems/hardware/encrypted-zfs.nix
+    ../../modules/systems/hardware/ups/headless-client.nix
+    ../../modules/systems/network/gdrive.nix
+    ../../modules/cron/finance-sync.nix
+    ../../modules/cron/heartbeat-healthchecks.nix
+    ../../modules/cron/pcloud-gdrive-sync.nix
+    ../../modules/cron/syncthing-conflicts.nix
   ];
 
   local.cron.heartbeat-healthchecks.enable = true;

@@ -1,5 +1,4 @@
 {
-  self,
   pkgs,
   config,
   local,
@@ -8,7 +7,7 @@
   utils = local.utils {inherit config;};
 in {
   imports = [
-    (self + /modules/clients/local-healthchecks.nix)
+    ../clients/local-healthchecks.nix
   ];
 
   systemd.timers.syncthing-conflicts = {

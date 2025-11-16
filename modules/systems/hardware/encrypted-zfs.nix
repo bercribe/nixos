@@ -1,12 +1,7 @@
-{
-  self,
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ./zfs.nix
-    (self + /modules/systems/network/ssh-server.nix)
+    ../network/ssh-server.nix
   ];
 
   sops.secrets = {

@@ -1,11 +1,10 @@
 {
-  self,
   pkgs,
   config,
   ...
 }: {
   imports = [
-    (self + /modules/clients/rclone.nix)
+    ../../clients/rclone.nix
   ];
 
   environment.systemPackages = [pkgs.rclone];

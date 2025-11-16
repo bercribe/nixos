@@ -1,11 +1,10 @@
 {
-  self,
   pkgs,
   lib,
   ...
 }: {
   imports = [
-    (self + /modules/clients/mullvad.nix)
+    ../../modules/clients/mullvad.nix
   ];
 
   time.timeZone = lib.mkForce "Asia/Shanghai";

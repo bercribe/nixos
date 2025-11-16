@@ -1,5 +1,4 @@
 {
-  self,
   pkgs,
   config,
   local,
@@ -8,8 +7,8 @@
   utils = local.utils {inherit config;};
 in {
   imports = [
-    (self + /modules/clients/local-healthchecks.nix)
-    (self + /modules/clients/rclone.nix)
+    ../clients/local-healthchecks.nix
+    ../clients/rclone.nix
   ];
 
   systemd.timers.gdrive-backup = {

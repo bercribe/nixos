@@ -1,9 +1,4 @@
-{
-  self,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   local.services.postfix.enable = true;
 
   services.zfs.autoScrub.enable = true;

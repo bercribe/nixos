@@ -1,9 +1,4 @@
-{
-  self,
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   imports = let
     rootDir = ../..;
   in [

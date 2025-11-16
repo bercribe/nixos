@@ -1,15 +1,14 @@
 {
-  self,
   config,
   secrets,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
-    (self + /modules/systems/headless)
-    (self + /modules/systems/hardware/zfs.nix)
-    (self + /modules/systems/hardware/ups/server.nix)
-    (self + /modules/cron/email-digest.nix)
+    ../../modules/systems/headless
+    ../../modules/systems/hardware/zfs.nix
+    ../../modules/systems/hardware/ups/server.nix
+    ../../modules/cron/email-digest.nix
   ];
 
   # Secrets

@@ -1,5 +1,4 @@
 {
-  self,
   pkgs,
   config,
   lib,
@@ -13,7 +12,7 @@
   utils = local.utils {inherit config;};
 in {
   imports = [
-    (self + /modules/cron/gdrive-backup.nix)
+    ../../modules/cron/gdrive-backup.nix
   ];
 
   # ZFS snapshots and replication

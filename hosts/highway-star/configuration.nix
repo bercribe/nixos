@@ -1,13 +1,8 @@
-{
-  self,
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ./hardware-configuration.nix
-    (self + /modules/systems/desktop)
-    (self + /modules/systems/hardware/encrypted-zfs.nix)
+    ../../modules/systems/desktop
+    ../../modules/systems/hardware/encrypted-zfs.nix
     # ./china.nix
   ];
 

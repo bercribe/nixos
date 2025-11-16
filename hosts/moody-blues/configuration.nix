@@ -1,14 +1,13 @@
 {
-  self,
   config,
   secrets,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
-    (self + /modules/systems/headless)
-    (self + /modules/systems/hardware/zfs.nix)
-    (self + /modules/systems/htpc/kodi)
+    ../../modules/systems/headless
+    ../../modules/systems/hardware/zfs.nix
+    ../../modules/systems/htpc/kodi
   ];
 
   # Secrets

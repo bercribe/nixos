@@ -2,7 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  self,
   pkgs,
   lib,
   local,
@@ -10,13 +9,14 @@
   errata,
   ...
 }: {
-  imports = [
+  imports = let
+  in [
     ./network/ssh-client.nix
     ./sops.nix
     ./home/stylix.nix
-    (self + /modules/services)
-    (self + /modules/cron/disk-monitor.nix)
-    (self + /modules/clients/local-healthchecks.nix)
+    ../services
+    ../cron/disk-monitor.nix
+    ../clients/local-healthchecks.nix
   ];
 
   # Config
@@ -62,7 +62,7 @@
   console.keyMap = "us";
 
   # User env
-  nixpkgs.overlays = [(import (self + /overlay.nix) {inherit nixpkgs-unstable errata;})];
+  nixpkgs.overlays = [(import ../../overlay.nix {inherit nixpkgs-unstable errata;})];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

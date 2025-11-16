@@ -1,11 +1,7 @@
-{
-  self,
-  config,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ../common.nix
-    (self + /modules/systems/network/ssh-server.nix)
+    ../network/ssh-server.nix
   ];
 
   # Config
