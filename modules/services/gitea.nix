@@ -1,9 +1,7 @@
 {...}: let
   port = 12552;
 in {
-  imports = [
-    ../clients/local-healthchecks.nix
-  ];
+  local.healthchecks-secret.enable = true;
 
   # mirroring my repos here with this:
   # https://docs.gitea.com/usage/repo-mirror#pulling-from-a-remote-repository

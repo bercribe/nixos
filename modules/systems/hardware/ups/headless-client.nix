@@ -8,8 +8,8 @@
 in {
   imports = [
     ./base-client.nix
-    ../../../clients/local-healthchecks.nix
   ];
+  local.healthchecks-secret.enable = true;
 
   systemd.timers.ups-monitor = {
     wantedBy = ["timers.target"];

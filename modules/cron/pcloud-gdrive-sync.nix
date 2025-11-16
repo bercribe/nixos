@@ -7,9 +7,10 @@
   utils = local.utils {inherit config;};
 in {
   imports = [
-    ../clients/local-healthchecks.nix
     ../clients/rclone.nix
   ];
+
+  local.healthchecks-secret.enable = true;
 
   systemd.timers.pcloud-gdrive-sync = {
     wantedBy = ["timers.target"];

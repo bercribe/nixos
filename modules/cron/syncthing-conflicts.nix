@@ -6,9 +6,7 @@
 }: let
   utils = local.utils {inherit config;};
 in {
-  imports = [
-    ../clients/local-healthchecks.nix
-  ];
+  local.healthchecks-secret.enable = true;
 
   systemd.timers.syncthing-conflicts = {
     wantedBy = ["timers.target"];

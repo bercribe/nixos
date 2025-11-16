@@ -5,9 +5,7 @@
   secrets,
   ...
 }: {
-  imports = [
-    ../../../clients/local-healthchecks.nix
-  ];
+  local.healthchecks-secret.enable = true;
 
   sops.secrets."ups/admin" = {};
   sops.secrets."ups/observer" = {

@@ -4,9 +4,7 @@
   secrets,
   ...
 }: {
-  imports = [
-    ../../../clients/local-healthchecks.nix
-  ];
+  local.healthchecks-secret.enable = true;
 
   sops.secrets."ups/observer" = {
     sopsFile = secrets + /sops/local.yaml;

@@ -33,13 +33,11 @@
       })
     cameras;
 in {
-  imports = [
-    ../clients/local-healthchecks.nix
-  ];
-
   options.local.services.frigate.enable = lib.mkEnableOption "frigate";
 
   config = lib.mkIf cfg.enable {
+    local.healthchecks-secret.enable = true;
+
     sops.secrets."frigate/rtsp/user" = {};
     sops.secrets."frigate/rtsp/pass" = {};
     sops.secrets."mosquitto/frigate" = {};
