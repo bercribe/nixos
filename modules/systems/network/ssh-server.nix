@@ -26,7 +26,12 @@ in {
 
     services.openssh = {
       enable = lib.mkDefault true;
-      settings.PasswordAuthentication = false;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        AllowUsers = ["mawz"] ++ (lib.optionals cfg.createHostUsers ["heavens-door" "highway-star" "judgement" "moody-blues" "super-fly"]);
+      };
     };
 
     users.groups.hosts = lib.mkIf cfg.createHostUsers {};
