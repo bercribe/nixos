@@ -12,7 +12,7 @@
 in {
   sops.secrets.finance-sync-ping-key = {
     key = "healthchecks/local/ping-key";
-    sopsFile = secrets + /sops/common.yaml;
+    sopsFile = secrets + /sops/local.yaml;
     owner = user;
   };
 

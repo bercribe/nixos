@@ -78,7 +78,7 @@ in {
 
       # Certs
       sops.secrets."cloudflare/lego" = {
-        sopsFile = secrets + /sops/common.yaml;
+        sopsFile = secrets + /sops/local.yaml;
       };
       security.acme = {
         acceptTerms = true;

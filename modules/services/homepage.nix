@@ -13,10 +13,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.secrets."healthchecks/local/api-key-ro" = {
-      sopsFile = secrets + /sops/common.yaml;
+      sopsFile = secrets + /sops/local.yaml;
     };
     sops.secrets."healthchecks/remote/api-key-ro" = {
-      sopsFile = secrets + /sops/common.yaml;
+      sopsFile = secrets + /sops/local.yaml;
     };
     sops.templates."homepage.env".content = ''
       HOMEPAGE_VAR_HEALTHCHECKS_LOCAL_API_KEY=${config.sops.placeholder."healthchecks/local/api-key-ro"}

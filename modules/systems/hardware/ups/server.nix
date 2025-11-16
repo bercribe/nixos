@@ -11,7 +11,7 @@
 
   sops.secrets."ups/admin" = {};
   sops.secrets."ups/observer" = {
-    sopsFile = secrets + /sops/common.yaml;
+    sopsFile = secrets + /sops/local.yaml;
   };
   sops.secrets."ups/monuser" = {};
 

@@ -468,11 +468,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1763187803,
-        "narHash": "sha256-x1cnpo9g8hZ1zjJbYdYQ7bB9lOPdXBGm6Kit4Q3EZQI=",
+        "lastModified": 1763329159,
+        "narHash": "sha256-SU63ZuzJbT4Chx9Kqz+xVfZLUCetryWy/9SNA6Bnp/g=",
         "ref": "refs/heads/master",
-        "rev": "d7ef87c7cdde0d8abfc87085baf46cde20748137",
-        "revCount": 17,
+        "rev": "77a9e7c6f8d8c719d378fa238743e5994d8fc273",
+        "revCount": 18,
         "type": "git",
         "url": "ssh://git@github.com/bercribe/secrets.git"
       },

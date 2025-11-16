@@ -9,7 +9,7 @@
   ];
 
   sops.secrets."ups/observer" = {
-    sopsFile = secrets + /sops/common.yaml;
+    sopsFile = secrets + /sops/local.yaml;
   };
 
   # shutdown machine automatically during power outage
