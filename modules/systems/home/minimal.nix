@@ -213,6 +213,10 @@ in {
               mime = "image/*";
               run = "mux image exiftool";
             }
+            {
+              mime = "video/*";
+              run = "mux video exiftool";
+            }
           ];
         };
       };
