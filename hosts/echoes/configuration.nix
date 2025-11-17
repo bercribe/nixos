@@ -1,6 +1,7 @@
 {
   modulesPath,
   config,
+  pkgs,
   lib,
   secrets,
   ...
@@ -31,7 +32,26 @@
   # TODO: fix disk monitor
   local.disk-monitor.enable = lib.mkForce false;
 
+  # SSH security
   services.fail2ban.enable = true;
+
+  security.pam.services.sshd.text = let
+    notifyLogin = pkgs.writeShellScript "notify-login.sh" ''
+      mkdir -p "$HOME/.ssh"
+      ip_file="$HOME/.ssh/last_ip"
+      ip=$(echo $SSH_CONNECTION | awk '{print $1}')
+      last_ip=$(cat $ip_file 2>/dev/null)
+      echo "$ip" > $ip_file
+
+      if [ "$ip" != "$last_ip" ]; then
+        message="SSH login detected on $(hostname) at $(date) by user $PAM_USER from $ip"
+        echo "$message" | ${pkgs.postfix}/bin/sendmail root
+      fi
+    '';
+  in
+    lib.mkDefault (lib.mkAfter ''
+      session optional ${pkgs.pam}/lib/security/pam_exec.so ${notifyLogin}
+    '');
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
