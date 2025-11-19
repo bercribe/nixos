@@ -99,9 +99,11 @@ in {
         in {
           "${hostUrl}" = {
             extraDomainNames = ["*.${hostUrl}"];
+            reloadServices = ["caddy"];
           };
           "${localRedirUrl}" = lib.mkIf isLocalRedirHost {
             extraDomainNames = ["*.${localRedirUrl}"];
+            reloadServices = ["caddy"];
           };
         };
       };
