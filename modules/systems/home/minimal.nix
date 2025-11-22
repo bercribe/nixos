@@ -152,7 +152,7 @@ in {
     programs.tmux = {
       enable = true;
       keyMode = "vi";
-      shortcut = "space";
+      prefix = "M-space";
       baseIndex = 1;
       mouse = true;
       escapeTime = 0;
