@@ -173,18 +173,42 @@
   services.kanata = {
     enable = true;
     keyboards.default = {
+      extraDefCfg = "process-unmapped-keys yes";
       config = ''
         (defsrc
-          caps
+          caps a s d f j k l ;
+        )
+
+        (defvar
+          tap-time 150
+          hold-time 200
         )
 
         (defalias
-          ;; tap caps lock as escape, hold caps lock as left control
-          escctrl (tap-hold 100 100 esc lctrl)
+          ;; caps mod
+          escsw (tap-hold 100 100 esc (layer-while-held switch))
+          ;; home row mods
+          a (tap-hold $tap-time $hold-time a lmet)
+          s (tap-hold $tap-time $hold-time s lalt)
+          d (tap-hold $tap-time $hold-time d lsft)
+          f (tap-hold $tap-time $hold-time f lctl)
+          j (tap-hold $tap-time $hold-time j rctl)
+          k (tap-hold $tap-time $hold-time k rsft)
+          l (tap-hold $tap-time $hold-time l ralt)
+          ; (tap-hold $tap-time $hold-time ; rmet)
+          ;; layer switching
+          sbs (layer-switch base)
+          sqt (layer-switch qwerty)
         )
 
         (deflayer base
-          @escctrl
+          @escsw @a @s @d @f @j @k @l @;
+        )
+        (deflayer switch
+          _ _ _ _ _ @sbs @sqt _ _
+        )
+        (deflayer qwerty
+          @escsw a s d f j k l ;
         )
       '';
     };
