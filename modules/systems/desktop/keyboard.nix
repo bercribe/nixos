@@ -188,16 +188,16 @@
 
         (defalias
           ;; caps mod
-          escsw (tap-hold 100 100 esc (layer-while-held switch))
+          escsw (tap-hold-release $tap-time $hold-time esc (layer-while-held switch))
           ;; home row mods
-          a (tap-hold $tap-time $hold-time a lmet)
-          s (tap-hold $tap-time $hold-time s lalt)
-          d (tap-hold $tap-time $hold-time d lsft)
-          f (tap-hold $tap-time $hold-time f lctl)
-          j (tap-hold $tap-time $hold-time j rctl)
-          k (tap-hold $tap-time $hold-time k rsft)
-          l (tap-hold $tap-time $hold-time l ralt)
-          ; (tap-hold $tap-time $hold-time ; rmet)
+          a (tap-hold-release $tap-time $hold-time a lmet)
+          s (tap-hold-release $tap-time $hold-time s lalt)
+          d (tap-hold-release $tap-time $hold-time d lsft)
+          f (tap-hold-release $tap-time $hold-time f lctl)
+          j (tap-hold-release $tap-time $hold-time j rctl)
+          k (tap-hold-release $tap-time $hold-time k rsft)
+          l (tap-hold-release $tap-time $hold-time l ralt)
+          ; (tap-hold-release $tap-time $hold-time ; rmet)
           ;; layer switching
           sbs (layer-switch base)
           sps (layer-switch pass)
