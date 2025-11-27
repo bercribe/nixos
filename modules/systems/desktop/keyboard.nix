@@ -177,6 +177,8 @@
       config = ''
         (defsrc
           caps a s d f j k l ;
+          lsft
+          lctl lmet
         )
 
         (defvar
@@ -198,17 +200,23 @@
           ; (tap-hold $tap-time $hold-time ; rmet)
           ;; layer switching
           sbs (layer-switch base)
-          sqt (layer-switch qwerty)
+          sps (layer-switch pass)
         )
 
         (deflayer base
           @escsw @a @s @d @f @j @k @l @;
+          XX
+          XX XX
         )
         (deflayer switch
-          _ _ _ _ _ @sbs @sqt _ _
+          _ _ _ _ _ @sbs @sps _ _
+          _
+          _ _
         )
-        (deflayer qwerty
-          @escsw a s d f j k l ;
+        (deflayer pass
+          @escsw _ _ _ _ _ _ _ _
+          _
+          _ _
         )
       '';
     };
