@@ -31,12 +31,13 @@ in {
       key = config.sops.secrets.syncthing-key.path;
       settings = {
         devices = {
-          "geb" = {id = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
-          "heavens-door" = {id = "HK3YODK-63EFXRW-77XQ2PK-ZB5A35F-6BSAZ6S-J76VARS-KV6HJSN-D7KR4AB";};
-          "highway-star" = {id = "EEM5E4H-7TFYA5Y-BY37H4D-25LOQIS-M5ETY2C-JSVJHOL-4O67NI3-CPZQ4AE";};
-          "mr-president" = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
-          "sethan" = {id = "HXAAIQL-OXKK5KA-YCD6KGU-RBXLLM2-XIDKKVG-GA6PCSZ-C4MZHVK-2H7HNAO";};
-          "super-fly" = {id = "QL7YLXY-WKBMRND-BKQB6KN-Q4QI2MT-Z4RJXUS-JF7HJGE-PZ7D7Y2-B5RGJAV";};
+          geb = {id = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
+          heavens-door = {id = "HK3YODK-63EFXRW-77XQ2PK-ZB5A35F-6BSAZ6S-J76VARS-KV6HJSN-D7KR4AB";};
+          highway-star = {id = "EEM5E4H-7TFYA5Y-BY37H4D-25LOQIS-M5ETY2C-JSVJHOL-4O67NI3-CPZQ4AE";};
+          mr-president = {id = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";};
+          sethan = {id = "HXAAIQL-OXKK5KA-YCD6KGU-RBXLLM2-XIDKKVG-GA6PCSZ-C4MZHVK-2H7HNAO";};
+          super-fly = {id = "QL7YLXY-WKBMRND-BKQB6KN-Q4QI2MT-Z4RJXUS-JF7HJGE-PZ7D7Y2-B5RGJAV";};
+          whitesnake = {id = "GAGOH5G-KBA557E-T7UVVKE-K2TYB5W-KRSCTUF-B6HU3UP-OZA3LAC-5S27BQI";};
         };
         folders = let
           versioning = {
@@ -50,7 +51,7 @@ in {
           personal-cloud = {
             enable = lib.mkDefault false;
             path = lib.mkDefault "/home/mawz/personal-cloud";
-            devices = ["geb" "heavens-door" "highway-star" "sethan" "super-fly"];
+            devices = ["geb" "heavens-door" "highway-star" "sethan" "super-fly" "whitesnake"];
             inherit versioning;
           };
           projects = {
@@ -75,6 +76,12 @@ in {
             enable = lib.mkDefault false;
             path = lib.mkDefault "/home/mawz/sethan";
             devices = ["sethan" "super-fly"];
+            inherit versioning;
+          };
+          whitesnake = {
+            enable = lib.mkDefault false;
+            path = lib.mkDefault "/home/mawz/whitesnake";
+            devices = ["whitesnake" "super-fly"];
             inherit versioning;
           };
         };

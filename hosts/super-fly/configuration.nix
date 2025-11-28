@@ -33,6 +33,7 @@
     "d /zvault/syncthing/libraries 0755 mawz users"
     "d /zvault/syncthing/geb 0755 mawz users"
     "d /zvault/syncthing/sethan 0755 mawz users"
+    "d /zvault/syncthing/whitesnake 0755 mawz users"
   ];
   services.syncthing.settings.folders = {
     personal-cloud = {
@@ -54,6 +55,10 @@
     sethan = {
       enable = true;
       path = "/zvault/syncthing/sethan";
+    };
+    whitesnake = {
+      enable = true;
+      path = "/zvault/syncthing/whitesnake";
     };
   };
 
