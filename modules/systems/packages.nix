@@ -111,5 +111,6 @@ in
       typst # document editor
       wev # shows keyboard inputs
       yt-dlp # youtube downloader
+      zbar # QR code utils
     ];
   }
