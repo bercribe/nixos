@@ -44,11 +44,11 @@
         "$mainMod, Q, focuswindow, class:^obsidian$"
 
         # destructive
-        "$mainMod SHIFT, D, killactive,"
-        "$mainMod SHIFT, K, forcekillactive,"
-        "$mainMod SHIFT, L, exec, loginctl lock-session"
-        "$mainMod SHIFT, S, exec, systemctl suspend"
-        "$mainMod SHIFT, E, exit,"
+        "$mainMod ALT, D, killactive,"
+        "$mainMod ALT, K, forcekillactive,"
+        "$mainMod ALT, L, exec, loginctl lock-session"
+        "$mainMod ALT, S, exec, systemctl suspend"
+        "$mainMod ALT, E, exit,"
 
         # Move focus with mainMod + movement keys
         "$mainMod, H, movefocus, l"
@@ -65,7 +65,7 @@
         "$mainMod,Tab,bringactivetotop," # bring it to the top
 
         # toggle between monitors
-        "$mainMod SHIFT, Tab, focusmonitor, +1"
+        "$mainMod ALT, Tab, focusmonitor, +1"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
@@ -86,7 +86,7 @@
         # Screenshots
         ", Print, exec, pkill slurp || ${grim} -l 0 -g \"$(${slurp})\" - | ${wl-copy}"
         "$mainMod, Print, exec, ${wl-paste} | ${swappy} -f -"
-        "$mainMod SHIFT, Print, exec, pkill wf-recorder || pkill slurp || ${wf-recorder} -g \"$(${slurp})\" -f \"$HOME/Videos/$(date).mkv\""
+        "$mainMod ALT, Print, exec, pkill wf-recorder || pkill slurp || ${wf-recorder} -g \"$(${slurp})\" -f \"$HOME/Videos/$(date).mkv\""
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
