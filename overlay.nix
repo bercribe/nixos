@@ -6,6 +6,7 @@
   unstable = import nixpkgs-unstable {
     system = final.system;
   };
+  immich = final.unstable.immich;
   yazi = final.unstable.yazi;
   yaziPlugins =
     final.unstable.yaziPlugins
