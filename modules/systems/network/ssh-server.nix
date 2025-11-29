@@ -11,6 +11,7 @@
   judgementKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIER64QQIhquhTeMpVMzMI8kjNV6ch80b48l/TLOtDiiO";
   moodyBluesKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDf6DMdjF6Fsp8GmVNg7soTxqi0iqR0berZ3tbFJarhp";
   superFlyKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjusmTfA4UTuMdrnBl3n66inecJF34mqtNp1avGp/nd";
+  whitesnakeKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZiopOhkZd+CcuGL3d4Kdm+/WxmqtEjZqBEr8iUJNhT";
 in {
   options.local.sshServer = {
     createHostUsers = lib.mkOption {
@@ -22,7 +23,7 @@ in {
   };
 
   config = {
-    users.users.mawz.openssh.authorizedKeys.keys = [heavensDoorKey highwayStarKey];
+    users.users.mawz.openssh.authorizedKeys.keys = [heavensDoorKey highwayStarKey whitesnakeKey];
 
     services.openssh = {
       enable = lib.mkDefault true;
