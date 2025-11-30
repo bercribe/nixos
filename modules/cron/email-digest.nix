@@ -24,7 +24,7 @@ in {
       receiver="$(cat ${config.sops.secrets."readeck/email-digest/receiver".path})"
       key="$(cat ${config.sops.secrets."readeck/email-digest/api-key".path})"
 
-      response="$(${lib.getExe pkgs.curl} -X GET "${utils.serviceUrl "readeck"}/api/bookmarks?is_archived=false" -H "accept: application/json" -H "Authorization: Bearer $key")"
+      response="$(${lib.getExe pkgs.curl} -X GET "${utils.serviceUrl "readeck"}/api/bookmarks?is_archived=false&limit=100" -H "accept: application/json" -H "Authorization: Bearer $key")"
 
       links="$(echo $response | ${lib.getExe pkgs.jq} -r '.[] | "[\(.title)](\(.url)) (\(.reading_time) min)\n"')"
       html=$(echo "### Links:
