@@ -197,6 +197,8 @@
     asw = callPackage ./pkgs/scripts/asw.nix {};
     gtgh = callPackage ./pkgs/scripts/gtgh.nix {};
     sf = callPackage ./pkgs/scripts/sf {};
+    tsl = callPackage ./pkgs/scripts/tsl.nix {};
+    twl = callPackage ./pkgs/scripts/twl.nix {};
   };
 
   # album art - currently broken

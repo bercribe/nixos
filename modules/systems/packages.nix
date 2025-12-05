@@ -21,6 +21,8 @@
   scripts = with pkgs.scripts; [
     gtgh
     sf
+    tsl
+    twl
   ];
 in
   with pkgs; {

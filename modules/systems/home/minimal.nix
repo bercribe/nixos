@@ -176,6 +176,23 @@ in {
         bind u switch-client -l
         bind g display-popup -E "sf"
         bind e run-shell "${lib.getExe editScrollback}"
+
+        # make these repeatable
+        bind -r % split-window -h
+        bind -r '"' split-window -v
+
+        # for switching split direction
+        bind -r S-Up move-pane -h -t '.{up-of}'
+        bind -r S-Down move-pane -h -t '.{down-of}'
+        bind -r S-Left move-pane -t '.{left-of}'
+        bind -r S-Right move-pane -t '.{right-of}'
+
+        # layout quick loads
+        bind M-6 run-shell "tsl 6"
+        bind M-7 run-shell "tsl 7"
+        bind M-8 run-shell "tsl 8"
+        bind M-9 run-shell "tsl 9"
+        bind M-0 run-shell "tsl 0"
       '';
     };
 
