@@ -178,7 +178,7 @@
         (defsrc
           caps a s d f j k l ;
           lsft
-          lctl lmet
+          lctl lmet spc
         )
 
         (defvar
@@ -198,6 +198,7 @@
           k (tap-hold-release $tap-time $hold-time k rsft)
           l (tap-hold-release $tap-time $hold-time l ralt)
           ; (tap-hold-release $tap-time $hold-time ; rmet)
+          spc (tap-hold-release $tap-time $hold-time spc lsft)
           ;; layer switching
           sbs (layer-switch base)
           sps (layer-switch pass)
@@ -206,17 +207,17 @@
         (deflayer base
           @escsw @a @s @d @f @j @k @l @;
           XX
-          XX XX
+          XX XX @spc
         )
         (deflayer switch
           _ _ _ _ _ @sbs @sps _ _
           _
-          _ _
+          _ _ _
         )
         (deflayer pass
           @escsw _ _ _ _ _ _ _ _
           _
-          _ _
+          _ _ _
         )
       '';
     };
