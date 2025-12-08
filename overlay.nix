@@ -6,6 +6,8 @@
   unstable = import nixpkgs-unstable {
     system = final.system;
   };
+  home-assistant = final.unstable.home-assistant;
+  home-assistant-custom-components = final.unstable.home-assistant-custom-components;
   immich = final.unstable.immich;
   yazi = final.unstable.yazi;
   yaziPlugins =

@@ -43,6 +43,7 @@ in {
           "cast"
           "esphome"
           "google_translate"
+          "homeassistant_hardware"
           "ibeacon"
           "idasen_desk"
           "improv_ble"
@@ -58,6 +59,7 @@ in {
           "synology_dsm"
           "wyoming"
           "yolink"
+          "zha"
         ];
       customComponents = with pkgs.home-assistant-custom-components; [
         frigate

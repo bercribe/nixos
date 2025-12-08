@@ -12,7 +12,7 @@
   hostAddress = "10.231.136.1";
   containerAddress = "10.231.136.2";
   localInterface = "enp89s0";
-  camInterface = "enp0s20f0u1";
+  camInterface = "enp0s20f0u1u1";
 
   coralGid = 999;
 
