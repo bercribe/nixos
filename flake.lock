@@ -329,11 +329,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1747953325,
-        "narHash": "sha256-y2ZtlIlNTuVJUZCqzZAhIw5rrKP4DOSklev6c8PyCkQ=",
+        "lastModified": 1764939437,
+        "narHash": "sha256-4TLFHUwXraw9Df5mXC/vCrJgb50CRr3CzUzF0Mn3CII=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "55d1f923c480dadce40f5231feb472e81b0bab48",
+        "rev": "00d2457e2f608b4be6fe8b470b0a36816324b0ae",
         "type": "github"
       },
       "original": {
@@ -468,11 +468,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1763329159,
-        "narHash": "sha256-SU63ZuzJbT4Chx9Kqz+xVfZLUCetryWy/9SNA6Bnp/g=",
+        "lastModified": 1765251004,
+        "narHash": "sha256-pJBYrDTwNnLpcga8lKCCVQyF4iq9g/vm8e+8xnxrbsg=",
         "ref": "refs/heads/master",
-        "rev": "77a9e7c6f8d8c719d378fa238743e5994d8fc273",
-        "revCount": 18,
+        "rev": "cbefe810ff7ff62490b15ac35643670452604266",
+        "revCount": 19,
         "type": "git",
         "url": "ssh://git@github.com/bercribe/secrets.git"
       },
