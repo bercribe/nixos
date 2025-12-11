@@ -97,6 +97,7 @@ in
       obs-studio # screen recording
       obsidian # PKM tool
       pavucontrol # sound control
+      pureref # reference image viewer
       shotwell # photo editor
       thunar # file browser
       wineWowPackages.waylandFull # windows game emulator
