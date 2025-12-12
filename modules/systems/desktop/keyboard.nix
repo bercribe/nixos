@@ -175,49 +175,56 @@
     keyboards.default = {
       extraDefCfg = "process-unmapped-keys yes";
       config = ''
-        (defsrc
-          caps a s d f j k l ;
-          lsft
-          lctl lmet spc
-        )
-
         (defvar
-          tap-time 150
-          hold-time 200
+          tap-time 200
+          hold-time 150
         )
 
         (defalias
-          ;; caps mod
-          escsw (tap-hold-release $tap-time $hold-time esc (layer-while-held switch))
+          ;; modifier mods
+          caps (tap-hold-release $tap-time $hold-time esc (layer-while-held switch))
+          lalt (multi lsft (layer-while-held shift))
+          ralt (multi rsft (layer-while-held shift))
+          tmux (macro C-b)
+
           ;; home row mods
-          a (tap-hold-release $tap-time $hold-time a lmet)
-          s (tap-hold-release $tap-time $hold-time s lalt)
-          d (tap-hold-release $tap-time $hold-time d lsft)
+          s (tap-hold-release $tap-time $hold-time s lmet)
+          d (tap-hold-release $tap-time $hold-time d lalt)
           f (tap-hold-release $tap-time $hold-time f lctl)
           j (tap-hold-release $tap-time $hold-time j rctl)
-          k (tap-hold-release $tap-time $hold-time k rsft)
-          l (tap-hold-release $tap-time $hold-time l ralt)
-          ; (tap-hold-release $tap-time $hold-time ; rmet)
-          spc (tap-hold-release $tap-time $hold-time spc lsft)
+          k (tap-hold-release $tap-time $hold-time k ralt)
+          l (tap-hold-release $tap-time $hold-time l rmet)
+
           ;; layer switching
           sbs (layer-switch base)
           sps (layer-switch pass)
         )
 
+        (defsrc
+          caps s d f j k l
+          lsft
+          lctl lmet lalt ralt
+        )
+
         (deflayer base
-          @escsw @a @s @d @f @j @k @l @;
+          @caps @s @d @f @j @k @l
           XX
-          XX XX @spc
+          XX XX @lalt @ralt
+        )
+        (deflayer shift
+          _ _ _ _ _ _ _
+          _
+          _ _ @tmux @tmux
         )
         (deflayer switch
-          _ _ _ _ _ @sbs @sps _ _
+          _ _ _ _ @sbs @sps _
           _
-          _ _ _
+          _ _ _ _
         )
         (deflayer pass
-          @escsw _ _ _ _ _ _ _ _
+          @caps _ _ _ _ _ _
           _
-          _ _ _
+          _ _ _ _
         )
       '';
     };
