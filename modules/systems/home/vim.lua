@@ -16,6 +16,7 @@ vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 -- system clipboard
 vim.keymap.set("n", "<leader>y", '"+yy')
 vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set({"n", "v"}, "<leader>p", '"+p')
 -- black hole delete
 vim.keymap.set("n", "<leader>d", '"_dd')
 vim.keymap.set("v", "<leader>d", '"_d')
@@ -52,7 +53,7 @@ vim.keymap.set({ "n", "v" }, "<leader>sz", ":FzfLua builtin<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>e", ":Oil<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>E", ":Yazi<CR>")
 -- typst
-vim.keymap.set({ "n", "v" }, "<leader>pt", ":TypstPreview<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>Pt", ":TypstPreview<CR>")
 
 -- scripts
 vim.keymap.set({ "n", "v" }, "<leader>xg", ":execute '!gtgh --upstream origin --path \"%\" --line' line('.')<CR>")
