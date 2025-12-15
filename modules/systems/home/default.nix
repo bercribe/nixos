@@ -116,7 +116,7 @@
       command = [''shell -- for path in "$@"; do echo "file://$path"; done | ${pkgs.wl-clipboard}/bin/wl-copy -t text/uri-list'' "yank"];
     };
   };
-  local.programs.sf.directories = ["$HOME" "$HOME/sources" "$HOME/personal-cloud"];
+  local.programs.sf.directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/scripts"];
 
   # docs:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md
