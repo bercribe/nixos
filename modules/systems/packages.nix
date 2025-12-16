@@ -108,6 +108,7 @@ in
       # CLI
       cava # audio visualizer
       ffsubsync # sync subtitles with video
+      gtypist # typing tutor
       handlr-regex # better xdg-open
       ncspot # spotify TUI
       spotify-player # spotify TUI
