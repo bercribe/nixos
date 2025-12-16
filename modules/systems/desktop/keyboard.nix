@@ -183,47 +183,66 @@
         (defalias
           ;; modifier mods
           caps (tap-hold-release $tap-time $hold-time esc (layer-while-held switch))
-          lalt (multi lsft (layer-while-held shift))
-          ralt (multi rsft (layer-while-held shift))
+          lsft (multi lsft (layer-while-held shift))
+          rsft (multi rsft (layer-while-held shift))
           tmux (macro C-b)
 
           ;; home row mods
-          s (tap-hold-release $tap-time $hold-time s lmet)
-          d (tap-hold-release $tap-time $hold-time d lalt)
-          f (tap-hold-release $tap-time $hold-time f lctl)
-          j (tap-hold-release $tap-time $hold-time j rctl)
-          k (tap-hold-release $tap-time $hold-time k ralt)
-          l (tap-hold-release $tap-time $hold-time l rmet)
+          smet (tap-hold-release $tap-time $hold-time s lmet)
+          dalt (tap-hold-release $tap-time $hold-time d lalt)
+          fctl (tap-hold-release $tap-time $hold-time f lctl)
+          jctl (tap-hold-release $tap-time $hold-time j rctl)
+          kalt (tap-hold-release $tap-time $hold-time k ralt)
+          lmet (tap-hold-release $tap-time $hold-time l rmet)
+          rmet (tap-hold-release $tap-time $hold-time r lmet)
+          salt (tap-hold-release $tap-time $hold-time s lalt)
+          tctl (tap-hold-release $tap-time $hold-time t lctl)
+          nctl (tap-hold-release $tap-time $hold-time n rctl)
+          ealt (tap-hold-release $tap-time $hold-time e ralt)
+          imet (tap-hold-release $tap-time $hold-time i rmet)
 
           ;; layer switching
           sbs (layer-switch base)
+          scm (layer-switch colemak)
           sps (layer-switch pass)
         )
 
         (defsrc
-          caps s d f j k l
-          lsft
+          q w e r t y u i o p
+          caps a s d f g h j k l ;
+          lsft z x c v b n m
           lctl lmet lalt ralt
         )
 
         (deflayer base
-          @caps @s @d @f @j @k @l
-          XX
-          XX XX @lalt @ralt
+          _ _ _ _ _ _ _ _ _ _
+          @caps _ @smet @dalt @fctl _ _ @jctl @kalt @lmet _
+          XX _ _ _ _ _ _ _
+          XX XX @lsft @rsft
+        )
+        (deflayer colemak
+          q w f p b j l u y ;
+          @caps a @rmet @salt @tctl g m @nctl @ealt @imet o
+          z x c d v XX k h
+          XX XX @lsft @rsft
         )
         (deflayer shift
-          _ _ _ _ _ _ _
-          _
+          _ _ _ _ _ _ _ _ _ _
+          _ _ _ _ _ _ _ _ _ _ _
+          _ _ _ _ _ _ _ _
           _ _ @tmux @tmux
         )
+
         (deflayer switch
-          _ _ _ _ @sbs @sps _
-          _
+          _ _ _ _ _ _ _ _ _ _
+          _ _ _ _ _ _ _ @sbs @scm @sps _
+          _ _ _ _ _ _ _ _
           _ _ _ _
         )
         (deflayer pass
-          @caps _ _ _ _ _ _
-          _
+          _ _ _ _ _ _ _ _ _ _
+          @caps _ _ _ _ _ _ _ _ _ _
+          _ _ _ _ _ _ _ _
           _ _ _ _
         )
       '';
