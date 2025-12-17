@@ -48,6 +48,7 @@ in
       bat # better cat
       bluetui # bluetooth device tui
       btop # performance visualizer
+      cht-sh # cheat sheet
       delta # better diff
       difftastic # syntax aware diff
       exiftool # image metadata
