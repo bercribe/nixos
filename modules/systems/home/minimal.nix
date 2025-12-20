@@ -106,6 +106,8 @@ in {
           source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         '';
         config = lib.mkOrder 1000 ''
+          bindkey '^ ' autosuggest-accept
+
           # typo correction
           setopt correct
 

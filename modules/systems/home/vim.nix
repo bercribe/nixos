@@ -86,7 +86,12 @@ in {
                 -- C-n/C-p or Up/Down: Select next/previous item
                 -- C-e: Hide menu
                 -- C-k: Toggle signature help (if signature.enabled = true)
-                keymap = { preset = 'default' },
+                keymap = {
+                  preset = 'default',
+                  -- swap space and y
+                  ['<C-space>'] = { 'select_and_accept', 'fallback' },
+                  ['<C-y>'] = { 'show', 'show_documentation', 'hide_documentation' },
+                },
 
                 appearance = {
                   nerd_font_variant = 'mono'
