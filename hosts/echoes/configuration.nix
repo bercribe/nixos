@@ -4,6 +4,7 @@
   pkgs,
   lib,
   secrets,
+  local,
   ...
 }: {
   imports = [
@@ -31,6 +32,11 @@
 
   # TODO: fix disk monitor
   local.disk-monitor.enable = lib.mkForce false;
+
+  local.reverseProxy = {
+    useAcme = false;
+    domainBase = local.secrets.personal-domain;
+  };
 
   # SSH security
   services.fail2ban.enable = true;

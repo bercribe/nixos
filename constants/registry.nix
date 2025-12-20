@@ -1,5 +1,6 @@
 let
   hosts = import ./hosts.nix;
+  echoes = hosts.echoes;
   judgement = hosts.judgement;
   moody-blues = hosts.moody-blues;
   super-fly = hosts.super-fly;
@@ -59,6 +60,10 @@ in {
   readeck = {
     shortName = "readeck";
     hosts = [judgement];
+  };
+  sftpgo = {
+    shortName = "files";
+    hosts = [echoes];
   };
   syncthing-headless = {
     shortName = "syncthing";

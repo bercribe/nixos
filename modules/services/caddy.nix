@@ -10,6 +10,22 @@ in {
   options.local.reverseProxy = {
     enable = lib.mkEnableOption "reverse proxy";
 
+    useAcme = with lib;
+    with types;
+      mkOption {
+        type = bool;
+        default = true;
+        description = "True to mange certs using ACME";
+      };
+
+    domainBase = with lib;
+    with types;
+      mkOption {
+        type = str;
+        default = "mawz.dev";
+        description = "DNS base name";
+      };
+
     localRedirectHost = with lib;
     with types;
       mkOption {
@@ -69,18 +85,18 @@ in {
 
   config = let
     hostName = config.networking.hostName;
-    hostUrl = "${hostName}.mawz.dev";
+    hostUrl = "${hostName}.${cfg.domainBase}";
     isLocalRedirHost = cfg.localRedirectHost == config.networking.hostName;
-    localRedirUrl = "lan.mawz.dev";
+    localRedirUrl = "lan.${cfg.domainBase}";
   in
     lib.mkIf cfg.enable {
       networking.firewall.allowedTCPPorts = [80 443] ++ (with lib; concatLists (mapAttrsToList (_: {additionalPorts, ...}: map ({from, ...}: from) additionalPorts) cfg.services));
 
       # Certs
-      sops.secrets."cloudflare/lego" = {
+      sops.secrets."cloudflare/lego" = lib.mkIf cfg.useAcme {
         sopsFile = secrets + /sops/local.yaml;
       };
-      security.acme = {
+      security.acme = lib.mkIf cfg.useAcme {
         acceptTerms = true;
 
         defaults = {
@@ -117,13 +133,15 @@ in {
           }
         '';
         virtualHosts = let
-          hostCertDir = config.security.acme.certs."${hostUrl}".directory;
+          tlsConf = certDir: lib.optionalString cfg.useAcme "tls ${certDir}/cert.pem ${certDir}/key.pem";
+
+          hostCertDir = config.security.acme.certs.${hostUrl}.directory;
           reverseProxies = with lib;
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
               shortName = config.local.service-registry."${service}".shortName;
               url = "${shortName}.${hostUrl}";
               caddyCfg = proxyUrl: ''
-                tls ${hostCertDir}/cert.pem ${hostCertDir}/key.pem
+                ${tlsConf hostCertDir}
                 reverse_proxy ${proxyUrl} {
                   ${
                   if attrs.httpsBackend
@@ -165,7 +183,7 @@ in {
               ++ additionalPorts)
             cfg.services));
 
-          localCertDir = config.security.acme.certs."${localRedirUrl}".directory;
+          localCertDir = config.security.acme.certs.${localRedirUrl}.directory;
           localRedirects =
             if isLocalRedirHost
             then let
@@ -178,8 +196,8 @@ in {
                     ...
                   }: (nameValuePair "https://${shortName}.${localRedirUrl}" {
                     extraConfig = ''
-                      tls ${localCertDir}/cert.pem ${localCertDir}/key.pem
-                      redir https://${shortName}.${head hosts}.mawz.dev{uri} 308
+                      ${tlsConf localCertDir}
+                      redir https://${shortName}.${head hosts}.${cfg.domainBase}{uri} 308
                     '';
                   }))
                   uniqueServices)

@@ -1,4 +1,5 @@
 {
+  echoes = "echoes";
   heavens-door = "heavens-door";
   highway-star = "highway-star";
   judgement = "judgement";

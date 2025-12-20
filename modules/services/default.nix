@@ -9,7 +9,6 @@
 in {
   imports = [
     # http
-    ./syncthing/headless.nix
     ./adguardhome.nix
     ./caddy.nix
     ./forgejo.nix
@@ -23,6 +22,8 @@ in {
     ./miniflux.nix
     ./paisa.nix
     ./readeck.nix
+    ./sftpgo.nix
+    ./syncthing/headless.nix
     # monitoring
     ./monitoring
     # other
