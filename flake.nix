@@ -41,41 +41,24 @@
     secrets,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
     overlay = import ./overlay.nix inputs;
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [overlay];
-      config.allowUnfree = true;
-    };
 
-    local = {
+    pkgsF = system:
+      import nixpkgs {
+        inherit system;
+        overlays = [overlay];
+        config.allowUnfree = true;
+      };
+    localF = system: let
+      pkgs = pkgsF system;
+    in {
       constants = pkgs.callPackage ./constants {};
       utils = pkgs.callPackage ./utils;
       secrets = import (secrets + /nix);
     };
-    specialArgs =
-      inputs
-      // {
-        inherit local;
-      };
-
-    commonModules = [
-      home-manager.nixosModules.home-manager
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      stylix.nixosModules.stylix
-    ];
-
-    paisaModule = {...}: {
-      nixpkgs.overlays = [
-        (final: prev: {
-          paisa-cli = paisa.packages."${system}".default;
-        })
-      ];
-    };
 
     homeInstaller = import ./installers/home.nix;
+
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     forAllSystems = f:
       builtins.listToAttrs (map (system: {
@@ -84,135 +67,117 @@
         })
         systems);
   in {
-    nixosConfigurations = {
-      echoes = let
-        system = "aarch64-linux";
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [overlay];
-          config.allowUnfree = true;
-        };
+    nixosConfigurations = let
+      commonModules = [
+        home-manager.nixosModules.home-manager
+        disko.nixosModules.disko
+        sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
+      ];
 
-        local = {
-          constants = pkgs.callPackage ./constants {};
-          utils = pkgs.callPackage ./utils;
-          secrets = import (secrets + /nix);
-        };
+      makeConfig = {
+        system,
+        hostname,
+        properties,
+      }: let
         specialArgs =
           inputs
           // {
-            inherit local;
+            local = localF system;
           };
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "aarch64-linux";
+        extraModules = properties.extraModules or [];
+      in {
+        name = hostname;
+        value = nixpkgs.lib.nixosSystem {
+          inherit system specialArgs;
           modules =
             commonModules
             ++ [
-              ./hosts/echoes/configuration.nix
-            ];
+              ./hosts/${hostname}/configuration.nix
+            ]
+            ++ extraModules;
         };
-      heavens-door = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/heavens-door/configuration.nix
-          ];
       };
-      highway-star = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/highway-star/configuration.nix
+      makeConfigs = system: hosts: (builtins.listToAttrs (map (hostname:
+        makeConfig {
+          inherit system hostname;
+          properties = hosts.${hostname};
+        }) (builtins.attrNames hosts)));
+
+      x86Linux = let
+        system = "x86_64-linux";
+      in
+        makeConfigs system {
+          heavens-door = {};
+          highway-star.extraModules = [
             nixos-hardware.nixosModules.framework-11th-gen-intel
           ];
-      };
-      judgement = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/judgement/configuration.nix
+          judgement = {};
+          moody-blues = {};
+          super-fly.extraModules = [
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  paisa-cli = paisa.packages.${system}.default;
+                })
+              ];
+            }
           ];
-      };
-      moody-blues = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/moody-blues/configuration.nix
-          ];
-      };
-      super-fly = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/super-fly/configuration.nix
-            paisaModule
-          ];
-      };
-      hetzner-cloud = nixpkgs.lib.nixosSystem {
+        };
+      aarchLinux = let
         system = "aarch64-linux";
-        modules = [
-          disko.nixosModules.disko
-          ./installers/hetzner/configuration.nix
-        ];
-      };
-    };
+      in
+        (makeConfigs system {
+          echoes = {};
+        })
+        // {
+          hetzner-cloud = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              disko.nixosModules.disko
+              ./installers/hetzner/configuration.nix
+            ];
+          };
+        };
+    in
+      x86Linux // aarchLinux;
+
     homeConfigurations = let
       commonModules = [
         stylix.homeModules.stylix
       ];
 
-      extraSpecialArgs = {
-        inherit local;
+      makeConfig = {
+        system,
+        hostname,
+      }: let
+        extraSpecialArgs = {
+          local = localF system;
+        };
+        pkgs = pkgsF system;
+      in {
+        name = "mawz@${hostname}";
+        value = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs extraSpecialArgs;
+          modules =
+            commonModules
+            ++ [
+              ./hosts/${hostname}/home.nix
+            ];
+        };
       };
-    in {
-      "mawz@heavens-door" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/heavens-door/home.nix
-          ];
-      };
-      "mawz@highway-star" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/highway-star/home.nix
-          ];
-      };
-      "mawz@judgement" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/judgement/home.nix
-          ];
-      };
-      "mawz@moody-blues" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/moody-blues/home.nix
-          ];
-      };
-      "mawz@super-fly" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-        modules =
-          commonModules
-          ++ [
-            ./hosts/super-fly/home.nix
-          ];
-      };
-    };
+      makeConfigs = system: hosts: (builtins.listToAttrs (map (hostname: makeConfig {inherit system hostname;}) hosts));
+
+      x86Linux = makeConfigs "x86_64-linux" [
+        "heavens-door"
+        "highway-star"
+        "judgement"
+        "moody-blues"
+        "super-fly"
+      ];
+      aarchLinux = makeConfigs "aarch64-linux" ["echoes"];
+    in
+      x86Linux // aarchLinux;
 
     # portable dev environment
     homeModules = let
