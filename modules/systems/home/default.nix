@@ -41,6 +41,10 @@
     addKeysToAgent = "yes";
     includes = ["~/.ssh/transient.conf"];
     matchBlocks = {
+      echoes = {
+        inherit user forwardAgent;
+        hostname = "echoes.${local.secrets.personal-domain}";
+      };
       judgement = {
         inherit user forwardAgent;
         hostname = "judgement.mawz.dev";
