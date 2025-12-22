@@ -4,24 +4,52 @@
   ...
 }: let
   cfg = config.local.services.sftpgo;
-  port = 48814;
+  httpPort = 48814;
+  sftpPort = 2022;
 in {
   options.local.services.sftpgo.enable = lib.mkEnableOption "sftpgo";
 
   config = lib.mkIf cfg.enable {
+    sops.secrets.sftpgo-data-file = {
+      owner = config.services.sftpgo.user;
+      key = "sftpgo/data-file";
+    };
+
     services.sftpgo = {
       enable = true;
-      settings.httpd.bindings = [
-        {
-          inherit port;
-        }
-      ];
+      loadDataFile = config.sops.secrets.sftpgo-data-file.path;
+      settings = {
+        httpd.bindings = [
+          {
+            port = httpPort;
+          }
+        ];
+        sftpd = {
+          keyboard_interactive_authentication = false;
+          password_authentication = false;
+          bindings = [
+            {
+              port = sftpPort;
+              address = "0.0.0.0";
+            }
+          ];
+        };
+        smtp = {
+          host = "localhost";
+          port = 25;
+          encryption = 0;
+          user = "";
+          from = "SFTPGo <noreply@sftpgo.lan>";
+          templates_path = "${config.services.sftpgo.package}/share/sftpgo/templates";
+        };
+      };
     };
+    networking.firewall.allowedTCPPorts = [sftpPort];
 
     local.reverseProxy = {
       enable = true;
       services.sftpgo = {
-        inherit port;
+        port = httpPort;
       };
     };
   };
