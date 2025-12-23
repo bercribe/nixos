@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  pkgs,
+  config,
+  local,
+  ...
+}: {
   # https://rclone.org/drive/
   sops.secrets."google/rclone/clientId" = {};
   sops.secrets."google/rclone/clientSecret" = {};
@@ -9,6 +14,13 @@
     owner = "mawz";
     path = "/home/mawz/.config/rclone/rclone.conf";
     content = ''
+      [echoes]
+      type = sftp
+      host = echoes.${local.secrets.personal-domain}
+      port = 2022
+      user = mawz
+      key_file = ${config.sops.secrets.ssh.path}
+
       [gdrive]
       type = drive
       client_id = ${config.sops.placeholder."google/rclone/clientId"}
@@ -17,5 +29,30 @@
       token = {"access_token":"${config.sops.placeholder."google/rclone/token/access_token"}","token_type":"Bearer","refresh_token":"${config.sops.placeholder."google/rclone/token/refresh_token"}","expiry":"${config.sops.placeholder."google/rclone/token/expiry"}"}
       team_drive =
     '';
+  };
+  environment.systemPackages = [pkgs.rclone];
+
+  fileSystems."/mnt/echoes" = {
+    device = "echoes:";
+    fsType = "rclone";
+    options = [
+      "nodev"
+      "nofail"
+      "allow_other"
+      "args2env"
+      "config=${config.sops.templates."rclone.conf".path}"
+    ];
+  };
+
+  fileSystems."/mnt/gdrive" = {
+    device = "gdrive:";
+    fsType = "rclone";
+    options = [
+      "nodev"
+      "nofail"
+      "allow_other"
+      "args2env"
+      "config=${config.sops.templates."rclone.conf".path}"
+    ];
   };
 }

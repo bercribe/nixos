@@ -10,7 +10,7 @@
     ./keyboard.nix
     ../../hyprland # Tiling window manager
     ../network/mount.nix
-    ../network/gdrive.nix
+    ../network/rclone.nix
     ../network/ssh-server.nix
     ../hardware/bluray.nix
   ];

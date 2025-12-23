@@ -5,7 +5,7 @@
     ../../modules/systems/headless
     ../../modules/systems/hardware/encrypted-zfs.nix
     ../../modules/systems/hardware/ups/headless-client.nix
-    ../../modules/systems/network/gdrive.nix
+    ../../modules/systems/network/rclone.nix
     ../../modules/cron/finance-sync.nix
     ../../modules/cron/heartbeat-healthchecks.nix
     ../../modules/cron/pcloud-gdrive-sync.nix
