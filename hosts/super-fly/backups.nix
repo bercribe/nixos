@@ -12,6 +12,7 @@
   utils = local.utils {inherit config;};
 in {
   imports = [
+    ../../modules/cron/echoes-backup.nix
     ../../modules/cron/gdrive-backup.nix
   ];
 
