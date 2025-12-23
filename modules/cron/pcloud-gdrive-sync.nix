@@ -7,7 +7,7 @@
   utils = local.utils {inherit config;};
 in {
   imports = [
-    ../clients/rclone.nix
+    ../systems/network/rclone.nix
   ];
 
   local.healthchecks-secret.enable = true;
