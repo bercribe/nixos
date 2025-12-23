@@ -19,6 +19,8 @@ in {
       enable = true;
       loadDataFile = config.sops.secrets.sftpgo-data-file.path;
       settings = {
+        common.defender.enabled = true;
+        data_provider.backups_path = "${config.services.sftpgo.dataDir}/storage/backups";
         httpd.bindings = [
           {
             port = httpPort;
