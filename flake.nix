@@ -49,10 +49,7 @@
         overlays = [overlay];
         config.allowUnfree = true;
       };
-    localF = system: let
-      pkgs = pkgsF system;
-    in {
-      constants = pkgs.callPackage ./constants {};
+    local = {
       secrets = import (secrets + /nix);
     };
 
@@ -72,6 +69,7 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
+        ./constants
         ./utils
       ];
 
@@ -83,7 +81,7 @@
         specialArgs =
           inputs
           // {
-            local = localF system;
+            inherit local;
           };
         extraModules = properties.extraModules or [];
       in {
@@ -145,6 +143,8 @@
     homeConfigurations = let
       commonModules = [
         stylix.homeModules.stylix
+        ./constants
+        ./utils
       ];
 
       makeConfig = {
@@ -152,7 +152,7 @@
         hostname,
       }: let
         extraSpecialArgs = {
-          local = localF system;
+          inherit local;
         };
         pkgs = pkgsF system;
       in {

@@ -1,73 +1,105 @@
-let
-  hosts = import ./hosts.nix;
-  echoes = hosts.echoes;
-  judgement = hosts.judgement;
-  moody-blues = hosts.moody-blues;
-  super-fly = hosts.super-fly;
+{lib, ...}: let
+  echoes = "echoes";
+  judgement = "judgement";
+  moody-blues = "moody-blues";
+  super-fly = "super-fly";
+  monitorHost = judgement;
 in {
-  adguardhome = {
-    shortName = "aghome";
-    friendlyName = "adguard-home";
-    hosts = [judgement super-fly];
-  };
-  forgejo = {
-    shortName = "forgejo";
-    hosts = [judgement];
-  };
-  frigate = {
-    shortName = "frigate";
-    hosts = [judgement];
-  };
-  home-assistant = {
-    shortName = "hass";
-    hosts = [judgement];
-  };
-  hledger-web = {
-    shortName = "ledger";
-    friendlyName = "hledger";
-    hosts = [super-fly];
-  };
-  homepage-dashboard = {
-    shortName = "home";
-    friendlyName = "homepage";
-    hosts = [judgement];
-  };
-  immich = {
-    shortName = "immich";
-    hosts = [super-fly];
-  };
-  jellyfin = {
-    shortName = "jellyfin";
-    hosts = [super-fly];
-  };
-  karakeep = {
-    shortName = "karakeep";
-    hosts = [judgement];
-  };
-  kodi = {
-    shortName = "kodi";
-    hosts = [moody-blues];
-  };
-  miniflux = {
-    shortName = "miniflux";
-    hosts = [judgement];
-  };
-  # TODO: https://github.com/ananthakumaran/paisa/issues/343
-  # paisa = {
-  #   shortName = "paisa";
-  #   hosts = [super-fly];
-  # };
-  readeck = {
-    shortName = "readeck";
-    hosts = [judgement];
-  };
-  sftpgo = {
-    shortName = "files";
-    hosts = [echoes];
-  };
-  syncthing-headless = {
-    shortName = "syncthing";
-    friendlyName = "syncthing";
-    hosts = [super-fly];
+  options.local.constants.service-registry = with lib;
+  with types;
+    mkOption {
+      type = attrsOf (submodule {
+        options = {
+          shortName = mkOption {
+            type = str;
+            description = "Used to generate URL";
+          };
+          friendlyName = mkOption {
+            type = nullOr str;
+            default = null;
+            description = "Used in place of service name when generating names";
+          };
+          hosts = mkOption {
+            type = listOf str;
+            description = "Hostnames of hosts running service";
+          };
+        };
+      });
+    };
+
+  config.local.constants.service-registry = {
+    adguardhome = {
+      shortName = "aghome";
+      friendlyName = "adguard-home";
+      hosts = [judgement super-fly];
+    };
+    forgejo = {
+      shortName = "forgejo";
+      hosts = [judgement];
+    };
+    frigate = {
+      shortName = "frigate";
+      hosts = [judgement];
+    };
+    gatus = {
+      shortName = "gatus";
+      hosts = [monitorHost];
+    };
+    healthchecks = {
+      shortName = "healthchecks";
+      hosts = [monitorHost];
+    };
+    hledger-web = {
+      shortName = "ledger";
+      friendlyName = "hledger";
+      hosts = [super-fly];
+    };
+    home-assistant = {
+      shortName = "hass";
+      hosts = [judgement];
+    };
+    homepage-dashboard = {
+      shortName = "home";
+      friendlyName = "homepage";
+      hosts = [judgement];
+    };
+    immich = {
+      shortName = "immich";
+      hosts = [super-fly];
+    };
+    jellyfin = {
+      shortName = "jellyfin";
+      hosts = [super-fly];
+    };
+    karakeep = {
+      shortName = "karakeep";
+      hosts = [judgement];
+    };
+    kodi = {
+      shortName = "kodi";
+      hosts = [moody-blues];
+    };
+    miniflux = {
+      shortName = "miniflux";
+      hosts = [judgement];
+    };
+    # TODO: https://github.com/ananthakumaran/paisa/issues/343
+    # paisa = {
+    #   shortName = "paisa";
+    #   hosts = [super-fly];
+    # };
+    readeck = {
+      shortName = "readeck";
+      hosts = [judgement];
+    };
+    sftpgo = {
+      shortName = "files";
+      hosts = [echoes];
+    };
+    syncthing-headless = {
+      shortName = "syncthing";
+      friendlyName = "syncthing";
+      hosts = [super-fly];
+    };
   };
 }

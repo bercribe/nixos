@@ -7,7 +7,6 @@
 in {
   imports = [
     ./base.nix
-    ../../cron/syncthing-healthchecks.nix
   ];
 
   options.local.services.syncthing-headless.enable = lib.mkEnableOption "syncthing-headless";

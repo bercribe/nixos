@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  local,
   ...
 }: {
   imports = [
@@ -87,7 +86,7 @@
       };
     };
     mime = let
-      associations = local.constants.mime-types.associations;
+      associations = config.local.constants.mime-types.associations;
     in {
       enable = true;
       defaultApplications = associations;

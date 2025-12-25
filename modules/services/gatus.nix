@@ -12,6 +12,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     local.services.postfix.enable = true;
+    local.cron.heartbeat-healthchecks.enable = true;
+    local.cron.email-healthchecks.enable = true;
 
     sops.secrets."healthchecks/remote/ping-key" = {};
     sops.templates."gatus.env".content = ''
@@ -109,7 +111,7 @@ in {
                   }
                   // (registryOverrides.${service} or {})))
               hosts)
-            config.local.service-registry);
+            config.local.constants.service-registry);
         in
           customEndpoints ++ registryEndpoints;
       };

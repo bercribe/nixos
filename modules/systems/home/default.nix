@@ -8,6 +8,8 @@
   imports = [
     ./minimal.nix
     ./stylix.nix
+    ../../../constants
+    ../../../utils
   ];
 
   # Home Manager needs a bit of information about you and the

@@ -117,7 +117,7 @@ in {
       ];
       services = let
         serviceEndpoint = service: let
-          registryEntry = config.local.service-registry."${service}";
+          registryEntry = config.local.constants.service-registry."${service}";
           shortName = registryEntry.shortName;
           host = lib.head registryEntry.hosts;
         in "https://${shortName}.${host}.mawz.dev";
@@ -138,12 +138,12 @@ in {
           };
         };
 
-        serviceName = service: lib.defaultTo service config.local.service-registry."${service}".friendlyName;
+        serviceName = service: lib.defaultTo service config.local.constants.service-registry."${service}".friendlyName;
         mkService = {
           service,
-          host ? lib.head config.local.service-registry."${service}".hosts,
+          host ? lib.head config.local.constants.service-registry."${service}".hosts,
         }: let
-          shortName = config.local.service-registry."${service}".shortName;
+          shortName = config.local.constants.service-registry."${service}".shortName;
           name = serviceName service;
         in {
           "${name}" = {
@@ -155,7 +155,7 @@ in {
         };
 
         homelabServices = with lib;
-          config.local.service-registry
+          config.local.constants.service-registry
           |> mapAttrsToList (service: {
             shortName,
             friendlyName,

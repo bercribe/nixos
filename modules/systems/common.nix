@@ -14,8 +14,8 @@
     ./network/ssh-client.nix
     ./sops.nix
     ./home/stylix.nix
+    ../cron
     ../services
-    ../cron/disk-monitor.nix
     ../clients/local-healthchecks.nix
   ];
 

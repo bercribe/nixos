@@ -138,7 +138,7 @@ in {
           hostCertDir = config.security.acme.certs.${hostUrl}.directory;
           reverseProxies = with lib;
             listToAttrs (concatLists (mapAttrsToList (service: attrs: let
-              shortName = config.local.service-registry."${service}".shortName;
+              shortName = config.local.constants.service-registry."${service}".shortName;
               url = "${shortName}.${hostUrl}";
               caddyCfg = proxyUrl: ''
                 ${tlsConf hostCertDir}
@@ -187,7 +187,7 @@ in {
           localRedirects =
             if isLocalRedirHost
             then let
-              uniqueServices = with lib; filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.service-registry;
+              uniqueServices = with lib; filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.constants.service-registry;
             in
               with lib;
                 listToAttrs (mapAttrsToList (service: {

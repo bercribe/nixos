@@ -1,7 +1,7 @@
 # `man home-configuration.nix` to view configurable options
 {
   pkgs,
-  local,
+  config,
   ...
 }: {
   imports = [
@@ -78,7 +78,7 @@
   # default apps
   xdg = {
     mimeApps = let
-      associations = local.constants.mime-types.associations;
+      associations = config.local.constants.mime-types.associations;
     in {
       enable = true;
       defaultApplications = associations;

@@ -12,6 +12,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     local.services.postfix.enable = true;
+    local.cron.heartbeat-healthchecks.enable = true;
+    local.cron.email-healthchecks.enable = true;
 
     sops.secrets = {
       "healthchecks/local/secret-key" = {owner = config.services.healthchecks.user;};

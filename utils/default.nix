@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  localHostUrlBase = service: "${config.local.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
+  localHostUrlBase = service: "${config.local.constants.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
   serviceUrl = service: let
-    serviceRegistration = config.local.service-registry."${service}";
+    serviceRegistration = config.local.constants.service-registry."${service}";
   in "https://${serviceRegistration.shortName}.${lib.head serviceRegistration.hosts}.mawz.dev";
 
   localSecret = "healthchecks/local/ping-key";

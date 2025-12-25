@@ -58,7 +58,7 @@ in {
             }: {
               domain = "${shortName}.lan";
               answer = "${head hosts}.mawz.dev";
-            }) (filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.service-registry);
+            }) (filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.constants.service-registry);
         in
           domainRewrites ++ registryRewrites;
         user_rules = [

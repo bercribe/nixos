@@ -7,7 +7,6 @@
     ../../modules/systems/hardware/ups/headless-client.nix
     ../../modules/systems/network/rclone.nix
     ../../modules/cron/finance-sync.nix
-    ../../modules/cron/heartbeat-healthchecks.nix
     ../../modules/cron/pcloud-gdrive-sync.nix
     ../../modules/cron/syncthing-conflicts.nix
   ];

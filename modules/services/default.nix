@@ -1,11 +1,10 @@
 {
   config,
   lib,
-  local,
   ...
 }: let
-  cfg = config.local.service-registry;
-  judgement = local.constants.hosts.judgement;
+  cfg = config.local.constants.service-registry;
+  judgement = config.local.constants.hosts.judgement;
 in {
   imports = [
     # http
@@ -13,7 +12,9 @@ in {
     ./caddy.nix
     ./forgejo.nix
     ./frigate.nix
+    ./gatus.nix
     ./hass.nix
+    ./healthchecks.nix
     ./hledger-web.nix
     ./homepage.nix
     ./immich.nix
@@ -24,43 +25,16 @@ in {
     ./readeck.nix
     ./sftpgo.nix
     ./syncthing/headless.nix
-    # monitoring
-    ./monitoring
     # other
     ./postfix.nix
     ./postgresql.nix
   ];
-
-  options.local.service-registry = with lib;
-  with types;
-    mkOption {
-      type = attrsOf (submodule {
-        options = {
-          shortName = mkOption {
-            type = str;
-            description = "Used to generate URL";
-          };
-          friendlyName = mkOption {
-            type = nullOr str;
-            default = null;
-            description = "Used in place of service name when generating names";
-          };
-          hosts = mkOption {
-            type = listOf str;
-            description = "Hostnames of hosts running service";
-          };
-        };
-      });
-    };
 
   config = let
     host = config.networking.hostName;
     # services running on this machine
     localServices = with lib; filterAttrs (_: {hosts, ...}: (elem host hosts)) cfg;
   in {
-    local.service-registry = local.constants.registry;
-    local.service-monitoring.host = judgement;
-
     local.services = with lib; mapAttrs (service: {hosts, ...}: {enable = true;}) localServices;
 
     local.reverseProxy = {
