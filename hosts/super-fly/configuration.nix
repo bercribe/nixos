@@ -8,10 +8,10 @@
     ../../modules/systems/network/rclone.nix
   ];
 
-  local.cron.finance-sync = true;
+  local.cron.finance-sync.enable = true;
   local.cron.heartbeat-healthchecks.enable = true;
-  local.cron.pcloud-gdrive-sync = true;
-  local.cron.syncthing-conflicts = true;
+  local.cron.pcloud-gdrive-sync.enable = true;
+  local.cron.syncthing-conflicts.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
