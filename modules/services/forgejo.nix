@@ -26,6 +26,7 @@ in {
         };
       };
     };
+    services.openssh.settings.AllowUsers = ["forgejo"];
 
     local.reverseProxy = {
       enable = true;
