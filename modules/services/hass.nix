@@ -2,11 +2,11 @@
   config,
   pkgs,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.services.home-assistant;
-  utils = local-utils;
+  utils = local.utils;
 
   dataDir = "/services/hass";
 in {

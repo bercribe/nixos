@@ -1,12 +1,12 @@
 {
   config,
   lib,
-  local-utils,
+  local,
   secrets,
   ...
 }: let
   cfg = config.local.cron.heartbeat-healthchecks;
-  utils = local-utils;
+  utils = local.utils;
 in {
   options.local.cron.heartbeat-healthchecks.enable = lib.mkEnableOption "heartbeat healthchecks";
 

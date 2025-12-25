@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.services.forgejo;
-  utils = local-utils;
+  utils = local.utils;
   port = 54776;
 
   url = utils.localHostUrl "forgejo";

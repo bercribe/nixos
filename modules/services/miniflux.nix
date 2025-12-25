@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.services.miniflux;
-  utils = local-utils;
+  utils = local.utils;
 
   port = 9044;
   rssBridgeHost = "http://rss-bridge.localhost";

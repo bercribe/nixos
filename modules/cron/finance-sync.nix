@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  local-utils,
+  local,
   secrets,
   ...
 }: let
@@ -11,7 +11,7 @@
   user = "finance-sync";
   group = "ledger";
 
-  utils = local-utils;
+  utils = local.utils;
 in {
   options.local.cron.finance-sync.enable = lib.mkEnableOption "finance sync";
 

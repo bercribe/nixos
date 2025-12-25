@@ -9,7 +9,7 @@
     ./minimal.nix
     ./stylix.nix
     ../../../constants
-    ../../../utils
+    ../../../local-args
   ];
 
   # Home Manager needs a bit of information about you and the

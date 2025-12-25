@@ -2,11 +2,11 @@
   config,
   pkgs,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.cron.syncthing-conflicts;
-  utils = local-utils;
+  utils = local.utils;
 in {
   options.local.cron.syncthing-conflicts.enable = lib.mkEnableOption "syncthing conflicts";
 

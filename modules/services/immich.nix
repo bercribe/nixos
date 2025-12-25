@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.services.immich;
-  utils = local-utils;
+  utils = local.utils;
   dataDir = "/zvault/services/immich";
 in {
   options.local.services.immich.enable = lib.mkEnableOption "immich";

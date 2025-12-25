@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.services.healthchecks;
-  utils = local-utils;
+  utils = local.utils;
   port = 45566;
 in {
   options.local.services.healthchecks.enable = lib.mkEnableOption "healthchecks";

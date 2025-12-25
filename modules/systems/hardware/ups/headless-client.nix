@@ -1,10 +1,10 @@
 {
   config,
   pkgs,
-  local-utils,
+  local,
   ...
 }: let
-  utils = local-utils;
+  utils = local.utils;
 in {
   imports = [
     ./base-client.nix

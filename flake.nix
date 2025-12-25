@@ -49,9 +49,6 @@
         overlays = [overlay];
         config.allowUnfree = true;
       };
-    local = {
-      secrets = import (secrets + /nix);
-    };
 
     homeInstaller = import ./installers/home.nix;
 
@@ -70,7 +67,7 @@
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         ./constants
-        ./utils
+        ./local-args
       ];
 
       makeConfig = {
@@ -78,11 +75,7 @@
         hostname,
         properties,
       }: let
-        specialArgs =
-          inputs
-          // {
-            inherit local;
-          };
+        specialArgs = inputs;
         extraModules = properties.extraModules or [];
       in {
         name = hostname;
@@ -144,21 +137,18 @@
       commonModules = [
         stylix.homeModules.stylix
         ./constants
-        ./utils
+        ./local-args
       ];
 
       makeConfig = {
         system,
         hostname,
       }: let
-        extraSpecialArgs = {
-          inherit local;
-        };
         pkgs = pkgsF system;
       in {
         name = "mawz@${hostname}";
         value = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs extraSpecialArgs;
+          inherit pkgs;
           modules =
             commonModules
             ++ [

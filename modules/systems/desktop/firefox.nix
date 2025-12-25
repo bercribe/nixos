@@ -1,10 +1,10 @@
 {
   pkgs,
-  local-utils,
+  local,
   ...
 }: let
-  homepage = local-utils.serviceUrl "homepage-dashboard";
-  miniflux = local-utils.serviceUrl "miniflux";
+  homepage = local.utils.serviceUrl "homepage-dashboard";
+  miniflux = local.utils.serviceUrl "miniflux";
 in {
   # to apply these, visit about:support and click "Refresh Firefox..."
   programs.firefox = {

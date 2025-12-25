@@ -2,14 +2,14 @@
   pkgs,
   config,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   sanoidHosts = ["heavens-door" "highway-star" "judgement" "moody-blues" "super-fly"];
   syncoidJobs = ["judgement" "moody-blues" "super-fly"];
   resticJobs = ["mr-president" "backblaze"];
 
-  utils = local-utils;
+  utils = local.utils;
 in {
   local.cron.echoes-backup.enable = true;
   local.cron.gdrive-backup.enable = true;

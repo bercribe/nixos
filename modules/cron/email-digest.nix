@@ -2,11 +2,11 @@
   config,
   pkgs,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.cron.email-digest;
-  utils = local-utils;
+  utils = local.utils;
 in {
   options.local.cron.email-digest.enable = lib.mkEnableOption "email digest";
 

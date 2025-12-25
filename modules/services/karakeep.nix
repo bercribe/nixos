@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.services.karakeep;
-  utils = local-utils;
+  utils = local.utils;
 
   port = 43463;
   dataDir = "/services/karakeep";

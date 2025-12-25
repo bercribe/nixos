@@ -2,11 +2,11 @@
   pkgs,
   lib,
   config,
-  local-utils,
+  local,
   ...
 }: let
   cfg = config.local.cron.echoes-backup;
-  utils = local-utils;
+  utils = local.utils;
 in {
   imports = [
     ../systems/network/rclone.nix
