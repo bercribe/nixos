@@ -138,13 +138,12 @@ in {
           };
         };
 
-        serviceName = service: lib.defaultTo service config.local.constants.service-registry."${service}".friendlyName;
         mkService = {
           service,
           host ? lib.head config.local.constants.service-registry."${service}".hosts,
         }: let
           shortName = config.local.constants.service-registry."${service}".shortName;
-          name = serviceName service;
+          name = config.local.constants.service-registry."${service}".friendlyName;
         in {
           "${name}" = {
             href = "https://${shortName}.${host}.mawz.dev";
