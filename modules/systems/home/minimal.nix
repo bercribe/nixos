@@ -273,6 +273,10 @@ in {
               run = "cd /";
             }
             {
+              on = ["g" "m" "e"];
+              run = "cd /mnt/echoes";
+            }
+            {
               on = ["g" "m" "g"];
               run = "cd /mnt/gdrive";
             }
