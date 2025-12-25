@@ -2,8 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  pkgs,
   lib,
+  config,
   local,
   nixpkgs-unstable,
   errata,
@@ -66,7 +66,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = (import ./packages.nix pkgs).system;
+  environment.systemPackages = config.local.constants.packages.system;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mawz = {
@@ -77,7 +77,7 @@
       "wheel" # Enable ‘sudo’ for the user.
       "ledger"
     ];
-    packages = (import ./packages.nix pkgs).user;
+    packages = config.local.constants.packages.user;
   };
 
   # Home manager

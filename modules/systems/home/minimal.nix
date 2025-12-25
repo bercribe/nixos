@@ -44,7 +44,7 @@ in {
 
   config = {
     home.packages = let
-      packages = import ../packages.nix pkgs;
+      packages = config.local.constants.packages;
     in
       packages.core ++ (lib.optionals cfg.packages.includeScripts packages.scripts);
 

@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   core = with pkgs; [
     dig # dns debug
     fd # better find
@@ -24,8 +28,36 @@
     tsl
     twl
   ];
-in
-  with pkgs; {
+in {
+  options.local.constants.packages = with lib;
+  with types; {
+    core = mkOption {
+      type = listOf package;
+      description = "Core packages";
+    };
+    scripts = mkOption {
+      type = listOf package;
+      description = "User defined scripts";
+    };
+    system = mkOption {
+      type = listOf package;
+      description = "Installed as system packages on all systems";
+    };
+    user = mkOption {
+      type = listOf package;
+      description = "Installed as user packages on all systems";
+    };
+    system-desktop = mkOption {
+      type = listOf package;
+      description = "Installed as system packages on GUI systems";
+    };
+    user-desktop = mkOption {
+      type = listOf package;
+      description = "Installed as user packages on GUI systems";
+    };
+  };
+
+  config.local.constants.packages = with pkgs; {
     inherit core scripts;
 
     system =
@@ -118,4 +150,5 @@ in
       yt-dlp # youtube downloader
       zbar # QR code utils
     ];
-  }
+  };
+}
