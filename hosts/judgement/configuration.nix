@@ -8,8 +8,9 @@
     ../../modules/systems/headless
     ../../modules/systems/hardware/zfs.nix
     ../../modules/systems/hardware/ups/server.nix
-    ../../modules/cron/email-digest.nix
   ];
+
+  local.cron.email-digest.enable = true;
 
   # Secrets
   sops.defaultSopsFile = builtins.toPath "${secrets}/sops/${config.networking.hostName}.yaml";

@@ -6,12 +6,12 @@
     ../../modules/systems/hardware/encrypted-zfs.nix
     ../../modules/systems/hardware/ups/headless-client.nix
     ../../modules/systems/network/rclone.nix
-    ../../modules/cron/finance-sync.nix
-    ../../modules/cron/pcloud-gdrive-sync.nix
-    ../../modules/cron/syncthing-conflicts.nix
   ];
 
+  local.cron.finance-sync = true;
   local.cron.heartbeat-healthchecks.enable = true;
+  local.cron.pcloud-gdrive-sync = true;
+  local.cron.syncthing-conflicts = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

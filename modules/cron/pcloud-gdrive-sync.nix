@@ -1,34 +1,40 @@
 {
   pkgs,
+  lib,
   config,
   local-utils,
   ...
 }: let
+  cfg = config.local.cron.pcloud-gdrive-sync;
   utils = local-utils;
 in {
   imports = [
     ../systems/network/rclone.nix
   ];
 
-  local.healthchecks-secret.enable = true;
+  options.local.cron.pcloud-gdrive-sync.enable = lib.mkEnableOption "pcloud gdrive sync";
 
-  systemd.timers.pcloud-gdrive-sync = {
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnBootSec = "1h";
-      OnUnitActiveSec = "1h";
-      Unit = "pcloud-gdrive-sync.service";
-    };
-  };
-  systemd.services.pcloud-gdrive-sync = {
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-    };
-    script = ''
-      ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync /zvault/syncthing/personal-cloud/passwords "gdrive:/passwords - external"
+  config = lib.mkIf cfg.enable {
+    local.healthchecks-secret.enable = true;
 
-      ${utils.writeHealthchecksPingScript {slug = "pcloud-gdrive-sync";}}
-    '';
+    systemd.timers.pcloud-gdrive-sync = {
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "1h";
+        OnUnitActiveSec = "1h";
+        Unit = "pcloud-gdrive-sync.service";
+      };
+    };
+    systemd.services.pcloud-gdrive-sync = {
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+      script = ''
+        ${pkgs.rclone}/bin/rclone --config ${config.sops.templates."rclone.conf".path} sync /zvault/syncthing/personal-cloud/passwords "gdrive:/passwords - external"
+
+        ${utils.writeHealthchecksPingScript {slug = "pcloud-gdrive-sync";}}
+      '';
+    };
   };
 }

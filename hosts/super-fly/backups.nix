@@ -11,10 +11,8 @@
 
   utils = local-utils;
 in {
-  imports = [
-    ../../modules/cron/echoes-backup.nix
-    ../../modules/cron/gdrive-backup.nix
-  ];
+  local.cron.echoes-backup.enable = true;
+  local.cron.gdrive-backup.enable = true;
 
   # ZFS snapshots and replication
   services.sanoid = {
