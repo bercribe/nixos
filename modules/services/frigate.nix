@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  local,
+  local-utils,
   ...
 }: let
   cfg = config.local.services.frigate;
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 
   dataDir = "/services/frigate";
 

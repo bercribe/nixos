@@ -53,7 +53,6 @@
       pkgs = pkgsF system;
     in {
       constants = pkgs.callPackage ./constants {};
-      utils = pkgs.callPackage ./utils;
       secrets = import (secrets + /nix);
     };
 
@@ -73,6 +72,7 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
+        ./utils
       ];
 
       makeConfig = {

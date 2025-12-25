@@ -2,14 +2,14 @@
   pkgs,
   config,
   lib,
-  local,
+  local-utils,
   ...
 }: let
   sanoidHosts = ["heavens-door" "highway-star" "judgement" "moody-blues" "super-fly"];
   syncoidJobs = ["judgement" "moody-blues" "super-fly"];
   resticJobs = ["mr-president" "backblaze"];
 
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 in {
   imports = [
     ../../modules/cron/echoes-backup.nix

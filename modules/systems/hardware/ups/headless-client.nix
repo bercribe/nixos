@@ -1,10 +1,10 @@
 {
   config,
   pkgs,
-  local,
+  local-utils,
   ...
 }: let
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 in {
   imports = [
     ./base-client.nix

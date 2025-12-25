@@ -2,10 +2,10 @@
   config,
   pkgs,
   lib,
-  local,
+  local-utils,
   ...
 }: let
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 in {
   local.services.postfix.enable = true;
 

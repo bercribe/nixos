@@ -2,11 +2,11 @@
   config,
   pkgs,
   lib,
-  local,
+  local-utils,
   ...
 }: let
   cfg = config.local.cron.syncthing-healthchecks;
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 in {
   options.local.cron.syncthing-healthchecks.enable = lib.mkEnableOption "syncthing healthchecks";
 

@@ -53,35 +53,37 @@
       extra = ''--data-raw "$1"'';
     });
 in {
-  localHostUrlBase = localHostUrlBase;
-  localHostUrl = service: "https://${localHostUrlBase service}";
-  serviceUrl = serviceUrl;
-  writeHealthchecksPingScript = healthchecksPing;
-  writeHealthchecksLogScript = healthchecksLog;
-  writeHealthchecksCombinedScript = {
-    slug,
-    secret ? localSecret,
-  } @ params: command:
-    pkgs.writeShellScript "hc-combined-${slug}" ''
-      set +e
-      logs=$(${command} 2>&1)
-      code=$?
-      set -e
+  _module.args.local-utils = {
+    localHostUrlBase = localHostUrlBase;
+    localHostUrl = service: "https://${localHostUrlBase service}";
+    serviceUrl = serviceUrl;
+    writeHealthchecksPingScript = healthchecksPing;
+    writeHealthchecksLogScript = healthchecksLog;
+    writeHealthchecksCombinedScript = {
+      slug,
+      secret ? localSecret,
+    } @ params: command:
+      pkgs.writeShellScript "hc-combined-${slug}" ''
+        set +e
+        logs=$(${command} 2>&1)
+        code=$?
+        set -e
 
-      ${healthchecksLog params} "$logs"
+        ${healthchecksLog params} "$logs"
 
-      if [ "$code" -eq "0" ]; then
-        ${healthchecksPing params}
-      fi
-    '';
-  writeRemoteHealthchecksPingScript = {
-    slug,
-    secret ? remoteSecret,
-  }:
-    pkgs.writeShellScript "remote-hc-ping-${slug}"
-    (healthchecksBase {
-      endpoint = slug;
-      remote = true;
-      sopsSecret = secret;
-    });
+        if [ "$code" -eq "0" ]; then
+          ${healthchecksPing params}
+        fi
+      '';
+    writeRemoteHealthchecksPingScript = {
+      slug,
+      secret ? remoteSecret,
+    }:
+      pkgs.writeShellScript "remote-hc-ping-${slug}"
+      (healthchecksBase {
+        endpoint = slug;
+        remote = true;
+        sopsSecret = secret;
+      });
+  };
 }

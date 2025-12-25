@@ -1,14 +1,13 @@
 {
   pkgs,
-  config,
-  local,
+  local-utils,
   secrets,
   ...
 }: let
   user = "finance-sync";
   group = "ledger";
 
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 in {
   sops.secrets.finance-sync-ping-key = {
     key = "healthchecks/local/ping-key";

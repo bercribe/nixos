@@ -2,11 +2,11 @@
   pkgs,
   config,
   lib,
-  local,
+  local-utils,
   ...
 }: let
   cfg = config.local.disk-monitor;
-  utils = local.utils {inherit config;};
+  utils = local-utils;
 in {
   options.local.disk-monitor = with lib;
   with types; {

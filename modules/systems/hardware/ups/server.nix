@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  local,
+  local-utils,
   secrets,
   ...
 }: {
@@ -78,7 +78,7 @@
     };
     script = let
       slug = "ups-runtime";
-      utils = local.utils {inherit config;};
+      utils = local-utils;
     in ''
       runtime=$(${pkgs.nut}/bin/upsc ups battery.runtime 2>&1) || true
       ${utils.writeHealthchecksLogScript {inherit slug;}} "UPS runtime remaining: $runtime seconds"

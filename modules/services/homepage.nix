@@ -1,12 +1,12 @@
 {
   config,
   lib,
-  local,
+  local-utils,
   secrets,
   ...
 }: let
   cfg = config.local.services.homepage-dashboard;
-  utils = local.utils {inherit config;};
+  utils = local-utils;
   port = 13242;
 in {
   options.local.services.homepage-dashboard.enable = lib.mkEnableOption "homepage-dashboard";
