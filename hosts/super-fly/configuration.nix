@@ -5,8 +5,9 @@
     ../../modules/systems/headless
     ../../modules/systems/hardware/encrypted-zfs.nix
     ../../modules/systems/hardware/ups/headless-client.nix
-    ../../modules/systems/network/rclone.nix
   ];
+
+  local.rclone.enable = true;
 
   local.cron.finance-sync.enable = true;
   local.cron.heartbeat-healthchecks.enable = true;

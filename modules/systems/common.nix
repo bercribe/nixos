@@ -14,6 +14,7 @@
     ./network/ssh-client.nix
     ./sops.nix
     ./home/stylix.nix
+    ./network/rclone.nix
     ../cron
     ../services
     ../clients/local-healthchecks.nix

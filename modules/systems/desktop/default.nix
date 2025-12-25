@@ -9,7 +9,6 @@
     ./keyboard.nix
     ../../hyprland # Tiling window manager
     ../network/mount.nix
-    ../network/rclone.nix
     ../network/ssh-server.nix
     ../hardware/bluray.nix
   ];
@@ -27,6 +26,7 @@
   };
 
   # Config
+  local.rclone.enable = true;
   local.services.syncthing-base.enable = true;
 
   # Enable the X11 windowing system.

@@ -8,14 +8,11 @@
   cfg = config.local.cron.pcloud-gdrive-sync;
   utils = local.utils;
 in {
-  imports = [
-    ../systems/network/rclone.nix
-  ];
-
   options.local.cron.pcloud-gdrive-sync.enable = lib.mkEnableOption "pcloud gdrive sync";
 
   config = lib.mkIf cfg.enable {
     local.healthchecks-secret.enable = true;
+    local.rclone.enable = true;
 
     systemd.timers.pcloud-gdrive-sync = {
       wantedBy = ["timers.target"];

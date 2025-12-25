@@ -8,14 +8,11 @@
   cfg = config.local.cron.gdrive-backup;
   utils = local.utils;
 in {
-  imports = [
-    ../systems/network/rclone.nix
-  ];
-
   options.local.cron.gdrive-backup.enable = lib.mkEnableOption "gdrive backup";
 
   config = lib.mkIf cfg.enable {
     local.healthchecks-secret.enable = true;
+    local.rclone.enable = true;
 
     systemd.timers.gdrive-backup = {
       wantedBy = ["timers.target"];

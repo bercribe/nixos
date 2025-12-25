@@ -8,14 +8,11 @@
   cfg = config.local.cron.echoes-backup;
   utils = local.utils;
 in {
-  imports = [
-    ../systems/network/rclone.nix
-  ];
-
   options.local.cron.echoes-backup.enable = lib.mkEnableOption "echoes backup";
 
   config = lib.mkIf cfg.enable {
     local.healthchecks-secret.enable = true;
+    local.rclone.enable = true;
 
     systemd.timers.echoes-backup = {
       wantedBy = ["timers.target"];
