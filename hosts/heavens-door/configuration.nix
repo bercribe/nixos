@@ -27,6 +27,8 @@
     pkgs.scripts.asw # audio switch
   ];
 
+  local.keyboard.device = "glove80";
+
   # Services
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
