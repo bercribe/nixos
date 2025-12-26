@@ -6,6 +6,7 @@
   ...
 }: let
   cfg = config.local.reverseProxy;
+  utils = local.utils;
 in {
   options.local.reverseProxy = {
     enable = lib.mkEnableOption "reverse proxy";
@@ -18,19 +19,11 @@ in {
         description = "True to mange certs using ACME";
       };
 
-    domainBase = with lib;
-    with types;
-      mkOption {
-        type = str;
-        default = "mawz.dev";
-        description = "DNS base name";
-      };
-
     localRedirectHost = with lib;
     with types;
       mkOption {
         type = str;
-        description = "Host to redirect from *.local.mawz.dev";
+        description = "Host to redirect from *.lan.<domain>";
       };
 
     services = with lib;
@@ -85,9 +78,9 @@ in {
 
   config = let
     hostName = config.networking.hostName;
-    hostUrl = "${hostName}.${cfg.domainBase}";
+    hostUrl = utils.hostDomain hostName;
     isLocalRedirHost = cfg.localRedirectHost == config.networking.hostName;
-    localRedirUrl = "lan.${cfg.domainBase}";
+    localRedirUrl = "lan.${config.local.constants.hosts.${cfg.localRedirectHost}.domain}";
   in
     lib.mkIf cfg.enable {
       networking.firewall.allowedTCPPorts = [80 443] ++ (with lib; concatLists (mapAttrsToList (_: {additionalPorts, ...}: map ({from, ...}: from) additionalPorts) cfg.services));
@@ -197,7 +190,7 @@ in {
                   }: (nameValuePair "https://${shortName}.${localRedirUrl}" {
                     extraConfig = ''
                       ${tlsConf localCertDir}
-                      redir https://${shortName}.${head hosts}.${cfg.domainBase}{uri} 308
+                      redir https://${shortName}.${utils.hostDomain (head hosts)}{uri} 308
                     '';
                   }))
                   uniqueServices)

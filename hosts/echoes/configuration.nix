@@ -4,7 +4,6 @@
   pkgs,
   lib,
   secrets,
-  local,
   ...
 }: {
   imports = [
@@ -35,7 +34,6 @@
 
   local.reverseProxy = {
     useAcme = false;
-    domainBase = local.secrets.personal-domain;
   };
 
   # SSH security

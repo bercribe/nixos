@@ -26,7 +26,7 @@ in {
       dataDir = "/services/healthchecks";
       settings = {
         SECRET_KEY_FILE = config.sops.secrets."healthchecks/local/secret-key".path;
-        SITE_ROOT = utils.localHostUrl "healthchecks";
+        SITE_ROOT = utils.localHostServiceUrl "healthchecks";
         EMAIL_HOST = "localhost";
         EMAIL_PORT = "25";
         EMAIL_USE_TLS = "False";

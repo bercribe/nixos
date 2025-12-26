@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  config,
+  local,
+  ...
+}: let
+  utils = local.utils;
   options = [
     "nodev"
     "noatime"
@@ -15,13 +20,13 @@ in {
 
   # Requires SFTP to be enabled
   fileSystems."/mnt/mr-president" = {
-    device = "mawz@mr-president.mawz.dev:/mawz-home";
+    device = "mawz@${utils.hostDomain "mr-president"}:/mawz-home";
     fsType = "sshfs";
     inherit options;
   };
 
   fileSystems."/mnt/super-fly" = {
-    device = "mawz@super-fly.mawz.dev:/zvault";
+    device = "mawz@${utils.hostDomain "super-fly"}:/zvault";
     fsType = "sshfs";
     inherit options;
   };

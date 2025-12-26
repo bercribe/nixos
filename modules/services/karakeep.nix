@@ -17,7 +17,7 @@ in {
       enable = true;
       extraEnvironment = {
         PORT = toString port;
-        NEXTAUTH_URL = utils.localHostUrl "karakeep";
+        NEXTAUTH_URL = utils.localHostServiceUrl "karakeep";
       };
     };
 

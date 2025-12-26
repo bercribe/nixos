@@ -15,7 +15,7 @@ in {
       enable = true;
       mediaLocation = dataDir;
       settings = {
-        server.externalDomain = utils.localHostUrl "immich";
+        server.externalDomain = utils.localHostServiceUrl "immich";
         notifications.smtp = {
           enabled = true;
           from = ''"Immich Photo Server <noreply@immich.lan>"'';

@@ -4,7 +4,9 @@
   lib,
   local,
   ...
-}: {
+}: let
+  utils = local.utils;
+in {
   imports = [
     ./minimal.nix
     ./stylix.nix
@@ -49,16 +51,16 @@
       };
       judgement = {
         inherit user forwardAgent;
-        hostname = "judgement.mawz.dev";
+        hostname = utils.hostDomain "judgement";
       };
       lovers = {
         inherit forwardAgent;
         user = "root";
-        hostname = "lovers.mawz.dev";
+        hostname = utils.hostDomain "lovers";
       };
       mr-president = {
         inherit user forwardAgent;
-        hostname = "mr-president.mawz.dev";
+        hostname = utils.hostDomain "mr-president";
         setEnv = {
           # check /usr/share/terminfo
           TERM = "xterm-color";
@@ -66,14 +68,14 @@
       };
       moody-blues = {
         inherit user forwardAgent;
-        hostname = "moody-blues.mawz.dev";
+        hostname = utils.hostDomain "moody-blues";
       };
       super-fly = {
         inherit user forwardAgent;
-        hostname = "super-fly.mawz.dev";
+        hostname = utils.hostDomain "super-fly";
       };
       super-fly-decrypt = {
-        hostname = "super-fly.mawz.dev";
+        hostname = utils.hostDomain "super-fly";
         port = 2222;
         user = "root";
       };

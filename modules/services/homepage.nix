@@ -26,7 +26,7 @@ in {
     services.homepage-dashboard = {
       enable = true;
       listenPort = port;
-      allowedHosts = utils.localHostUrlBase "homepage-dashboard";
+      allowedHosts = utils.localHostServiceUrlBase "homepage-dashboard";
       settings = {
         layout = [
           {Productivity = {};}
@@ -120,7 +120,7 @@ in {
           registryEntry = config.local.constants.service-registry."${service}";
           shortName = registryEntry.shortName;
           host = lib.head registryEntry.hosts;
-        in "https://${shortName}.${host}.mawz.dev";
+        in "https://${shortName}.${utils.hostDomain host}";
 
         icons = {
           hledger-web = "https://hledger.org/images/coins2-248.png";
@@ -147,7 +147,7 @@ in {
           name = serviceName service;
         in {
           "${name}" = {
-            href = "https://${shortName}.${host}.mawz.dev";
+            href = "https://${shortName}.${utils.hostDomain host}";
             icon = icons."${service}" or name;
             description = "Running on ${host}";
             widget = lib.mkIf (widgets ? "${service}") widgets."${service}";

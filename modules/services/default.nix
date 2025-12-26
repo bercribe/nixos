@@ -4,7 +4,7 @@
   ...
 }: let
   cfg = config.local.constants.service-registry;
-  judgement = config.local.constants.hosts.judgement;
+  judgement = "judgement";
 in {
   imports = [
     # http

@@ -8,7 +8,7 @@
   utils = local.utils;
   port = 54776;
 
-  url = utils.localHostUrl "forgejo";
+  url = utils.localHostServiceUrl "forgejo";
 in {
   options.local.services.forgejo.enable = lib.mkEnableOption "forgejo";
 

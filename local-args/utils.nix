@@ -4,10 +4,11 @@
   lib,
   ...
 }: let
-  localHostUrlBase = service: "${config.local.constants.service-registry."${service}".shortName}.${config.networking.hostName}.mawz.dev";
+  hostDomain = hostname: "${hostname}.${config.local.constants.hosts.${hostname}.domain}";
+  localHostServiceUrlBase = service: "${config.local.constants.service-registry."${service}".shortName}.${hostDomain config.networking.hostName}";
   serviceUrl = service: let
     serviceRegistration = config.local.constants.service-registry."${service}";
-  in "https://${serviceRegistration.shortName}.${lib.head serviceRegistration.hosts}.mawz.dev";
+  in "https://${serviceRegistration.shortName}.${hostDomain (lib.head serviceRegistration.hosts)}";
 
   localSecret = "healthchecks/local/ping-key";
   remoteSecret = "healthchecks/remote/ping-key";
@@ -29,7 +30,7 @@
     ${pkgs.curl}/bin/curl -m 10 --retry 5 --retry-connrefused --location "${
       if remote
       then "https://hc-ping.com"
-      else "https://healthchecks.lan.mawz.dev/ping"
+      else "${serviceUrl "healthchecks"}/ping"
     }/$pingKey/${endpoint}?create=1" ${extra}
   '';
 
@@ -53,8 +54,9 @@
       extra = ''--data-raw "$1"'';
     });
 in {
-  localHostUrlBase = localHostUrlBase;
-  localHostUrl = service: "https://${localHostUrlBase service}";
+  hostDomain = hostDomain;
+  localHostServiceUrlBase = localHostServiceUrlBase;
+  localHostServiceUrl = service: "https://${localHostServiceUrlBase service}";
   serviceUrl = serviceUrl;
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;

@@ -1,4 +1,10 @@
-{config, ...}: {
+{
+  config,
+  local,
+  ...
+}: let
+  utils = local.utils;
+in {
   # generate with `ssh-keygen -t ed25519 -N "" -f ./id_ed25519 -C "mawz@<host>"`
   sops.secrets.ssh = {
     owner = "mawz";
@@ -9,19 +15,19 @@
   # get public key: `sudo ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -y`
   programs.ssh.knownHosts = {
     mr-president = {
-      extraHostNames = ["mr-president.mawz.dev"];
+      extraHostNames = [(utils.hostDomain "mr-president")];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPmljHSvr8veywr2SIWLw8oP0jH75y45KTqROo09yzBk";
     };
     judgement = {
-      extraHostNames = ["judgement.mawz.dev"];
+      extraHostNames = [(utils.hostDomain "judgement")];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNTo4tnqG7zk+yAmA7JUOapVjhSWkhdqSoEor9q+KbL";
     };
     moody-blues = {
-      extraHostNames = ["moody-blues.mawz.dev"];
+      extraHostNames = [(utils.hostDomain "moody-blues")];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBUCKXB7muqmoovAblrX2znV3PUejkIqqZ4OxSMGuXGE";
     };
     super-fly = {
-      extraHostNames = ["super-fly.mawz.dev"];
+      extraHostNames = [(utils.hostDomain "super-fly")];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdZUinVNS9d3LOmDKYWq4kEb6iO1uKaJOGhBZ4cQ6/h";
     };
   };

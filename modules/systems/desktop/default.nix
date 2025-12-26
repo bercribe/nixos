@@ -2,8 +2,11 @@
   config,
   pkgs,
   lib,
+  local,
   ...
-}: {
+}: let
+  utils = local.utils;
+in {
   imports = [
     ../common.nix
     ./keyboard.nix
@@ -218,7 +221,7 @@
         else "zpool"
       }/home" = {
         recursive = true;
-        target = "${hostName}@super-fly.mawz.dev:zvault/hosts/${hostName}";
+        target = "${hostName}@${utils.hostDomain "super-fly"}:zvault/hosts/${hostName}";
       };
     };
     service = {

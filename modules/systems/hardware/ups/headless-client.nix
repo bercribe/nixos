@@ -26,7 +26,7 @@ in {
     };
     script = ''
       # will error out if not connected
-      ${pkgs.nut}/bin/upsc ups@judgement.mawz.dev
+      ${pkgs.nut}/bin/upsc ups@${utils.hostDomain "judgement"}
 
       ${utils.writeHealthchecksPingScript {slug = "${config.networking.hostName}-ups-online";}}
     '';

@@ -69,7 +69,7 @@ in {
         # https://www.home-assistant.io/integrations/default_config/
         default_config = {};
         homeassistant = let
-          url = utils.localHostUrl "home-assistant";
+          url = utils.localHostServiceUrl "home-assistant";
         in {
           internal_url = url;
           external_url = url;

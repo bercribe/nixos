@@ -7,6 +7,8 @@
 }: let
   cfg = config.local.services.gatus;
   port = 55310;
+
+  utils = local.utils;
 in {
   options.local.services.gatus.enable = lib.mkEnableOption "gatus";
 
@@ -55,23 +57,23 @@ in {
             }
             {
               name = "synology DSM";
-              url = "https://mr-president.lan:5001";
+              url = "https://${utils.hostDomain "mr-president"}:5001";
               group = "lan";
               client.insecure = true;
             }
             {
               name = "jet kvm";
-              url = "http://notorious-big.lan";
+              url = "http://${utils.hostDomain "notorious-big"}";
               group = "lan";
             }
             {
               name = "main router";
-              url = "http://hierophant-green.lan";
+              url = "http://${utils.hostDomain "hierophant-green"}";
               group = "lan";
             }
             {
               name = "office switch";
-              url = "http://hermit-purple.lan";
+              url = "http://${utils.hostDomain "hermit-purple"}";
               group = "lan";
               conditions = ["[STATUS] == 401"];
             }

@@ -19,7 +19,7 @@ in {
       enable = true;
       config = {
         PORT = toString port;
-        BASE_URL = utils.localHostUrl "miniflux";
+        BASE_URL = utils.localHostServiceUrl "miniflux";
         FETCH_YOUTUBE_WATCH_TIME = 1;
         # tuning
         POLLING_FREQUENCY = 5; # minutes

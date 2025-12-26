@@ -2,8 +2,11 @@
   config,
   pkgs,
   secrets,
+  local,
   ...
-}: {
+}: let
+  utils = local.utils;
+in {
   local.healthchecks-secret.enable = true;
 
   sops.secrets."ups/observer" = {
@@ -21,7 +24,7 @@
         SHUTDOWNCMD = "${pkgs.systemd}/bin/shutdown now";
       };
       monitor.cyberpower = {
-        system = "ups@judgement.mawz.dev";
+        system = "ups@${utils.hostDomain "judgement"}";
         type = "secondary";
         user = "observer";
         passwordFile = config.sops.secrets."ups/observer".path;

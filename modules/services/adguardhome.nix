@@ -1,10 +1,13 @@
 {
   config,
   lib,
+  local,
   ...
 }: let
   cfg = config.local.services.adguardhome;
   port = 29222;
+
+  utils = local.utils;
 in {
   options.local.services.adguardhome.enable = lib.mkEnableOption "adguardhome";
 
@@ -30,26 +33,20 @@ in {
           }
         ];
         filtering.rewrites = let
-          domains = {
-            "hierophant-green.mawz.dev" = ["hierophant-green.lan"];
-            "hermit-purple.mawz.dev" = ["hermit-purple.lan"];
-            "judgement.mawz.dev" = [
-              "judgement.lan"
-              "*.judgement.lan"
-            ];
-            "lovers.mawz.dev" = ["lovers.lan"];
-            "moody-blues.mawz.dev" = [
-              "moody-blues.lan"
-              "*.moody-blues.lan"
-            ];
-            "mr-president.mawz.dev" = ["mr-president.lan"];
-            "notorious-big.mawz.dev" = ["notorious-big.lan"];
-            "super-fly.mawz.dev" = [
-              "super-fly.lan"
-              "*.super-fly.lan"
-            ];
-          };
-          domainRewrites = with lib; concatLists (attrValues (mapAttrs (answer: domains: (map (domain: {inherit domain answer;}) domains)) domains));
+          domainRewrites = with lib;
+            concatLists (mapAttrsToList (
+                hostname: _: [
+                  {
+                    domain = "${hostname}.lan";
+                    answer = utils.hostDomain hostname;
+                  }
+                  {
+                    domain = "*.${hostname}.lan";
+                    answer = utils.hostDomain hostname;
+                  }
+                ]
+              )
+              config.local.constants.hosts);
           registryRewrites = with lib;
             mapAttrsToList (_: {
               shortName,
@@ -57,7 +54,7 @@ in {
               ...
             }: {
               domain = "${shortName}.lan";
-              answer = "${head hosts}.mawz.dev";
+              answer = utils.hostDomain (head hosts);
             }) (filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.constants.service-registry);
         in
           domainRewrites ++ registryRewrites;
