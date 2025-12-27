@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   local.services.postfix.enable = true;
+  local.cron.disk-monitor.zfs = true;
 
   services.zfs.autoScrub.enable = true;
 

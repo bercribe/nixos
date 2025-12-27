@@ -23,6 +23,7 @@ in {
     remoteCheck = mkOption {
       type = bool;
       description = "True to use upstream healthchecks endpoint, false for local";
+      default = false;
     };
   };
 
