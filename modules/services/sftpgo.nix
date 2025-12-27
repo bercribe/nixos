@@ -15,6 +15,8 @@ in {
       key = "sftpgo/data-file";
     };
 
+    local.cron.email-healthchecks.enable = true;
+
     services.sftpgo = {
       enable = true;
       loadDataFile = config.sops.secrets.sftpgo-data-file.path;
