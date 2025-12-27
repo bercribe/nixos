@@ -29,6 +29,7 @@
   # User env
   home-manager.users.mawz = import ./home.nix;
 
+  local.cron.email-healthchecks.enable = true;
   local.cron.disk-monitor = {
     zfs = false;
     remoteCheck = true;
