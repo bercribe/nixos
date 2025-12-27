@@ -11,7 +11,7 @@
 
   local.cron.finance-sync.enable = true;
   local.cron.heartbeat-healthchecks.enable = true;
-  local.cron.pcloud-gdrive-sync.enable = true;
+  local.cron.pcloud-echoes-sync.enable = true;
   local.cron.syncthing-conflicts.enable = true;
 
   # Use the systemd-boot EFI boot loader.
