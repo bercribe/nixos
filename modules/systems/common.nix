@@ -118,7 +118,7 @@
 
   # Services
 
-  local.disk-monitor.enable = true;
+  local.cron.disk-monitor.enable = true;
 
   # Firmware updater - `fwupdmgr update`
   services.fwupd.enable = true;

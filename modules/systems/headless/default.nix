@@ -26,7 +26,7 @@
   programs.mosh.enable = true;
 
   # Services
-  local.disk-monitor.headless = true;
+  local.cron.disk-monitor.headless = true;
 
   local.sshServer.createHostUsers = true;
 

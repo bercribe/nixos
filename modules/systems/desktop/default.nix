@@ -154,7 +154,7 @@ in {
     '';
   };
 
-  local.disk-monitor.headless = false;
+  local.cron.disk-monitor.headless = false;
 
   # Printing
   # Enable CUPS to print documents.

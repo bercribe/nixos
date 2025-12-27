@@ -29,8 +29,10 @@
   # User env
   home-manager.users.mawz = import ./home.nix;
 
-  # TODO: fix disk monitor
-  local.disk-monitor.enable = lib.mkForce false;
+  local.cron.disk-monitor = {
+    zfs = false;
+    remoteCheck = true;
+  };
 
   local.reverseProxy = {
     useAcme = false;

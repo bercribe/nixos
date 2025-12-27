@@ -53,14 +53,7 @@
       sopsSecret = secret;
       extra = ''--data-raw "$1"'';
     });
-in {
-  hostDomain = hostDomain;
-  localHostServiceUrlBase = localHostServiceUrlBase;
-  localHostServiceUrl = service: "https://${localHostServiceUrlBase service}";
-  serviceUrl = serviceUrl;
-  writeHealthchecksPingScript = healthchecksPing;
-  writeHealthchecksLogScript = healthchecksLog;
-  writeHealthchecksCombinedScript = {
+  healthchecksCombined = {
     slug,
     secret ? localSecret,
   } @ params: command:
@@ -76,7 +69,8 @@ in {
         ${healthchecksPing params}
       fi
     '';
-  writeRemoteHealthchecksPingScript = {
+
+  remotePing = {
     slug,
     secret ? remoteSecret,
   }:
@@ -86,4 +80,42 @@ in {
       remote = true;
       sopsSecret = secret;
     });
+  remoteLog = {
+    slug,
+    secret ? remoteSecret,
+  }:
+    pkgs.writeShellScript "remote-hc-log-${slug}"
+    (healthchecksBase {
+      endpoint = "${slug}/log";
+      remote = true;
+      sopsSecret = secret;
+      extra = ''--data-raw "$1"'';
+    });
+  remoteCombined = {
+    slug,
+    secret ? remoteSecret,
+  } @ params: command:
+    pkgs.writeShellScript "remote-hc-combined-${slug}" ''
+      set +e
+      logs=$(${command} 2>&1)
+      code=$?
+      set -e
+
+      ${remoteLog params} "$logs"
+
+      if [ "$code" -eq "0" ]; then
+        ${remotePing params}
+      fi
+    '';
+in {
+  hostDomain = hostDomain;
+  localHostServiceUrlBase = localHostServiceUrlBase;
+  localHostServiceUrl = service: "https://${localHostServiceUrlBase service}";
+  serviceUrl = serviceUrl;
+  writeHealthchecksPingScript = healthchecksPing;
+  writeHealthchecksLogScript = healthchecksLog;
+  writeHealthchecksCombinedScript = healthchecksCombined;
+  writeRemoteHealthchecksPingScript = remotePing;
+  writeRemoteHealthchecksLogScript = remoteLog;
+  writeRemoteHealthchecksCombinedScript = remoteCombined;
 }
