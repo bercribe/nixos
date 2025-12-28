@@ -52,7 +52,13 @@
 
       if [ "$ip" != "$last_ip" ]; then
         message="SSH login detected on $(hostname) at $(date) by user $PAM_USER from $ip"
-        echo "$message" | ${pkgs.postfix}/bin/sendmail root
+        (
+          echo "From: Echoes <noreply@echoes.lan>"
+          echo "Subject: Echoes system alert"
+          echo "Content-Type: text/html"
+          echo
+          echo "$message"
+        ) | ${pkgs.postfix}/bin/sendmail root
       fi
     '';
   in
