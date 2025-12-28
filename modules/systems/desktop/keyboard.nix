@@ -219,6 +219,12 @@ in {
                 z x c d v XX k h
                 XX XX @lsft @rsft
               )
+              (deflayer colemak-nomods
+                q w f p b j l u y ;
+                @escsw a r s t g m n e i o
+                z x c d v XX k h
+                XX XX @lsft @rsft
+              )
               (deflayer shift
                 _ _ _ _ _ _ _ _ _ _
                 _ _ _ _ _ _ _ _ _ _ _
@@ -228,7 +234,7 @@ in {
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @sbs @scm @sps _
+                _ _ _ _ _ _ _ @sbs @scm @sps @scn
                 _ _ _ _ _ _ _ _
                 _ _ _ _
               )
@@ -252,6 +258,12 @@ in {
                 z x c d v k h
                 @lsft @rsft
               )
+              (deflayer colemak-nomods
+                q w f p b j l u y ;
+                @escsw a r s t g m n e i o
+                z x c d v k h
+                @lsft @rsft
+              )
               (deflayer shift
                 _ _ _ _ _ _ _ _ _ _
                 _ _ _ _ _ _ _ _ _ _ _
@@ -261,7 +273,7 @@ in {
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @sbs @scm @sps _
+                _ _ _ _ _ _ _ @sbs @scm @sps @scn
                 _ _ _ _ _ _ _
                 _ _
               )
@@ -303,6 +315,7 @@ in {
             ;; layer switching
             sbs (layer-switch base)
             scm (layer-switch colemak)
+            scn (layer-switch colemak-nomods)
             sps (layer-switch pass)
           )
 
