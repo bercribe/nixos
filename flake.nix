@@ -38,7 +38,6 @@
     sops-nix,
     stylix,
     paisa,
-    secrets,
     ...
   } @ inputs: let
     overlay = import ./overlay.nix inputs;
@@ -136,8 +135,6 @@
     homeConfigurations = let
       commonModules = [
         stylix.homeModules.stylix
-        ./constants
-        ./local-args
       ];
 
       makeConfig = {
@@ -145,10 +142,11 @@
         hostname,
       }: let
         pkgs = pkgsF system;
+        extraSpecialArgs = inputs;
       in {
         name = "mawz@${hostname}";
         value = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+          inherit pkgs extraSpecialArgs;
           modules =
             commonModules
             ++ [

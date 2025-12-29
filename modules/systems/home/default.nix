@@ -48,6 +48,13 @@ in {
       echoes = {
         inherit user forwardAgent;
         hostname = "echoes.${local.secrets.personal-domain}";
+        localForwards = [
+          {
+            bind.port = 8080;
+            host.address = "127.0.0.1";
+            host.port = 48815;
+          }
+        ];
       };
       judgement = {
         inherit user forwardAgent;
