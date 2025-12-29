@@ -41,6 +41,7 @@ in {
           {
             port = httpPort;
             enable_web_admin = false;
+            enable_rest_api = false;
             proxy_allowed = "127.0.0.1";
             client_ip_proxy_header = "X-Forwarded-For";
           }
