@@ -144,6 +144,7 @@ in {
       gtypist # typing tutor
       handlr-regex # better xdg-open
       ncspot # spotify TUI
+      qmk # keyboard firmware
       spotify-player # spotify TUI
       typst # document editor
       wev # shows keyboard inputs

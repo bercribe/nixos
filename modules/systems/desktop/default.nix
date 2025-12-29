@@ -107,6 +107,10 @@ in {
     TERMINAL = getExe foot;
   };
 
+  # Hardware
+
+  hardware.keyboard.qmk.enable = true;
+
   # Programs
 
   # Agent forwarding

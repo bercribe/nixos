@@ -234,7 +234,7 @@ in {
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @sbs @scm @sps @scn
+                _ _ _ _ _ _ _ @sbs @sps @scm @scn
                 _ _ _ _ _ _ _ _
                 _ _ _ _
               )
@@ -273,7 +273,7 @@ in {
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @sbs @scm @sps @scn
+                _ _ _ _ _ _ _ @sbs @sps @scm @scn
                 _ _ _ _ _ _ _
                 _ _
               )

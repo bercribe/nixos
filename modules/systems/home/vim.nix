@@ -55,6 +55,7 @@ in {
       treesitterParsers = ["lua" "nix" "python" "typst"];
       filetypes = {
         "*" = {};
+        json.tabsize = 2;
         lua.commentPattern = "--";
         nix = {
           tabsize = 2;
