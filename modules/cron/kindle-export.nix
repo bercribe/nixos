@@ -42,6 +42,7 @@ in {
         boundary=$(${lib.getExe pkgs.openssl} rand -base64 12)
         (
           echo "From: Readeck <noreply@readeck.lan>"
+          echo "To: $receiver"
           echo "Subject: Readeck export"
           echo "Mime-Version: 1.0"
           echo "Content-Type: multipart/mixed; boundary=\"$boundary\""
