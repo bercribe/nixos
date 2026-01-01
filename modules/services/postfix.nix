@@ -21,6 +21,7 @@ in {
       relayHost = "smtp.gmail.com";
       relayPort = 587;
       config = {
+        message_size_limit = 52428800;
         smtp_use_tls = "yes";
         smtp_sasl_auth_enable = "yes";
         smtp_sasl_security_options = "";

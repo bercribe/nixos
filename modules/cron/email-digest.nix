@@ -13,8 +13,8 @@ in {
   config = lib.mkIf cfg.enable {
     local.services.postfix.enable = true;
 
-    sops.secrets."readeck/email-digest/receiver" = {};
-    sops.secrets."readeck/email-digest/api-key" = {};
+    sops.secrets."readeck/email-digest-receiver" = {};
+    sops.secrets."readeck/cron-api-key" = {};
 
     systemd.timers.email-digest = {
       wantedBy = ["timers.target"];
@@ -25,8 +25,8 @@ in {
     };
     systemd.services.email-digest = {
       script = ''
-        receiver="$(cat ${config.sops.secrets."readeck/email-digest/receiver".path})"
-        key="$(cat ${config.sops.secrets."readeck/email-digest/api-key".path})"
+        receiver="$(cat ${config.sops.secrets."readeck/email-digest-receiver".path})"
+        key="$(cat ${config.sops.secrets."readeck/cron-api-key".path})"
 
         response="$(${lib.getExe pkgs.curl} -X GET "${utils.serviceUrl "readeck"}/api/bookmarks?is_archived=false&limit=100" -H "accept: application/json" -H "Authorization: Bearer $key")"
 

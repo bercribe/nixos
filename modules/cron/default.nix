@@ -7,6 +7,7 @@
     ./finance-sync.nix
     ./gdrive-backup.nix
     ./heartbeat-healthchecks.nix
+    ./kindle-export.nix
     ./pcloud-echoes-sync.nix
     ./syncthing-conflicts.nix
     ./syncthing-healthchecks.nix

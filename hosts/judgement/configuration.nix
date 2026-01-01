@@ -11,6 +11,7 @@
   ];
 
   local.cron.email-digest.enable = true;
+  local.cron.kindle-export.enable = true;
 
   # Secrets
   sops.defaultSopsFile = builtins.toPath "${secrets}/sops/${config.networking.hostName}.yaml";
