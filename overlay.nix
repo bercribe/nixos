@@ -6,14 +6,6 @@
   unstable = import nixpkgs-unstable {
     system = final.system;
   };
-  home-assistant = final.unstable.home-assistant;
-  home-assistant-custom-components = final.unstable.home-assistant-custom-components;
-  immich = final.unstable.immich;
-  yaziPlugins =
-    prev.yaziPlugins
-    // {
-      mux = prev.callPackage ./pkgs/yazi/mux.nix {};
-    };
   yt-dlp = final.unstable.yt-dlp;
 
   # user scripts
@@ -26,6 +18,13 @@
     tsl = callPackage ./pkgs/scripts/tsl.nix {};
     twl = callPackage ./pkgs/scripts/twl.nix {};
   };
+
+  # local packages
+  yaziPlugins =
+    prev.yaziPlugins
+    // {
+      mux = prev.callPackage ./pkgs/yazi/mux.nix {};
+    };
 
   # album art - currently broken
   # ncspot = prev.ncspot.override (prev: {
