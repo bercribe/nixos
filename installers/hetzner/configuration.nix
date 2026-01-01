@@ -2,6 +2,7 @@
   modulesPath,
   lib,
   pkgs,
+  nixosVersion,
   ...
 }: {
   imports = [
@@ -27,5 +28,5 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM9y6wTI2WarxWkohtI5enYZe6XcBzSlc1YD/9pvuehY" # highway-star
   ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = nixosVersion;
 }

@@ -130,10 +130,7 @@ in {
           new_status = "master";
         };
 
-        gestures = {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = true;
-        };
+        gesture = "3, horizontal, workspace";
 
         misc = {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more

@@ -40,13 +40,14 @@ in {
   programs.ssh = let
     user = "mawz";
     forwardAgent = true;
+    addKeysToAgent = "yes";
   in {
     enable = true;
-    addKeysToAgent = "yes";
     includes = ["~/.ssh/transient.conf"];
+    enableDefaultConfig = false;
     matchBlocks = {
       echoes = {
-        inherit user forwardAgent;
+        inherit user forwardAgent addKeysToAgent;
         hostname = "echoes.${local.secrets.personal-domain}";
         localForwards = [
           {
@@ -57,16 +58,16 @@ in {
         ];
       };
       judgement = {
-        inherit user forwardAgent;
+        inherit user forwardAgent addKeysToAgent;
         hostname = utils.hostDomain "judgement";
       };
       lovers = {
-        inherit forwardAgent;
+        inherit forwardAgent addKeysToAgent;
         user = "root";
         hostname = utils.hostDomain "lovers";
       };
       mr-president = {
-        inherit user forwardAgent;
+        inherit user forwardAgent addKeysToAgent;
         hostname = utils.hostDomain "mr-president";
         setEnv = {
           # check /usr/share/terminfo
@@ -74,11 +75,11 @@ in {
         };
       };
       moody-blues = {
-        inherit user forwardAgent;
+        inherit user forwardAgent addKeysToAgent;
         hostname = utils.hostDomain "moody-blues";
       };
       super-fly = {
-        inherit user forwardAgent;
+        inherit user forwardAgent addKeysToAgent;
         hostname = utils.hostDomain "super-fly";
       };
       super-fly-decrypt = {
@@ -91,20 +92,10 @@ in {
 
   programs.git = {
     enable = true;
-    userName = "mawz";
-    userEmail = local.secrets.email;
-    delta = {
-      enable = true;
-      options = {
-        features = "decorations";
-        decorations = {
-          file-decoration-style = "none";
-          file-style = "bold yellow ul";
-          hunk-header-decoration-style = "none";
-        };
-      };
+    settings.user = {
+      name = "mawz";
+      email = local.secrets.email;
     };
-    difftastic.enableAsDifftool = true;
   };
 
   programs.jujutsu = {
@@ -117,6 +108,24 @@ in {
     };
   };
 
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      features = "decorations";
+      decorations = {
+        file-decoration-style = "none";
+        file-style = "bold yellow ul";
+        hunk-header-decoration-style = "none";
+      };
+    };
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.diffToolMode = true;
+  };
+
   programs.tmux.terminal = "foot";
 
   local.packages.includeScripts = true;
@@ -124,7 +133,7 @@ in {
   local.yazi.keybinds = {
     drag-and-drop = {
       bind = "<C-n>";
-      command = ''shell -- ${lib.getExe pkgs.xdragon} -x -i -T -a "$@"'';
+      command = ''shell -- ${lib.getExe pkgs.dragon-drop} -x -i -T -a "$@"'';
     };
     copy-to-clipboard = {
       bind = "y";
@@ -164,7 +173,7 @@ in {
       dragon-out = ''
         ''${{
           readarray -t files <<<"$fx"
-          ${pkgs.xdragon}/bin/xdragon -a -x "''${files[@]}"
+          ${pkgs.dragon-drop}/bin/xdragon -a -x "''${files[@]}"
         }}
       '';
     };

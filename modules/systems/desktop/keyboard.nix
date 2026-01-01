@@ -23,7 +23,7 @@ in {
         waylandFrontend = true;
         addons = with pkgs; [
           fcitx5-mozc
-          fcitx5-chinese-addons
+          qt6Packages.fcitx5-chinese-addons
         ];
         settings = {
           inputMethod = {
@@ -168,7 +168,7 @@ in {
     fonts.packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
 
       liberation_ttf # times new roman, arial, and courier new replacements
       mplus-outline-fonts.githubRelease # google font
