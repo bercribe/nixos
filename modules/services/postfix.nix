@@ -20,9 +20,10 @@ in {
       enable = true;
       settings.main = {
         relayhost = [
-          "smtp.gmail.com:587"
+          "[smtp.gmail.com]:587"
         ];
         message_size_limit = 52428800;
+        mailbox_size_limit = 104857600;
         smtp_use_tls = "yes";
         smtp_sasl_auth_enable = "yes";
         smtp_sasl_security_options = "";
