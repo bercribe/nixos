@@ -97,6 +97,7 @@ in {
       mtr # ping + traceroute
       neofetch # system info
       nh # nix helper
+      nix-inspect # nix env tui explorer
       restic # backup tool
       sops # secrets management
       wikiman # CLI docs
