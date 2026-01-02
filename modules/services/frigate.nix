@@ -134,6 +134,11 @@ in {
           enable = true;
           hostname = "localhost";
           vaapiDriver = "iHD";
+          preCheckConfig = ''
+            export FRIGATE_RTSP_USER=rtsp-user
+            export FRIGATE_RTSP_PASSWORD=rtsp-pass
+            export FRIGATE_MQTT_PASSWORD=mqtt-pass
+          '';
           settings = let
             userPass = "{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}";
             frigatePath = camera: subtype: (cameraPath {inherit userPass camera subtype;});
