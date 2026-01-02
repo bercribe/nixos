@@ -39,10 +39,12 @@ in {
                   {
                     domain = "${hostname}.lan";
                     answer = utils.hostDomain hostname;
+                    enabled = true;
                   }
                   {
                     domain = "*.${hostname}.lan";
                     answer = utils.hostDomain hostname;
+                    enabled = true;
                   }
                 ]
               )
@@ -55,6 +57,7 @@ in {
             }: {
               domain = "${shortName}.lan";
               answer = utils.hostDomain (head hosts);
+              enabled = true;
             }) (filterAttrs (_: {hosts, ...}: (length hosts) == 1) config.local.constants.service-registry);
         in
           domainRewrites ++ registryRewrites;
