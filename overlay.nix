@@ -6,6 +6,7 @@
   unstable = import nixpkgs-unstable {
     system = final.system;
   };
+  karakeep = final.unstable.karakeep;
   yt-dlp = final.unstable.yt-dlp;
 
   # user scripts
