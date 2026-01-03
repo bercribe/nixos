@@ -198,9 +198,9 @@ in {
             '';
             glove80 = ''
               (defsrc
-                q w e r t y u i o p
-                esc a s d f g h j k l ;
-                z x c v b n m
+                    q w e r t   y u i o p
+                esc a s d f g   h j k l ;
+                    z x c v b   n m
                 lsft rsft
               )
             '';
@@ -264,6 +264,12 @@ in {
                 z x c d v k h
                 @lsft @rsft
               )
+              (deflayer games
+                        tab q w e r   t y u i o
+                @escsw lsft a s d f   g h j k l
+                       lctl z x c v   b n
+                _ _
+              )
               (deflayer shift
                 _ _ _ _ _ _ _ _ _ _
                 _ _ _ _ _ _ _ _ _ _ _
@@ -272,7 +278,7 @@ in {
               )
 
               (deflayer switch
-                _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ @sgm _ _ _
                 _ _ _ _ _ _ _ @sbs @sps @scm @scn
                 _ _ _ _ _ _ _
                 _ _
@@ -317,6 +323,7 @@ in {
             scm (layer-switch colemak)
             scn (layer-switch colemak-nomods)
             sps (layer-switch pass)
+            sgm (layer-switch games)
           )
 
           ${defsrc.${cfg.device}}
