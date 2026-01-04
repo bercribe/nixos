@@ -189,9 +189,25 @@ in {
             };
           }
         ];
+
+        hostBookmarks = with lib;
+          mapAttrsToList (host: {
+            friendlyName,
+            icon,
+            ...
+          }: {
+            ${friendlyName} = {
+              inherit icon;
+              href = utils.hostUrl host;
+              description = host;
+            };
+          }) (filterAttrs (_: {createBookmark, ...}: createBookmark) config.local.constants.hosts);
       in [
         {
           Homelab = homelabServices;
+        }
+        {
+          Hosts = hostBookmarks;
         }
         {
           Monitoring = monitoringServices;

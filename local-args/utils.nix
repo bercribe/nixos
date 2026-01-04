@@ -5,6 +5,18 @@
   ...
 }: let
   hostDomain = hostname: "${hostname}.${config.local.constants.hosts.${hostname}.domain}";
+  hostUrl = hostname: let
+    host = config.local.constants.hosts.${hostname};
+    scheme =
+      if host.enableSsl
+      then "https://"
+      else "http://";
+    domain =
+      if host.lanDomain
+      then "${hostname}.lan"
+      else hostDomain hostname;
+    port = lib.optionalString (host.port != null) ":${toString host.port}";
+  in "${scheme}${domain}${port}";
   localHostServiceUrlBase = service: "${config.local.constants.service-registry."${service}".shortName}.${hostDomain config.networking.hostName}";
   serviceUrl = service: let
     serviceRegistration = config.local.constants.service-registry."${service}";
@@ -109,6 +121,7 @@
     '';
 in {
   hostDomain = hostDomain;
+  hostUrl = hostUrl;
   localHostServiceUrlBase = localHostServiceUrlBase;
   localHostServiceUrl = service: "https://${localHostServiceUrlBase service}";
   serviceUrl = serviceUrl;

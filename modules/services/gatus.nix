@@ -56,33 +56,29 @@ in {
               group = "public";
             }
             {
-              name = "synology DSM";
-              url = "https://${utils.hostDomain "mr-president"}:5001";
-              group = "lan";
-              client.insecure = true;
-            }
-            {
-              name = "jet kvm";
-              url = "http://${utils.hostDomain "notorious-big"}";
-              group = "lan";
-            }
-            {
-              name = "main router";
-              url = "http://${utils.hostDomain "hierophant-green"}";
-              group = "lan";
-            }
-            {
-              name = "office switch";
-              url = "http://${utils.hostDomain "hermit-purple"}";
-              group = "lan";
-              conditions = ["[STATUS] == 401"];
-            }
-            {
               name = "upstream healthchecks.io ping";
               url = "https://hc-ping.com/\${UPSTREAM_HEALTHCHECKS_PING_KEY}/gatus-online?create=1";
               group = "monitoring";
             }
           ];
+
+          hostOverrides = {
+            mr-president = {
+              client.insecure = true;
+            };
+            hermit-purple = {
+              conditions = ["[STATUS] == 401"];
+            };
+          };
+
+          hostEndpoints = with lib;
+            mapAttrsToList (host: {friendlyName, ...}:
+              makeEndpoint ({
+                  name = friendlyName;
+                  url = utils.hostUrl host;
+                  group = "hosts";
+                }
+                // (hostOverrides.${host} or {}))) (filterAttrs (_: {enableMonitoring, ...}: enableMonitoring) config.local.constants.hosts);
 
           registryOverrides = {
             kodi = {
@@ -115,7 +111,7 @@ in {
               hosts)
             config.local.constants.service-registry);
         in
-          customEndpoints ++ registryEndpoints;
+          customEndpoints ++ hostEndpoints ++ registryEndpoints;
       };
       environmentFile = config.sops.templates."gatus.env".path;
     };
