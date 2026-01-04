@@ -31,6 +31,7 @@ in {
           host = "localhost";
           port = 25;
           to = local.secrets.email;
+          default-alert.description = utils.serviceUrl "gatus";
         };
         endpoints = let
           makeEndpoint = site:
