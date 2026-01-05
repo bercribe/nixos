@@ -70,7 +70,7 @@ in {
         hosts = [judgement];
       };
       kodi = {
-        hosts = [moody-blues];
+        hosts = [];
       };
       miniflux = {
         hosts = [judgement];
