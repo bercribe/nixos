@@ -289,6 +289,10 @@ in {
                 _ _ _ _ _ _ _
                 _ _
               )
+
+              (defalias
+                sgm (layer-switch games)
+              )
             '';
           };
         in ''
@@ -323,7 +327,6 @@ in {
             scm (layer-switch colemak)
             scn (layer-switch colemak-nomods)
             sps (layer-switch pass)
-            sgm (layer-switch games)
           )
 
           ${defsrc.${cfg.device}}
