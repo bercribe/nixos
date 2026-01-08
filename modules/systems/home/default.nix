@@ -10,7 +10,6 @@ in {
   imports = [
     ./minimal.nix
     ./stylix.nix
-    ../../../constants
     ../../../local-args
   ];
 

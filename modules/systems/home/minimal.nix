@@ -8,6 +8,7 @@
 in {
   imports = [
     ./vim.nix
+    ../../../constants
     ../../../pkgs/scripts/sf/homeModule.nix
   ];
 
