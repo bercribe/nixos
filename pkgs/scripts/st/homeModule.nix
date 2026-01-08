@@ -3,11 +3,11 @@
   lib,
   ...
 }: let
-  cfg = config.local.programs.sf;
+  cfg = config.local.programs.st;
 in {
   options.local = with lib;
   with types; {
-    programs.sf = {
+    programs.st = {
       directories = mkOption {
         type = listOf str;
         default = ["$HOME"];

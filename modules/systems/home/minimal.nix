@@ -9,7 +9,7 @@ in {
   imports = [
     ./vim.nix
     ../../../constants
-    ../../../pkgs/scripts/sf/homeModule.nix
+    ../../../pkgs/scripts/st/homeModule.nix
   ];
 
   options.local = with lib;

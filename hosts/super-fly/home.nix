@@ -11,7 +11,7 @@
       command = "cd /zvault";
     };
   };
-  local.programs.sf.directories = ["/zvault/shared"];
+  local.programs.st.directories = ["/zvault/shared"];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
