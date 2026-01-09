@@ -28,6 +28,7 @@
   ];
 
   local.keyboard.device = "glove80";
+  services.kanata.enable = lib.mkForce false; # handled in zmk
 
   # Services
 
