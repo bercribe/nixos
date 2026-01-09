@@ -123,6 +123,7 @@ in {
       imv # image viewer
       inkscape # svg editor
       keepassxc # password manager
+      libation # audible audiobook manager
       libreoffice # office tools
       localsend # file sending utility
       makemkv # blu-ray ripper
