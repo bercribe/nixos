@@ -177,7 +177,7 @@ in {
         set -as terminal-features ',screen-256color:clipboard'
 
         bind u switch-client -l
-        bind g display-popup -E "sf"
+        bind g display-popup -E "st"
         bind e run-shell "${lib.getExe editScrollback}"
 
         # make these repeatable
