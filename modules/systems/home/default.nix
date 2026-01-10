@@ -139,7 +139,7 @@ in {
       command = [''shell -- for path in "$@"; do echo "file://$path"; done | ${pkgs.wl-clipboard}/bin/wl-copy -t text/uri-list'' "yank"];
     };
   };
-  local.programs.st.directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/scripts"];
+  local.programs.st.directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/scripts" "$HOME/sources/errata"];
 
   # docs:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md
