@@ -216,13 +216,13 @@ in {
               (deflayer colemak
                 q w f p b j l u y ;
                 @escsw a @rmet @salt @tctl g m @nctl @ealt @imet o
-                z x c d v XX k h
+                z x c d v z k h
                 XX XX @lsft @rsft
               )
               (deflayer colemak-nomods
                 q w f p b j l u y ;
                 @escsw a r s t g m n e i o
-                z x c d v XX k h
+                z x c d v z k h
                 XX XX @lsft @rsft
               )
               (deflayer shift
