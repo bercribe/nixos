@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/systems/desktop
@@ -19,6 +23,11 @@
 
   networking.hostName = "highway-star"; # Define your hostname.
   networking.hostId = "ec94cb3d"; # Should be unique among ZFS machines
+
+  # set colemak layout for passphrase
+  boot.initrd.preLVMCommands = ''
+    ${pkgs.kbd}/bin/loadkeys i386/colemak/mod-dh-ansi-us
+  '';
 
   # VPN config
   networking.networkmanager = {
