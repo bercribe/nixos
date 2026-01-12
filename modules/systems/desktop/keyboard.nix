@@ -207,12 +207,6 @@ in {
           };
           deflayers = {
             standard = ''
-              (deflayer base
-                _ _ _ _ _ _ _ _ _ _
-                @escsw _ @smet @dalt @fctl _ _ @jctl @kalt @lmet _
-                XX _ _ _ _ _ _ _
-                XX XX @lsft @rsft
-              )
               (deflayer colemak
                 q w f p b j l u y ;
                 @escsw a @rmet @salt @tctl g m @nctl @ealt @imet o
@@ -234,7 +228,7 @@ in {
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @sbs @sps @scm @scn
+                _ _ _ _ _ _ _ @scm @scn @sps _
                 _ _ _ _ _ _ _ _
                 _ _ _ _
               )
@@ -246,12 +240,6 @@ in {
               )
             '';
             glove80 = ''
-              (deflayer base
-                _ _ _ _ _ _ _ _ _ _
-                @escsw _ @smet @dalt @fctl _ _ @jctl @kalt @lmet _
-                _ _ _ _ _ _ _
-                @lsft @rsft
-              )
               (deflayer colemak
                 q w f p b j l u y ;
                 @escsw a @rmet @salt @tctl g m @nctl @ealt @imet o
@@ -278,8 +266,8 @@ in {
               )
 
               (deflayer switch
-                _ _ _ _ _ _ @sgm _ _ _
-                _ _ _ _ _ _ _ @sbs @sps @scm @scn
+                _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ @scm @scn @sps @sgm
                 _ _ _ _ _ _ _
                 _ _
               )
@@ -306,15 +294,9 @@ in {
             escsw (tap-hold-release $tap-time $hold-time esc (layer-while-held switch))
             lsft (multi lsft (layer-while-held shift))
             rsft (multi rsft (layer-while-held shift))
-            tmux (macro C-b)
+            tmux (macro (unshift ctl b))
 
             ;; home row mods
-            smet (tap-hold-release $tap-time $hold-time s lmet)
-            dalt (tap-hold-release $tap-time $hold-time d lalt)
-            fctl (tap-hold-release $tap-time $hold-time f lctl)
-            jctl (tap-hold-release $tap-time $hold-time j rctl)
-            kalt (tap-hold-release $tap-time $hold-time k ralt)
-            lmet (tap-hold-release $tap-time $hold-time l rmet)
             rmet (tap-hold-release $tap-time $hold-time r lmet)
             salt (tap-hold-release $tap-time $hold-time s lalt)
             tctl (tap-hold-release $tap-time $hold-time t lctl)
@@ -323,7 +305,6 @@ in {
             imet (tap-hold-release $tap-time $hold-time i rmet)
 
             ;; layer switching
-            sbs (layer-switch base)
             scm (layer-switch colemak)
             scn (layer-switch colemak-nomods)
             sps (layer-switch pass)
