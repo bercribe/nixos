@@ -116,6 +116,7 @@ in {
       discord # voice chat
       firefox # browser
       foot # terminal
+      gale # thunderstore mod manager
       ghostty # terminal
       godot_4 # game engine
       handbrake # video transcoding
