@@ -31,6 +31,9 @@ vim.keymap.set("n", "<leader>r", [[:%s/\V]])
 vim.keymap.set("v", "<leader>r", [[:s/\V]])
 -- comments
 vim.keymap.set({ "n", "v" }, "<leader>u", ":norm ^diwx<CR>")
+-- indent pasted lines
+vim.keymap.set("n", "<leader>[", "'[V']<")
+vim.keymap.set("n", "<leader>]", "'[V']>")
 
 -- fzf-lua
 vim.keymap.set({ "n", "v" }, "<leader>f", ":FzfLua files<CR>")
