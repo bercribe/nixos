@@ -94,7 +94,7 @@ fi
 "${rebuildCmd[@]}" || exit 1
 
 # Get current generation metadata
-current=$(nixos-rebuild list-generations | grep current)
+current=$(nh os info | grep current)
 
 # Commit all changes witih the generation metadata
 if [ "$disableCommit" != true ]; then
