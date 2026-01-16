@@ -41,7 +41,6 @@ vim.keymap.set("n", "<leader>g", ":FzfLua live_grep<CR>")
 vim.keymap.set("v", "<leader>g", ":FzfLua grep_visual<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>b", ":FzfLua buffers<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sa", ":FzfLua lsp_code_actions<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>sb", ":FzfLua git_blame<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sc", ":FzfLua git_commits<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sC", ":FzfLua git_bcommits<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>sg", ":FzfLua grep_cword<CR>")
@@ -55,6 +54,11 @@ vim.keymap.set({ "n", "v" }, "<leader>sz", ":FzfLua builtin<CR>")
 -- files
 vim.keymap.set({ "n", "v" }, "<leader>e", ":Oil<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>E", ":Yazi<CR>")
+-- git
+vim.keymap.set({ "n", "v" }, "<leader>hb", ":Gitsigns blame<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>hd", ":Gitsigns preview_hunk_inline<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 -- typst
 vim.keymap.set({ "n", "v" }, "<leader>Pt", ":TypstPreview<CR>")
 

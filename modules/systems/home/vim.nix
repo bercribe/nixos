@@ -106,8 +106,10 @@ in {
             '';
           }
           {
-            plugin = oil-nvim; # file explorer
-            config = toLua "require('oil').setup()";
+            plugin = gitsigns-nvim; # buffer + git integration
+            config = toLua "require('gitsigns').setup({
+              numhl = true;
+            })";
           }
           {
             plugin = nvim-treesitter; # syntax highlighting
@@ -116,6 +118,10 @@ in {
                 highlight = {enable = true},
               })
             '';
+          }
+          {
+            plugin = oil-nvim; # file explorer
+            config = toLua "require('oil').setup()";
           }
           (nvim-treesitter.withPlugins (p: map (t: p."${t}") cfg.treesitterParsers))
         ];
