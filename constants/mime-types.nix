@@ -29,6 +29,7 @@
         "x-scheme-handler/mailto"
       ];
       text = [
+        "text/markdown"
         "text/plain"
         "text/x-python"
       ];
