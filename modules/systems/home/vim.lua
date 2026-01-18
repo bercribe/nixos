@@ -81,6 +81,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+-- disable completion for markdown
+vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = '*.md',
+    callback = function()
+        vim.b.completion = false
+    end,
+})
+
 -- quickfix binds
 vim.api.nvim_create_autocmd("BufWinEnter", {
     group = vim.api.nvim_create_augroup("qf", {}),
