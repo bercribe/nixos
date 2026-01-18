@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   local,
   ...
 }: let
@@ -14,31 +15,91 @@ in {
       # details here https://mozilla.github.io/policy-templates/#extensionsettings
       ExtensionSettings = let
         mozillaAddon = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
-        makeExtension = id: default_area: {
+        makeExtension = name: {
+          id,
+          default_area,
+        }: {
           installation_mode = "normal_installed";
           install_url = mozillaAddon id;
           inherit default_area;
         };
-      in {
-        "firefox@betterttv.net" = makeExtension "betterttv" "menupanel";
-        "addon@darkreader.org" = makeExtension "darkreader" "navbar";
-        "enhancerforyoutube@maximerf.addons.mozilla.org" = makeExtension "enhancer-for-youtube" "menupanel";
-        "jid1-KKzOGWgsW3Ao4Q@jetpack" = makeExtension "i-dont-care-about-cookies" "menupanel";
-        "search@kagi.com" = makeExtension "kagi-search-for-firefox" "menupanel";
-        "addon@karakeep.app" = makeExtension "karakeep" "navbar";
-        "keepassxc-browser@keepassxc.org" = makeExtension "keepassxc-browser" "menupanel";
-        "clipper@obsidian.md" = makeExtension "web-clipper-obsidian" "menupanel";
-        "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = makeExtension "old-reddit-redirect" "menupanel";
-        "readeck@readeck.com" = makeExtension "readeck" "navbar";
-        "jid1-xUfzOsOFlzSOXg@jetpack" = makeExtension "reddit-enhancement-suite" "menupanel";
-        "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = makeExtension "return-youtube-dislikes" "menupanel";
-        "sponsorBlocker@ajay.app" = makeExtension "sponsorblock" "menupanel";
-        "treestyletab@piro.sakura.ne.jp" = makeExtension "tree-style-tab" "menupanel";
-        "{d07ccf11-c0cd-4938-a265-2a4d6ad01189}" = makeExtension "view-page-archive" "menupanel";
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = makeExtension "vimium-ff" "menupanel";
-        "{6b733b82-9261-47ee-a595-2dda294a4d08}" = makeExtension "yomitan" "navbar";
-        "uBlock0@raymondhill.net" = makeExtension "ublock-origin" "navbar";
-      };
+
+        extensions = {
+          "firefox@betterttv.net" = {
+            id = "betterttv";
+            default_area = "menupanel";
+          };
+          "addon@darkreader.org" = {
+            id = "darkreader";
+            default_area = "navbar";
+          };
+          "enhancerforyoutube@maximerf.addons.mozilla.org" = {
+            id = "enhancer-for-youtube";
+            default_area = "menupanel";
+          };
+          "jid1-KKzOGWgsW3Ao4Q@jetpack" = {
+            id = "i-dont-care-about-cookies";
+            default_area = "menupanel";
+          };
+          "search@kagi.com" = {
+            id = "kagi-search-for-firefox";
+            default_area = "menupanel";
+          };
+          "addon@karakeep.app" = {
+            id = "karakeep";
+            default_area = "navbar";
+          };
+          "keepassxc-browser@keepassxc.org" = {
+            id = "keepassxc-browser";
+            default_area = "menupanel";
+          };
+          "clipper@obsidian.md" = {
+            id = "web-clipper-obsidian";
+            default_area = "menupanel";
+          };
+          "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
+            id = "old-reddit-redirect";
+            default_area = "menupanel";
+          };
+          "readeck@readeck.com" = {
+            id = "readeck";
+            default_area = "navbar";
+          };
+          "jid1-xUfzOsOFlzSOXg@jetpack" = {
+            id = "reddit-enhancement-suite";
+            default_area = "menupanel";
+          };
+          "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
+            id = "return-youtube-dislikes";
+            default_area = "menupanel";
+          };
+          "sponsorBlocker@ajay.app" = {
+            id = "sponsorblock";
+            default_area = "menupanel";
+          };
+          "treestyletab@piro.sakura.ne.jp" = {
+            id = "tree-style-tab";
+            default_area = "menupanel";
+          };
+          "{d07ccf11-c0cd-4938-a265-2a4d6ad01189}" = {
+            id = "view-page-archive";
+            default_area = "menupanel";
+          };
+          "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+            id = "vimium-ff";
+            default_area = "menupanel";
+          };
+          "{6b733b82-9261-47ee-a595-2dda294a4d08}" = {
+            id = "yomitan";
+            default_area = "navbar";
+          };
+          "uBlock0@raymondhill.net" = {
+            id = "ublock-origin";
+            default_area = "navbar";
+          };
+        };
+      in
+        with lib; mapAttrs makeExtension extensions;
     };
     profiles.mawz = {
       isDefault = true;
