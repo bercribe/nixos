@@ -34,6 +34,7 @@ in {
         "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = makeExtension "return-youtube-dislikes" "menupanel";
         "sponsorBlocker@ajay.app" = makeExtension "sponsorblock" "menupanel";
         "treestyletab@piro.sakura.ne.jp" = makeExtension "tree-style-tab" "menupanel";
+        "{d07ccf11-c0cd-4938-a265-2a4d6ad01189}" = makeExtension "view-page-archive" "menupanel";
         "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = makeExtension "vimium-ff" "menupanel";
         "{6b733b82-9261-47ee-a595-2dda294a4d08}" = makeExtension "yomitan" "navbar";
         "uBlock0@raymondhill.net" = makeExtension "ublock-origin" "navbar";
