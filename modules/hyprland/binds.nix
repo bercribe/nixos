@@ -146,7 +146,8 @@
       bind = , P, pseudo, # dwindle
       bind = , F, fullscreen,
       bind = , V, togglefloating,
-      bind = , S, movetoworkspace, special:magic
+      bind = , S, movetoworkspacesilent, special:magic
+      bind = SHIFT, S, movetoworkspace, special:magic
 
       # groups
       bind = , G, togglegroup,
