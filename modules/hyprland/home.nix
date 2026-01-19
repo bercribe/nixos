@@ -35,13 +35,6 @@ in {
         # Source a file (multi-file configs)
         # source = ~/.config/hypr/myColors.conf
 
-        # Set programs that you use
-        "$terminal" = "$TERMINAL";
-        "$fileManager" = "$TERMINAL -e yazi";
-        "$browser" = "$BROWSER";
-        # Open fuzzel on first press, closes it on second
-        "$menu" = "pkill fuzzel || ${lib.getExe pkgs.fuzzel}";
-
         env = [
           # Set shell inside hyprland
           "SHELL,${lib.getExe pkgs.zsh}"
