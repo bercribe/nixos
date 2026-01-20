@@ -50,9 +50,10 @@ in {
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
+        rust_analyzer = rust-analyzer;
         tinymist = tinymist;
       };
-      treesitterParsers = ["lua" "nix" "python" "typst"];
+      treesitterParsers = ["lua" "nix" "python" "rust" "typst"];
       filetypes = {
         "*" = {};
         json.tabsize = 2;
@@ -62,6 +63,7 @@ in {
           commentPattern = "#";
         };
         python.commentPattern = "#";
+        rust.commentPattern = "//";
       };
     };
 
