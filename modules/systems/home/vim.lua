@@ -23,6 +23,8 @@ vim.keymap.set("v", "<leader>d", '"_d')
 -- switch to alt file
 vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
+-- change working dir
+vim.keymap.set({ "n", "v" }, "<leader>cd", ":cd %:h<CR>")
 -- swap command key
 vim.keymap.set({ "n", "v" }, ":", ";")
 vim.keymap.set({ "n", "v" }, ";", ":")
