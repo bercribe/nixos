@@ -30,9 +30,8 @@ in {
       settings = {
         layout = [
           {Productivity = {};}
-          {Entertainment = {};}
-          {Coding = {};}
           {Language = {};}
+          {Hobbies = {};}
         ];
       };
       bookmarks = [
@@ -43,6 +42,7 @@ in {
                 {
                   abbr = "HE";
                   href = "https://app.hey.com/";
+                  icon = "https://app.hey.com/favicon.ico";
                 }
               ];
             }
@@ -56,35 +56,9 @@ in {
               ];
             }
             {
-              Drive = [
-                {
-                  abbr = "GD";
-                  href = "https://drive.google.com/";
-                  icon = "google-drive";
-                }
-              ];
-            }
-          ];
-        }
-        {
-          Entertainment = [
-            {
-              Chess = [
-                {
-                  abbr = "CH";
-                  href = "https://www.chess.com/";
-                  icon = "https://www.chess.com/favicon.ico";
-                }
-              ];
-            }
-          ];
-        }
-        {
-          Coding = [
-            {
               Github = [
                 {
-                  abbr = "GitHub";
+                  abbr = "GH";
                   href = "https://github.com/";
                   icon = "github";
                 }
@@ -95,20 +69,42 @@ in {
         {
           Language = [
             {
-              "Lazy Chinese" = [
+              "Teatime Chinese" = [
                 {
-                  abbr = "LC";
-                  href = "https://www.lazychinese.com/";
-                  icon = "https://images.squarespace-cdn.com/content/v1/650274d4d2b34154b074e134/dfa9aa3d-c2fe-4e5a-8247-561554c464c8/favicon.ico?format=100w";
+                  abbr = "CN";
+                  href = "https://teatimechinese.com/teatime-chinese-podcast/";
+                  icon = "https://teatimechinese.s3.amazonaws.com/wp-content/uploads/2022/06/12220228/cropped-logo-192x192.png";
                 }
               ];
             }
             {
-              "Comprehensible Japanese" = [
+              "Thinking in Japanese" = [
                 {
-                  abbr = "CJ";
-                  href = "https://cijapanese.com/";
-                  icon = "https://cijapanese.com/realfavicon/favicon-32x32.png";
+                  abbr = "JP";
+                  href = "https://www.patreon.com/thinking_in_japanese";
+                  icon = "https://c10.patreonusercontent.com/4/patreon-media/p/campaign/3445863/94734df41eff4bf8a1461acdefd2f70d/eyJoIjozNjAsInciOjM2MH0%3D/20.png?token-hash=2y1193BBc3AcZY6f56lLiZUJyVNOmyYXiSbZnUOx2b8%3D&token-time=1770595200";
+                }
+              ];
+            }
+          ];
+        }
+        {
+          Hobbies = [
+            {
+              Keybr = [
+                {
+                  abbr = "KB";
+                  href = "https://www.keybr.com/";
+                  icon = "https://www.keybr.com/favicon.ico";
+                }
+              ];
+            }
+            {
+              Chess = [
+                {
+                  abbr = "CH";
+                  href = "https://www.chess.com/";
+                  icon = "https://www.chess.com/favicon.ico";
                 }
               ];
             }
