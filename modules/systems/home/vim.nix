@@ -114,6 +114,12 @@ in {
             })";
           }
           {
+            plugin = nvim-origami; # folding
+            config = toLua ''
+              require("origami").setup({})
+            '';
+          }
+          {
             plugin = nvim-treesitter; # syntax highlighting
             config = toLua ''
               require('nvim-treesitter.configs').setup({

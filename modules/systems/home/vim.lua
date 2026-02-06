@@ -6,6 +6,8 @@ vim.o.signcolumn = "yes"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
 -- this doesn't reliably get set in tmux sessions over ssh
 vim.o.termguicolors = true;
 
@@ -16,7 +18,7 @@ vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 -- system clipboard
 vim.keymap.set("n", "<leader>y", '"+yy')
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set({"n", "v"}, "<leader>p", '"+p')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
 -- black hole delete
 vim.keymap.set("n", "<leader>d", '"_dd')
 vim.keymap.set("v", "<leader>d", '"_d')
@@ -123,7 +125,7 @@ vim.keymap.set("n", "<leader>dR", dap.run_last)
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>dl", function() dap.set_breakpoint(nil, nil, vim.fn.input("log point message: ")) end)
 vim.keymap.set("n", "<leader>dc", dap.continue)
-vim.keymap.set({"n", "v"}, "<leader>dh", require("dap.ui.widgets").hover)
+vim.keymap.set({ "n", "v" }, "<leader>dh", require("dap.ui.widgets").hover)
 vim.keymap.set("n", "<leader>dv", ":DapViewToggle<CR>")
 vim.keymap.set("n", "<leader>dV", dap.repl.toggle)
 
