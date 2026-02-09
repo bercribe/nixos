@@ -93,6 +93,7 @@ in {
       hledger-ui # hledger tui
       isd # systemd TUI
       jujutsu # version control
+      just # command runner
       lf # list files
       mosh # mobile shell
       mtr # ping + traceroute
