@@ -148,6 +148,10 @@ in {
       # improves performance on zfs systems
       daemon.enable = true;
     };
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
 
     programs.tmux = {
       enable = true;
