@@ -82,6 +82,7 @@ in {
       btop # performance visualizer
       cht-sh # cheat sheet
       delta # better diff
+      devenv # nix based developer environments
       difftastic # syntax aware diff
       exiftool # image metadata
       eza # better ls

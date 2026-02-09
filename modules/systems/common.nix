@@ -24,6 +24,8 @@
 
   # Flakes + pipes
   nix.settings.experimental-features = ["nix-command" "flakes" "pipe-operators"];
+  # needed for devenv automatic cache management
+  nix.settings.trusted-users = ["root" "mawz"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
