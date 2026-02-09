@@ -56,10 +56,6 @@ in {
 
     # shell
     home.sessionVariables.SHELL = lib.getExe pkgs.zsh;
-    programs.bash = {
-      enable = true;
-      initExtra = "exec $SHELL";
-    };
     programs.zsh = {
       enable = true;
       defaultKeymap = "emacs";
@@ -83,8 +79,6 @@ in {
         enable = true;
         abbreviations = {
           vim = "nvim";
-          nix-shell = "nix-shell --run zsh";
-          "nix develop" = "nix develop -c zsh";
           sctl = "systemctl";
           jctl = "journalctl";
           jfu = "journalctl -f -u";
@@ -126,6 +120,9 @@ in {
           zstyle ':completion:*' menu no # disable default
           zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # display directory contents on cd
           zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:toggle+down,ctrl-k:toggle+up'
+
+          # fixes nix-shell and nix develop to use zsh
+          ${lib.getExe pkgs.any-nix-shell} zsh --info-right | source /dev/stdin
         '';
       in
         lib.mkMerge [prompt config];
