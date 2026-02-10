@@ -78,11 +78,11 @@ in {
               ];
             }
             {
-              "Thinking in Japanese" = [
+              "Yuyu no Nihongo" = [
                 {
                   abbr = "JP";
-                  href = "https://www.patreon.com/thinking_in_japanese";
-                  icon = "https://c10.patreonusercontent.com/4/patreon-media/p/campaign/3445863/94734df41eff4bf8a1461acdefd2f70d/eyJoIjozNjAsInciOjM2MH0%3D/20.png?token-hash=2y1193BBc3AcZY6f56lLiZUJyVNOmyYXiSbZnUOx2b8%3D&token-time=1770595200";
+                  href = "https://www.patreon.com/yuyujapanesepodcast";
+                  icon = "https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4587248/d025a1dee53a481db43fb4be1dc3fa20/eyJoIjozNjAsInciOjM2MH0%3D/2.png?token-hash=7o0FUVqcVSfugilXPghMfVqwluE3mbVq8f9mD20B36s%3D&token-time=1771977600";
                 }
               ];
             }
