@@ -129,6 +129,10 @@ in {
                 name = "Add to Miniflux";
                 url = "javascript:location.href='${miniflux}/bookmarklet?uri='+encodeURIComponent(window.location.href)";
               }
+              {
+                name = "Yomitan PDF viewer";
+                url = "https://yomitan.wiki/yomitan-pdf-viewer/web/";
+              }
             ];
           }
         ];
