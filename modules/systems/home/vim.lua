@@ -82,8 +82,18 @@ vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition)
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp", {}),
     callback = function(e)
-        local name = vim.lsp.get_client_by_id(e.data.client_id).name
-        if name == "clangd" then
+        local client = assert(vim.lsp.get_client_by_id(e.data.client_id))
+        if not client:supports_method("textDocument/willSaveWaitUntil")
+            and client:supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("lsp", { clear = false }),
+                buffer = e.buf,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = e.buf, id = client.id, timeout_ms = 1000 })
+                end
+            })
+        end
+        if client.name == "clangd" then
             vim.keymap.set({ "n", "v" }, "<leader>la", ":LspClangdSwitchSourceHeader<CR>", { buffer = true })
         end
     end
