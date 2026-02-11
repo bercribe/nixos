@@ -24,6 +24,7 @@
         "inode/directory"
       ];
       browser = [
+        "text/html"
         "x-scheme-handler/http"
         "x-scheme-handler/https"
         "x-scheme-handler/mailto"
