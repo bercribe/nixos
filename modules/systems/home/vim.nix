@@ -46,6 +46,7 @@ in {
   config = {
     local.vim = {
       languageServers = with pkgs; {
+        bashls = bash-language-server;
         clangd = clang-tools; # c lsp
         lua_ls = lua-language-server;
         nixd = nixd;
@@ -54,7 +55,15 @@ in {
         rust_analyzer = rust-analyzer;
         tinymist = tinymist; # typst lsp
       };
-      treesitterParsers = ["lua" "nix" "python" "rust" "typst"];
+      treesitterParsers = [
+        "bash"
+        "cpp"
+        "lua"
+        "nix"
+        "python"
+        "rust"
+        "typst"
+      ];
       filetypes = {
         "*" = {};
         json.tabsize = 2;
