@@ -124,7 +124,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 
 -- for vim symbols
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
-vim.lsp.config("nixd", { formatting = { command = { "alejandra" } } })
+vim.lsp.config("nixd", { settings = { nixd = { formatting = { command = { "alejandra" } } } } })
 vim.lsp.config("clangd", { cmd = { "clangd", "--fallback-style=webkit" } })
 
 -- debugger
