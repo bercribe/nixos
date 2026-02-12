@@ -46,12 +46,13 @@ in {
   config = {
     local.vim = {
       languageServers = with pkgs; {
-        clangd = clang-tools;
+        clangd = clang-tools; # c lsp
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
+        ruff = ruff; # python linter
         rust_analyzer = rust-analyzer;
-        tinymist = tinymist;
+        tinymist = tinymist; # typst lsp
       };
       treesitterParsers = ["lua" "nix" "python" "rust" "typst"];
       filetypes = {
