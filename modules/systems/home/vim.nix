@@ -66,6 +66,7 @@ in {
       ];
       filetypes = {
         "*" = {};
+        cpp.commentPattern = "//";
         json.tabsize = 2;
         lua.commentPattern = "--";
         nix = {
@@ -74,6 +75,7 @@ in {
         };
         python.commentPattern = "#";
         rust.commentPattern = "//";
+        sh.commentPattern = "#";
       };
     };
 
