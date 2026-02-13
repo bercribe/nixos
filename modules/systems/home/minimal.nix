@@ -180,6 +180,7 @@ in {
         bind u switch-client -l
         bind g display-popup -E "st"
         bind e run-shell "${lib.getExe editScrollback}"
+        bind U select-layout -o
 
         # make these repeatable
         bind -r % split-window -h
