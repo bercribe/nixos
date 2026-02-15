@@ -46,11 +46,6 @@ in {
       healthchecks = {
         hosts = [monitorHost];
       };
-      hledger-web = {
-        shortName = "ledger";
-        friendlyName = "hledger";
-        hosts = [super-fly];
-      };
       home-assistant = {
         shortName = "hass";
         hosts = [judgement];
