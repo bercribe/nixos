@@ -56,6 +56,20 @@ in {
           }
         ];
       };
+      heavens-door = {
+        inherit user forwardAgent addKeysToAgent;
+        extraOptions = {
+          RemoteCommand = "systemd-inhibit --who='SSH session' --why='Active user' --what=idle --mode=block zsh";
+          RequestTTY = "yes";
+        };
+      };
+      heavens-door-git = {
+        inherit user forwardAgent addKeysToAgent;
+      };
+      heavens-door-decrypt = {
+        port = 2222;
+        user = "root";
+      };
       judgement = {
         inherit user forwardAgent addKeysToAgent;
         hostname = utils.hostDomain "judgement";
