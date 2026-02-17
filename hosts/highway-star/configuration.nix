@@ -64,6 +64,7 @@
           };
           proxy = {};
           wireguard = {
+            mtu = "1280";
             private-key = "$PRIVATE_KEY";
           };
           "wireguard-peer.$PUBLIC_KEY" = {
