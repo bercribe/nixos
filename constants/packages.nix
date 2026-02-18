@@ -102,6 +102,7 @@ in {
       nix-inspect # nix env tui explorer
       restic # backup tool
       sops # secrets management
+      termsvg # record terminal as SVG
       wikiman # CLI docs
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
