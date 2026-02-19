@@ -27,6 +27,8 @@
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix/release-25.11";
 
+    karatui.url = "github:bercribe/karatui";
+
     paisa.url = "github:ananthakumaran/paisa";
   };
 

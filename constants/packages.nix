@@ -94,6 +94,7 @@ in {
       isd # systemd TUI
       jujutsu # version control
       just # command runner
+      karatui # karakeep TUI
       lf # list files
       mosh # mobile shell
       mtr # ping + traceroute

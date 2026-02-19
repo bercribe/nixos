@@ -7,6 +7,7 @@
   local,
   nixpkgs-unstable,
   errata,
+  karatui,
   ...
 }: {
   imports = let
@@ -65,7 +66,7 @@
   console.keyMap = "us";
 
   # User env
-  nixpkgs.overlays = [(import ../../overlay.nix {inherit nixpkgs-unstable errata;})];
+  nixpkgs.overlays = [(import ../../overlay.nix {inherit nixpkgs-unstable errata karatui;})];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

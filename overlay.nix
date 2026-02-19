@@ -1,6 +1,7 @@
 {
   nixpkgs-unstable,
   errata,
+  karatui,
   ...
 }: (final: prev: {
   unstable = import nixpkgs-unstable {
@@ -20,6 +21,9 @@
     tsl = callPackage ./pkgs/scripts/tsl.nix {};
     twl = callPackage ./pkgs/scripts/twl.nix {};
   };
+
+  # personal packages
+  karatui = karatui.packages.x86_64-linux.default;
 
   # local packages
   yaziPlugins =
