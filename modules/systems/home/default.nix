@@ -40,13 +40,17 @@ in {
     user = "mawz";
     forwardAgent = true;
     addKeysToAgent = "yes";
+    extraOptions = {
+      RemoteCommand = "systemd-inhibit --who='SSH session' --why='Active user' --what=idle --mode=block zsh";
+      RequestTTY = "yes";
+    };
   in {
     enable = true;
     includes = ["~/.ssh/transient.conf"];
     enableDefaultConfig = false;
     matchBlocks = {
       echoes = {
-        inherit user forwardAgent addKeysToAgent;
+        inherit user forwardAgent addKeysToAgent extraOptions;
         hostname = "echoes.${local.secrets.personal-domain}";
         localForwards = [
           {
@@ -64,14 +68,14 @@ in {
         };
       };
       heavens-door-git = {
-        inherit user forwardAgent addKeysToAgent;
+        inherit user forwardAgent addKeysToAgent extraOptions;
       };
       heavens-door-decrypt = {
         port = 2222;
         user = "root";
       };
       judgement = {
-        inherit user forwardAgent addKeysToAgent;
+        inherit user forwardAgent addKeysToAgent extraOptions;
         hostname = utils.hostDomain "judgement";
       };
       lovers = {
@@ -88,11 +92,11 @@ in {
         };
       };
       moody-blues = {
-        inherit user forwardAgent addKeysToAgent;
+        inherit user forwardAgent addKeysToAgent extraOptions;
         hostname = utils.hostDomain "moody-blues";
       };
       super-fly = {
-        inherit user forwardAgent addKeysToAgent;
+        inherit user forwardAgent addKeysToAgent extraOptions;
         hostname = utils.hostDomain "super-fly";
       };
       super-fly-decrypt = {
