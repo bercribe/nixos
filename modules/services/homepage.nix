@@ -81,8 +81,8 @@ in {
               "Yuyu no Nihongo" = [
                 {
                   abbr = "JP";
-                  href = "https://www.patreon.com/yuyujapanesepodcast";
-                  icon = "https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4587248/d025a1dee53a481db43fb4be1dc3fa20/eyJoIjozNjAsInciOjM2MH0%3D/2.png?token-hash=7o0FUVqcVSfugilXPghMfVqwluE3mbVq8f9mD20B36s%3D&token-time=1771977600";
+                  href = "https://www.haru-no-nihongo.com/podcast/categories";
+                  icon = "https://static.wixstatic.com/media/ced5b6_733eaf15211b44318cc469691d2efd53%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/ced5b6_733eaf15211b44318cc469691d2efd53%7Emv2.png";
                 }
               ];
             }
