@@ -27,13 +27,8 @@
     pkgs.scripts.asw # audio switch
   ];
 
-  # TODO: revert
-  # local.keyboard.device = "glove80";
-  # services.kanata.enable = lib.mkForce false; # handled in zmk
-  # set colemak layout for passphrase
-  boot.initrd.preLVMCommands = ''
-    ${pkgs.kbd}/bin/loadkeys i386/colemak/mod-dh-ansi-us
-  '';
+  local.keyboard.device = "glove80";
+  services.kanata.enable = lib.mkForce false; # handled in zmk
 
   # Services
 
