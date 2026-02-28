@@ -71,6 +71,7 @@ in {
   users.users.mawz = {
     extraGroups = [
       "dialout" # required for bluetooth in steam VR
+      "scanner"
       "wireshark"
     ];
     packages = config.local.constants.packages.user-desktop;
@@ -175,6 +176,9 @@ in {
     enable = true;
     nssmdns4 = true;
   };
+
+  # Scanning
+  hardware.sane.enable = true;
 
   # USB drive automount
   services.udisks2 = {
