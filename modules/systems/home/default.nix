@@ -28,6 +28,7 @@ in {
   programs.zsh.zsh-abbr.abbreviations = {
     nhs = "nh home switch ~/sources/nixos";
     nrs = "~/sources/nixos/rebuild-switch.sh";
+    scan = "scanimage -d pixma:04A91912_515996 --format=tiff -b --resolution=300 --button-controlled=yes";
   };
 
   nixpkgs.config = import ./nixpkgs-config.nix;
