@@ -80,6 +80,7 @@ in {
       bat # better cat
       bluetui # bluetooth device tui
       btop # performance visualizer
+      chafa # terminal image viewer
       cht-sh # cheat sheet
       delta # better diff
       devenv # nix based developer environments
@@ -96,6 +97,7 @@ in {
       just # command runner
       karatui # karakeep TUI
       lf # list files
+      lm_sensors # hardware measurements
       mosh # mobile shell
       mtr # ping + traceroute
       neofetch # system info
