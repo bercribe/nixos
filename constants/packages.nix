@@ -117,6 +117,7 @@ in {
       bs-manager # mod manager for beat saber
       chromium # browser
       czkawka # deduping util
+      darktable # photo editor
       discord # voice chat
       firefox # browser
       foot # terminal
@@ -138,7 +139,6 @@ in {
       obsidian # PKM tool
       pavucontrol # sound control
       pureref # reference image viewer
-      shotwell # photo editor
       thunar # file browser
       wineWowPackages.waylandFull # windows game emulator
       wireshark # network analyzer
