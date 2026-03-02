@@ -140,6 +140,7 @@ in {
       obs-studio # screen recording
       obsidian # PKM tool
       pavucontrol # sound control
+      pdfarranger # simple pdf editor
       pureref # reference image viewer
       thunar # file browser
       wineWowPackages.waylandFull # windows game emulator
