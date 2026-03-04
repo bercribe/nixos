@@ -175,6 +175,7 @@ in {
         set -g default-command "''${SHELL}"
 
         # enable clipboard in tmux over ssh
+        set -s set-clipboard on
         set -as terminal-features ',screen-256color:clipboard'
 
         bind u switch-client -l

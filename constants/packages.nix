@@ -23,6 +23,7 @@
   ];
 
   scripts = with pkgs.scripts; [
+    copy
     gtgh
     st
     tsl
