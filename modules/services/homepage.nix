@@ -78,7 +78,7 @@ in {
               ];
             }
             {
-              "Yuyu no Nihongo" = [
+              "Haru no Nihongo" = [
                 {
                   abbr = "JP";
                   href = "https://www.haru-no-nihongo.com/podcast/categories";
