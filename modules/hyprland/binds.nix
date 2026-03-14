@@ -20,7 +20,12 @@
       "$browser" = "$BROWSER";
       "$command-runner" = let
         commands = ["bb timer 10m"];
-      in "$TERMINAL -e $(echo \"${lib.concatStringsSep "\n" commands}\" | ${fuzzel} --dmenu)";
+        run-command = pkgs.writeShellScript "run-command" ''
+          cmd=$(echo "${lib.concatStringsSep "\n" commands}" | ${fuzzel} --dmenu)
+          [[ -z "$cmd" ]] && exit 0
+          $TERMINAL -e $cmd
+        '';
+      in "${run-command}";
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = let
