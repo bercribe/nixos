@@ -5,17 +5,22 @@
   ...
 }: {
   wayland.windowManager.hyprland = {
-    settings = {
+    settings = let
+      fuzzel = lib.getExe pkgs.fuzzel;
+    in {
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mainMod" = "SUPER";
 
       # Set programs that you use
       # Open fuzzel on first press, closes it on second
-      "$menu" = "pkill fuzzel || ${lib.getExe pkgs.fuzzel}";
+      "$menu" = "pkill fuzzel || ${fuzzel}";
       "$terminal" = "$TERMINAL";
       "$fileManager" = "$TERMINAL -e yazi";
       "$editor" = "$TERMINAL -e nvim";
       "$browser" = "$BROWSER";
+      "$command-runner" = let
+        commands = ["bb timer 10m"];
+      in "$TERMINAL -e $(echo \"${lib.concatStringsSep "\n" commands}\" | ${fuzzel} --dmenu)";
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = let
@@ -27,11 +32,12 @@
         wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
       in [
         # openers
-        "$mainMod, R, exec, $menu"
+        "$mainMod, SPACE, exec, $menu"
         "$mainMod, T, exec, $terminal"
         "$mainMod, F, exec, $fileManager"
         "$mainMod, J, exec, $editor"
         "$mainMod, B, exec, $browser"
+        "$mainMod, R, exec, $command-runner"
 
         # universal copy paste
         "$mainMod, X, sendshortcut, , XF86Cut, activewindow"

@@ -16,9 +16,11 @@
 
   scripts = with prev; {
     asw = callPackage ./pkgs/scripts/asw.nix {};
+    bb = callPackage ./pkgs/scripts/bb.nix {};
     copy = callPackage ./pkgs/scripts/copy.nix {};
     gtgh = callPackage ./pkgs/scripts/gtgh.nix {};
     st = callPackage ./pkgs/scripts/st {};
+    timer = callPackage ./pkgs/scripts/timer.nix {};
     tsl = callPackage ./pkgs/scripts/tsl.nix {};
     twl = callPackage ./pkgs/scripts/twl.nix {};
   };

@@ -23,9 +23,11 @@
   ];
 
   scripts = with pkgs.scripts; [
+    bb
     copy
     gtgh
     st
+    timer
     tsl
     twl
   ];
