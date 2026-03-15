@@ -19,7 +19,7 @@
       "$editor" = "$TERMINAL -e nvim";
       "$browser" = "$BROWSER";
       "$command-runner" = let
-        commands = ["bb timer 10m"];
+        commands = ["timer 10m"];
         run-command = pkgs.writeShellScript "run-command" ''
           cmd=$(echo "${lib.concatStringsSep "\n" commands}" | ${fuzzel} --dmenu)
           [[ -z "$cmd" ]] && exit 0

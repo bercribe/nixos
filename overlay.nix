@@ -21,6 +21,7 @@
     gtgh = callPackage ./pkgs/scripts/gtgh.nix {};
     st = callPackage ./pkgs/scripts/st {};
     timer = callPackage ./pkgs/scripts/timer.nix {};
+    timers = callPackage ./pkgs/scripts/timers.nix {};
     tsl = callPackage ./pkgs/scripts/tsl.nix {};
     twl = callPackage ./pkgs/scripts/twl.nix {};
   };

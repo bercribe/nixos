@@ -28,6 +28,7 @@
     gtgh
     st
     timer
+    timers
     tsl
     twl
   ];
