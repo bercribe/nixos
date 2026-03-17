@@ -67,6 +67,9 @@ in {
       kodi = {
         hosts = [];
       };
+      mealie = {
+        hosts = [judgement];
+      };
       miniflux = {
         hosts = [judgement];
       };

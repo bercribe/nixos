@@ -20,6 +20,7 @@ in {
     ./immich.nix
     ./jellyfin.nix
     ./karakeep.nix
+    ./mealie.nix
     ./miniflux.nix
     ./paisa.nix
     ./readeck.nix
