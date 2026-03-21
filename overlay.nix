@@ -27,7 +27,7 @@
   };
 
   # personal packages
-  karatui = karatui.packages.x86_64-linux.default;
+  karatui = karatui.packages.${final.system}.default;
 
   # local packages
   yaziPlugins =

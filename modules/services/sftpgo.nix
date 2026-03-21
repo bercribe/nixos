@@ -90,10 +90,8 @@ in {
           ip=$(echo "$line" | ${lib.getExe pkgs.jq} -r '.ip')
 
           ip_file="$logDir/last_ip-$user-$proto"
-          last_ip=$(cat $ip_file 2>/dev/null)
-          echo "$ip" > $ip_file
 
-          if [ "$ip" != "$last_ip" ]; then
+          if ! grep "^$ip$" $ip_file 1>/dev/null; then
             message="SFTPGo login detected by $user from $ip over $proto"
             (
               echo "From: SFTPGo <noreply@sftpgo.lan>"
@@ -102,6 +100,10 @@ in {
               echo
               echo "$message"
             ) | ${pkgs.postfix}/bin/sendmail root
+
+            echo "$ip" >> $ip_file
+            last_ips=$(tail -n 5 $ip_file)
+            echo "$last_ips" > $ip_file
           fi
         '';
       in ''
