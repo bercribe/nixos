@@ -99,7 +99,6 @@ in {
       isd # systemd TUI
       jujutsu # version control
       just # command runner
-      karatui # karakeep TUI
       lf # list files
       lm_sensors # hardware measurements
       mosh # mobile shell
@@ -157,6 +156,7 @@ in {
       ffsubsync # sync subtitles with video
       gtypist # typing tutor
       handlr-regex # better xdg-open
+      karatui # karakeep TUI
       ncspot # spotify TUI
       qmk # keyboard firmware
       spotify-player # spotify TUI

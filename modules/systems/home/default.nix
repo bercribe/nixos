@@ -236,6 +236,15 @@ in {
     };
   };
 
+  programs.karatui = {
+    enable = true;
+    settings = {
+      url = "https://karakeep.judgement.mawz.dev";
+      list_id = "ivmnikdds455unndi4nuyoah";
+      api_key_path = "/home/mawz/.config/karatui/api_key";
+    };
+  };
+
   # Theme settings
   # needed for stylix theming
   programs.btop.enable = true;

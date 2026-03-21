@@ -235,11 +235,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1771450431,
-        "narHash": "sha256-P+XHt1+68pG7GTPnA6JLBhYfPN0q/DQ2faoKDgng02A=",
+        "lastModified": 1774138238,
+        "narHash": "sha256-WqfVq/xtqB5ac28ONZgZBAi+Q+CAWAM+URuFtS58hS8=",
         "owner": "bercribe",
         "repo": "karatui",
-        "rev": "ba91e49a059df50e739fb6a971e27fcb0aa43110",
+        "rev": "3b1440cd0b8062482b00e14e71526f705d090cb2",
         "type": "github"
       },
       "original": {
@@ -420,11 +420,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1767234658,
-        "narHash": "sha256-wG8uBBUvsJny8HqmldiNkBVPAOwbN7xi9WXgcEbeX/8=",
+        "lastModified": 1774136942,
+        "narHash": "sha256-eKGcT6vQuXNFA37I59Z3AoCqXM+Zj4zcDGtpyWfV5FE=",
         "ref": "refs/heads/master",
-        "rev": "9e9ec51c9b055167c87b0195cd9db5cb979e81e9",
-        "revCount": 27,
+        "rev": "43391d6925d443865e780b5a68e28ed83dbb4440",
+        "revCount": 28,
         "type": "git",
         "url": "ssh://git@github.com/bercribe/secrets.git"
       },

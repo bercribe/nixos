@@ -39,6 +39,7 @@
     disko,
     sops-nix,
     stylix,
+    karatui,
     paisa,
     ...
   } @ inputs: let
@@ -138,6 +139,7 @@
     homeConfigurations = let
       commonModules = [
         stylix.homeModules.stylix
+        karatui.homeModules.karatui
       ];
 
       makeConfig = {
