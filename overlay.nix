@@ -5,7 +5,7 @@
   ...
 }: (final: prev: {
   unstable = import nixpkgs-unstable {
-    system = final.system;
+    inherit (final.stdenv.hostPlatform) system;
   };
   devenv = final.unstable.devenv;
   karakeep = final.unstable.karakeep;
