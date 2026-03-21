@@ -61,7 +61,7 @@ in {
               EnumerateSkipFirst = "False";
             };
             "Hotkey/TriggerKeys" = {
-              "0" = "Super+space";
+              "0" = "Super+comma";
               "1" = "Zenkaku_Hankaku";
               "2" = "Hangul";
             };
@@ -69,10 +69,10 @@ in {
               "0" = "Shift_L";
             };
             "Hotkey/EnumerateGroupForwardKeys" = {
-              "0" = "Super+space";
+              "0" = "Super+comma";
             };
             "Hotkey/EnumerateGroupBackwardKeys" = {
-              "0" = "Shift+Super+space";
+              "0" = "Shift+Super+comma";
             };
             "Hotkey/ActivateKeys" = {
               "0" = "Hangul_Hanja";
