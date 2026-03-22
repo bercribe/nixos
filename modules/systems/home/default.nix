@@ -239,7 +239,7 @@ in {
   programs.karatui = {
     enable = true;
     settings = {
-      url = "https://karakeep.judgement.mawz.dev";
+      url = local.utils.serviceUrl "karakeep";
       list_id = "ivmnikdds455unndi4nuyoah";
       api_key_path = "/home/mawz/.config/karatui/api_key";
     };
