@@ -22,7 +22,11 @@ in {
   };
 
   config = {
-    home.sessionVariables.ST_DIRS = lib.concatStringsSep ":" cfg.directories;
-    home.sessionVariables.ST_FD_FLAGS = lib.concatStringsSep " " cfg.extraFdFlags;
+    xdg.configFile."st/st.env" = {
+      text = ''
+        ST_DIRS=${lib.concatStringsSep ":" cfg.directories}
+        ST_FD_FLAGS=${lib.concatStringsSep " " cfg.extraFdFlags}
+      '';
+    };
   };
 }
