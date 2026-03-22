@@ -61,6 +61,11 @@
           value = f system;
         })
         systems);
+
+    homeModules = [
+      sops-nix.homeModules.sops
+      karatui.homeModules.karatui
+    ];
   in {
     nixosConfigurations = let
       commonModules = [
@@ -88,7 +93,12 @@
             ++ [
               ./hosts/${hostname}/configuration.nix
             ]
-            ++ extraModules;
+            ++ extraModules
+            ++ [
+              {
+                home-manager.sharedModules = homeModules;
+              }
+            ];
         };
       };
       makeConfigs = system: hosts: (builtins.listToAttrs (map (hostname:
@@ -139,9 +149,7 @@
     homeConfigurations = let
       commonModules = [
         stylix.homeModules.stylix
-        karatui.homeModules.karatui
       ];
-
       makeConfig = {
         system,
         hostname,
@@ -153,7 +161,8 @@
         value = home-manager.lib.homeManagerConfiguration {
           inherit pkgs extraSpecialArgs;
           modules =
-            commonModules
+            homeModules
+            ++ commonModules
             ++ [
               ./hosts/${hostname}/home.nix
             ];

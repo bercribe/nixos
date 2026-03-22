@@ -22,7 +22,7 @@ in {
       content = ''
         [echoes]
         type = sftp
-        host = echoes.${local.secrets.personal-domain}
+        host = echoes.${local.secret-attrs.personal-domain}
         port = 2022
         user = mawz
         key_file = ${config.sops.secrets.ssh.path}

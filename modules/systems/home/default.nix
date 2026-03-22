@@ -1,5 +1,6 @@
 # `man home-configuration.nix` to view configurable options
 {
+  config,
   pkgs,
   lib,
   local,
@@ -10,6 +11,7 @@ in {
   imports = [
     ./minimal.nix
     ./stylix.nix
+    ../sops.nix
     ../../../local-args
   ];
 
@@ -52,7 +54,7 @@ in {
     matchBlocks = {
       echoes = {
         inherit user forwardAgent addKeysToAgent extraOptions;
-        hostname = "echoes.${local.secrets.personal-domain}";
+        hostname = "echoes.${local.secret-attrs.personal-domain}";
         localForwards = [
           {
             bind.port = 8080;
@@ -112,7 +114,7 @@ in {
     enable = true;
     settings.user = {
       name = "mawz";
-      email = local.secrets.email;
+      email = local.secret-attrs.email;
     };
   };
 
@@ -121,7 +123,7 @@ in {
     settings = {
       user = {
         name = "mawz";
-        email = local.secrets.email;
+        email = local.secret-attrs.email;
       };
     };
   };
@@ -236,12 +238,13 @@ in {
     };
   };
 
+  sops.secrets.karakeep = {};
   programs.karatui = {
     enable = true;
     settings = {
       url = local.utils.serviceUrl "karakeep";
       list_id = "ivmnikdds455unndi4nuyoah";
-      api_key_path = "/home/mawz/.config/karatui/api_key";
+      api_key_path = config.sops.secrets.karakeep.path;
     };
   };
 

@@ -93,6 +93,7 @@
     extraSpecialArgs = {inherit local;};
   };
 
+  environment.variables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
   environment.enableAllTerminfo = true;
 
   # Programs

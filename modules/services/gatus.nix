@@ -30,7 +30,7 @@ in {
           from = ''"Gatus" <noreply@gatus.lan>'';
           host = "localhost";
           port = 25;
-          to = local.secrets.email;
+          to = local.secret-attrs.email;
           default-alert.description = utils.serviceUrl "gatus";
         };
         endpoints = let

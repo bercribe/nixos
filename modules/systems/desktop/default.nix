@@ -3,7 +3,6 @@
   pkgs,
   lib,
   local,
-  karatui,
   ...
 }: let
   utils = local.utils;
@@ -22,10 +21,6 @@ in {
     syncoid-ssh = {
       owner = config.services.syncoid.user;
       key = "${config.networking.hostName}/ssh";
-    };
-    karakeep = {
-      owner = "mawz";
-      path = "/home/mawz/.config/karatui/api_key";
     };
     keepass-keyfile = {
       owner = "mawz";
@@ -70,10 +65,6 @@ in {
   # services.libinput.enable = true;
 
   # User env
-  home-manager.users.mawz = {
-    imports = [karatui.homeModules.karatui];
-  };
-
   environment.systemPackages = config.local.constants.packages.system-desktop;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

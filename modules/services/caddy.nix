@@ -93,7 +93,7 @@ in {
         acceptTerms = true;
 
         defaults = {
-          email = local.secrets.email;
+          email = local.secret-attrs.email;
           group = config.services.caddy.group;
 
           dnsProvider = "cloudflare";

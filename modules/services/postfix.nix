@@ -29,7 +29,7 @@ in {
         smtp_sasl_security_options = "";
         smtp_sasl_password_maps = "texthash:${config.sops.secrets."postfix/sasl_passwd".path}";
         # Forward mails to root (e.g. from cron jobs, smartd) to me
-        virtual_alias_maps = "inline:{ {root=${local.secrets.email}} }";
+        virtual_alias_maps = "inline:{ {root=${local.secret-attrs.email}} }";
       };
     };
   };

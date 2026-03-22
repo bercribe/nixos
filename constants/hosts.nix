@@ -53,7 +53,7 @@
   config.local.constants.hosts = let
     hosts = {
       echoes = {
-        domain = local.secrets.personal-domain;
+        domain = local.secret-attrs.personal-domain;
       };
       heavens-door = {};
       highway-star = {};
