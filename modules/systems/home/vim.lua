@@ -71,8 +71,13 @@ vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>Pt", ":TypstPreview<CR>")
 
 -- scripts
-vim.keymap.set({ "n", "v" }, "<leader>xg", ":execute '!gtgh --upstream origin --path \"%\" --line' line('.')<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!gtgh --path \"%\" --line' line('.')<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xg",
+    ":execute '!opn $(gtgh --upstream origin --path \"%\" --line' line('.') ')'<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!opn $(gtgh --path \"%\" --line' line('.') ')'<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xc",
+    [[:let @+ = system('gtgh upstream origin --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
+vim.keymap.set({ "n", "v" }, "<leader>xC",
+    [[:let @+ = system('gtgh --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)

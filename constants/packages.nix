@@ -26,6 +26,7 @@
     bb
     copy
     gtgh
+    opn
     st
     timer
     timers

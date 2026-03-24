@@ -19,6 +19,7 @@
     bb = callPackage ./pkgs/scripts/bb.nix {};
     copy = callPackage ./pkgs/scripts/copy.nix {};
     gtgh = callPackage ./pkgs/scripts/gtgh.nix {};
+    opn = callPackage ./pkgs/scripts/opn.nix {};
     st = callPackage ./pkgs/scripts/st {};
     timer = callPackage ./pkgs/scripts/timer.nix {};
     timers = callPackage ./pkgs/scripts/timers.nix {};

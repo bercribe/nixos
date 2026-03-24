@@ -94,5 +94,5 @@ in
     fi
 
     popd 1>/dev/null
-    xdg-open "$url" 2>/dev/null || open "$url" 2>/dev/null || echo "$url"
+    echo "$url"
   ''
