@@ -9,7 +9,7 @@ in {
   options.local.keyboard.device = with lib;
   with types;
     mkOption {
-      type = enum ["standard" "glove80"];
+      type = enum ["standard"];
       default = "standard";
       description = "Determines layout to use for kanata";
     };
@@ -192,16 +192,8 @@ in {
               (defsrc
                 q w e r t y u i o p
                 caps a s d f g h j k l ;
-                lsft z x c v b n m
+                lsft z x c v b n m rsft
                 lctl lmet lalt ralt
-              )
-            '';
-            glove80 = ''
-              (defsrc
-                    q w e r t   y u i o p
-                esc a s d f g   h j k l ;
-                    z x c v b   n m
-                lsft rsft
               )
             '';
           };
@@ -209,77 +201,28 @@ in {
             standard = ''
               (deflayer colemak
                 q w f p b j l u y ;
-                @escsw a @rmet @salt @tctl g m @nctl @ealt @imet o
-                z x c d v z k h
-                XX XX @lsft @rsft
+                @escsw @amet @ralt @sctl @tsft g m @nsft @ectl @ialt @omet
+                z x c d v z k h @rsft
+                XX XX @lsft @tmux
               )
               (deflayer colemak-nomods
                 q w f p b j l u y ;
                 @escsw a r s t g m n e i o
-                z x c d v z k h
-                XX XX @lsft @rsft
-              )
-              (deflayer shift
-                _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ _
-                _ _ @tmux @tmux
+                z x c d v z k h @rsft
+                XX XX @lsft @tmux
               )
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
                 _ _ _ _ _ _ _ @scm @scn @sps _
-                _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ _ _
                 _ _ _ _
               )
               (deflayer pass
                 _ _ _ _ _ _ _ _ _ _
                 @escsw _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ _ _
                 _ _ _ _
-              )
-            '';
-            glove80 = ''
-              (deflayer colemak
-                q w f p b j l u y ;
-                @escsw a @rmet @salt @tctl g m @nctl @ealt @imet o
-                z x c d v k h
-                @lsft @rsft
-              )
-              (deflayer colemak-nomods
-                q w f p b j l u y ;
-                @escsw a r s t g m n e i o
-                z x c d v k h
-                @lsft @rsft
-              )
-              (deflayer games
-                        tab q w e r   t y u i o
-                @escsw lsft a s d f   g h j k l
-                       lctl z x c v   b n
-                _ _
-              )
-              (deflayer shift
-                _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _
-                @tmux @tmux
-              )
-
-              (deflayer switch
-                _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @scm @scn @sps @sgm
-                _ _ _ _ _ _ _
-                _ _
-              )
-              (deflayer pass
-                _ _ _ _ _ _ _ _ _ _
-                @escsw _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _
-                _ _
-              )
-
-              (defalias
-                sgm (layer-switch games)
               )
             '';
           };
@@ -292,17 +235,19 @@ in {
           (defalias
             ;; modifier mods
             escsw (tap-hold-release $tap-time $hold-time esc (layer-while-held switch))
-            lsft (multi lsft (layer-while-held shift))
-            rsft (multi rsft (layer-while-held shift))
+            lsft (one-shot 500 lsft)
+            rsft (one-shot 500 rsft)
             tmux (macro (unshift ctl b))
 
             ;; home row mods
-            rmet (tap-hold-release $tap-time $hold-time r lmet)
-            salt (tap-hold-release $tap-time $hold-time s lalt)
-            tctl (tap-hold-release $tap-time $hold-time t lctl)
-            nctl (tap-hold-release $tap-time $hold-time n rctl)
-            ealt (tap-hold-release $tap-time $hold-time e ralt)
-            imet (tap-hold-release $tap-time $hold-time i rmet)
+            amet (tap-hold-release $tap-time $hold-time a lmet)
+            ralt (tap-hold-release $tap-time $hold-time r lalt)
+            sctl (tap-hold-release $tap-time $hold-time s lctl)
+            tsft (tap-hold-release $tap-time $hold-time t lsft)
+            nsft (tap-hold-release $tap-time $hold-time n rsft)
+            ectl (tap-hold-release $tap-time $hold-time e rctl)
+            ialt (tap-hold-release $tap-time $hold-time i ralt)
+            omet (tap-hold-release $tap-time $hold-time o rmet)
 
             ;; layer switching
             scm (layer-switch colemak)
