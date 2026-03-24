@@ -10,7 +10,7 @@ in
     # launches a fuzzy find picker and opens the selected directory in tmux
     # optionally takes an argument as the selected directory
 
-    source "$XDG_CONFIG_HOME/st/st.env" || true
+    source "''${XDG_CONFIG_HOME:-$HOME/.config}/st/st.env" || true
 
     IFS=: read -ra dirs <<< $ST_DIRS
 
