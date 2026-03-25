@@ -56,6 +56,7 @@
         # misc
         "$mainMod, O, movecurrentworkspacetomonitor, +1"
         "$mainMod, S, togglespecialworkspace, magic"
+        "$mainMod, H, exec, ${lib.getExe pkgs.scripts.opn} ~/Documents/hints/*"
         "$mainMod, PERIOD, exec, pkill fuzzel || ${lib.getExe pkgs.bemoji} -n"
 
         # applications
