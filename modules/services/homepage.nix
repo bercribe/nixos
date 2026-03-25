@@ -78,11 +78,11 @@ in {
               ];
             }
             {
-              "Haru no Nihongo" = [
+              "Momoko to Nihongo" = [
                 {
                   abbr = "JP";
-                  href = "https://www.haru-no-nihongo.com/podcast/categories";
-                  icon = "https://static.wixstatic.com/media/ced5b6_733eaf15211b44318cc469691d2efd53%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/ced5b6_733eaf15211b44318cc469691d2efd53%7Emv2.png";
+                  href = "https://www.momoko-to-nihongo.com/podcast-scripts";
+                  icon = "https://static.wixstatic.com/media/45def7_29ee7c39391048229a08f9203c40f7ca%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/45def7_29ee7c39391048229a08f9203c40f7ca%7Emv2.png";
                 }
               ];
             }
