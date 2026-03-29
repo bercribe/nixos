@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./firefox.nix
+    ../sops.nix
   ];
 
   # model for mutable config files:
@@ -64,6 +65,16 @@
     enable = true;
     settings = {
       notify_timeout_in_secs = 10;
+    };
+  };
+
+  sops.secrets.karakeep = {};
+  programs.karatui = {
+    enable = true;
+    settings = {
+      url = local.utils.serviceUrl "karakeep";
+      list_id = "ivmnikdds455unndi4nuyoah";
+      api_key_path = config.sops.secrets.karakeep.path;
     };
   };
 

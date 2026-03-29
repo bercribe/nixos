@@ -11,7 +11,6 @@ in {
   imports = [
     ./minimal.nix
     ./stylix.nix
-    ../sops.nix
     ../../../local-args
   ];
 
@@ -235,16 +234,6 @@ in {
 
         less "$1"
       '';
-    };
-  };
-
-  sops.secrets.karakeep = {};
-  programs.karatui = {
-    enable = true;
-    settings = {
-      url = local.utils.serviceUrl "karakeep";
-      list_id = "ivmnikdds455unndi4nuyoah";
-      api_key_path = config.sops.secrets.karakeep.path;
     };
   };
 
