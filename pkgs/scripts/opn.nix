@@ -1,4 +1,5 @@
 {pkgs, ...}:
 pkgs.writeShellScriptBin "opn" ''
-  xdg-open "$1" 2>/dev/null || open "$1" 2>/dev/null || echo "$1"
+  opener=$(command -v xdg-open || command -v open)
+  for f in "$@"; do $opener "$f" 2>/dev/null || echo "$1"; done
 ''
