@@ -54,7 +54,7 @@
         "$mainMod, K, exec, ${pkgs.mako}/bin/makoctl invoke"
 
         # misc
-        "$mainMod, O, movecurrentworkspacetomonitor, +1"
+        "$mainMod, U, movecurrentworkspacetomonitor, +1"
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod, H, exec, $fileManager ~/Documents/hints/"
         "$mainMod, PERIOD, exec, pkill fuzzel || ${lib.getExe pkgs.bemoji} -n"
@@ -73,9 +73,9 @@
 
         # Move focus with mainMod + movement keys
         "$mainMod, N, movefocus, l"
-        "$mainMod, I, movefocus, r"
-        "$mainMod, U, movefocus, u"
-        "$mainMod, E, movefocus, d"
+        "$mainMod, E, movefocus, u"
+        "$mainMod, I, movefocus, d"
+        "$mainMod, O, movefocus, r"
         "$mainMod, Left,  movefocus, l"
         "$mainMod, Right, movefocus, r"
         "$mainMod, Up,    movefocus, u"
@@ -169,9 +169,9 @@
 
       # move rules
       bind = , N, movewindoworgroup, l
-      bind = , I, movewindoworgroup, r
-      bind = , U, movewindoworgroup, u
-      bind = , E, movewindoworgroup, d
+      bind = , E, movewindoworgroup, u
+      bind = , I, movewindoworgroup, d
+      bind = , O, movewindoworgroup, r
       bind = , Left,  movewindoworgroup, l
       bind = , Right, movewindoworgroup, r
       bind = , Up,    movewindoworgroup, u
@@ -200,9 +200,9 @@
 
       # resize rules
       binde = SHIFT, N, resizeactive, -100 0
-      binde = SHIFT, I, resizeactive, 100 0
-      binde = SHIFT, U, resizeactive, 0 -100
-      binde = SHIFT, E, resizeactive, 0 100
+      binde = SHIFT, E, resizeactive, 0 -100
+      binde = SHIFT, I, resizeactive, 0 100
+      binde = SHIFT, O, resizeactive, 100 0
       binde = SHIFT, Left,  resizeactive, -100 0
       binde = SHIFT, Right, resizeactive, 100 0
       binde = SHIFT, Up,    resizeactive, 0 -100
@@ -210,9 +210,9 @@
 
       # escape hatch for switching focus
       bind = ALT, N, movefocus, l
-      bind = ALT, I, movefocus, r
-      bind = ALT, U, movefocus, u
-      bind = ALT, E, movefocus, d
+      bind = ALT, E, movefocus, u
+      bind = ALT, I, movefocus, d
+      bind = ALT, O, movefocus, r
       bind = ALT, Left,   movefocus, l
       bind = ALT, Right,  movefocus, r
       bind = ALT, Up,     movefocus, u
