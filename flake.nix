@@ -27,6 +27,11 @@
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix/release-25.11";
 
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     karatui.url = "github:bercribe/karatui";
 
     paisa.url = "github:ananthakumaran/paisa";
@@ -39,6 +44,7 @@
     disko,
     sops-nix,
     stylix,
+    microvm,
     karatui,
     paisa,
     ...
@@ -73,6 +79,7 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
+        microvm.nixosModules.host
         ./constants
         ./local-args
       ];

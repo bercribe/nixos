@@ -7,6 +7,8 @@
   unstable = import nixpkgs-unstable {
     inherit (final.stdenv.hostPlatform) system;
   };
+  # fixes https://github.com/microvm-nix/microvm.nix/pull/477#issuecomment-4122489542
+  cloud-hypervisor = final.unstable.cloud-hypervisor;
   devenv = final.unstable.devenv;
   karakeep = final.unstable.karakeep;
   yt-dlp = final.unstable.yt-dlp;

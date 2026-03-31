@@ -30,6 +30,11 @@
   local.keyboard.device = "glove80";
   services.kanata.enable = lib.mkForce false; # handled in zmk
 
+  local.microvm = {
+    enable = true;
+    externalInterface = "enp5s0";
+  };
+
   # Services
 
   # Syncthing folders. Access UI at: http://127.0.0.1:8384/
