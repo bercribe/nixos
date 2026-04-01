@@ -3,7 +3,7 @@
   pkgs,
   lib,
   local,
-  secrets,
+  inputs,
   ...
 }: let
   cfg = config.local.cron.finance-sync;
@@ -18,7 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets.finance-sync-ping-key = {
       key = "healthchecks/local/ping-key";
-      sopsFile = secrets + /sops/local.yaml;
+      sopsFile = inputs.secrets + /sops/local.yaml;
       owner = user;
     };
 

@@ -1,12 +1,12 @@
 {
   pkgs,
   config,
-  secrets,
+  inputs,
   ...
 }: {
   _module.args.local = {
     utils = pkgs.callPackage ./utils.nix {inherit config;};
-    secrets = secrets;
-    secret-attrs = import (secrets + /nix);
+    secrets = inputs.secrets;
+    secret-attrs = import (inputs.secrets + /nix);
   };
 }

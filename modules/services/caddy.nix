@@ -2,7 +2,7 @@
   config,
   lib,
   local,
-  secrets,
+  inputs,
   ...
 }: let
   cfg = config.local.reverseProxy;
@@ -87,7 +87,7 @@ in {
 
       # Certs
       sops.secrets."cloudflare/lego" = lib.mkIf cfg.useAcme {
-        sopsFile = secrets + /sops/local.yaml;
+        sopsFile = inputs.secrets + /sops/local.yaml;
       };
       security.acme = lib.mkIf cfg.useAcme {
         acceptTerms = true;

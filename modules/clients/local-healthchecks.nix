@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  secrets,
+  inputs,
   ...
 }: let
   cfg = config.local.healthchecks-secret;
@@ -10,7 +10,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.secrets."healthchecks/local/ping-key" = {
-      sopsFile = secrets + /sops/local.yaml;
+      sopsFile = inputs.secrets + /sops/local.yaml;
     };
   };
 }

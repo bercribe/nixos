@@ -1,6 +1,6 @@
 {
   config,
-  secrets,
+  inputs,
   ...
 }: {
   imports = [
@@ -14,7 +14,7 @@
   local.cron.kindle-export.enable = true;
 
   # Secrets
-  sops.defaultSopsFile = builtins.toPath "${secrets}/sops/${config.networking.hostName}.yaml";
+  sops.defaultSopsFile = builtins.toPath "${inputs.secrets}/sops/${config.networking.hostName}.yaml";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

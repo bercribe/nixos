@@ -4,8 +4,7 @@
   tapId,
   mac,
   workspace,
-  nixpkgs-unstable,
-  home-manager,
+  inputs,
 }: {
   config,
   lib,
@@ -13,13 +12,13 @@
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
-  pkgsUnstable = import nixpkgs-unstable {
+  pkgsUnstable = import inputs.nixpkgs-unstable {
     inherit system;
     config.allowUnfree = true;
   };
 in {
   imports = [
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     ../systems/network/ssh-server.nix
   ];
 

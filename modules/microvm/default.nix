@@ -1,9 +1,7 @@
 {
   config,
   lib,
-  microvm,
-  nixpkgs-unstable,
-  home-manager,
+  inputs,
   ...
 }: let
   cfg = config.local.microvm;
@@ -57,17 +55,14 @@ in {
       autostart = false;
       config = {
         imports = [
-          microvm.nixosModules.microvm
+          inputs.microvm.nixosModules.microvm
           (microvmBase {
             hostName = "sources";
             ipAddress = "192.168.83.2";
             tapId = "microvm2";
             mac = "02:00:00:00:00:02";
             workspace = "/home/mawz/sources/public";
-            inherit
-              nixpkgs-unstable
-              home-manager
-              ;
+            inherit inputs;
           })
           {
             home-manager.users.mawz.local.programs.st.directories = ["$HOME/sources/public"];

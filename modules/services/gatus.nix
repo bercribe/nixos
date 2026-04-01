@@ -2,7 +2,6 @@
   config,
   lib,
   local,
-  secrets,
   ...
 }: let
   cfg = config.local.services.gatus;

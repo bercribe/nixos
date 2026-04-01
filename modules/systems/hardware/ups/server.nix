@@ -2,14 +2,14 @@
   config,
   pkgs,
   local,
-  secrets,
+  inputs,
   ...
 }: {
   local.healthchecks-secret.enable = true;
 
   sops.secrets."ups/admin" = {};
   sops.secrets."ups/observer" = {
-    sopsFile = secrets + /sops/local.yaml;
+    sopsFile = inputs.secrets + /sops/local.yaml;
   };
   sops.secrets."ups/monuser" = {};
 

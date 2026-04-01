@@ -89,7 +89,7 @@
         hostname,
         properties,
       }: let
-        specialArgs = inputs;
+        specialArgs = {inherit inputs;};
         extraModules = properties.extraModules or [];
       in {
         name = hostname;
@@ -162,7 +162,7 @@
         hostname,
       }: let
         pkgs = pkgsF system;
-        extraSpecialArgs = inputs;
+        extraSpecialArgs = {inherit inputs;};
       in {
         name = "mawz@${hostname}";
         value = home-manager.lib.homeManagerConfiguration {

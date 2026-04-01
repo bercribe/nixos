@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  secrets,
+  inputs,
   local,
   ...
 }: let
@@ -10,7 +10,7 @@ in {
   local.healthchecks-secret.enable = true;
 
   sops.secrets."ups/observer" = {
-    sopsFile = secrets + /sops/local.yaml;
+    sopsFile = inputs.secrets + /sops/local.yaml;
   };
 
   # shutdown machine automatically during power outage

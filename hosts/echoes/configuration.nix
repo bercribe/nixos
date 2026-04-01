@@ -3,7 +3,7 @@
   config,
   pkgs,
   lib,
-  secrets,
+  inputs,
   ...
 }: {
   imports = [
@@ -15,7 +15,7 @@
   ];
 
   # Secrets
-  sops.defaultSopsFile = builtins.toPath "${secrets}/sops/${config.networking.hostName}.yaml";
+  sops.defaultSopsFile = builtins.toPath "${inputs.secrets}/sops/${config.networking.hostName}.yaml";
 
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
