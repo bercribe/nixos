@@ -30,7 +30,7 @@
   };
 
   # personal packages
-  karatui = karatui.packages.${final.system}.default;
+  karatui = karatui.packages.${final.stdenv.hostPlatform.system}.default;
 
   # local packages
   yaziPlugins =
