@@ -85,14 +85,6 @@ in {
     }
   ];
 
-  # Use SSH host keys mounted from outside the VM (remain identical).
-  services.openssh.hostKeys = [
-    {
-      path = "/etc/ssh/host-keys/ssh_host_ed25519_key";
-      type = "ed25519";
-    }
-  ];
-
   microvm = {
     # Enable writable nix store overlay so nix-daemon works.
     # This is required for home-manager activation.
@@ -117,13 +109,6 @@ in {
         # squashfs/erofs will be built for it.
         source = "/nix/store";
         mountPoint = "/nix/.ro-store";
-      }
-      # ssh-keygen -t ed25519 -N "" -f ssh_host_ed25519_key
-      {
-        proto = "virtiofs";
-        tag = "ssh-keys";
-        source = "${workspace}/ssh-host-keys";
-        mountPoint = "/etc/ssh/host-keys";
       }
       {
         proto = "virtiofs";
