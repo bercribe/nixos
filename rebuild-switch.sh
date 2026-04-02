@@ -65,7 +65,10 @@ while true; do
 done
 
 # cd to your config dir
-pushd $(dirname "$0")
+pushd "$(dirname "$0")"
+
+# convenience symlink
+ln -s "$(realpath .)" ~/.config 2>/dev/null || true
 
 # Early return if no changes were detected (thanks @singiamtel!)
 if [ "$forceRun" != true ] && git diff HEAD --quiet '*.nix'; then
