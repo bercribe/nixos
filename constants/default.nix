@@ -4,5 +4,6 @@
     ./mime-types.nix
     ./packages.nix
     ./registry.nix
+    ./ssh.nix
   ];
 }
