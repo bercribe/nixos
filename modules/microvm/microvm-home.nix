@@ -1,4 +1,4 @@
-{lib, ...}: {
+{...}: {
   imports = [./pi.nix ../systems/home/minimal.nix];
 
   home.username = "mawz";

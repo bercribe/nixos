@@ -24,7 +24,7 @@
   # User env
   home-manager.users.mawz = import ./home.nix;
   users.users.mawz.packages = [
-    pkgs.scripts.asw # audio switch
+    pkgs.asw # audio switch
   ];
 
   local.keyboard.device = "glove80";

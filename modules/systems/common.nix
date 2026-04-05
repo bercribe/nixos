@@ -65,7 +65,7 @@
   console.keyMap = "us";
 
   # User env
-  nixpkgs.overlays = [(import ../../overlay.nix inputs)];
+  nixpkgs.overlays = import ../../overlays.nix inputs;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

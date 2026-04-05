@@ -35,6 +35,7 @@
   };
 
   outputs = {
+    errata,
     nixpkgs,
     nixos-hardware,
     home-manager,
@@ -46,12 +47,11 @@
     paisa,
     ...
   } @ inputs: let
-    overlay = import ./overlay.nix inputs;
+    overlays = import ./overlays.nix inputs;
 
     pkgsF = system:
       import nixpkgs {
-        inherit system;
-        overlays = [overlay];
+        inherit system overlays;
         config.allowUnfree = true;
       };
 
@@ -68,6 +68,7 @@
     homeModules = [
       sops-nix.homeModules.sops
       karatui.homeModules.karatui
+      errata.homeModules.session-tool
     ];
   in {
     nixosConfigurations = let
@@ -215,6 +216,5 @@
       default = minimal;
       inherit minimal;
     });
-    overlays.default = overlay;
   };
 }

@@ -12,10 +12,11 @@ system: ''
         inputs.nixpkgs.follows = "nixpkgs";
       };
       my-nix.url = "github:bercribe/nixos";
+      errata.url = "github:bercribe/errata";
     };
 
     outputs = {nixpkgs, home-manager, my-nix, ...}: let
-      overlays = [my-nix.overlays.default];
+      overlays = [errata.overlays.default];
       pkgs = import nixpkgs {
         inherit overlays;
         system = "${system}";
@@ -27,9 +28,9 @@ system: ''
         modules = [
           ./home.nix
           my-nix.homeModules.minimal
+          errata.homeModules.session-tool
           {
             local.packages.includeScripts = true;
-            local.yazi.useMux = true;
           }
         ];
       };

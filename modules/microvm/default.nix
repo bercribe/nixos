@@ -65,7 +65,7 @@ in {
             inherit inputs;
           })
           {
-            home-manager.users.mawz.local.programs.st.directories = ["$HOME/sources/public"];
+            home-manager.users.mawz.programs.session-tool.directories = ["$HOME/sources/public"];
           }
         ];
       };

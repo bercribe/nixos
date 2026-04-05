@@ -22,13 +22,13 @@
     zip # zip compressor
   ];
 
-  scripts = with pkgs.scripts; [
+  scripts = with pkgs; [
     bb
     copy
     gtgh
     opn
-    st
-    timer
+    session-tool
+    systemd-timer
     timers
     tsl
     twl
