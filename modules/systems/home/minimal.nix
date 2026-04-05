@@ -276,6 +276,10 @@ in {
               run = "cd /";
             }
             {
+              on = ["g" "t"];
+              run = "cd ~/.local/share/Trash";
+            }
+            {
               on = ["g" "m" "e"];
               run = "cd /mnt/echoes";
             }
