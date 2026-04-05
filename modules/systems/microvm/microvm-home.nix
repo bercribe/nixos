@@ -1,5 +1,5 @@
 {workspace, ...}: {
-  imports = [./pi.nix ../systems/home/minimal.nix];
+  imports = [./pi.nix ../home/minimal.nix];
 
   home.username = "mawz";
   home.homeDirectory = "/home/mawz";

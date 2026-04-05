@@ -16,7 +16,7 @@
     ./network/rclone.nix
     ../cron
     ../services
-    ../microvm
+    ./microvm
     ../clients/local-healthchecks.nix
   ];
 

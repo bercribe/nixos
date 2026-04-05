@@ -19,8 +19,8 @@
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../systems/network/ssh-server.nix
-    ../../constants/default.nix
+    ../network/ssh-server.nix
+    ../../../constants/default.nix
   ];
 
   # home-manager configuration
