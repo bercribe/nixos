@@ -2,10 +2,7 @@
   description = "A NixOS configuration flake";
 
   inputs = {
-    errata = {
-      url = "github:bercribe/errata";
-      flake = false;
-    };
+    errata.url = "github:bercribe/errata";
     secrets = {
       url = "git+ssh://git@github.com/bercribe/secrets.git";
       flake = false;

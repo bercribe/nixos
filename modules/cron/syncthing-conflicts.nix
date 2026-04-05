@@ -26,9 +26,8 @@ in {
         Type = "oneshot";
         User = "root";
       };
-      path = with pkgs; [python3 difftastic];
       script = ''
-        ${utils.writeHealthchecksCombinedScript {slug = "syncthing-conflicts";} "python ${pkgs.errata}/check_sync_conflicts.py /zvault/syncthing --no-colors"}
+        ${utils.writeHealthchecksCombinedScript {slug = "syncthing-conflicts";} "${lib.getExe pkgs.check-sync-conflicts} /zvault/syncthing --no-colors"}
       '';
     };
   };

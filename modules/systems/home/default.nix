@@ -20,7 +20,6 @@ in {
   home.homeDirectory = "/home/mawz";
 
   home.shellAliases = {
-    csc = "python ${pkgs.errata}/check_sync_conflicts.py";
     wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
     cat = "bat";
     diff = "delta";

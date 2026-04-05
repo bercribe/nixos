@@ -14,8 +14,6 @@
   yt-dlp = final.unstable.yt-dlp;
 
   # user scripts
-  errata = errata;
-
   scripts = with prev; {
     asw = callPackage ./pkgs/scripts/asw.nix {};
     bb = callPackage ./pkgs/scripts/bb.nix {};
@@ -30,6 +28,7 @@
   };
 
   # personal packages
+  check-sync-conflicts = errata.packages.${final.stdenv.hostPlatform.system}.check-sync-conflicts;
   karatui = karatui.packages.${final.stdenv.hostPlatform.system}.default;
 
   # local packages

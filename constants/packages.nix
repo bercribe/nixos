@@ -86,6 +86,7 @@ in {
       bluetui # bluetooth device tui
       btop # performance visualizer
       chafa # terminal image viewer
+      check-sync-conflicts # syncthing conflict helper
       cht-sh # cheat sheet
       delta # better diff
       devenv # nix based developer environments
