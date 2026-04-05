@@ -27,6 +27,7 @@ in {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.sharedModules = [inputs.errata.homeModules.session-tool];
+  home-manager.extraSpecialArgs = {inherit workspace;};
   home-manager.users.mawz = {
     imports = [./microvm-home.nix];
   };

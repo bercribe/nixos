@@ -6,6 +6,7 @@
 }: let
   cfg = config.local.microvm;
   microvmBase = import ./microvm-base.nix;
+  vms = import ./vms.nix;
 in {
   # https://michael.stapelberg.ch/posts/2026-02-01-coding-agent-microvm-nix/
   # https://microvm-nix.github.io/microvm.nix/
@@ -47,30 +48,20 @@ in {
       externalInterface = cfg.externalInterface;
     };
 
-    # TODO: consolidate IP declarations, make HM accessible
-    home-manager.users.mawz.programs.ssh.matchBlocks.sources-microvm = {
-      hostname = "192.168.83.2";
-      extraOptions.StrictHostKeyChecking = "no";
-      extraOptions.UserKnownHostsFile = "/dev/null";
-    };
-    microvm.vms.sources = {
-      autostart = false;
-      config = {
-        imports = [
-          inputs.microvm.nixosModules.microvm
-          (microvmBase {
-            hostName = "sources";
-            ipAddress = "192.168.83.2";
-            tapId = "microvm2";
-            mac = "02:00:00:00:00:02";
-            workspace = "/home/mawz/sources/public";
-            inherit inputs;
-          })
-          {
-            home-manager.users.mawz.programs.session-tool.directories = ["$HOME/sources/public"];
-          }
-        ];
+    microvm.vms = let
+      makeVm = hostName: vm: {
+        autostart = false;
+        config = {
+          imports = [
+            inputs.microvm.nixosModules.microvm
+            (microvmBase {
+              inherit hostName inputs;
+              inherit (vm) ipAddress tapId mac workspace;
+            })
+          ];
+        };
       };
-    };
+    in
+      lib.mapAttrs makeVm vms;
   };
 }
