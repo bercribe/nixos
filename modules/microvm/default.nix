@@ -50,6 +50,8 @@ in {
     # TODO: consolidate IP declarations, make HM accessible
     home-manager.users.mawz.programs.ssh.matchBlocks.sources-microvm = {
       hostname = "192.168.83.2";
+      extraOptions.StrictHostKeyChecking = "no";
+      extraOptions.UserKnownHostsFile = "/dev/null";
     };
     microvm.vms.sources = {
       autostart = false;
