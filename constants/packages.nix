@@ -162,6 +162,7 @@ in {
       handlr-regex # better xdg-open
       karatui # karakeep TUI
       ncspot # spotify TUI
+      pi-coding-agent # TUI coding agent
       qmk # keyboard firmware
       spotify-player # spotify TUI
       typst # document editor

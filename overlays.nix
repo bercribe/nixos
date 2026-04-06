@@ -13,6 +13,7 @@
     cloud-hypervisor = final.unstable.cloud-hypervisor;
     devenv = final.unstable.devenv;
     karakeep = final.unstable.karakeep;
+    pi-coding-agent = final.unstable.pi-coding-agent;
     yt-dlp = final.unstable.yt-dlp;
 
     # personal-packages
