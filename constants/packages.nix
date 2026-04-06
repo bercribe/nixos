@@ -86,7 +86,7 @@ in {
       bluetui # bluetooth device tui
       btop # performance visualizer
       chafa # terminal image viewer
-      check-sync-conflicts # syncthing conflict helper
+      check-sync-conflicts # syncthing conflict viewer
       cht-sh # cheat sheet
       delta # better diff
       devenv # nix based developer environments
@@ -108,6 +108,7 @@ in {
       neofetch # system info
       nh # nix helper
       nix-inspect # nix env tui explorer
+      resolve-sync-conflicts # syncthing conflict resolver
       restic # backup tool
       sops # secrets management
       termsvg # record terminal as SVG
