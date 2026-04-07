@@ -22,6 +22,7 @@ in {
         BASE_URL = utils.localHostServiceUrl "miniflux";
         FETCH_YOUTUBE_WATCH_TIME = 1;
         # tuning
+        POLLING_PARSING_ERROR_LIMIT = 10;
         POLLING_FREQUENCY = 5; # minutes
         BATCH_SIZE = 4; # num feeds / 288, so everything gets refreshed every 24 hours
       };
