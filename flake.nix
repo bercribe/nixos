@@ -3,6 +3,7 @@
 
   inputs = {
     errata.url = "github:bercribe/errata";
+    # errata.url = "path:/home/mawz/sources/public/errata";
     secrets = {
       url = "git+ssh://git@github.com/bercribe/secrets.git";
       flake = false;
