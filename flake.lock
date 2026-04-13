@@ -93,11 +93,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1775707808,
-        "narHash": "sha256-8EUJT03NSrMkTrOfivHrofioU3FVP8GvAjb7kEMQoMI=",
+        "lastModified": 1776041769,
+        "narHash": "sha256-CuhXzGhEcBOUkgeUOHL9KvEQS7BuICztp4TWVKUO6t0=",
         "owner": "bercribe",
         "repo": "errata",
-        "rev": "ba00b0cf7352f898b19eafe42308fbc437069fea",
+        "rev": "dc447432d7d5b0b0e850523a7a5d2c04b592c4a8",
         "type": "github"
       },
       "original": {

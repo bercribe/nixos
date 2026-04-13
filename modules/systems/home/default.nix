@@ -160,6 +160,7 @@ in {
     };
   };
   programs.session-tool.directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/public" "$HOME/sources/scripts" "$HOME/sources/public/errata"];
+  programs.mirror.target = "$HOME/sources/public/sandbox";
 
   # docs:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md

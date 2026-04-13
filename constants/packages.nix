@@ -103,6 +103,7 @@ in {
       just # command runner
       lf # list files
       lm_sensors # hardware measurements
+      mirror # convenience mount util
       mosh # mobile shell
       mtr # ping + traceroute
       neofetch # system info
