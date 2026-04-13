@@ -79,6 +79,10 @@
     };
   };
 
+  sops.secrets.miniflux = {
+    path = "/home/mawz/.config/miniflux/api_key";
+  };
+
   gtk = {
     enable = true;
     iconTheme = {
