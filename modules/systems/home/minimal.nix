@@ -267,7 +267,7 @@ in {
             # drop into shell
             {
               on = "!";
-              run = ''shell "$SHELL" --block'';
+              run = ''shell zsh --block'';
               desc = "Open shell here";
             }
             # shortcuts
