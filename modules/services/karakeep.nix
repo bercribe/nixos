@@ -33,6 +33,9 @@ in {
     systemd.services.karakeep-web.serviceConfig.StateDirectory = lib.mkForce null;
     systemd.services.karakeep-init.environment.STATE_DIRECTORY = dataDir;
 
+    # reload on occasional crash
+    systemd.services.karakeep-web.serviceConfig.Restart = "always";
+
     local.reverseProxy = {
       enable = true;
       services.karakeep = {
