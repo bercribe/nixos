@@ -113,6 +113,7 @@ in {
       restic # backup tool
       sops # secrets management
       termsvg # record terminal as SVG
+      vman # man pager in vim
       wikiman # CLI docs
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
