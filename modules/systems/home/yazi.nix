@@ -1,0 +1,165 @@
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.local;
+in {
+  options.local = with lib;
+  with types; {
+    yazi = {
+      useMux = mkEnableOption "mux";
+      keybinds = mkOption {
+        type = attrsOf (submodule {
+          options = {
+            bind = mkOption {
+              type = either str (listOf str);
+              description = "Keyboard inputs";
+            };
+            command = mkOption {
+              type = either str (listOf str);
+              description = "Command to run";
+            };
+          };
+        });
+        default = {};
+        example = {
+          goto-zsolid = {
+            bind = ["g" "z" "s"];
+            command = "cd /zsolid";
+          };
+        };
+        description = "Keybinds to set in yazi";
+      };
+    };
+  };
+  config = {
+    programs.yazi = {
+      enable = true;
+
+      plugins = with pkgs.yaziPlugins;
+        {
+          piper = piper; # pipe any shell command as a previewer
+        }
+        // lib.optionalAttrs cfg.yazi.useMux {
+          mux = mux;
+        };
+      settings = {
+        mgr.linemode = "size";
+        opener.open = [
+          {
+            run = ''$OPENER "$@"'';
+            desc = "Open";
+            orphan = true;
+          }
+        ];
+        plugin = {
+          prepend_previewers = lib.optionals cfg.yazi.useMux [
+            # prepend these to keep default behavior
+            {
+              mime = "image/{avif,hei?,jxl}";
+              run = "magick";
+            }
+            {
+              mime = "image/svg+xml";
+              run = "svg";
+            }
+            {
+              mime = "image/*";
+              run = "mux image exiftool";
+            }
+            {
+              mime = "video/*";
+              run = "mux video exiftool";
+            }
+          ];
+        };
+      };
+      keymap = {
+        mgr.prepend_keymap = let
+          localKeybinds = with lib;
+            mapAttrsToList (desc: {
+              bind,
+              command,
+            }: {
+              inherit desc;
+              on = bind;
+              run = command;
+            })
+            cfg.yazi.keybinds;
+        in
+          lib.optionals cfg.yazi.useMux [
+            # cycle previewer
+            {
+              on = "<C-p>";
+              run = "plugin mux next";
+              desc = "Cycle through mux previewers";
+            }
+          ]
+          ++ [
+            # drop into shell
+            {
+              on = "!";
+              run = ''shell zsh --block'';
+              desc = "Open shell here";
+            }
+            # shortcuts
+            {
+              on = ["g" "/"];
+              run = "cd /";
+            }
+            {
+              on = ["g" "t"];
+              run = "cd ~/.local/share/Trash";
+            }
+            {
+              on = ["g" "m" "e"];
+              run = "cd /mnt/echoes";
+            }
+            {
+              on = ["g" "m" "g"];
+              run = "cd /mnt/gdrive";
+            }
+            {
+              on = ["g" "m" "s"];
+              run = "cd /mnt/super-fly";
+            }
+            {
+              on = ["g" "m" "m"];
+              run = "cd /mnt/mr-president";
+            }
+            {
+              on = ["g" "s" "c"];
+              run = "cd ~/personal-cloud";
+            }
+            {
+              on = ["g" "s" "p"];
+              run = "cd ~/projects";
+            }
+          ]
+          ++ localKeybinds;
+      };
+      initLua = ''
+        require("session"):setup {
+         sync_yanked = true,
+        }
+
+        ${lib.optionalString cfg.yazi.useMux ''
+          -- plugins
+          require("mux"):setup({
+            remember_per_file_extension = true,
+            aliases = {
+              exiftool = {
+                previewer = "piper",
+                args = {
+                  '${lib.getExe pkgs.exiftool} -S -DateTimeOriginal -MediaCreateDate -FileModifyDate "$1" | fmt -t -w $w',
+                },
+              },
+            },
+          })
+        ''}
+      '';
+    };
+  };
+}
