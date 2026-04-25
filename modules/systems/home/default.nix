@@ -21,7 +21,6 @@ in {
   home.homeDirectory = "/home/mawz";
 
   home.shellAliases = {
-    wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
     cat = "bat";
     diff = "delta";
     ls = "eza";
@@ -30,6 +29,7 @@ in {
     nhs = "nh home switch ~/.config/nixos";
     nrs = "~/.config/nixos/rebuild-switch.sh";
     scan = "scanimage -d pixma:04A91912_515996 --format=tiff -b --resolution=300 --button-controlled=yes";
+    wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
   };
 
   nixpkgs.config = import ./nixpkgs-config.nix;
