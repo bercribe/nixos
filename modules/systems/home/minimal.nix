@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }: let
@@ -24,6 +23,12 @@ in {
       packages = config.local.constants.packages;
     in
       packages.core ++ (lib.optionals cfg.packages.includeScripts packages.scripts);
+
+    home.sessionVariables = {
+      # colored man pages
+      MANROFFOPT = "-P -c";
+      MANPAGER = "less --use-color -Dd+r -Du+b";
+    };
 
     home.shellAliases = {
       cd = "z";
