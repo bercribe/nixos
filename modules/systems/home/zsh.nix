@@ -3,11 +3,6 @@
   lib,
   ...
 }: {
-  home.shellAliases = {
-    cd = "z";
-    reload-env = "eval $(tmux show-env -s)";
-  };
-
   home.sessionVariables.SHELL = lib.getExe pkgs.zsh;
   programs.zsh = {
     enable = true;
