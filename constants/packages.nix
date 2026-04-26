@@ -96,6 +96,7 @@ in {
       ffmpeg # video utilities
       gdu # go disk analyzer
       gh # github cli
+      glow # cli markdown renderer
       hledger # ledger accounting tool
       hledger-ui # hledger tui
       isd # systemd TUI
