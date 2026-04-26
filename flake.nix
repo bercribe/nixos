@@ -21,6 +21,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgr.follows = "nixpkgs";
+    };
 
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix/release-25.11";
@@ -41,6 +45,7 @@
     nixos-hardware,
     home-manager,
     disko,
+    nix-index-database,
     sops-nix,
     stylix,
     microvm,
@@ -77,6 +82,7 @@
       commonModules = [
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
+        nix-index-database.nixosModules.default
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         microvm.nixosModules.host

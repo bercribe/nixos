@@ -106,6 +106,7 @@
     enable = false;
     enableZshIntegration = true;
   };
+  programs.nix-index-database.comma.enable = true;
 
   # shell
   programs.zsh.enable = true;
