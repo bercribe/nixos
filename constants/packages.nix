@@ -32,6 +32,7 @@
     timers
     tsl
     twl
+    vman
   ];
 in {
   options.local.constants.packages = with lib;
@@ -102,7 +103,6 @@ in {
       isd # systemd TUI
       jujutsu # version control
       just # command runner
-      lf # list files
       lm_sensors # hardware measurements
       mirror # convenience mount util
       mosh # mobile shell
@@ -114,7 +114,6 @@ in {
       restic # backup tool
       sops # secrets management
       termsvg # record terminal as SVG
-      vman # man pager in vim
       wikiman # CLI docs
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
