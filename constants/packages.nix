@@ -130,6 +130,7 @@ in {
       czkawka # deduping util
       darktable # photo editor
       discord # voice chat
+      encrypt-pdf # simple pdf util
       firefox # browser
       foot # terminal
       gale # thunderstore mod manager
