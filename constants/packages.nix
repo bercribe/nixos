@@ -92,10 +92,10 @@ in {
       delta # better diff
       devenv # nix based developer environments
       difftastic # syntax aware diff
+      dua # disk usage analyzer
       exiftool # image metadata
       eza # better ls
       ffmpeg # video utilities
-      gdu # go disk analyzer
       gh # github cli
       glow # cli markdown renderer
       hledger # ledger accounting tool
@@ -116,7 +116,6 @@ in {
       termsvg # record terminal as SVG
       whosthere # lan discovery tui
       wikiman # CLI docs
-      wiper # disk cleanup tool
       wireguard-tools # wireguard debug
       wol # wake on lan
       zfs-hist # zfs version browser
@@ -168,7 +167,6 @@ in {
       ncspot # spotify TUI
       pi-coding-agent # TUI coding agent
       qmk # keyboard firmware
-      spotify-player # spotify TUI
       typst # document editor
       wev # shows keyboard inputs
       yt-dlp # youtube downloader
