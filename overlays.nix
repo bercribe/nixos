@@ -14,6 +14,7 @@
     devenv = final.unstable.devenv;
     karakeep = final.unstable.karakeep;
     pi-coding-agent = final.unstable.pi-coding-agent;
+    whosthere = final.unstable.whosthere;
     yt-dlp = final.unstable.yt-dlp;
 
     # personal-packages

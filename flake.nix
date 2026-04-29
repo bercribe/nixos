@@ -23,7 +23,7 @@
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgr.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix.url = "github:Mic92/sops-nix";

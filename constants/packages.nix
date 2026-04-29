@@ -114,6 +114,7 @@ in {
       restic # backup tool
       sops # secrets management
       termsvg # record terminal as SVG
+      whosthere # lan discovery tui
       wikiman # CLI docs
       wiper # disk cleanup tool
       wireguard-tools # wireguard debug
