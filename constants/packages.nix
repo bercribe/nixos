@@ -4,6 +4,7 @@
   ...
 }: let
   core = with pkgs; [
+    delta # better diff
     dig # dns debug
     fd # better find
     fzf # fuzzy find
@@ -89,7 +90,6 @@ in {
       chafa # terminal image viewer
       check-sync-conflicts # syncthing conflict viewer
       cht-sh # cheat sheet
-      delta # better diff
       devenv # nix based developer environments
       difftastic # syntax aware diff
       dua # disk usage analyzer
