@@ -130,7 +130,6 @@ in {
       czkawka # deduping util
       darktable # photo editor
       discord # voice chat
-      encrypt-pdf # simple pdf util
       firefox # browser
       foot # terminal
       gale # thunderstore mod manager
@@ -160,6 +159,7 @@ in {
       zoom-us # video conferencing
       # CLI
       cava # audio visualizer
+      encrypt-pdf # simple pdf util
       ffsubsync # sync subtitles with video
       gtypist # typing tutor
       handlr-regex # better xdg-open
