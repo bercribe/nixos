@@ -16,8 +16,13 @@ vim.o.termguicolors = true;
 vim.keymap.set({ "n", "v" }, "<leader>w", ":write<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 -- system clipboard
-vim.keymap.set("n", "<leader>y", '"+yy')
 vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>yy", '"+yy')
+vim.keymap.set("n", "<leader>yp", [[:let @+ = expand('%')<CR>]])
+vim.keymap.set("n", "<leader>yl", [[:let @+ = expand('%') . ':' . line('.')<CR>]])
+vim.keymap.set("n", "<leader>yg",
+    [[:let @+ = system('gtgh --upstream origin --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
+vim.keymap.set("n", "<leader>yG", [[:let @+ = system('gtgh --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
 -- black hole delete
 vim.keymap.set("n", "<leader>d", '"_dd')
@@ -74,10 +79,6 @@ vim.keymap.set({ "n", "v" }, "<leader>Pt", ":TypstPreview<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xg",
     ":execute '!opn $(gtgh --upstream origin --path \"%\" --line' line('.') ')'<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!opn $(gtgh --path \"%\" --line' line('.') ')'<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>xc",
-    [[:let @+ = system('gtgh --upstream origin --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
-vim.keymap.set({ "n", "v" }, "<leader>xC",
-    [[:let @+ = system('gtgh --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)
