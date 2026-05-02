@@ -21,8 +21,6 @@ in {
   home.homeDirectory = "/home/mawz";
 
   home.shellAliases = {
-    cat = "bat";
-    diff = "delta";
     ls = "eza";
   };
   programs.zsh.zsh-abbr.abbreviations = {
@@ -123,19 +121,6 @@ in {
       user = {
         name = "mawz";
         email = local.secret-attrs.email;
-      };
-    };
-  };
-
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      features = "decorations";
-      decorations = {
-        file-decoration-style = "none";
-        file-style = "bold yellow ul";
-        hunk-header-decoration-style = "none";
       };
     };
   };

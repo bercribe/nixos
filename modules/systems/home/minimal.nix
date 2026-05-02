@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -31,7 +32,9 @@ in {
     };
 
     home.shellAliases = {
+      cat = "bat";
       cd = "z";
+      diff = "delta";
     };
 
     # shell integrations
@@ -51,6 +54,20 @@ in {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    programs.delta = {
+      enable = true;
+      package = pkgs.delta;
+      enableGitIntegration = true;
+      options = {
+        features = "decorations";
+        decorations = {
+          file-decoration-style = "none";
+          file-style = "bold yellow ul";
+          hunk-header-decoration-style = "none";
+        };
+      };
     };
 
     # Let Home Manager install and manage itself.

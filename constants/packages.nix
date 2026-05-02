@@ -4,13 +4,14 @@
   ...
 }: let
   core = with pkgs; [
-    delta # better diff
+    bat # better cat
     dig # dns debug
     fd # better find
     fzf # fuzzy find
     git # version control
     hexyl # hex viewer
     jq # json formatter
+    jujutsu # version control
     lazygit # git tui
     python3 # scripting
     ripgrep # file content search
@@ -21,6 +22,12 @@
     wget # network util
     yazi # terminal file manager
     zip # zip compressor
+  ];
+  # the following packages would be in `core`
+  # if they didn't conflict with the wrapped versions in home manager
+  hmConflicts = with pkgs; [
+    delta # better diff
+    neovim # text editor
   ];
 
   scripts = with pkgs; [
@@ -71,11 +78,10 @@ in {
       [
         lzop # compression with syncoid
         mbuffer # buffering with syncoid
-        neovim # text editor
         rclone # network file mounts
         usbutils # lsusb
       ]
-      ++ core ++ scripts;
+      ++ core ++ hmConflicts ++ scripts;
 
     system-desktop = [
       libnotify # desktop notification util
@@ -84,7 +90,6 @@ in {
 
     user = [
       alejandra # nix formatter
-      bat # better cat
       bluetui # bluetooth device tui
       btop # performance visualizer
       chafa # terminal image viewer
@@ -101,7 +106,6 @@ in {
       hledger # ledger accounting tool
       hledger-ui # hledger tui
       isd # systemd TUI
-      jujutsu # version control
       just # command runner
       lm_sensors # hardware measurements
       mirror # convenience mount util
