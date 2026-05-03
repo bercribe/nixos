@@ -90,6 +90,7 @@ in {
 
     user = [
       alejandra # nix formatter
+      bandwhich # network utilization tui
       bluetui # bluetooth device tui
       btop # performance visualizer
       chafa # terminal image viewer

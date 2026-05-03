@@ -119,6 +119,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.bandwhich.enable = true;
 
   # Services
 
