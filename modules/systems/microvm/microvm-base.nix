@@ -16,6 +16,7 @@
     inherit system;
     config.allowUnfree = true;
   };
+  modelSecretsDir = (import ./consts.nix).model-secrets-dir;
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -88,6 +89,11 @@ in {
     }
   ];
 
+  # grant permissions for model secrets
+  systemd.tmpfiles.rules = [
+    "z ${modelSecretsDir} - mawz - -"
+  ];
+
   microvm = {
     # Enable writable nix store overlay so nix-daemon works.
     # This is required for home-manager activation.
@@ -118,6 +124,12 @@ in {
         tag = "pi-config";
         source = "/home/mawz/.pi";
         mountPoint = "/home/mawz/.pi";
+      }
+      {
+        proto = "virtiofs";
+        tag = "model-secrets";
+        source = modelSecretsDir;
+        mountPoint = modelSecretsDir;
       }
       {
         proto = "virtiofs";

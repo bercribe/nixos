@@ -5,6 +5,19 @@
   ...
 }: let
   cfg = config.local.programs.pi-coding-agent;
+
+  modelSecretsDir = (import ./consts.nix).model-secrets-dir;
+
+  # model credentials
+  pi = pkgs.symlinkJoin {
+    name = "pi";
+    buildInputs = [pkgs.makeWrapper];
+    paths = [pkgs.pi-coding-agent];
+    postBuild = ''
+      wrapProgram $out/bin/pi \
+        --run 'export ANTHROPIC_API_KEY="$(cat ${modelSecretsDir}/anthropic)"'
+    '';
+  };
 in {
   options.local.programs.pi-coding-agent = with lib;
   with types; {
@@ -25,6 +38,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = [pi];
+
     home.file.".pi/agent/AGENTS.md" = lib.mkIf (cfg.instructions != "") {
       text = cfg.instructions;
     };

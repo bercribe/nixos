@@ -63,5 +63,9 @@ in {
       };
     in
       lib.mapAttrs makeVm vms;
+
+    sops.secrets."models/anthropic" = {
+      owner = "mawz";
+    };
   };
 }
