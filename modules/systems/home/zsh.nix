@@ -49,8 +49,6 @@
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '';
       config = lib.mkOrder 1000 ''
-        bindkey '^ ' autosuggest-accept
-
         # typo correction
         setopt correct
 
@@ -58,16 +56,43 @@
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # case insensitive completion
         zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # directory colors
 
+        # enable zmv
+        autoload -Uz zmv
+
+        # autocomplete
+        bindkey '^ ' autosuggest-accept
+
         # edit current line
         autoload -z edit-command-line
         zle -N edit-command-line
-        bindkey "^X^E" edit-command-line
+        bindkey "^Xe" edit-command-line
+
+        # copy current line
+        function copy-buffer-to-clipboard() {
+          echo -n "$BUFFER" | copy
+          zle -M "Copied to clipboard"
+        }
+        zle -N copy-buffer-to-clipboard
+        bindkey '^Xc' copy-buffer-to-clipboard
+
+        # git commit hotkey
+        bindkey -s '^Xgc' 'git commit -m ""\C-b'
 
         # fzf command arg menu
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
         zstyle ':completion:*' menu no # disable default
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # display directory contents on cd
         zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:toggle+down,ctrl-k:toggle+up'
+
+        # suffix aliases
+        alias -s log=bat
+        alias -s txt=bat
+        alias -s md=bat
+        alias -s json=jless
+        alias -s nix='$EDITOR'
+        alias -s py='$EDITOR'
+        alias -s rs='$EDITOR'
+        alias -s html=opn
 
         # fixes nix-shell and nix develop to use zsh
         ${lib.getExe pkgs.any-nix-shell} zsh --info-right | source /dev/stdin

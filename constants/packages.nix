@@ -10,6 +10,7 @@
     fzf # fuzzy find
     git # version control
     hexyl # hex viewer
+    jless # interactive json viewer
     jq # json formatter
     jujutsu # version control
     lazygit # git tui
