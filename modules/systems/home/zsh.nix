@@ -26,13 +26,15 @@
     zsh-abbr = {
       enable = true;
       abbreviations = {
-        vim = "nvim";
-        sctl = "systemctl";
+        "git m" = ''git commit -m "%"'';
         jctl = "journalctl";
         jfu = "journalctl -f -u";
+        nsu = "nix shell github:NixOS/nixpkgs/nixos-unstable#%";
+        sctl = "systemctl";
+        vim = "nvim";
       };
       globalAbbreviations = {
-        "s:" = ''| sed "s/:/\\n/g"'';
+        "S:" = ''| sed "s/:/\\n/g"'';
       };
     };
 
@@ -49,6 +51,9 @@
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '';
       config = lib.mkOrder 1000 ''
+        # enables cursor manipulation for abbreviations using %
+        ABBR_SET_EXPANSION_CURSOR=1
+
         # typo correction
         setopt correct
 
@@ -74,9 +79,6 @@
         }
         zle -N copy-buffer-to-clipboard
         bindkey '^Xc' copy-buffer-to-clipboard
-
-        # git commit hotkey
-        bindkey -s '^Xgc' 'git commit -m ""\C-b'
 
         # fzf command arg menu
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
