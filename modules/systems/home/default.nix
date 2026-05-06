@@ -144,8 +144,14 @@ in {
       command = [''shell -- for path in "$@"; do echo "file://$path"; done | ${pkgs.wl-clipboard}/bin/wl-copy -t text/uri-list'' "yank"];
     };
   };
-  programs.session-tool.directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/public" "$HOME/sources/sandbox" "$HOME/sources/public/errata"];
-  programs.mirror.target = "$HOME/sources/public/sandbox";
+  programs.session-tool = {
+    enable = true;
+    directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/public" "$HOME/sources/sandbox" "$HOME/sources/public/errata"];
+  };
+  programs.mirror = {
+    enable = true;
+    target = "$HOME/sources/public/sandbox";
+  };
 
   # docs:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md
