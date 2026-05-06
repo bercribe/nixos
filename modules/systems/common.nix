@@ -27,6 +27,9 @@
   # needed for devenv automatic cache management
   nix.settings.trusted-users = ["root" "mawz"];
 
+  nix.gc.automatic = true;
+  nix.optimise.automatic = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
