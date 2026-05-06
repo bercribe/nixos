@@ -105,6 +105,7 @@ in {
       ffmpeg # video utilities
       gh # github cli
       glow # cli markdown renderer
+      grex # regex builder
       hledger # ledger accounting tool
       hledger-ui # hledger tui
       isd # systemd TUI
