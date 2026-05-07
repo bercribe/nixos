@@ -36,6 +36,7 @@
     copy
     gtgh
     opn
+    pi-sync
     session-tool
     systemd-timer
     timers
@@ -117,7 +118,6 @@ in {
       neofetch # system info
       nh # nix helper
       nix-inspect # nix env tui explorer
-      pi-sync # convenience utility for agent config
       resolve-sync-conflicts # syncthing conflict resolver
       restic # backup tool
       sops # secrets management
