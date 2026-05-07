@@ -4,7 +4,13 @@
   home.username = "mawz";
   home.homeDirectory = "/home/mawz";
 
-  local.programs.pi-coding-agent.enable = true;
+  local.programs.pi-coding-agent = {
+    enable = true;
+    instructions = ''
+      I will often edit files you have worked on - do not revert my changes. Integrate them into the final result.
+    '';
+  };
+
   local.packages.includeScripts = true;
   local.yazi.useMux = true;
   programs.session-tool = {
