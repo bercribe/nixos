@@ -2,8 +2,6 @@
   description = "A NixOS configuration flake";
 
   inputs = {
-    errata.url = "github:bercribe/errata";
-    # errata.url = "path:/home/mawz/sources/public/errata";
     secrets = {
       url = "git+ssh://git@github.com/bercribe/secrets.git";
       flake = false;
@@ -13,30 +11,36 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    # nix extensions
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+    microvm.url = "github:microvm-nix/microvm.nix";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix/release-25.11";
 
-    microvm = {
-      url = "github:microvm-nix/microvm.nix";
+    # my packages
+    errata = {
+      url = "github:bercribe/errata";
+      # url = "path:/home/mawz/sources/public/errata";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    karatui = {
+      url = "github:bercribe/karatui";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    karatui.url = "github:bercribe/karatui";
-
-    paisa.url = "github:ananthakumaran/paisa";
+    # other packages
+    paisa = {
+      url = "github:ananthakumaran/paisa";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
