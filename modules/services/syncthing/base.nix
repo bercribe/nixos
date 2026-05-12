@@ -53,6 +53,7 @@ in {
             path = lib.mkDefault "/home/mawz/personal-cloud";
             devices = ["geb" "heavens-door" "highway-star" "sethan" "super-fly" "whitesnake"];
             inherit versioning;
+            ignorePatterns = [".git"];
           };
           projects = {
             enable = lib.mkDefault false;
