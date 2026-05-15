@@ -107,6 +107,11 @@ in {
         image = "var.img";
         size = 8192; # MB
       }
+      {
+        mountPoint = "/nix/.rw-store";
+        image = "nix-store-overlay.img";
+        size = 8192; # MB
+      }
     ];
 
     shares = [
