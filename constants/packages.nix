@@ -33,16 +33,40 @@
 
   scripts = with pkgs; [
     bb
+    catbin
     copy
     gtgh
+    hoy
+    httpstatus
+    line
+    make-shell
+    markdownquote
+    murder
+    nato
     opn
+    pasta
+    pastas
     pi-sync
+    rn
+    running
+    scratch
+    serveit
     session-tool
+    shrinkvid
+    speak
+    straightquote
     systemd-timer
+    tempe
     timers
+    trash
+    tryna
     tsl
     twl
+    url
     vman
+    waitfor
+    wherebin
+    wifi
   ];
 in {
   options.local.constants.packages = with lib;
@@ -120,6 +144,7 @@ in {
       nix-inspect # nix env tui explorer
       resolve-sync-conflicts # syncthing conflict resolver
       restic # backup tool
+      snippets # configurable text snippets
       sops # secrets management
       termsvg # record terminal as SVG
       whosthere # lan discovery tui
@@ -166,14 +191,22 @@ in {
       zathura # pdf viewer
       zoom-us # video conferencing
       # CLI
+      boop # indicate command success or failure
       cava # audio visualizer
       encrypt-pdf # simple pdf util
       ffsubsync # sync subtitles with video
+      getpod # downoad video as podcast
+      getsong # download song
+      getsubs # download subtitles
       gtypist # typing tutor
       handlr-regex # better xdg-open
       karatui # karakeep TUI
       ncspot # spotify TUI
+      notification # system notification utility
       qmk # keyboard firmware
+      removeexif # strips exif from jpegs
+      sfx # play sound effect
+      tunes # play music in dir
       typst # document editor
       wev # shows keyboard inputs
       yt-dlp # youtube downloader

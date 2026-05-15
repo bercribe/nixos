@@ -75,6 +75,8 @@
       karatui.homeModules.karatui
       errata.homeModules.mirror
       errata.homeModules.session-tool
+      errata.homeModules.sfx
+      errata.homeModules.snippets
     ];
   in {
     nixosConfigurations = let

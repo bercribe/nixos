@@ -152,6 +152,22 @@ in {
     enable = true;
     target = "$HOME/sources/public/sandbox";
   };
+  programs.sfx = {
+    enable = true;
+    sounds = let
+      assets = ../../../assets;
+    in {
+      failure = assets + /failure.mp3;
+      ringaling = assets + /ringaling.mp3;
+      success = assets + /success.mp3;
+    };
+  };
+  programs.snippets = {
+    enable = true;
+    snippets = {
+      lorem = "Lorem ipsum";
+    };
+  };
 
   # docs:
   #   - https://github.com/gokcehan/lf/blob/master/doc.md
