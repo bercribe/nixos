@@ -199,6 +199,18 @@ in {
           };
           deflayers = {
             standard = ''
+              (deflayer mods
+                _ _ _ _ _ _ _ _ _ _
+                @escsw @amet @salt @dctl @fsft _ _ @jsft @kctl @lalt @;met
+                @lsft _ _ _ _ _ _ _ @rsft
+                XX XX @lsft @tmux
+              )
+              (deflayer pass
+                _ _ _ _ _ _ _ _ _ _
+                @escsw _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ _ _
+                _ _ _ _
+              )
               (deflayer colemak
                 q w f p b j l u y ;
                 @escsw @amet @ralt @sctl @tsft g m @nsft @ectl @ialt @omet
@@ -214,13 +226,7 @@ in {
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ @scm @scn @sps _
-                _ _ _ _ _ _ _ _ _
-                _ _ _ _
-              )
-              (deflayer pass
-                _ _ _ _ _ _ _ _ _ _
-                @escsw _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ @shm @sps @scm @scn
                 _ _ _ _ _ _ _ _ _
                 _ _ _ _
               )
@@ -240,7 +246,16 @@ in {
             tmux (macro (unshift ctl b))
 
             ;; home row mods
+            ;; qwerty
             amet (tap-hold-release $tap-time $hold-time a lmet)
+            salt (tap-hold-release $tap-time $hold-time s lalt)
+            dctl (tap-hold-release $tap-time $hold-time d lctl)
+            fsft (tap-hold-release $tap-time $hold-time f lsft)
+            jsft (tap-hold-release $tap-time $hold-time j rsft)
+            kctl (tap-hold-release $tap-time $hold-time k rctl)
+            lalt (tap-hold-release $tap-time $hold-time l ralt)
+            ;met (tap-hold-release $tap-time $hold-time ; rmet)
+            ;; colemak
             ralt (tap-hold-release $tap-time $hold-time r lalt)
             sctl (tap-hold-release $tap-time $hold-time s lctl)
             tsft (tap-hold-release $tap-time $hold-time t lsft)
@@ -250,9 +265,10 @@ in {
             omet (tap-hold-release $tap-time $hold-time o rmet)
 
             ;; layer switching
+            shm (layer-switch mods)
+            sps (layer-switch pass)
             scm (layer-switch colemak)
             scn (layer-switch colemak-nomods)
-            sps (layer-switch pass)
           )
 
           ${defsrc.${cfg.device}}
