@@ -78,11 +78,11 @@ in {
               ];
             }
             {
-              "Momoko to Nihongo" = [
+              "あかね的日本語教室" = [
                 {
                   abbr = "JP";
-                  href = "https://www.momoko-to-nihongo.com/podcast-scripts";
-                  icon = "https://static.wixstatic.com/media/45def7_29ee7c39391048229a08f9203c40f7ca%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/45def7_29ee7c39391048229a08f9203c40f7ca%7Emv2.png";
+                  href = "https://akanesenseijp.com/category/scrtipt/";
+                  icon = "https://yt3.googleusercontent.com/ytc/AIdro_kykxNolZAhyFMec4m7G-1XvOaIVU5IY1hZDE867JdwFw=s160-c-k-c0x00ffffff-no-rj";
                 }
               ];
             }
