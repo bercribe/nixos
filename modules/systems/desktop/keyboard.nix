@@ -192,8 +192,8 @@ in {
               (defsrc
                 q w e r t y u i o p
                 caps a s d f g h j k l ;
-                lsft z x c v b n m rsft
-                lctl lmet lalt ralt
+                lsft z x c v b n m , . rsft
+                lctl lmet lalt spc ralt rctl
               )
             '';
           };
@@ -202,33 +202,46 @@ in {
               (deflayer mods
                 _ _ _ _ _ _ _ _ _ _
                 @escsw @amet @salt @dctl @fsft _ _ @jsft @kctl @lalt @;met
-                @lsft _ _ _ _ _ _ _ @rsft
-                XX XX @lsft @tmux
+                @mcs _ _ _ _ _ _ _ _ _ @rsft
+                @mnm rpt @lsft _ @tmux @mcs
               )
               (deflayer pass
                 _ _ _ _ _ _ _ _ _ _
                 @escsw _ _ _ _ _ _ _ _ _ _
-                _ _ _ _ _ _ _ _ _
-                _ _ _ _
+                _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _
               )
               (deflayer colemak
                 q w f p b j l u y ;
                 @escsw @amet @ralt @sctl @tsft g m @nsft @ectl @ialt @omet
-                z x c d v z k h @rsft
-                XX XX @lsft @tmux
+                z x c d v z k h _ _ @rsft
+                @mnm rpt @lsft _ @tmux @mcs
               )
               (deflayer colemak-nomods
                 q w f p b j l u y ;
                 @escsw a r s t g m n e i o
-                z x c d v z k h @rsft
-                XX XX @lsft @tmux
+                z x c d v z k h _ _ @rsft
+                @mnm rpt @lsft _ @tmux @mcs
+              )
+
+              (deflayer cursor
+                _ _ _ _ _ _ _ _ _ _
+                @escsw _ _ _ _ _ _ left up down right
+                _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _
+              )
+              (deflayer numpad
+                       _ _ _ _ _ _ 1 2 3 _
+                @escsw _ _ _ _ _ _ 4 5 6 _
+                     _ _ _ _ _ _ _ 7 8 9 _
+                _ _ _ 0 _ _
               )
 
               (deflayer switch
                 _ _ _ _ _ _ _ _ _ _
                 _ _ _ _ _ _ _ @shm @sps @scm @scn
-                _ _ _ _ _ _ _ _ _
-                _ _ _ _
+                _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _
               )
             '';
           };
@@ -269,6 +282,8 @@ in {
             sps (layer-switch pass)
             scm (layer-switch colemak)
             scn (layer-switch colemak-nomods)
+            mcs (layer-while-held cursor)
+            mnm (layer-while-held numpad)
           )
 
           ${defsrc.${cfg.device}}
