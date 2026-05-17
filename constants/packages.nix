@@ -172,6 +172,7 @@ in {
       imagemagick # image viewer
       imv # image viewer
       inkscape # svg editor
+      jupyter # python notebook
       keepassxc # password manager
       libation # audible audiobook manager
       libreoffice # office tools
