@@ -60,7 +60,7 @@
     LC_NUMERIC = "en_US.UTF-8";
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_TIME = "en_GB.UTF-8"; # start week on Monday
   };
 
   # Configure keymap in X11
