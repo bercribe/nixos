@@ -130,6 +130,7 @@ in {
       ffmpeg # video utilities
       gh # github cli
       glow # cli markdown renderer
+      glslviewer # live fragment shader renderer
       grex # regex builder
       hledger # ledger accounting tool
       hledger-ui # hledger tui

@@ -48,6 +48,8 @@ in {
       languageServers = with pkgs; {
         bashls = bash-language-server;
         clangd = clang-tools; # c lsp
+        glsl_analyzer = glsl_analyzer; # shader lsp
+        glslls = glslls; # shader lsp
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
@@ -58,6 +60,7 @@ in {
       treesitterParsers = [
         "bash"
         "cpp"
+        "glsl"
         "lua"
         "nix"
         "python"
@@ -67,12 +70,11 @@ in {
       filetypes = {
         "*" = {};
         cpp.commentPattern = "//";
+        glsl.commentPattern = "//";
         json.tabsize = 2;
         lua.commentPattern = "--";
-        nix = {
-          tabsize = 2;
-          commentPattern = "#";
-        };
+        nix.commentPattern = "#";
+        nix.tabsize = 2;
         python.commentPattern = "#";
         rust.commentPattern = "//";
         sh.commentPattern = "#";

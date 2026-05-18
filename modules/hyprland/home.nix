@@ -144,7 +144,9 @@ in {
         # Example windowrule v2
         # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
         # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-        windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
+        windowrulev2 = [
+          "suppressevent maximize, class:.*" # You'll probably like this.
+        ];
       };
     };
 

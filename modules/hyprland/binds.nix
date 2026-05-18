@@ -54,9 +54,10 @@
         "$mainMod, K, exec, ${pkgs.mako}/bin/makoctl invoke"
 
         # misc
-        "$mainMod, U, movecurrentworkspacetomonitor, +1"
+        "$mainMod, H, togglefloating"
+        "$mainMod, Y, movecurrentworkspacetomonitor, +1"
         "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod, H, exec, $fileManager ~/Documents/hints/"
+        "$mainMod, K, exec, $fileManager ~/Documents/hints/"
         "$mainMod, PERIOD, exec, pkill fuzzel || ${lib.getExe pkgs.bemoji} -n"
 
         # applications
@@ -159,7 +160,7 @@
       bind = , T, togglesplit, # dwindle
       bind = , P, pseudo, # dwindle
       bind = , F, fullscreen,
-      bind = , V, togglefloating,
+      bind = , H, togglefloating,
       bind = , S, movetoworkspacesilent, special:magic
       bind = SHIFT, S, movetoworkspace, special:magic
 

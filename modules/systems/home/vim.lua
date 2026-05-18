@@ -102,6 +102,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client.name == "clangd" then
             vim.keymap.set({ "n", "v" }, "<leader>la", ":LspClangdSwitchSourceHeader<CR>", { buffer = true })
         end
+        if client.name == "glslls" then
+            vim.keymap.set({ "n", "v" }, "<leader>lp", ":!bb glslViewer % -l<CR>", { buffer = true })
+        end
     end
 })
 
@@ -132,6 +135,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
 vim.lsp.config("nixd", { settings = { nixd = { formatting = { command = { "alejandra" } } } } })
 vim.lsp.config("clangd", { cmd = { "clangd", "--fallback-style=webkit" } })
+vim.lsp.config("glslls", { cmd = { "glslls", "--stdin", "--target-env=opengl" } })
 
 -- debugger
 local dap = require("dap")
