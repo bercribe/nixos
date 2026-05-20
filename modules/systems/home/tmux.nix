@@ -29,6 +29,9 @@
       set -s set-clipboard on
       set -as terminal-features ',screen-256color:clipboard'
 
+      # enable true color
+      set -ga terminal-overrides ",*-256color:Tc"
+
       bind u switch-client -l
       bind g display-popup -E "st"
       bind e run-shell "${lib.getExe editScrollback}"
