@@ -128,7 +128,6 @@ in {
       exiftool # image metadata
       eza # better ls
       ffmpeg # video utilities
-      generate-pod # TTS on readeck articles
       gh # github cli
       glow # cli markdown renderer
       glslviewer # live fragment shader renderer
@@ -168,6 +167,7 @@ in {
       firefox # browser
       foot # terminal
       gale # thunderstore mod manager
+      generate-pod # TTS on readeck articles
       ghostty # terminal
       godot_4 # game engine
       handbrake # video transcoding
@@ -187,6 +187,7 @@ in {
       pavucontrol # sound control
       pdfarranger # simple pdf editor
       pureref # reference image viewer
+      sandbox # convenience util for code sandbox
       thunar # file browser
       wineWowPackages.waylandFull # windows game emulator
       wireshark # network analyzer
