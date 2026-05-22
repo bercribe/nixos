@@ -26,10 +26,16 @@
     zsh-abbr = {
       enable = true;
       abbreviations = {
-        "git m" = ''git commit -m "%"'';
+        "git m" = ''git commit -m "%%"'';
+        # https://piechowski.io/post/git-commands-before-reading-code/
+        "git bugs" = "git log -i -E --grep=\"fix|bug|broken\" --name-only --format='' | sort | uniq -c | sort -nr | head -20";
+        "git churn" = ''git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20'';
+        "git crisis" = ''git log --oneline --since="1 year ago" | grep -iE 'revert|hotfix|emergency|rollback' '';
+        "git pace" = "git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c";
+        "git who" = "git shortlog -sn --no-merges";
         jctl = "journalctl";
         jfu = "journalctl -f -u";
-        nsu = "nix shell github:NixOS/nixpkgs/nixos-unstable#%";
+        nsu = "nix shell github:NixOS/nixpkgs/nixos-unstable#%%";
         sctl = "systemctl";
         vim = "nvim";
       };
@@ -53,6 +59,7 @@
       config = lib.mkOrder 1000 ''
         # enables cursor manipulation for abbreviations using %
         ABBR_SET_EXPANSION_CURSOR=1
+        ABBR_EXPANSION_CURSOR_MARKER="%%"
 
         # typo correction
         setopt correct
