@@ -43,6 +43,7 @@
       ];
       video = [
         "audio/vnd.wave"
+        "audio/wav"
         "video/mp4"
         "video/vnd.avi"
         "video/x-matroska"
