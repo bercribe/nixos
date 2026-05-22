@@ -82,6 +82,9 @@
   sops.secrets.miniflux = {
     path = "/home/mawz/.config/miniflux/api_key";
   };
+  sops.secrets.readeck = {
+    path = "/home/mawz/.config/readeck/api_key";
+  };
 
   gtk = {
     enable = true;

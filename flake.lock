@@ -95,11 +95,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778898949,
-        "narHash": "sha256-zn7KmNXfYI1JzmfngMvWPAmCMy4MqdMC0nqH9HFgK6E=",
+        "lastModified": 1779417930,
+        "narHash": "sha256-3htNAZnDzBpbWpdSs7BGkjXryNkv6BvWJ3Zys8KRJbU=",
         "owner": "bercribe",
         "repo": "errata",
-        "rev": "0a40075b9a715084e905768cf1f1dc50e8f70be5",
+        "rev": "a60ca410e3a083fbcf416c3f67ca4924b5b86cbc",
         "type": "github"
       },
       "original": {
@@ -328,11 +328,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1774709303,
-        "narHash": "sha256-D3Q07BbIA2KnTcSXIqqu9P586uWxN74zNoCH3h2ESHg=",
+        "lastModified": 1778869304,
+        "narHash": "sha256-30sZNZoA1cqF5JNO9fVX+wgiQYjB7HJqqJ4ztCDeBZE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8110df5ad7abf5d4c0f6fb0f8f978390e77f9685",
+        "rev": "d233902339c02a9c334e7e593de68855ad26c4cb",
         "type": "github"
       },
       "original": {
@@ -409,11 +409,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1777775470,
-        "narHash": "sha256-r7XLmx1EsUjqvtS4rLWNIESVBuvgxHKwDAKu2JJ6Oeg=",
+        "lastModified": 1779415644,
+        "narHash": "sha256-V6IbV1hbo8IlphxdkNYb7BYNJuILFPdce9R4SapG5d8=",
         "ref": "refs/heads/master",
-        "rev": "b4465dcd38449c2fb0259e372ba5aba79e2188be",
-        "revCount": 32,
+        "rev": "fc742903cc19e73b4d10ae4df39d129e9a43b6bc",
+        "revCount": 33,
         "type": "git",
         "url": "ssh://git@github.com/bercribe/secrets.git"
       },

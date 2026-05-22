@@ -128,6 +128,7 @@ in {
       exiftool # image metadata
       eza # better ls
       ffmpeg # video utilities
+      generate-pod # TTS on readeck articles
       gh # github cli
       glow # cli markdown renderer
       glslviewer # live fragment shader renderer
