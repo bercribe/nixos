@@ -164,6 +164,7 @@ in {
       czkawka # deduping util
       darktable # photo editor
       discord # voice chat
+      epub-clean # ebook utility
       firefox # browser
       foot # terminal
       gale # thunderstore mod manager
