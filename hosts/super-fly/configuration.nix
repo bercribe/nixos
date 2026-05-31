@@ -9,6 +9,7 @@
 
   local.rclone.enable = true;
 
+  local.cron.article-export.enable = true;
   local.cron.finance-sync.enable = true;
   local.cron.heartbeat-healthchecks.enable = true;
   local.cron.media-download.enable = true;

@@ -5,32 +5,34 @@
   local,
   ...
 }: let
-  cfg = config.local.cron.kindle-export;
+  cfg = config.local.cron.article-export;
   utils = local.utils;
 in {
-  options.local.cron.kindle-export.enable = lib.mkEnableOption "kindle export";
+  options.local.cron.article-export.enable = lib.mkEnableOption "article export";
 
   config = lib.mkIf cfg.enable {
     local.services.postfix.enable = true;
 
-    sops.secrets."readeck/cron-api-key" = {};
-    sops.secrets."readeck/kindle-export-receiver" = {};
+    sops.secrets.readeck = {owner = "mawz";};
+    sops.secrets.kindle-export-receiver = {owner = "mawz";};
 
-    systemd.timers.kindle-export = {
+    systemd.timers.article-export = {
       wantedBy = ["timers.target"];
       timerConfig = {
         OnCalendar = "weekly";
-        Unit = "kindle-export.service";
+        Unit = "article-export.service";
       };
     };
-    systemd.services.kindle-export = {
+    systemd.services.article-export = {
+      path = ["/run/wrappers"];
       script = let
         convert = "${pkgs.calibre}/bin/ebook-convert";
+        articleDir = "/zvault/syncthing/media/articles/";
       in ''
-        key="$(cat ${config.sops.secrets."readeck/cron-api-key".path})"
-        receiver="$(cat ${config.sops.secrets."readeck/kindle-export-receiver".path})"
+        key="$(cat ${config.sops.secrets.readeck.path})"
+        receiver="$(cat ${config.sops.secrets.kindle-export-receiver.path})"
 
-        tmpdir=$(mktemp -d /tmp/kindle-export-XXXXXX)
+        tmpdir=$(mktemp -d /tmp/article-export-XXXXXX)
         basename=$(date +"%Y-%m-%d")-readeck-bookmarks
         basepath="$tmpdir/$basename"
 
@@ -55,13 +57,16 @@ in {
           echo $(${pkgs.coreutils}/bin/base64 "$basepath.epub")
           echo
           echo "--$boundary--"
-        ) | ${pkgs.postfix}/bin/sendmail $receiver
+        ) | sendmail $receiver
 
-        ${utils.writeHealthchecksPingScript {slug = "kindle-export";}}
+        mkdir -p ${articleDir}
+        mv "$basepath.epub" ${articleDir}
+
+        ${utils.writeHealthchecksPingScript {slug = "article-export";}}
       '';
       serviceConfig = {
         Type = "oneshot";
-        User = "root";
+        User = "mawz";
       };
     };
   };

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./article-export.nix
     ./disk-monitor.nix
     ./echoes-backup.nix
     ./email-digest.nix
@@ -7,7 +8,6 @@
     ./finance-sync.nix
     ./gdrive-backup.nix
     ./heartbeat-healthchecks.nix
-    ./kindle-export.nix
     ./media-download.nix
     ./pcloud-echoes-sync.nix
     ./syncthing-conflicts.nix
