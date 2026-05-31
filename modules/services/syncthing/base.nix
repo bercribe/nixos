@@ -70,7 +70,7 @@ in {
           media = {
             enable = lib.mkDefault false;
             path = lib.mkDefault "/home/mawz/media";
-            devices = ["super-fly" "whitesnake"];
+            devices = ["heavens-door" "highway-star" "sethan" "super-fly" "whitesnake"];
             inherit versioning;
           };
           geb = {
