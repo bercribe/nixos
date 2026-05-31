@@ -72,8 +72,6 @@ vim.keymap.set({ "n", "v" }, "<leader>hb", ":Gitsigns blame<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hd", ":Gitsigns preview_hunk_inline<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
--- typst
-vim.keymap.set({ "n", "v" }, "<leader>Pt", ":TypstPreview<CR>")
 
 -- scripts
 vim.keymap.set({ "n", "v" }, "<leader>xg",
@@ -104,6 +102,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
         if client.name == "glslls" then
             vim.keymap.set({ "n", "v" }, "<leader>lp", ":!bb glslViewer % -l<CR>", { buffer = true })
+        end
+        if client.name == "tinymist" then
+            vim.keymap.set({ "n", "v" }, "<leader>lp", ":TypstPreview<CR>")
         end
     end
 })
