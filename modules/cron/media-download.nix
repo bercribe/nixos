@@ -15,6 +15,7 @@ in {
     local.rclone.enable = true;
 
     sops.secrets.miniflux = {owner = "mawz";};
+    sops.secrets.readeck = {owner = "mawz";};
 
     systemd.timers.media-download = {
       wantedBy = ["timers.target"];
@@ -32,6 +33,8 @@ in {
       script = let
         mfUrl = utils.serviceUrl "miniflux";
         mfKey = config.sops.secrets.miniflux.path;
+        rdUrl = utils.serviceUrl "readeck";
+        rdKey = config.sops.secrets.readeck.path;
         vidDir = "/zvault/syncthing/media/vids/";
         # TODO: revert unstable
         dlVids =
@@ -46,11 +49,14 @@ in {
           } ''
             from datetime import datetime, timezone
             import miniflux
+            import requests
             import warnings
             import yt_dlp
 
             _url = "${mfUrl}"
             _key_path = "${mfKey}"
+            _readeck_url = "${rdUrl}"
+            _readeck_key_path = "${rdKey}"
             _paths = {"home": "${vidDir}"}
             _categories = [26, 5]
 
@@ -86,13 +92,29 @@ in {
                 return urls
 
 
+            def get_readeck_vids():
+                with open(_readeck_key_path) as f:
+                    api_key = f.read().strip()
+                resp = requests.get(
+                    f"{_readeck_url}/api/bookmarks?is_archived=false",
+                    headers={"Authorization": f"Bearer {api_key}"},
+                )
+                bookmarks = resp.json()
+                urls = [b["url"] for b in bookmarks]
+                youtube_urls = [u for u in urls if "youtu" in u]
+                return youtube_urls
+
+
             def dl_vids(urls):
                 yt_cli.download(urls)
 
 
+            vids = []
             for category in _categories:
-                vids = category_entries(category)
-                dl_vids(vids)
+                vids.extend(category_entries(category))
+            vids.extend(get_readeck_vids())
+
+            dl_vids(vids)
           '';
       in ''
         ${lib.getExe dlVids}
