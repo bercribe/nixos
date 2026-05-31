@@ -11,6 +11,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets."healthchecks/local/ping-key" = {
       sopsFile = inputs.secrets + /sops/local.yaml;
+      owner = "mawz";
     };
   };
 }

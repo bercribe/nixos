@@ -67,6 +67,12 @@ in {
             devices = ["heavens-door" "super-fly"];
             inherit versioning;
           };
+          media = {
+            enable = lib.mkDefault false;
+            path = lib.mkDefault "/home/mawz/media";
+            devices = ["super-fly" "whitesnake"];
+            inherit versioning;
+          };
           geb = {
             enable = lib.mkDefault false;
             path = lib.mkDefault "/home/mawz/geb";

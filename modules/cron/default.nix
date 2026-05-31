@@ -8,6 +8,7 @@
     ./gdrive-backup.nix
     ./heartbeat-healthchecks.nix
     ./kindle-export.nix
+    ./media-download.nix
     ./pcloud-echoes-sync.nix
     ./syncthing-conflicts.nix
     ./syncthing-healthchecks.nix

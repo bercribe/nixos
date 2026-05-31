@@ -11,6 +11,7 @@
 
   local.cron.finance-sync.enable = true;
   local.cron.heartbeat-healthchecks.enable = true;
+  local.cron.media-download.enable = true;
   local.cron.pcloud-echoes-sync.enable = true;
   local.cron.syncthing-conflicts.enable = true;
 
@@ -31,6 +32,7 @@
     "d /zvault/syncthing/personal-cloud 0755 mawz users"
     "d /zvault/syncthing/projects 0755 mawz users"
     "d /zvault/syncthing/libraries 0755 mawz users"
+    "d /zvault/syncthing/media 0755 mawz users"
     "d /zvault/syncthing/geb 0755 mawz users"
     "d /zvault/syncthing/sethan 0755 mawz users"
     "d /zvault/syncthing/whitesnake 0755 mawz users"
@@ -47,6 +49,10 @@
     libraries = {
       enable = true;
       path = "/zvault/syncthing/libraries";
+    };
+    media = {
+      enable = true;
+      path = "/zvault/syncthing/media";
     };
     geb = {
       enable = true;
