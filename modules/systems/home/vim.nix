@@ -78,6 +78,7 @@ in {
         python.commentPattern = "#";
         rust.commentPattern = "//";
         sh.commentPattern = "#";
+        typst.commentPattern = "//";
       };
     };
 
