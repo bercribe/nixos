@@ -202,7 +202,7 @@ in {
               (deflayer mods
                 _ _ _ _ _ _ _ _ _ _
                 @escsw @amet @salt @dctl @fsft _ _ @jsft @kctl @lalt @;met
-                @mcs _ _ _ _ _ _ _ _ _ @rsft
+                @lsft  _ _ _ _ _ _ _ _ _ @rsft
                 @mnm rpt @lsft _ @tmux @mcs
               )
               (deflayer pass
