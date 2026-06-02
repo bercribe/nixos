@@ -46,6 +46,7 @@ in {
   config = {
     local.vim = {
       languageServers = with pkgs; {
+        astro = astro-language-server;
         bashls = bash-language-server;
         clangd = clang-tools; # c lsp
         glsl_analyzer = glsl_analyzer; # shader lsp
@@ -58,6 +59,7 @@ in {
         tinymist = tinymist; # typst lsp
       };
       treesitterParsers = [
+        "astro"
         "bash"
         "cpp"
         "glsl"
@@ -69,6 +71,7 @@ in {
       ];
       filetypes = {
         "*" = {};
+        astro.commentPattern = "//";
         cpp.commentPattern = "//";
         glsl.commentPattern = "//";
         json.tabsize = 2;
@@ -197,6 +200,16 @@ in {
             vim.api.nvim_feedkeys(keys, "n", false)
           end)
         '';
+
+        astroTsFixup = ''
+          vim.lsp.config['astro'] = {
+            init_options = {
+              typescript = {
+                tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
+              },
+            },
+          }
+        '';
       in ''
         ${builtins.readFile ./vim.lua}
 
@@ -204,6 +217,7 @@ in {
         ${commentCommands}
 
         -- lsp servers
+        ${astroTsFixup}
         vim.lsp.enable({
           ${lspServers}
         })
