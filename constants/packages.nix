@@ -6,6 +6,7 @@
   core = with pkgs; [
     bat # better cat
     dig # dns debug
+    dua # disk usage analyzer
     fd # better find
     fzf # fuzzy find
     git # version control
@@ -124,7 +125,6 @@ in {
       cht-sh # cheat sheet
       devenv # nix based developer environments
       difftastic # syntax aware diff
-      dua # disk usage analyzer
       exiftool # image metadata
       eza # better ls
       ffmpeg # video utilities
