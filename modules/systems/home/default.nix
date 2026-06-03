@@ -68,7 +68,7 @@ in {
         };
       };
       heavens-door-git = {
-        inherit user forwardAgent addKeysToAgent extraOptions;
+        inherit user forwardAgent addKeysToAgent;
       };
       heavens-door-decrypt = {
         port = 2222;
