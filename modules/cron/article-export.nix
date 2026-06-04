@@ -14,7 +14,8 @@ in {
     local.services.postfix.enable = true;
 
     sops.secrets.readeck = {owner = "mawz";};
-    sops.secrets.kindle-export-receiver = {owner = "mawz";};
+    sops.secrets.kindle-receiver = {owner = "mawz";};
+    sops.secrets.pocketbook-receiver = {owner = "mawz";};
 
     systemd.timers.article-export = {
       wantedBy = ["timers.target"];
@@ -30,7 +31,8 @@ in {
         articleDir = "/zvault/syncthing/media/articles/";
       in ''
         key="$(cat ${config.sops.secrets.readeck.path})"
-        receiver="$(cat ${config.sops.secrets.kindle-export-receiver.path})"
+        kindleReceiver="$(cat ${config.sops.secrets.kindle-receiver.path})"
+        pocketbookReceiver="$(cat ${config.sops.secrets.pocketbook-receiver.path})"
 
         tmpdir=$(mktemp -d /tmp/article-export-XXXXXX)
         basename=$(date +"%Y-%m-%d")-readeck-bookmarks
@@ -44,7 +46,7 @@ in {
         boundary=$(${lib.getExe pkgs.openssl} rand -base64 12)
         (
           echo "From: Readeck <noreply@readeck.lan>"
-          echo "To: $receiver"
+          echo "To: $kindleReceiver"
           echo "Subject: Readeck export"
           echo "Mime-Version: 1.0"
           echo "Content-Type: multipart/mixed; boundary=\"$boundary\""
@@ -57,7 +59,25 @@ in {
           echo $(${pkgs.coreutils}/bin/base64 "$basepath.epub")
           echo
           echo "--$boundary--"
-        ) | sendmail $receiver
+        ) | sendmail $kindleReceiver
+
+        boundary=$(${lib.getExe pkgs.openssl} rand -base64 12)
+        (
+          echo "From: Readeck <noreply@readeck.lan>"
+          echo "To: $pocketbookReceiver"
+          echo "Subject: Readeck export"
+          echo "Mime-Version: 1.0"
+          echo "Content-Type: multipart/mixed; boundary=\"$boundary\""
+          echo
+          echo "--$boundary"
+          echo "Content-Type: application;"
+          echo "Content-Transfer-Encoding: base64"
+          echo "Content-Disposition: attachment; filename=\"$basename.epub\""
+          echo
+          echo $(${pkgs.coreutils}/bin/base64 "$basepath.epub")
+          echo
+          echo "--$boundary--"
+        ) | sendmail $pocketbookReceiver
 
         mkdir -p ${articleDir}
         mv "$basepath.epub" ${articleDir}
