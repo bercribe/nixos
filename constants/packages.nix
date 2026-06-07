@@ -170,6 +170,7 @@ in {
       gale # thunderstore mod manager
       generate-pod # TTS on readeck articles
       ghostty # terminal
+      gimp # photo editor
       godot_4 # game engine
       handbrake # video transcoding
       imagemagick # image viewer
