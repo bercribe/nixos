@@ -13,6 +13,7 @@
     cloud-hypervisor = final.unstable.cloud-hypervisor;
     devenv = final.unstable.devenv;
     karakeep = final.unstable.karakeep;
+    nono = final.unstable.nono;
     pi-coding-agent = final.unstable.pi-coding-agent;
     pocket-tts = final.unstable.pocket-tts;
     whosthere = final.unstable.whosthere;

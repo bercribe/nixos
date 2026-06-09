@@ -7,6 +7,7 @@
   cfg = config.local;
 in {
   imports = [
+    ./nono.nix
     ./tmux.nix
     ./vim.nix
     ./yazi.nix
@@ -68,6 +69,11 @@ in {
           hunk-header-decoration-style = "none";
         };
       };
+    };
+
+    local.programs.nono = {
+      enable = true;
+      pi.allowedDirs = ["~/sources"];
     };
 
     # Let Home Manager install and manage itself.

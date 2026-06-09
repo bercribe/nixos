@@ -15,6 +15,7 @@
     jq # json formatter
     jujutsu # version control
     lazygit # git tui
+    nono # agent sandbox
     python3 # scripting
     ripgrep # file content search
     tcpdump # network sniffer
