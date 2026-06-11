@@ -44,6 +44,8 @@ vim.keymap.set({ "n", "v" }, "<leader>cu", ":norm ^diwx<CR>")
 -- indent pasted lines
 vim.keymap.set("n", "<leader>[", "'[V']<")
 vim.keymap.set("n", "<leader>]", "'[V']>")
+-- shell
+vim.keymap.set("n", "<leader>t", ":te zsh<CR>i")
 
 -- fzf-lua
 vim.keymap.set({ "n", "v" }, "<leader>f", ":FzfLua files<CR>")
@@ -77,6 +79,7 @@ vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xg",
     ":execute '!opn $(gtgh --upstream origin --path \"%\" --line' line('.') ')'<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!opn $(gtgh --path \"%\" --line' line('.') ')'<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>xp", ':!printdoc "%"<CR>')
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)

@@ -189,6 +189,7 @@ in {
       obsidian # PKM tool
       pavucontrol # sound control
       pdfarranger # simple pdf editor
+      printdoc # CLI convenience
       pureref # reference image viewer
       sandbox # convenience util for code sandbox
       thunar # file browser
