@@ -26,7 +26,7 @@
     zsh-abbr = {
       enable = true;
       abbreviations = {
-        agent = "nono run --profile pi --allow-cwd --pi";
+        agent = "nono run --profile pi --allow-cwd -- pi";
         "git m" = ''git commit -m "%%"'';
         # https://piechowski.io/post/git-commands-before-reading-code/
         "git bugs" = "git log -i -E --grep=\"fix|bug|broken\" --name-only --format='' | sort | uniq -c | sort -nr | head -20";
