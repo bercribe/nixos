@@ -104,6 +104,11 @@ in {
               run = ''shell zsh --block'';
               desc = "Open shell here";
             }
+            {
+              on = "A";
+              run = ''shell 'fa "$0"' --block'';
+              desc = "File actions";
+            }
             # shortcuts
             {
               on = ["g" "/"];

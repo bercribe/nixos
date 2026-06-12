@@ -26,6 +26,16 @@
           $TERMINAL -e $cmd
         '';
       in "${run-command}";
+      "$file-actions" = let
+        run = pkgs.writeShellScript "fa-clipboard" ''
+          export TMUX_TMPDIR="/run/user/$(id -u)"
+          f=$(pasta)
+          [[ -z "$f" ]] && exit 0
+          cmd=$(fa -l | ${fuzzel} --dmenu --prompt="$(basename "$f"): ")
+          [[ -z "$cmd" ]] && exit 0
+          $TERMINAL -e fa -r "$cmd" "$f"
+        '';
+      in "${run}";
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = let
@@ -43,6 +53,7 @@
         "$mainMod, J, exec, $editor"
         "$mainMod, B, exec, $browser"
         "$mainMod, R, exec, $command-runner"
+        "$mainMod, A, exec, $file-actions"
 
         # universal copy paste
         "$mainMod, X, sendshortcut, , XF86Cut, activewindow"

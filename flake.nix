@@ -73,6 +73,7 @@
     homeModules = [
       sops-nix.homeModules.sops
       karatui.homeModules.karatui
+      errata.homeModules.file-actions
       errata.homeModules.mirror
       errata.homeModules.session-tool
       errata.homeModules.sfx

@@ -28,6 +28,7 @@ system: ''
         modules = [
           ./home.nix
           my-nix.homeModules.minimal
+          errata.homeModules.file-actions
           errata.homeModules.session-tool
           {
             local.packages.includeScripts = true;

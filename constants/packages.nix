@@ -37,6 +37,8 @@
     bb
     catbin
     copy
+    cpath
+    file-actions
     gtgh
     hoy
     httpstatus

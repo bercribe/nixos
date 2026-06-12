@@ -19,6 +19,7 @@ vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>yy", '"+yy')
 vim.keymap.set("n", "<leader>yp", [[:let @+ = expand('%')<CR>]])
+vim.keymap.set("n", "<leader>yr", [[:let @+ = system('realpath ' . shellescape(expand('%')))<CR>]])
 vim.keymap.set("n", "<leader>yl", [[:let @+ = expand('%') . ':' . line('.')<CR>]])
 vim.keymap.set("n", "<leader>yg",
     [[:let @+ = system('gtgh --upstream origin --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
@@ -79,7 +80,7 @@ vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xg",
     ":execute '!opn $(gtgh --upstream origin --path \"%\" --line' line('.') ')'<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!opn $(gtgh --path \"%\" --line' line('.') ')'<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>xp", ':!printdoc "%"<CR>')
+vim.keymap.set({ "n", "v" }, "<leader>xf", ':te fa "%"<CR>i')
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)

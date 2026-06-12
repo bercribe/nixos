@@ -21,6 +21,7 @@
         tmux capture-pane -p -S - > $tmpfile
         tmux new-window "$EDITOR $tmpfile '+set nowrap' '+normal GH2k'; rm $tmpfile"
       '';
+      pane_path = ''#{pane_current_path}'';
     in ''
       # fix warnings caused by UWSM
       set -g default-command "''${SHELL}"
@@ -35,6 +36,8 @@
       bind u switch-client -l
       bind g display-popup -E "st"
       bind e run-shell "${lib.getExe editScrollback}"
+      bind y run-shell "tmux set-buffer -w '${pane_path}'"
+      bind a run-shell 'tmux display-popup -E "fa \"${pane_path}\""'
       bind U select-layout -o
 
       # make these repeatable

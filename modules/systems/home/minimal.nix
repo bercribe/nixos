@@ -71,6 +71,37 @@ in {
       };
     };
 
+    programs.file-actions = {
+      enable = true;
+      # The idea here is to allow for easy context transfer between core apps.
+      # As of writing, core apps are: system, tmux, zsh, nvim, yazi, and obsidian.
+      # Each core app should fulfill 3 capabilities: copy path, invoke actions, and
+      # appear in action list.
+      # Additional oneshot commands are also nice to include here.
+      actions = [
+        # core
+        "nvim"
+        "opn"
+        ''cd "$d" && zsh''
+        ''bb foot -D "$d"''
+        ''st "$d"''
+        ''tmux new-window -c "$d"''
+        ''tmux split-window -c "$d"''
+        ''yazi "$d"''
+        # oneshot
+        "cpath"
+        "encrypt-pdf"
+        "epub-clean"
+        "gtgh --path"
+        "printdoc"
+        "removeexif"
+        "shrinkvid"
+        "zvb"
+        ''csc "$d"''
+        ''rsc "$d"''
+      ];
+    };
+
     local.programs.nono = {
       enable = true;
       pi.allowedDirs = ["~/sources"];
