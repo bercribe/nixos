@@ -75,6 +75,7 @@
       karatui.homeModules.karatui
       errata.homeModules.file-actions
       errata.homeModules.mirror
+      errata.homeModules.oo
       errata.homeModules.session-tool
       errata.homeModules.sfx
       errata.homeModules.snippets

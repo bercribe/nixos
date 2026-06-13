@@ -245,6 +245,11 @@ in {
     };
   };
 
+  programs.oo = {
+    enable = true;
+    vaultPath = "/home/mawz/personal-cloud/external-brain";
+  };
+
   # Theme settings
   # needed for stylix theming
   programs.btop.enable = true;

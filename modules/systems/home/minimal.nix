@@ -81,9 +81,10 @@ in {
       actions = [
         # core
         "nvim"
+        "oo"
         "opn"
-        ''cd "$d" && zsh''
         ''bb foot -D "$d"''
+        ''cd "$d" && zsh''
         ''st "$d"''
         ''tmux new-window -c "$d"''
         ''tmux split-window -c "$d"''

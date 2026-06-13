@@ -189,6 +189,7 @@ in {
       mpv # video player
       obs-studio # screen recording
       obsidian # PKM tool
+      oo # open obsidian
       pavucontrol # sound control
       pdfarranger # simple pdf editor
       printdoc # CLI convenience
