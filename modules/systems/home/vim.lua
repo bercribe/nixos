@@ -77,10 +77,66 @@ vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 
 -- scripts
+-- general purpose runners
+-- ┌───────────────────┬──────────────┬──────────────────┬──────────────┬──────────────────┐
+-- │ in / out          │ filter (xf)  │ to buffer (xb)   │ peek (xp)    │ terminal (xt)    │
+-- ├───────────────────┼──────────────┼──────────────────┼──────────────┼──────────────────┤
+-- │ nothing           │              │ xb               │ xp           │ xt               │
+-- │ selection         │ xf           │                  │ xp (sel)     │ xt (sel)         │
+-- │ path (%)          │              │ xb (path)        │ xp (path)    │ xt (path)        │
+-- │ command in buffer │              │ xc               │ xc (peek)    │                  │
+-- └───────────────────┴──────────────┴──────────────────┴──────────────┴──────────────────┘
+-- filter: pipe selection through command, replace
+vim.keymap.set("v", "<leader>xf", ":!")
+-- to buffer: insert command output at cursor
+vim.keymap.set("n", "<leader>xb", ":r!")
+vim.keymap.set("n", "<leader>xB", ':r! "%"<Left><Left><Left><Left>')
+-- peek: show output, dismiss with enter
+vim.keymap.set("n", "<leader>xp", ":!")
+vim.keymap.set("v", "<leader>xp", ":w !")
+vim.keymap.set("n", "<leader>xP", ':! "%"<Left><Left><Left><Left>')
+-- terminal: run in new pane
+vim.keymap.set("n", "<leader>xt", ":te ")
+vim.keymap.set("v", "<leader>xt", function()
+    local s = math.min(vim.fn.line("v"), vim.fn.line("."))
+    local e = math.max(vim.fn.line("v"), vim.fn.line("."))
+    local sel = vim.api.nvim_buf_get_lines(0, s - 1, e, true)
+    local cmd = vim.fn.input({ prompt = "Command: ", completion = "shellcmd" })
+    if cmd == "" then return end
+    local tmp = vim.fn.tempname()
+    vim.fn.writefile(sel, tmp)
+    vim.cmd("te " .. cmd .. " < " .. tmp)
+end)
+vim.keymap.set("n", "<leader>xT", ':te  "%"<Left><Left><Left><Left>')
+-- command in buffer: execute current line/selection as a command
+vim.keymap.set("n", "<leader>xc", function()
+    local line = vim.api.nvim_get_current_line()
+    local row = vim.fn.line(".")
+    local output = vim.fn.system("sh", line)
+    local lines = vim.split(output, "\n", { trimempty = true })
+    if #lines == 0 then return end
+    vim.api.nvim_buf_set_lines(0, row, row, true, lines)
+    vim.cmd("normal! " .. (row + 1) .. "GV" .. (row + #lines) .. "G")
+end)
+vim.keymap.set("v", "<leader>xc", function()
+    local s = math.min(vim.fn.line("v"), vim.fn.line("."))
+    local e = math.max(vim.fn.line("v"), vim.fn.line("."))
+    local sel = vim.api.nvim_buf_get_lines(0, s - 1, e, true)
+    local output = vim.fn.system("sh", table.concat(sel, "\n"))
+    local lines = vim.split(output, "\n", { trimempty = true })
+    if #lines == 0 then return end
+    vim.api.nvim_buf_set_lines(0, e, e, true, lines)
+    local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+    vim.api.nvim_feedkeys(esc .. (e + 1) .. "GV" .. (e + #lines) .. "G", "n", false)
+end)
+vim.keymap.set("n", "<leader>xC", ':!<C-r><C-l><CR>')
+vim.keymap.set("v", "<leader>xC", ":w !sh<CR>")
+
+-- bespoke oneshots
+vim.keymap.set({ "n", "v" }, "<leader>xa", ':te fa "%"<CR>i')
 vim.keymap.set({ "n", "v" }, "<leader>xg",
     ":execute '!opn $(gtgh --upstream origin --path \"%\" --line' line('.') ')'<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>xG", ":execute '!opn $(gtgh --path \"%\" --line' line('.') ')'<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>xf", ':te fa "%"<CR>i')
 
 -- lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format)
