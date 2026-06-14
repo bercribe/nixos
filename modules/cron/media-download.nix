@@ -106,10 +106,12 @@ in {
 
 
             def dl_vids(urls):
+                succeeded = 0
                 failed = []
                 for url in urls:
                     try:
                         yt_cli.download([url])
+                        succeeded += 1
                     except Exception as e:
                         warnings.warn(f"Skipping {url}: {e}")
                         failed.append(url)
@@ -117,6 +119,8 @@ in {
                     print(f"Failed to download {len(failed)} video(s):")
                     for url in failed:
                         print(f"  - {url}")
+                    if succeeded == 0:
+                        raise RuntimeError("no download succeeded!")
 
 
             vids = []
