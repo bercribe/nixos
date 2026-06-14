@@ -79,22 +79,23 @@ vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 -- scripts
 -- general purpose runners
 -- ┌───────────────────┬──────────────┬──────────────────┬──────────────┬──────────────────┐
--- │ in / out          │ filter (xf)  │ to buffer (xb)   │ peek (xp)    │ terminal (xt)    │
+-- │ in / out          │ filter (xf)  │ to buffer (xb)   │ output (xo)  │ terminal (xt)    │
 -- ├───────────────────┼──────────────┼──────────────────┼──────────────┼──────────────────┤
--- │ nothing           │              │ xb               │ xp           │ xt               │
--- │ selection         │ xf           │                  │ xp (sel)     │ xt (sel)         │
--- │ path (%)          │              │ xb (path)        │ xp (path)    │ xt (path)        │
--- │ command in buffer │              │ xc               │ xc (peek)    │                  │
+-- │ nothing           │              │ xb               │ xo           │ xt               │
+-- │ selection         │ xf           │                  │ xo (sel)     │ xt (sel)         │
+-- │ path (%)          │              │ xb (path)        │ xo (path)    │ xt (path)        │
+-- │ cmd in buffer     │              │ xc (sh)          │ xc (peek)    │                  │
+-- │                   │              │ xp (python)      │ xp (peek)    │                  │
 -- └───────────────────┴──────────────┴──────────────────┴──────────────┴──────────────────┘
 -- filter: pipe selection through command, replace
 vim.keymap.set("v", "<leader>xf", ":!")
 -- to buffer: insert command output at cursor
 vim.keymap.set("n", "<leader>xb", ":r!")
 vim.keymap.set("n", "<leader>xB", ':r! "%"<Left><Left><Left><Left>')
--- peek: show output, dismiss with enter
-vim.keymap.set("n", "<leader>xp", ":!")
-vim.keymap.set("v", "<leader>xp", ":w !")
-vim.keymap.set("n", "<leader>xP", ':! "%"<Left><Left><Left><Left>')
+-- output: show output, dismiss with enter
+vim.keymap.set("n", "<leader>xo", ":!")
+vim.keymap.set("v", "<leader>xo", ":w !")
+vim.keymap.set("n", "<leader>xO", ':! "%"<Left><Left><Left><Left>')
 -- terminal: run in new pane
 vim.keymap.set("n", "<leader>xt", ":te ")
 vim.keymap.set("v", "<leader>xt", function()
@@ -131,6 +132,33 @@ vim.keymap.set("v", "<leader>xc", function()
 end)
 vim.keymap.set("n", "<leader>xC", ':!<C-r><C-l><CR>')
 vim.keymap.set("v", "<leader>xC", ":w !sh<CR>")
+-- python in buffer: execute current line/selection as python
+vim.keymap.set("n", "<leader>xp", function()
+    local line = vim.api.nvim_get_current_line()
+    local row = vim.fn.line(".")
+    local output = vim.fn.system("python3", "print(" .. line .. ")")
+    local lines = vim.split(output, "\n", { trimempty = true })
+    if #lines == 0 then return end
+    vim.api.nvim_buf_set_lines(0, row, row, true, lines)
+    vim.cmd("normal! " .. (row + 1) .. "GV" .. (row + #lines) .. "G")
+end)
+vim.keymap.set("v", "<leader>xp", function()
+    local s = math.min(vim.fn.line("v"), vim.fn.line("."))
+    local e = math.max(vim.fn.line("v"), vim.fn.line("."))
+    local sel = vim.api.nvim_buf_get_lines(0, s - 1, e, true)
+    local output = vim.fn.system("python3", table.concat(sel, "\n"))
+    local lines = vim.split(output, "\n", { trimempty = true })
+    if #lines == 0 then return end
+    vim.api.nvim_buf_set_lines(0, e, e, true, lines)
+    local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+    vim.api.nvim_feedkeys(esc .. (e + 1) .. "GV" .. (e + #lines) .. "G", "n", false)
+end)
+vim.keymap.set("n", "<leader>xP", function()
+    local line = vim.api.nvim_get_current_line()
+    local output = vim.fn.system("python3", "print(" .. line .. ")")
+    vim.api.nvim_echo({ { output } }, false, {})
+end)
+vim.keymap.set("v", "<leader>xP", ":w !python3<CR>")
 
 -- bespoke oneshots
 vim.keymap.set({ "n", "v" }, "<leader>xa", ':te fa "%"<CR>i')
