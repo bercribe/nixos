@@ -146,7 +146,10 @@ vim.keymap.set("v", "<leader>xp", function()
     local s = math.min(vim.fn.line("v"), vim.fn.line("."))
     local e = math.max(vim.fn.line("v"), vim.fn.line("."))
     local sel = vim.api.nvim_buf_get_lines(0, s - 1, e, true)
-    local output = vim.fn.system("python3", table.concat(sel, "\n"))
+    local source = table.concat(sel, "\n")
+    local wrapper = "import ast\nfor node in ast.parse(" ..
+        vim.fn.json_encode(source) .. ").body:\n exec(compile(ast.Interactive([node]),'','single'))"
+    local output = vim.fn.system("python3", wrapper)
     local lines = vim.split(output, "\n", { trimempty = true })
     if #lines == 0 then return end
     vim.api.nvim_buf_set_lines(0, e, e, true, lines)
@@ -158,7 +161,16 @@ vim.keymap.set("n", "<leader>xP", function()
     local output = vim.fn.system("python3", "print(" .. line .. ")")
     vim.api.nvim_echo({ { output } }, false, {})
 end)
-vim.keymap.set("v", "<leader>xP", ":w !python3<CR>")
+vim.keymap.set("v", "<leader>xP", function()
+    local s = math.min(vim.fn.line("v"), vim.fn.line("."))
+    local e = math.max(vim.fn.line("v"), vim.fn.line("."))
+    local sel = vim.api.nvim_buf_get_lines(0, s - 1, e, true)
+    local source = table.concat(sel, "\n")
+    local wrapper = "import ast\nfor node in ast.parse(" ..
+        vim.fn.json_encode(source) .. ").body:\n exec(compile(ast.Interactive([node]),'','single'))"
+    local output = vim.fn.system("python3", wrapper)
+    vim.api.nvim_echo({ { output } }, false, {})
+end)
 
 -- bespoke oneshots
 vim.keymap.set({ "n", "v" }, "<leader>xa", ':te fa "%"<CR>i')
