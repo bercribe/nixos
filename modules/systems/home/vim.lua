@@ -13,7 +13,7 @@ vim.o.termguicolors = true;
 
 -- binds
 -- convenience
-vim.keymap.set({ "n", "v" }, "<leader>w", ":write<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>w", ":noa w<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
 -- system clipboard
 vim.keymap.set("v", "<leader>y", '"+y')
