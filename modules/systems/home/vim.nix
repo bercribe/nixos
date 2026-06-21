@@ -51,23 +51,32 @@ in {
         clangd = clang-tools; # c lsp
         glsl_analyzer = glsl_analyzer; # shader lsp
         glslls = lib.mkIf (lib.meta.availableOn stdenv.hostPlatform.system glslls) glslls; # shader lsp
+        jsonls = vscode-langservers-extracted;
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
         ruff = ruff; # python linter
         rust_analyzer = rust-analyzer;
         tinymist = tinymist; # typst lsp
+        ts_ls = typescript-language-server;
+        yamlls = yaml-language-server;
       };
       treesitterParsers = [
         "astro"
         "bash"
         "cpp"
+        "css"
         "glsl"
+        "html"
+        "javascript"
+        "json"
         "lua"
         "nix"
         "python"
         "rust"
+        "typescript"
         "typst"
+        "yaml"
       ];
       filetypes = {
         "*" = {};
