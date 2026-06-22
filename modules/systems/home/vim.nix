@@ -78,6 +78,7 @@ in {
         "typst"
         "yaml"
       ];
+      # check with :set filetype
       filetypes = {
         "*" = {};
         astro.commentPattern = "//";
@@ -91,6 +92,7 @@ in {
         rust.commentPattern = "//";
         sh.commentPattern = "#";
         typst.commentPattern = "//";
+        yaml.tabsize = 2;
       };
     };
 

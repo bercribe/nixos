@@ -22,6 +22,7 @@
       "encrypt-pdf"
       "epub-clean"
       "gtgh --path"
+      "imv"
       "inkscape"
       "printdoc"
       "removeexif"
