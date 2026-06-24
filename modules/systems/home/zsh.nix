@@ -17,6 +17,7 @@
 
     history = {
       extended = true;
+      share = false;
       expireDuplicatesFirst = true;
       findNoDups = true;
       ignoreAllDups = true;
