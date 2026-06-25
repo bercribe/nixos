@@ -241,11 +241,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774138238,
-        "narHash": "sha256-WqfVq/xtqB5ac28ONZgZBAi+Q+CAWAM+URuFtS58hS8=",
+        "lastModified": 1782356959,
+        "narHash": "sha256-Jc0TYTFlvAAWrOPghiTElAJSdGR6MdQ+fq1ddK0jVC8=",
         "owner": "bercribe",
         "repo": "karatui",
-        "rev": "3b1440cd0b8062482b00e14e71526f705d090cb2",
+        "rev": "62755d14d256fd1cd7ebb8c9f1d624e611db0a80",
         "type": "github"
       },
       "original": {
