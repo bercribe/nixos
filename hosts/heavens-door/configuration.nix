@@ -41,6 +41,7 @@
   services.syncthing.settings.folders = {
     personal-cloud.enable = true;
     projects.enable = true;
+    media.enable = true;
     libraries = {
       enable = true;
       path = "/zsolid/syncthing/libraries";
