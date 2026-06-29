@@ -214,6 +214,7 @@ in {
       karatui # karakeep TUI
       ncspot # spotify TUI
       notification # system notification utility
+      pandoc # conversion util
       qmk # keyboard firmware
       removeexif # strips exif from jpegs
       sfx # play sound effect
