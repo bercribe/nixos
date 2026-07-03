@@ -15,6 +15,7 @@
     fq # jq for binary files
     fzf # fuzzy find
     git # version control
+    gron # grepable json
     hexyl # hex viewer
     jless # interactive json viewer
     jq # json formatter
