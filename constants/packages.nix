@@ -46,6 +46,7 @@
     make-shell
     markdownquote
     murder
+    myip
     nato
     opn
     pasta
