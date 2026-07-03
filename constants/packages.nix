@@ -5,9 +5,14 @@
 }: let
   core = with pkgs; [
     bat # better cat
-    dig # dns debug
+    broot # better tree
+    croc # file sending util
+    doggo # better dig
     dua # disk usage analyzer
+    duf # better df
+    entr # run command when files change
     fd # better find
+    fq # jq for binary files
     fzf # fuzzy find
     git # version control
     hexyl # hex viewer
@@ -15,13 +20,19 @@
     jq # json formatter
     jujutsu # version control
     lazygit # git tui
+    moreutils # extra coreutils
     nono # agent sandbox
+    procs # better ps
+    pv # pipe viewer
     python3 # scripting
     ripgrep # file content search
+    ripgrep-all # ripgrep on PDFs, etc
+    sd # better sed
     tcpdump # network sniffer
     tmux # terminal multiplexer
     tree # directory tree
     unzip # zip extractor
+    up # interactive pipe builder
     wget # network util
     yazi # terminal file manager
     zip # zip compressor
@@ -138,6 +149,7 @@ in {
       grex # regex builder
       hledger # ledger accounting tool
       hledger-ui # hledger tui
+      hyperfine # benchmarking util
       isd # systemd TUI
       just # command runner
       lm_sensors # hardware measurements
