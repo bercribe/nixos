@@ -1,15 +1,25 @@
 {
   pkgs,
+  config,
   lib,
   ...
-}: {
-  # currently required: https://discourse.nixos.org/t/connected-to-mullvadvpn-but-no-internet-connection/35803/8
-  services.resolved.enable = true;
-  services.mullvad-vpn.enable = true;
-  # for GUI
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+}: let
+  cfg = config.local.clients.mullvad;
+in {
+  options.local.clients.mullvad = with lib;
+  with types; {
+    enable = mkEnableOption "mullvad";
+  };
 
-  # fixes conflict between mullvad and home wireguard server by forcing home server for everything
-  # remember to enable local network sharing in mullvad
-  networking.networkmanager.ensureProfiles.profiles.home-lan.ipv4.dns-search = lib.mkForce "lan;~.;";
+  config = lib.mkIf cfg.enable {
+    # currently required: https://discourse.nixos.org/t/connected-to-mullvadvpn-but-no-internet-connection/35803/8
+    services.resolved.enable = true;
+    services.mullvad-vpn.enable = true;
+    # for GUI
+    services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+    # fixes conflict between mullvad and home wireguard server by forcing home server for everything
+    # remember to enable local network sharing in mullvad
+    networking.networkmanager.ensureProfiles.profiles.home-lan.ipv4.dns-search = lib.mkForce "lan;~.;";
+  };
 }

@@ -7,7 +7,7 @@
     ./hardware-configuration.nix
     ../../modules/systems/desktop
     ../../modules/systems/hardware/encrypted-zfs.nix
-    # ./china.nix
+    ./china.nix
   ];
 
   # Config
