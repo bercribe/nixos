@@ -57,7 +57,7 @@ in {
             scroll_factor = 0.3;
           };
 
-          sensitivity = 0.6; # -1.0 to 1.0, 0 means no modification.
+          sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
           accel_profile = "flat";
         };
 

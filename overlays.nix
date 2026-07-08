@@ -26,7 +26,7 @@
     yaziPlugins =
       prev.yaziPlugins
       // {
-        mux = prev.callPackage ./pkgs/yazi/mux.nix {};
+        mux = final.callPackage ./pkgs/yazi/mux.nix {};
       };
 
     # album art - currently broken
