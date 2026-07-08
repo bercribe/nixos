@@ -44,6 +44,7 @@
   };
 
   outputs = {
+    self,
     errata,
     nixpkgs,
     nixos-hardware,
@@ -57,14 +58,6 @@
     paisa,
     ...
   } @ inputs: let
-    overlays = import ./overlays.nix inputs;
-
-    pkgsF = system:
-      import nixpkgs {
-        inherit system overlays;
-        config.allowUnfree = true;
-      };
-
     homeInstaller = import ./installers/home.nix;
 
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -163,39 +156,20 @@
       x86Linux // aarchLinux;
 
     homeConfigurations = let
-      commonModules = [
-        stylix.homeModules.stylix
-      ];
-      makeConfig = {
-        system,
-        hostname,
-      }: let
-        pkgs = pkgsF system;
-        extraSpecialArgs = {inherit inputs;};
-      in {
+      nixos = self.nixosConfigurations;
+      makeConfig = hostname: {
         name = "mawz@${hostname}";
-        value = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs extraSpecialArgs;
-          modules =
-            homeModules
-            ++ commonModules
-            ++ [
-              ./hosts/${hostname}/home.nix
-            ];
-        };
+        value.config = nixos.${hostname}.config.home-manager.users.mawz;
       };
-      makeConfigs = system: hosts: (builtins.listToAttrs (map (hostname: makeConfig {inherit system hostname;}) hosts));
-
-      x86Linux = makeConfigs "x86_64-linux" [
+    in
+      builtins.listToAttrs (map makeConfig [
         "heavens-door"
         "highway-star"
         "judgement"
         "moody-blues"
         "super-fly"
-      ];
-      aarchLinux = makeConfigs "aarch64-linux" ["echoes"];
-    in
-      x86Linux // aarchLinux;
+        "echoes"
+      ]);
 
     # portable dev environment
     homeModules = let

@@ -64,6 +64,8 @@ in {
     in
       lib.mapAttrs makeVm vms;
 
+    home-manager.users.mawz.local.microvm-client.enable = true;
+
     sops.secrets."models/anthropic" = {
       owner = "mawz";
     };
