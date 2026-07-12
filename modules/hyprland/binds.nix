@@ -67,7 +67,6 @@
         # misc
         "$mainMod, H, togglefloating"
         "$mainMod, Y, movecurrentworkspacetomonitor, +1"
-        "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod, K, exec, $fileManager ~/Documents/hints/"
         "$mainMod, PERIOD, exec, pkill fuzzel || ${lib.getExe pkgs.bemoji} -n"
 
@@ -80,18 +79,30 @@
         "$mainMod ALT, D, killactive,"
         "$mainMod ALT, K, forcekillactive,"
         "$mainMod ALT, L, exec, loginctl lock-session"
-        "$mainMod ALT, S, exec, systemctl suspend"
-        "$mainMod ALT, E, exit,"
+        "$mainMod ALT, Z, exec, systemctl suspend"
+        "$mainMod ALT, Q, exit,"
+
+        # scratchpad
+        "$mainMod, S, togglespecialworkspace, magic"
+        "$mainMod ALT, S, movetoworkspace, special:magic"
 
         # Move focus with mainMod + movement keys
         "$mainMod, N, movefocus, l"
         "$mainMod, E, movefocus, u"
         "$mainMod, I, movefocus, d"
         "$mainMod, O, movefocus, r"
+        "$mainMod ALT, N, movewindoworgroup, l"
+        "$mainMod ALT, E, movewindoworgroup, u"
+        "$mainMod ALT, I, movewindoworgroup, d"
+        "$mainMod ALT, O, movewindoworgroup, r"
         "$mainMod, Left,  movefocus, l"
         "$mainMod, Right, movefocus, r"
         "$mainMod, Up,    movefocus, u"
         "$mainMod, Down,  movefocus, d"
+        "$mainMod ALT, Left,  movewindoworgroup, l"
+        "$mainMod ALT, Right, movewindoworgroup, r"
+        "$mainMod ALT, Up,    movewindoworgroup, u"
+        "$mainMod ALT, Down,  movewindoworgroup, d"
 
         # to switch between windows in a floating workspace
         "$mainMod,Tab,cyclenext," # change focus to another window
@@ -111,6 +122,16 @@
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
+        "$mainMod ALT, 1, movetoworkspace, 1"
+        "$mainMod ALT, 2, movetoworkspace, 2"
+        "$mainMod ALT, 3, movetoworkspace, 3"
+        "$mainMod ALT, 4, movetoworkspace, 4"
+        "$mainMod ALT, 5, movetoworkspace, 5"
+        "$mainMod ALT, 6, movetoworkspace, 6"
+        "$mainMod ALT, 7, movetoworkspace, 7"
+        "$mainMod ALT, 8, movetoworkspace, 8"
+        "$mainMod ALT, 9, movetoworkspace, 9"
+        "$mainMod ALT, 0, movetoworkspace, 10"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
