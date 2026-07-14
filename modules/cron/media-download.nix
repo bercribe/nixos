@@ -49,6 +49,7 @@ in {
           } ''
             from datetime import datetime, timezone
             import miniflux
+            import os
             import requests
             import warnings
             import yt_dlp
@@ -110,6 +111,11 @@ in {
                 failed = []
                 for url in urls:
                     try:
+                        info = yt_cli.extract_info(url, download=False)
+                        filename = yt_cli.prepare_filename(info)
+                        already_existed = os.path.exists(filename)
+                        if already_existed:
+                            continue
                         yt_cli.download([url])
                         succeeded += 1
                     except Exception as e:
