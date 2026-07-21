@@ -12,6 +12,7 @@
     # fixes https://github.com/microvm-nix/microvm.nix/pull/477#issuecomment-4122489542
     cloud-hypervisor = final.unstable.cloud-hypervisor;
     devenv = final.unstable.devenv;
+    gallery-dl = final.unstable.gallery-dl;
     karakeep = final.unstable.karakeep;
     nono = final.unstable.nono;
     pi-coding-agent = final.unstable.pi-coding-agent;

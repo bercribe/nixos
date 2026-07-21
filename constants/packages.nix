@@ -210,6 +210,7 @@ in {
       pureref # reference image viewer
       sandbox # convenience util for code sandbox
       thunar # file browser
+      timed-reference # drawing helper
       wineWowPackages.waylandFull # windows game emulator
       wireshark # network analyzer
       xivlauncher # ffxiv
