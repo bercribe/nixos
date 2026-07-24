@@ -79,6 +79,9 @@
     };
   };
 
+  sops.secrets.karakeep = {
+    path = "/home/mawz/.config/karakeep/api_key";
+  };
   sops.secrets.miniflux = {
     path = "/home/mawz/.config/miniflux/api_key";
   };
