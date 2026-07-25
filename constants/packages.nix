@@ -157,6 +157,7 @@ in {
       mirror # convenience mount util
       mosh # mobile shell
       mtr # ping + traceroute
+      mktrash # fixes gio trash
       neofetch # system info
       nh # nix helper
       nix-inspect # nix env tui explorer

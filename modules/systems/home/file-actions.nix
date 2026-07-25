@@ -24,6 +24,7 @@
       "gtgh --path"
       "imv"
       "inkscape"
+      "mktrash"
       "printdoc"
       "removeexif"
       "shrinkvid"
