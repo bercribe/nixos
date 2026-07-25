@@ -142,6 +142,10 @@ in {
               on = ["g" "s" "p"];
               run = "cd ~/projects";
             }
+            {
+              on = ["g" "s" "m"];
+              run = "cd ~/media";
+            }
           ]
           ++ localKeybinds;
       };
