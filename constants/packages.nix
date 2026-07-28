@@ -145,6 +145,7 @@ in {
       eza # better ls
       ffmpeg # video utilities
       gh # github cli
+      ghgrab # github downloader tui
       glow # cli markdown renderer
       glslviewer # live fragment shader renderer
       grex # regex builder
@@ -155,9 +156,9 @@ in {
       just # command runner
       lm_sensors # hardware measurements
       mirror # convenience mount util
+      mktrash # fixes gio trash
       mosh # mobile shell
       mtr # ping + traceroute
-      mktrash # fixes gio trash
       neofetch # system info
       nh # nix helper
       nix-inspect # nix env tui explorer

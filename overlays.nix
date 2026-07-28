@@ -13,6 +13,7 @@
     cloud-hypervisor = final.unstable.cloud-hypervisor;
     devenv = final.unstable.devenv;
     gallery-dl = final.unstable.gallery-dl;
+    ghgrab = final.unstable.ghgrab;
     karakeep = final.unstable.karakeep;
     nono = final.unstable.nono;
     pi-coding-agent = final.unstable.pi-coding-agent;
