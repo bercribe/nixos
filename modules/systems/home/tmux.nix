@@ -16,6 +16,12 @@
     sensibleOnTop = true;
     terminal = lib.mkDefault "tmux-256color";
     extraConfig = let
+      devLayout = pkgs.writeShellScriptBin "dev-layout" ''
+        tmux split-window -h \; send-keys '$EDITOR' Enter \; select-pane -L
+      '';
+      devLayoutFull = pkgs.writeShellScriptBin "dev-layout-full" ''
+        tmux split-window -h \; send-keys '$EDITOR' Enter \; select-pane -L \; split-window -v \; send-keys 'agent' Enter \; select-pane -U
+      '';
       editScrollback = pkgs.writeShellScriptBin "edit-scrollback" ''
         tmpfile=$(mktemp /tmp/tmux-pane-XXXXXX)
         tmux capture-pane -p -S - > $tmpfile
@@ -39,6 +45,8 @@
       bind y run-shell "tmux set-buffer -w '${pane_path}'"
       bind a run-shell 'tmux display-popup -E "fa \"${pane_path}\""'
       bind U select-layout -o
+      bind v run-shell "${lib.getExe devLayout}"
+      bind V run-shell "${lib.getExe devLayoutFull}"
 
       # make these repeatable
       bind -r % split-window -h
