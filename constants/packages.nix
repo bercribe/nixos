@@ -50,6 +50,7 @@
     catbin
     copy
     cpath
+    ding
     file-actions
     gtgh
     hoy
