@@ -77,6 +77,7 @@ vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hn", ":Gitsigns nav_hunk next<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hp", ":Gitsigns nav_hunk prev<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>ht", ":Gitsigns toggle_word_diff<CR>")
 
 -- scripts
 -- general purpose runners
