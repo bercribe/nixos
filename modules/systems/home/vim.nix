@@ -140,6 +140,7 @@ in {
             plugin = gitsigns-nvim; # buffer + git integration
             config = toLua "require('gitsigns').setup({
               numhl = true;
+              word_diff = true;
             })";
           }
           {
