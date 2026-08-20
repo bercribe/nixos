@@ -8,13 +8,13 @@
   (final: prev: {
     unstable = import nixpkgs-unstable {
       inherit (final.stdenv.hostPlatform) system;
+      config.allowUnfree = true;
     };
-    # fixes https://github.com/microvm-nix/microvm.nix/pull/477#issuecomment-4122489542
-    cloud-hypervisor = final.unstable.cloud-hypervisor;
     devenv = final.unstable.devenv;
     gallery-dl = final.unstable.gallery-dl;
     ghgrab = final.unstable.ghgrab;
     karakeep = final.unstable.karakeep;
+    makemkv = final.unstable.makemkv;
     nono = final.unstable.nono;
     pi-coding-agent = final.unstable.pi-coding-agent;
     pocket-tts = final.unstable.pocket-tts;

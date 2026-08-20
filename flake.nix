@@ -16,7 +16,7 @@
     disko.url = "github:nix-community/disko";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
-    microvm.inputs.nixpkgs.follows = "nixpkgs";
+    microvm.inputs.nixpkgs.follows = "nixpkgs-unstable";
     microvm.url = "github:microvm-nix/microvm.nix";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
