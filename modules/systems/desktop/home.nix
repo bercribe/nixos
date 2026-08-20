@@ -32,6 +32,7 @@
     settings = {
       Browser.Enabled = true;
       FdoSecrets.Enabled = true;
+      FdoSecrets.UnlockBeforeSearch = false;
       GUI.ApplicationTheme = "dark";
     };
   };
