@@ -44,13 +44,24 @@ in {
       RemoteCommand = "systemd-inhibit --who='SSH session' --why='Active user' --what=idle --mode=block zsh";
       RequestTTY = "yes";
     };
-  in {
-    enable = true;
-    includes = ["~/.ssh/transient.conf"];
-    enableDefaultConfig = false;
-    matchBlocks = {
-      echoes = {
-        inherit user forwardAgent addKeysToAgent extraOptions;
+
+    mkHostBlocks = hostname: overrides: {
+      ${hostname} =
+        {
+          inherit user forwardAgent addKeysToAgent extraOptions;
+          hostname = utils.hostDomain hostname;
+        }
+        // overrides;
+      "${hostname}-git" =
+        {
+          inherit user forwardAgent addKeysToAgent;
+          hostname = utils.hostDomain hostname;
+        }
+        // overrides;
+    };
+
+    hosts = {
+      echos = {
         hostname = "echoes.${local.secret-attrs.personal-domain}";
         localForwards = [
           {
@@ -60,44 +71,23 @@ in {
           }
         ];
       };
-      heavens-door = {
-        inherit user forwardAgent addKeysToAgent;
-        extraOptions = {
-          RemoteCommand = "systemd-inhibit --who='SSH session' --why='Active user' --what=idle --mode=block zsh";
-          RequestTTY = "yes";
-        };
-      };
-      heavens-door-git = {
-        inherit user forwardAgent addKeysToAgent;
-      };
-      heavens-door-decrypt = {
-        port = 2222;
-        user = "root";
-      };
-      judgement = {
-        inherit user forwardAgent addKeysToAgent extraOptions;
-        hostname = utils.hostDomain "judgement";
-      };
-      lovers = {
-        inherit forwardAgent addKeysToAgent;
-        user = "root";
-        hostname = utils.hostDomain "lovers";
-      };
+      heavens-door = {hostname = null;};
+      judgement = {};
+      lovers = {user = "root";};
+      moody-blues = {};
       mr-president = {
-        inherit user forwardAgent addKeysToAgent;
-        hostname = utils.hostDomain "mr-president";
+        extraOptions = {};
         setEnv = {
           # check /usr/share/terminfo
           TERM = "xterm-color";
         };
       };
-      moody-blues = {
-        inherit user forwardAgent addKeysToAgent extraOptions;
-        hostname = utils.hostDomain "moody-blues";
-      };
-      super-fly = {
-        inherit user forwardAgent addKeysToAgent extraOptions;
-        hostname = utils.hostDomain "super-fly";
+      super-fly = {};
+    };
+    extraBlocks = {
+      heavens-door-decrypt = {
+        port = 2222;
+        user = "root";
       };
       super-fly-decrypt = {
         hostname = utils.hostDomain "super-fly";
@@ -105,6 +95,12 @@ in {
         user = "root";
       };
     };
+  in {
+    enable = true;
+    includes = ["~/.ssh/transient.conf"];
+    enableDefaultConfig = false;
+    matchBlocks =
+      lib.mergeAttrsList (lib.mapAttrsToList mkHostBlocks hosts) // extraBlocks;
   };
 
   programs.git = {
