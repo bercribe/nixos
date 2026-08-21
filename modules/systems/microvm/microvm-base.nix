@@ -49,6 +49,7 @@ in {
   users.users.mawz = {
     isNormalUser = true;
     group = "mawz";
+    extraGroups = ["systemd-journal"];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -92,6 +93,13 @@ in {
   # grant permissions for model secrets
   systemd.tmpfiles.rules = [
     "z ${modelSecretsDir} - mawz - -"
+  ];
+
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 4096; # MB
+    }
   ];
 
   microvm = {
