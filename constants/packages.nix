@@ -52,6 +52,7 @@
     cpath
     ding
     file-actions
+    git-mk-remote
     gtgh
     hoy
     httpstatus
