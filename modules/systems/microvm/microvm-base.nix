@@ -102,6 +102,16 @@ in {
     }
   ];
 
+  # Override microvm's default rootfs tmpfs size (50% of RAM = 2GB).
+  # nix-daemon writes to the store overlay on rootfs and can exhaust it,
+  # causing ESTALE errors that break sshd/nsncd.
+  fileSystems."/" = {
+    device = "rootfs";
+    fsType = "tmpfs";
+    options = ["size=4G" "mode=0755"];
+    neededForBoot = true;
+  };
+
   microvm = {
     # Enable writable nix store overlay so nix-daemon works.
     # This is required for home-manager activation.
@@ -115,7 +125,7 @@ in {
         image = "var.img";
         size = 8192; # MB
       }
-      # writable nix store
+      # writable nix store - disabled because it got corrupted and prevented VM bootup
       # {
       #   mountPoint = "/nix/.rw-store";
       #   image = "nix-store-overlay.img";
