@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   inputs,
   ...
 }: let
@@ -63,6 +64,35 @@ in {
       };
     in
       lib.mapAttrs makeVm vms;
+
+    # Stop/start VMs on sleep/resume to prevent virtiofs ESTALE errors.
+    # Only restarts VMs that were running before suspend.
+    powerManagement = let
+      vmNames = lib.attrNames vms;
+      stateDir = "/run/microvm-suspend";
+      systemctl = "${pkgs.systemd}/bin/systemctl";
+    in {
+      powerDownCommands = ''
+        mkdir -p ${stateDir}
+        rm -f ${stateDir}/*
+        ${lib.concatMapStringsSep "\n" (name: ''
+            if ${systemctl} is-active --quiet microvm@${name}.service; then
+              touch ${stateDir}/${name}
+              ${systemctl} stop microvm@${name}.service
+            fi
+          '')
+          vmNames}
+      '';
+      resumeCommands = ''
+        ${lib.concatMapStringsSep "\n" (name: ''
+            if [ -f ${stateDir}/${name} ]; then
+              ${systemctl} start microvm@${name}.service
+            fi
+          '')
+          vmNames}
+        rm -rf ${stateDir}
+      '';
+    };
 
     home-manager.users.mawz.local.microvm-client.enable = true;
 
