@@ -8,11 +8,16 @@
   cfg = config.local.cron.media-download;
   utils = local.utils;
 in {
+  imports = [
+    ../../modules/clients/mullvad-proxy
+  ];
+
   options.local.cron.media-download.enable = lib.mkEnableOption "automatic media downloader";
 
   config = lib.mkIf cfg.enable {
     local.healthchecks-secret.enable = true;
     local.rclone.enable = true;
+    local.clients.mullvad-proxy.enable = true;
 
     sops.secrets.miniflux = {owner = "mawz";};
     sops.secrets.readeck = {owner = "mawz";};
@@ -36,10 +41,18 @@ in {
         rdUrl = utils.serviceUrl "readeck";
         rdKey = config.sops.secrets.readeck.path;
         vidDir = "/zvault/syncthing/media/vids/";
+
         # TODO: revert unstable
+        ytDlpPinned = pkgs.unstable.python3Packages.yt-dlp.overrideAttrs (old: rec {
+          version = "2026.08.19";
+          src = old.src.override {
+            tag = version;
+            hash = "sha256-BM5ZeGTmHq+1xH6G/zsuCtjLgYgfRA11ya0zIHK5p4g=";
+          };
+        });
         dlVids =
           pkgs.unstable.writers.writePython3Bin "dl_vids" {
-            libraries = with pkgs.unstable.python3Packages; [miniflux yt-dlp];
+            libraries = [pkgs.unstable.python3Packages.miniflux ytDlpPinned];
             makeWrapperArgs = [
               "--prefix"
               "PATH"
@@ -53,6 +66,8 @@ in {
             import requests
             import warnings
             import yt_dlp
+
+            print(f"yt-dlp version: {yt_dlp.version.__version__}")
 
             _url = "${mfUrl}"
             _key_path = "${mfKey}"
@@ -69,7 +84,10 @@ in {
 
 
             mf_cli = get_miniflux_client()
-            yt_cli = yt_dlp.YoutubeDL(params={"paths": _paths})
+            yt_cli = yt_dlp.YoutubeDL(params={
+                "paths": _paths,
+                "proxy": "${config.local.clients.mullvad-proxy.url}",
+            })
 
 
             def category_entries(id):

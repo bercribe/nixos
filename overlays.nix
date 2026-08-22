@@ -19,7 +19,14 @@
     pi-coding-agent = final.unstable.pi-coding-agent;
     pocket-tts = final.unstable.pocket-tts;
     whosthere = final.unstable.whosthere;
-    yt-dlp = final.unstable.yt-dlp;
+
+    yt-dlp = final.unstable.yt-dlp.overrideAttrs (prev: rec {
+      version = "2026.08.19";
+      src = prev.src.override {
+        tag = version;
+        hash = "sha256-BM5ZeGTmHq+1xH6G/zsuCtjLgYgfRA11ya0zIHK5p4g=";
+      };
+    });
 
     # personal-packages
     karatui = karatui.packages.${final.stdenv.hostPlatform.system}.default;
