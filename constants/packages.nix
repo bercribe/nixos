@@ -148,6 +148,7 @@ in {
       ffmpeg # video utilities
       gh # github cli
       ghgrab # github downloader tui
+      glab-tui # tui for github
       glow # cli markdown renderer
       glslviewer # live fragment shader renderer
       grex # regex builder
@@ -156,6 +157,7 @@ in {
       hyperfine # benchmarking util
       isd # systemd TUI
       just # command runner
+      lazyrsync # tui for rsync
       lm_sensors # hardware measurements
       mirror # convenience mount util
       mktrash # fixes gio trash

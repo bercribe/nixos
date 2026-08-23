@@ -13,7 +13,9 @@
     devenv = final.unstable.devenv;
     gallery-dl = final.unstable.gallery-dl;
     ghgrab = final.unstable.ghgrab;
+    glab-tui = final.unstable.glab-tui;
     karakeep = final.unstable.karakeep;
+    lazyrsync = final.unstable.lazyrsync;
     makemkv = final.unstable.makemkv;
     nono = final.unstable.nono;
     pi-coding-agent = final.unstable.pi-coding-agent;
