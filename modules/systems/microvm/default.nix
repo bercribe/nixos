@@ -65,22 +65,33 @@ in {
     in
       lib.mapAttrs makeVm vms;
 
-    # Pause/resume VMs on sleep/wake to prevent virtiofs ESTALE errors.
+    # Stop/start VMs on sleep/resume to prevent virtiofs ESTALE errors.
+    # virtiofs doesn't survive host suspend even with VM paused.
     powerManagement = let
       vmNames = lib.attrNames vms;
-      curl = "${pkgs.curl}/bin/curl";
-      apiCall = name: endpoint: "${curl} --unix-socket /var/lib/microvms/${name}/control.socket -X PUT http://localhost/api/v1/${endpoint}";
+      stateDir = "/run/microvm-suspend";
+      systemctl = "${pkgs.systemd}/bin/systemctl";
     in {
-      powerDownCommands =
-        lib.concatMapStringsSep "\n" (name: ''
-          ${apiCall name "vm.pause"} 2>/dev/null || true
-        '')
-        vmNames;
-      resumeCommands =
-        lib.concatMapStringsSep "\n" (name: ''
-          ${apiCall name "vm.resume"} 2>/dev/null || true
-        '')
-        vmNames;
+      powerDownCommands = ''
+        mkdir -p ${stateDir}
+        rm -f ${stateDir}/*
+        ${lib.concatMapStringsSep "\n" (name: ''
+            if ${systemctl} is-active --quiet microvm@${name}.service; then
+              touch ${stateDir}/${name}
+              ${systemctl} stop microvm@${name}.service
+            fi
+          '')
+          vmNames}
+      '';
+      resumeCommands = ''
+        ${lib.concatMapStringsSep "\n" (name: ''
+            if [ -f ${stateDir}/${name} ]; then
+              ${systemctl} start microvm@${name}.service
+            fi
+          '')
+          vmNames}
+        rm -rf ${stateDir}
+      '';
     };
 
     home-manager.users.mawz.local.microvm-client.enable = true;
