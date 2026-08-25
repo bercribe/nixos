@@ -15,7 +15,7 @@ system: ''
       errata.url = "github:bercribe/errata";
     };
 
-    outputs = {nixpkgs, home-manager, my-nix, ...}: let
+    outputs = {nixpkgs, home-manager, my-nix, errata, ...}: let
       overlays = [errata.overlays.default];
       pkgs = import nixpkgs {
         inherit overlays;
