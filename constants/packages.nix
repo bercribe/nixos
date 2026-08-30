@@ -135,6 +135,7 @@ in {
 
     user = [
       alejandra # nix formatter
+      amdtop # top for AMD GPUs
       bandwhich # network utilization tui
       bluetui # bluetooth device tui
       btop # performance visualizer

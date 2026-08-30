@@ -10,6 +10,7 @@
       inherit (final.stdenv.hostPlatform) system;
       config.allowUnfree = true;
     };
+    amdtop = final.unstable.amdtop;
     devenv = final.unstable.devenv;
     gallery-dl = final.unstable.gallery-dl;
     ghgrab = final.unstable.ghgrab;
