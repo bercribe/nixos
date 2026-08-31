@@ -142,7 +142,15 @@ in {
   };
   programs.session-tool = {
     enable = true;
-    directories = ["$HOME" "$HOME/personal-cloud" "$HOME/sources" "$HOME/sources/public" "$HOME/sources/sandbox" "$HOME/sources/public/errata"];
+    directories = [
+      "$HOME"
+      "$HOME/personal-cloud"
+      "$HOME/projects"
+      "$HOME/sources"
+      "$HOME/sources/public"
+      "$HOME/sources/sandbox"
+      "$HOME/sources/public/errata"
+    ];
   };
   programs.mirror = {
     enable = true;
