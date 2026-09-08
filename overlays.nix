@@ -5,24 +5,37 @@
   ...
 }: [
   errata.overlays.default
-  (final: prev: {
-    unstable = import nixpkgs-unstable {
-      inherit (final.stdenv.hostPlatform) system;
-      config.allowUnfree = true;
-    };
-    amdtop = final.unstable.amdtop;
-    devenv = final.unstable.devenv;
-    gallery-dl = final.unstable.gallery-dl;
-    ghgrab = final.unstable.ghgrab;
-    glab-tui = final.unstable.glab-tui;
-    karakeep = final.unstable.karakeep;
-    lazyrsync = final.unstable.lazyrsync;
-    makemkv = final.unstable.makemkv;
-    nono = final.unstable.nono;
-    pi-coding-agent = final.unstable.pi-coding-agent;
-    pocket-tts = final.unstable.pocket-tts;
-    whosthere = final.unstable.whosthere;
 
+  (final: prev: let
+    unstablePackages = [
+      "amdtop"
+      "devenv"
+      "gallery-dl"
+      "ghgrab"
+      "glab-tui"
+      "karakeep"
+      "lazyrsync"
+      "makemkv"
+      "nono"
+      "pi-coding-agent"
+      "pocket-tts"
+      "whosthere"
+    ];
+    unstableOverlay = builtins.listToAttrs (map (package: {
+        name = package;
+        value = final.unstable.${package};
+      })
+      unstablePackages);
+  in
+    {
+      unstable = import nixpkgs-unstable {
+        inherit (final.stdenv.hostPlatform) system;
+        config.allowUnfree = true;
+      };
+    }
+    // unstableOverlay)
+
+  (final: prev: {
     yt-dlp = final.unstable.yt-dlp.overrideAttrs (prev: rec {
       version = "2026.08.19";
       src = prev.src.override {
