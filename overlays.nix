@@ -16,6 +16,7 @@
       "karakeep"
       "lazyrsync"
       "makemkv"
+      "netwatch"
       "nono"
       "pi-coding-agent"
       "pocket-tts"

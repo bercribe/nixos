@@ -165,6 +165,7 @@ in {
       mosh # mobile shell
       mtr # ping + traceroute
       neofetch # system info
+      netwatch # network diagnostics TUI
       nh # nix helper
       nix-inspect # nix env tui explorer
       resolve-sync-conflicts # syncthing conflict resolver
