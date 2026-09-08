@@ -178,6 +178,29 @@
         "type": "github"
       }
     },
+    "glide": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788676465,
+        "narHash": "sha256-Wx+LGg3ABsyqdkZiy+X+B7Oo9Y0qLKtBY0CaP9aFwko=",
+        "owner": "glide-browser",
+        "repo": "glide.nix",
+        "rev": "1a23691614d3335c57577a75f67a67915072e1ae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glide-browser",
+        "repo": "glide.nix",
+        "type": "github"
+      }
+    },
     "gnome-shell": {
       "flake": false,
       "locked": {
@@ -393,6 +416,7 @@
       "inputs": {
         "disko": "disko",
         "errata": "errata",
+        "glide": "glide",
         "home-manager": "home-manager",
         "karatui": "karatui",
         "microvm": "microvm",

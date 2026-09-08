@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./firefox.nix
+    ./glide.nix
     ../sops.nix
   ];
 

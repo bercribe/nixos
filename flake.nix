@@ -41,6 +41,11 @@
       url = "github:ananthakumaran/paisa";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    glide = {
+      url = "github:glide-browser/glide.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {
@@ -56,6 +61,7 @@
     microvm,
     karatui,
     paisa,
+    glide,
     ...
   } @ inputs: let
     homeInstaller = import ./installers/home.nix;
@@ -72,6 +78,7 @@
       errata.homeModules.session-tool
       errata.homeModules.sfx
       errata.homeModules.snippets
+      glide.homeModules.default
     ];
   in {
     nixosConfigurations = let
