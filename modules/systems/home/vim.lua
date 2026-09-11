@@ -26,8 +26,8 @@ vim.keymap.set("n", "<leader>yg",
 vim.keymap.set("n", "<leader>yG", [[:let @+ = system('gtgh --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
 -- black hole delete
-vim.keymap.set("n", "<leader>d", '"_dd')
 vim.keymap.set("v", "<leader>d", '"_d')
+vim.keymap.set("n", "<leader>dd", '"_dd')
 -- switch to alt file
 vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
@@ -78,6 +78,19 @@ vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hn", ":Gitsigns nav_hunk next<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>hp", ":Gitsigns nav_hunk prev<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>ht", ":Gitsigns toggle_word_diff<CR>")
+-- devdocs
+vim.keymap.set('n', '<leader>md', function()
+    local devdocs = require("devdocs")
+    local installedDocs = devdocs.GetInstalledDocs()
+    vim.ui.select(installedDocs, {}, function(selected)
+        if not selected then
+            return
+        end
+        local docDir = devdocs.GetDocDir(selected)
+        -- prettify the filename as you wish
+        require('fzf-lua').files({ cwd = docDir })
+    end)
+end)
 
 -- scripts
 -- general purpose runners

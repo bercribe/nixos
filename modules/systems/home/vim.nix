@@ -18,6 +18,11 @@ in {
       description = "Treesitter parsers to use";
       default = [];
     };
+    devdocsLanguages = mkOption {
+      type = listOf str;
+      description = "DevDocs languages to install - list available through :DevDocs install";
+      default = [];
+    };
     filetypes = mkOption {
       type = attrsOf (submodule {
         options = {
@@ -78,6 +83,19 @@ in {
         "typst"
         "yaml"
       ];
+      devdocsLanguages = [
+        "astro"
+        "bash"
+        "cpp"
+        "css"
+        "html"
+        "javascript"
+        "lua~5.1"
+        "nix"
+        "python~3.14"
+        "rust"
+        "typescript"
+      ];
       # check with :set filetype
       filetypes = {
         "*" = {};
@@ -133,6 +151,14 @@ in {
                   default = { 'lsp', 'path', 'snippets', 'buffer' },
                 },
                 fuzzy = { implementation = "prefer_rust_with_warning" }
+              })
+            '';
+          }
+          {
+            plugin = devdocs-nvim; # devdocs.io lookup
+            config = toLua ''
+              require('devdocs').setup({
+                ensure_installed = {${lib.concatMapStringsSep ", " (l: "'${l}'") cfg.devdocsLanguages}},
               })
             '';
           }
@@ -240,8 +266,9 @@ in {
       extraPackages = let
         lsp = with lib; filter (s: s != null) (mapAttrsToList (_: pkg: pkg) cfg.languageServers);
         fmt = with pkgs; [alejandra];
+        devdocsDeps = with pkgs; [jq curl pandoc];
       in
-        lsp ++ fmt;
+        lsp ++ fmt ++ devdocsDeps;
     };
   };
 }
