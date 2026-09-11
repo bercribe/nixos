@@ -6,6 +6,7 @@
   core = with pkgs; [
     bat # better cat
     broot # better tree
+    cht-sh # cheat sheet
     croc # file sending util
     doggo # better dig
     dua # disk usage analyzer
@@ -141,7 +142,6 @@ in {
       btop # performance visualizer
       chafa # terminal image viewer
       check-sync-conflicts # syncthing conflict viewer
-      cht-sh # cheat sheet
       devenv # nix based developer environments
       difftastic # syntax aware diff
       exiftool # image metadata
