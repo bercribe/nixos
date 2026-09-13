@@ -75,7 +75,7 @@
     shrinkvid
     speak
     straightquote
-    systemd-timer
+    timer
     tempe
     timers
     trash
