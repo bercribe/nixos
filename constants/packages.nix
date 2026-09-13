@@ -46,7 +46,7 @@
     neovim # text editor
   ];
 
-  scripts = with pkgs; [
+  scripts = with pkgs.errata; [
     bb
     catbin
     copy
@@ -134,118 +134,124 @@ in {
       wl-clipboard # clipboard
     ];
 
-    user = [
-      alejandra # nix formatter
-      amdtop # top for AMD GPUs
-      bandwhich # network utilization tui
-      bluetui # bluetooth device tui
-      btop # performance visualizer
-      chafa # terminal image viewer
-      check-sync-conflicts # syncthing conflict viewer
-      devenv # nix based developer environments
-      difftastic # syntax aware diff
-      exiftool # image metadata
-      eza # better ls
-      ffmpeg # video utilities
-      gh # github cli
-      ghgrab # github downloader tui
-      glab-tui # tui for github
-      glow # cli markdown renderer
-      glslviewer # live fragment shader renderer
-      grex # regex builder
-      hledger # ledger accounting tool
-      hledger-ui # hledger tui
-      hyperfine # benchmarking util
-      isd # systemd TUI
-      just # command runner
-      lazyrsync # tui for rsync
-      lm_sensors # hardware measurements
-      mirror # convenience mount util
-      mktrash # fixes gio trash
-      mosh # mobile shell
-      mtr # ping + traceroute
-      neofetch # system info
-      netwatch # network diagnostics TUI
-      nh # nix helper
-      nix-inspect # nix env tui explorer
-      resolve-sync-conflicts # syncthing conflict resolver
-      restic # backup tool
-      snippets # configurable text snippets
-      sops # secrets management
-      termsvg # record terminal as SVG
-      whosthere # lan discovery tui
-      wikiman # CLI docs
-      wireguard-tools # wireguard debug
-      wol # wake on lan
-      zfs-hist # zfs version browser
-    ];
+    user =
+      [
+        alejandra # nix formatter
+        amdtop # top for AMD GPUs
+        bandwhich # network utilization tui
+        bluetui # bluetooth device tui
+        btop # performance visualizer
+        chafa # terminal image viewer
+        devenv # nix based developer environments
+        difftastic # syntax aware diff
+        exiftool # image metadata
+        eza # better ls
+        ffmpeg # video utilities
+        gh # github cli
+        ghgrab # github downloader tui
+        glab-tui # tui for github
+        glow # cli markdown renderer
+        glslviewer # live fragment shader renderer
+        grex # regex builder
+        hledger # ledger accounting tool
+        hledger-ui # hledger tui
+        hyperfine # benchmarking util
+        isd # systemd TUI
+        just # command runner
+        lazyrsync # tui for rsync
+        lm_sensors # hardware measurements
+        mosh # mobile shell
+        mtr # ping + traceroute
+        neofetch # system info
+        netwatch # network diagnostics TUI
+        nh # nix helper
+        nix-inspect # nix env tui explorer
+        restic # backup tool
+        sops # secrets management
+        termsvg # record terminal as SVG
+        whosthere # lan discovery tui
+        wikiman # CLI docs
+        wireguard-tools # wireguard debug
+        wol # wake on lan
+      ]
+      ++ (with errata; [
+        check-sync-conflicts # syncthing conflict viewer
+        mirror # convenience mount util
+        mktrash # fixes gio trash
+        resolve-sync-conflicts # syncthing conflict resolver
+        snippets # configurable text snippets
+        zfs-hist # zfs version browser
+      ]);
 
-    user-desktop = [
-      # GUI
-      anki # SRS app
-      beeper # universal chat
-      bs-manager # mod manager for beat saber
-      chromium # browser
-      czkawka # deduping util
-      darktable # photo editor
-      discord # voice chat
-      epub-clean # ebook utility
-      firefox # browser
-      foot # terminal
-      gale # thunderstore mod manager
-      generate-pod # TTS on readeck articles
-      ghostty # terminal
-      gimp # photo editor
-      godot_4 # game engine
-      handbrake # video transcoding
-      imagemagick # image viewer
-      imv # image viewer
-      inkscape # svg editor
-      jupyter # python notebook
-      keepassxc # password manager
-      libation # audible audiobook manager
-      libreoffice # office tools
-      localsend # file sending utility
-      makemkv # blu-ray ripper
-      mangohud # fps overlay
-      mpv # video player
-      obs-studio # screen recording
-      obsidian # PKM tool
-      oo # open obsidian
-      pavucontrol # sound control
-      pdfarranger # simple pdf editor
-      printdoc # CLI convenience
-      pureref # reference image viewer
-      sandbox # convenience util for code sandbox
-      thunar # file browser
-      timed-reference # drawing helper
-      wineWowPackages.waylandFull # windows game emulator
-      wireshark # network analyzer
-      xivlauncher # ffxiv
-      zathura # pdf viewer
-      zoom-us # video conferencing
-      # CLI
-      boop # indicate command success or failure
-      cava # audio visualizer
-      encrypt-pdf # simple pdf util
-      ffsubsync # sync subtitles with video
-      getpod # downoad video as podcast
-      getsong # download song
-      getsubs # download subtitles
-      gtypist # typing tutor
-      handlr-regex # better xdg-open
-      karatui # karakeep TUI
-      ncspot # spotify TUI
-      notification # system notification utility
-      pandoc # conversion util
-      qmk # keyboard firmware
-      removeexif # strips exif from jpegs
-      sfx # play sound effect
-      tunes # play music in dir
-      typst # document editor
-      wev # shows keyboard inputs
-      yt-dlp # youtube downloader
-      zbar # QR code utils
-    ];
+    user-desktop =
+      [
+        # GUI
+        anki # SRS app
+        beeper # universal chat
+        bs-manager # mod manager for beat saber
+        chromium # browser
+        czkawka # deduping util
+        darktable # photo editor
+        discord # voice chat
+        firefox # browser
+        foot # terminal
+        gale # thunderstore mod manager
+        ghostty # terminal
+        gimp # photo editor
+        godot_4 # game engine
+        handbrake # video transcoding
+        imagemagick # image viewer
+        imv # image viewer
+        inkscape # svg editor
+        jupyter # python notebook
+        keepassxc # password manager
+        libation # audible audiobook manager
+        libreoffice # office tools
+        localsend # file sending utility
+        makemkv # blu-ray ripper
+        mangohud # fps overlay
+        mpv # video player
+        obs-studio # screen recording
+        obsidian # PKM tool
+        pavucontrol # sound control
+        pdfarranger # simple pdf editor
+        pureref # reference image viewer
+        thunar # file browser
+        wineWowPackages.waylandFull # windows game emulator
+        wireshark # network analyzer
+        xivlauncher # ffxiv
+        zathura # pdf viewer
+        zoom-us # video conferencing
+        # CLI
+        cava # audio visualizer
+        ffsubsync # sync subtitles with video
+        gtypist # typing tutor
+        handlr-regex # better xdg-open
+        karatui # karakeep TUI
+        ncspot # spotify TUI
+        pandoc # conversion util
+        qmk # keyboard firmware
+        typst # document editor
+        wev # shows keyboard inputs
+        yt-dlp # youtube downloader
+        zbar # QR code utils
+      ]
+      ++ (with errata; [
+        boop # indicate command success or failure
+        encrypt-pdf # simple pdf util
+        epub-clean # ebook utility
+        generate-pod # TTS on readeck articles
+        getpod # downoad video as podcast
+        getsong # download song
+        getsubs # download subtitles
+        notification # system notification utility
+        oo # open obsidian
+        printdoc # CLI convenience
+        removeexif # strips exif from jpegs
+        sandbox # convenience util for code sandbox
+        sfx # play sound effect
+        timed-reference # drawing helper
+        tunes # play music in dir
+      ]);
   };
 }
