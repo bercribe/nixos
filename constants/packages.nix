@@ -53,6 +53,8 @@
     cpath
     ding
     file-actions
+    git-branch
+    git-commit
     git-mk-remote
     gtgh
     hoy
@@ -75,8 +77,8 @@
     shrinkvid
     speak
     straightquote
-    timer
     tempe
+    timer
     timers
     trash
     tryna
