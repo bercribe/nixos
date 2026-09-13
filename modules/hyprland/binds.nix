@@ -11,34 +11,20 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mainMod" = "SUPER";
 
-      # Set programs that you use
-      # Open fuzzel on first press, closes it on second
-      "$menu" = "pkill fuzzel || ${fuzzel}";
-      "$terminal" = "$TERMINAL";
-      "$fileManager" = "$TERMINAL -e yazi";
-      "$editor" = "$TERMINAL -e nvim";
-      "$browser" = "$BROWSER";
-      "$command-runner" = let
-        commands = ["timer 10m"];
-        run-command = pkgs.writeShellScript "run-command" ''
-          cmd=$(echo "${lib.concatStringsSep "\n" commands}" | ${fuzzel} --dmenu)
-          [[ -z "$cmd" ]] && exit 0
-          $TERMINAL -e $cmd
-        '';
-      in "${run-command}";
-      "$file-actions" = let
-        run = pkgs.writeShellScript "fa-clipboard" ''
-          export TMUX_TMPDIR="/run/user/$(id -u)"
-          f=$(pasta)
-          [[ -z "$f" ]] && exit 0
-          cmd=$(fa -l | ${fuzzel} --dmenu --prompt="$(basename "$f"): ")
-          [[ -z "$cmd" ]] && exit 0
-          $TERMINAL -e fa -r "$cmd" "$f"
-        '';
-      in "${run}";
-
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = let
+        mkMenu = menu: let
+          configFile =
+            pkgs.writeText "config.yaml"
+            (lib.generators.toYAML {} {
+              anchor = "bottom-right";
+              inherit menu;
+            });
+        in
+          pkgs.writeShellScriptBin "which-key-menu" ''
+            exec ${lib.getExe pkgs.wlr-which-key} ${configFile}
+          '';
+
         slurp = lib.getExe pkgs.slurp;
         grim = lib.getExe pkgs.grim;
         swappy = lib.getExe pkgs.swappy;
@@ -47,13 +33,91 @@
         wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
       in [
         # openers
-        "$mainMod, SPACE, exec, $menu"
-        "$mainMod, T, exec, $terminal"
-        "$mainMod, F, exec, $fileManager"
-        "$mainMod, J, exec, $editor"
-        "$mainMod, B, exec, $browser"
-        "$mainMod, R, exec, $command-runner"
-        "$mainMod, A, exec, $file-actions"
+        "$mainMod, D, exec, pkill wlr-which-key || ${lib.getExe (mkMenu [
+          {
+            key = "a";
+            desc = "File actions";
+            cmd = let
+              run = pkgs.writeShellScript "fa-clipboard" ''
+                export TMUX_TMPDIR="/run/user/$(id -u)"
+                f=$(pasta)
+                [[ -z "$f" ]] && exit 0
+                cmd=$(fa -l | ${fuzzel} --dmenu --prompt="$(basename "$f"): ")
+                [[ -z "$cmd" ]] && exit 0
+                $TERMINAL -e fa -r "$cmd" "$f"
+              '';
+            in "${run}";
+          }
+          {
+            key = "b";
+            desc = "Browser";
+            cmd = "$BROWSER";
+          }
+          {
+            key = "d";
+            desc = "App menu";
+            # Open fuzzel on first press, closes it on second
+            cmd = "pkill fuzzel || ${fuzzel}";
+          }
+          {
+            key = "e";
+            desc = "Editor";
+            cmd = "$TERMINAL -e nvim";
+          }
+          {
+            key = "f";
+            desc = "File manager";
+            cmd = "$TERMINAL -e yazi";
+          }
+          {
+            key = "h";
+            desc = "Hints";
+            cmd = "$TERMINAL -e yazi ~/Documents/hints/";
+          }
+          {
+            key = "j";
+            desc = "Emoji menu";
+            cmd = "pkill fuzzel || ${lib.getExe pkgs.bemoji} -n";
+          }
+          {
+            key = "n";
+            desc = "Invoke notification";
+            cmd = "${pkgs.mako}/bin/makoctl invoke";
+          }
+          {
+            key = "r";
+            desc = "Command runner";
+            cmd = let
+              commands = ["timer 10m"];
+              run-command = pkgs.writeShellScript "run-command" ''
+                cmd=$(echo "${lib.concatStringsSep "\n" commands}" | ${fuzzel} --dmenu)
+                [[ -z "$cmd" ]] && exit 0
+                $TERMINAL -e $cmd
+              '';
+            in "${run-command}";
+          }
+          {
+            key = "t";
+            desc = "Terminal";
+            cmd = "$TERMINAL";
+          }
+          {
+            key = "z";
+            desc = "System";
+            submenu = [
+              {
+                key = "l";
+                desc = "Lock";
+                cmd = "loginctl lock-session";
+              }
+              {
+                key = "s";
+                desc = "Suspend";
+                cmd = "systemctl suspend";
+              }
+            ];
+          }
+        ])}"
 
         # universal copy paste
         "$mainMod, X, sendshortcut, , XF86Cut, activewindow"
@@ -61,14 +125,11 @@
         "$mainMod, V, sendshortcut, , XF86Paste, activewindow"
 
         # notifications
-        "$mainMod, D, exec, ${pkgs.mako}/bin/makoctl dismiss"
-        "$mainMod, K, exec, ${pkgs.mako}/bin/makoctl invoke"
+        "$mainMod, B, exec, ${pkgs.mako}/bin/makoctl dismiss"
 
         # misc
         "$mainMod, H, togglefloating"
         "$mainMod, Y, movecurrentworkspacetomonitor, +1"
-        "$mainMod, K, exec, $fileManager ~/Documents/hints/"
-        "$mainMod, PERIOD, exec, pkill fuzzel || ${lib.getExe pkgs.bemoji} -n"
 
         # applications
         "$mainMod, M, sendshortcut, CTRL SHIFT, M, class:^discord$" # mute
@@ -78,8 +139,6 @@
         # destructive
         "$mainMod ALT, D, killactive,"
         "$mainMod ALT, K, forcekillactive,"
-        "$mainMod ALT, L, exec, loginctl lock-session"
-        "$mainMod ALT, Z, exec, systemctl suspend"
         "$mainMod ALT, Q, exit,"
 
         # scratchpad
