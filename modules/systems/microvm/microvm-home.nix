@@ -10,6 +10,7 @@
       - be consice with code comments - only use them when necessary to explain "why" or to provide a high level summary
       - I will often edit files you have worked on - do not revert my changes. Integrate them into the final result
       - You are running in a VM, building nix packages will not work. Prompt me to build them for you
+      - Don't run find commands from "/", it takes too long. If you need direction, ask for it
     '';
   };
 
