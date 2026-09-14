@@ -33,7 +33,8 @@
         wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
       in [
         # openers
-        "$mainMod, D, exec, pkill wlr-which-key || ${lib.getExe (mkMenu [
+        "$mainMod, D, exec, pkill fuzzel || ${fuzzel}"
+        "$mainMod, SPACE, exec, pkill wlr-which-key || ${lib.getExe (mkMenu [
           {
             key = "a";
             desc = "File actions";
@@ -52,12 +53,6 @@
             key = "b";
             desc = "Browser";
             cmd = "$BROWSER";
-          }
-          {
-            key = "d";
-            desc = "App menu";
-            # Open fuzzel on first press, closes it on second
-            cmd = "pkill fuzzel || ${fuzzel}";
           }
           {
             key = "e";
