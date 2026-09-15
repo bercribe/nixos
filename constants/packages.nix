@@ -162,6 +162,7 @@ in {
         just # command runner
         lazyrsync # tui for rsync
         lm_sensors # hardware measurements
+        mcat # CLI image / document viewer
         mosh # mobile shell
         mtr # ping + traceroute
         neofetch # system info
@@ -169,6 +170,7 @@ in {
         nh # nix helper
         nix-inspect # nix env tui explorer
         restic # backup tool
+        snitch # nicer netstat
         sops # secrets management
         termsvg # record terminal as SVG
         whosthere # lan discovery tui
