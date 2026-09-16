@@ -154,7 +154,7 @@ in {
   };
   programs.mirror = {
     enable = true;
-    target = "$HOME/sources/public/sandbox";
+    target = "$HOME/sources/public/playground";
   };
   programs.sfx = {
     enable = true;
