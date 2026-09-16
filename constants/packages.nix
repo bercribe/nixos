@@ -56,6 +56,7 @@
     git-branch
     git-commit
     git-mk-remote
+    git-resync
     gtgh
     hoy
     httpstatus
