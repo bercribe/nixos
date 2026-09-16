@@ -185,6 +185,7 @@ in {
         mktrash # fixes gio trash
         resolve-sync-conflicts # syncthing conflict resolver
         snippets # configurable text snippets
+        vma # quick connect to VM agent
         zfs-hist # zfs version browser
       ]);
 

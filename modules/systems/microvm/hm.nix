@@ -20,5 +20,10 @@ in {
         };
       })
     vms;
+
+    programs.vma = {
+      enable = true;
+      host = "sources-microvm";
+    };
   };
 }

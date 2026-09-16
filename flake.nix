@@ -78,6 +78,7 @@
       errata.homeModules.session-tool
       errata.homeModules.sfx
       errata.homeModules.snippets
+      errata.homeModules.vma
       glide.homeModules.default
     ];
   in {
