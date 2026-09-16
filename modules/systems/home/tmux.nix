@@ -39,6 +39,8 @@
       # enable true color
       set -ga terminal-overrides ",*-256color:Tc"
 
+      set -g renumber-windows on
+
       bind u switch-client -l
       bind g display-popup -E "st"
       bind e run-shell "${lib.getExe editScrollback}"
