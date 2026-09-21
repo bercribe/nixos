@@ -94,7 +94,10 @@ in {
       '';
     };
 
-    home-manager.users.mawz.local.microvm-client.enable = true;
+    home-manager.users.mawz = {
+      imports = [./hm.nix];
+      local.microvm-client.enable = true;
+    };
 
     sops.secrets."models/anthropic" = {
       owner = "mawz";

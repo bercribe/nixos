@@ -3,12 +3,8 @@
   lib,
   ...
 }: {
-  imports = let
-    rootDir = ../..;
-  in [
-    (rootDir + /modules/systems/home)
-    (rootDir + /modules/systems/desktop/home.nix)
-    (rootDir + /modules/hyprland/home.nix)
+  imports = [
+    ../../modules/systems/home
   ];
 
   wayland.windowManager.hyprland.settings = {

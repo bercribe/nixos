@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+  home-manager.users.mawz = {
+    imports = [./home.nix];
+  };
+
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -51,8 +55,4 @@
       pkgs.xdg-desktop-portal-gtk
     ];
   };
-
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 }

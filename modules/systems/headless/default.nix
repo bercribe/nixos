@@ -1,7 +1,6 @@
 {config, ...}: {
   imports = [
     ../common.nix
-    ../network/ssh-server.nix
   ];
 
   # Config

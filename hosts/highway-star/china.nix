@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../../modules/clients/mullvad.nix
+    ../../modules/systems/network/mullvad.nix
   ];
 
   specialisation.china = {
@@ -18,7 +18,7 @@
         '')
       ];
 
-      local.clients.mullvad.enable = true;
+      local.network.mullvad.enable = true;
     };
   };
 }

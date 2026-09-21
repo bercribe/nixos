@@ -1,8 +1,6 @@
 {...}: {
-  imports = let
-    rootDir = ../..;
-  in [
-    (rootDir + /modules/systems/home)
+  imports = [
+    ../../modules/systems/home
   ];
 
   local.yazi.keybinds = {

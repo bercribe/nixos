@@ -10,14 +10,15 @@
 }: {
   imports = let
   in [
-    ./network/ssh-client.nix
-    ./sops.nix
-    ./home/stylix.nix
-    ./network/rclone.nix
     ../cron
     ../services
+    ./helpers/local-healthchecks.nix
+    ./helpers/sops.nix
+    ./home/stylix.nix
     ./microvm
-    ../clients/local-healthchecks.nix
+    ./network/rclone.nix
+    ./network/ssh-client.nix
+    ./network/ssh-server.nix
   ];
 
   # Config

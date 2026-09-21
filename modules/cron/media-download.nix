@@ -9,7 +9,7 @@
   utils = local.utils;
 in {
   imports = [
-    ../../modules/clients/mullvad-proxy
+    ../systems/network/mullvad-proxy
   ];
 
   options.local.cron.media-download.enable = lib.mkEnableOption "automatic media downloader";
@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     local.healthchecks-secret.enable = true;
     local.rclone.enable = true;
-    local.clients.mullvad-proxy.enable = true;
+    local.network.mullvad-proxy.enable = true;
 
     sops.secrets.miniflux = {owner = "mawz";};
     sops.secrets.readeck = {owner = "mawz";};
@@ -86,7 +86,7 @@ in {
             mf_cli = get_miniflux_client()
             yt_cli = yt_dlp.YoutubeDL(params={
                 "paths": _paths,
-                "proxy": "${config.local.clients.mullvad-proxy.url}",
+                "proxy": "${config.local.network.mullvad-proxy.url}",
             })
 
 

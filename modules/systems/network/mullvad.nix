@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  cfg = config.local.clients.mullvad;
+  cfg = config.local.network.mullvad;
 in {
-  options.local.clients.mullvad = with lib;
+  options.local.network.mullvad = with lib;
   with types; {
     enable = mkEnableOption "mullvad";
   };

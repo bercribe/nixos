@@ -8,7 +8,7 @@
   imports = [
     ./firefox.nix
     ./glide.nix
-    ../sops.nix
+    ../helpers/sops.nix
   ];
 
   # model for mutable config files:

@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.local.clients.mullvad-proxy;
+  cfg = config.local.network.mullvad-proxy;
 
   ns = "mullvad";
   vethHost = "veth-mv-host";
@@ -19,7 +19,7 @@
   peerPublicKey = peer.public-key;
   peerEndpoint = peer.endpoint;
 in {
-  options.local.clients.mullvad-proxy = with lib;
+  options.local.network.mullvad-proxy = with lib;
   with types; {
     enable = mkEnableOption "persistent SOCKS5 proxy through Mullvad WireGuard";
     port = mkOption {

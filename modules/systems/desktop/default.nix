@@ -9,12 +9,15 @@
 in {
   imports = [
     ../common.nix
-    ./keyboard.nix
-    ../../hyprland # Tiling window manager
-    ../network/mount.nix
-    ../network/ssh-server.nix
     ../hardware/bluray.nix
+    ../network/mount.nix
+    ./environment/hyprland
+    ./keyboard.nix
   ];
+
+  home-manager.users.mawz = {
+    imports = [./home.nix];
+  };
 
   # Secrets
   sops.secrets = {
@@ -160,6 +163,10 @@ in {
   };
 
   local.cron.disk-monitor.headless = false;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Printing
   # Enable CUPS to print documents.
