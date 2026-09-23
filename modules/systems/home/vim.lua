@@ -12,8 +12,21 @@ vim.o.foldlevelstart = 99
 vim.o.termguicolors = true;
 
 -- binds
--- convenience
-vim.keymap.set({ "n", "v" }, "<leader>w", ":noa w<CR>")
+-- switch to alt file
+vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
+-- change working dir
+local original_cwd = vim.fn.getcwd()
+vim.keymap.set({ "n", "v" }, "<leader>cd", ":cd %:h<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>cb", ":cd -<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>co", function() vim.cmd.cd(original_cwd) end)
+-- comments
+vim.keymap.set({ "n", "v" }, "<leader>cu", ":norm ^diwx<CR>")
+-- black hole delete
+vim.keymap.set("v", "<leader>d", '"_d')
+vim.keymap.set("n", "<leader>dd", '"_dd')
+-- paste
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
 -- quickfix
 vim.keymap.set({ "n", "v" }, "<leader>qo", ":copen<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>qc", function() vim.fn.setqflist({}, 'r') end)
@@ -24,7 +37,14 @@ vim.keymap.set({ "n", "v" }, "<leader>ql", function()
         text = vim.api.nvim_get_current_line(),
     } }, 'a')
 end)
--- system clipboard
+-- replace
+vim.keymap.set("n", "<leader>r", [[:%s/\V]])
+vim.keymap.set("v", "<leader>r", [[:s/\V]])
+-- shell
+vim.keymap.set("n", "<leader>t", ":te zsh<CR>i")
+-- write
+vim.keymap.set({ "n", "v" }, "<leader>w", ":noa w<CR>")
+-- copy
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>yy", '"+yy')
 vim.keymap.set("n", "<leader>yp", [[:let @+ = expand('%')<CR>]])
@@ -33,31 +53,12 @@ vim.keymap.set("n", "<leader>yl", [[:let @+ = expand('%') . ':' . line('.')<CR>]
 vim.keymap.set("n", "<leader>yg",
     [[:let @+ = system('gtgh --upstream origin --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
 vim.keymap.set("n", "<leader>yG", [[:let @+ = system('gtgh --path "' . expand('%') . '" --line ' . line('.'))<CR>]])
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
--- black hole delete
-vim.keymap.set("v", "<leader>d", '"_d')
-vim.keymap.set("n", "<leader>dd", '"_dd')
--- switch to alt file
-vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
--- change working dir
-local original_cwd = vim.fn.getcwd()
-vim.keymap.set({ "n", "v" }, "<leader>cd", ":cd %:h<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>cb", ":cd -<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>co", function() vim.cmd.cd(original_cwd) end)
 -- swap command key
 vim.keymap.set({ "n", "v" }, ":", ";")
 vim.keymap.set({ "n", "v" }, ";", ":")
--- replace
-vim.keymap.set("n", "<leader>r", [[:%s/\V]])
-vim.keymap.set("v", "<leader>r", [[:s/\V]])
--- comments
-vim.keymap.set({ "n", "v" }, "<leader>cu", ":norm ^diwx<CR>")
 -- indent pasted lines
 vim.keymap.set("n", "<leader>[", "'[V']<")
 vim.keymap.set("n", "<leader>]", "'[V']>")
--- shell
-vim.keymap.set("n", "<leader>t", ":te zsh<CR>i")
 
 -- fzf-lua
 vim.keymap.set({ "n", "v" }, "<leader>f", ":FzfLua files<CR>")
@@ -236,6 +237,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+-- for vim symbols
+vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
+vim.lsp.config("nixd", { settings = { nixd = { formatting = { command = { "alejandra" } } } } })
+vim.lsp.config("clangd", { cmd = { "clangd", "--fallback-style=webkit" } })
+vim.lsp.config("glslls", { cmd = { "glslls", "--stdin", "--target-env=opengl" } })
+
 -- disable completion for markdown
 vim.api.nvim_create_autocmd('BufEnter', {
     pattern = '*.md',
@@ -258,12 +265,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         end
     end,
 })
-
--- for vim symbols
-vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
-vim.lsp.config("nixd", { settings = { nixd = { formatting = { command = { "alejandra" } } } } })
-vim.lsp.config("clangd", { cmd = { "clangd", "--fallback-style=webkit" } })
-vim.lsp.config("glslls", { cmd = { "glslls", "--stdin", "--target-env=opengl" } })
 
 -- debugger
 local dap = require("dap")
