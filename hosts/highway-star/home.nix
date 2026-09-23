@@ -3,10 +3,6 @@
   lib,
   ...
 }: {
-  imports = [
-    ../../modules/systems/home
-  ];
-
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "[workspace 1 silent] $TERMINAL"

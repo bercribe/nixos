@@ -1,8 +1,4 @@
 {lib, ...}: {
-  imports = [
-    ../../modules/systems/home
-  ];
-
   wayland.windowManager.hyprland.settings = let
     main = "desc:Dell Inc. AW3423DWF 1YVF2S3";
     top = "desc:Ancor Communications Inc ROG PG279Q K5LMQS058625";

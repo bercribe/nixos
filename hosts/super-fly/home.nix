@@ -1,8 +1,4 @@
 {...}: {
-  imports = [
-    ../../modules/systems/home
-  ];
-
   local.yazi.keybinds = {
     goto-zvault = {
       bind = ["g" "z"];

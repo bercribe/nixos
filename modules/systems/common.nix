@@ -21,6 +21,10 @@
     ./network/ssh-server.nix
   ];
 
+  home-manager.users.mawz = {
+    imports = [./home];
+  };
+
   # Config
 
   # Flakes + pipes
