@@ -51,6 +51,14 @@ vim.keymap.set({ "n", "v" }, "<leader>ql", function()
     } }, 'a')
 end)
 vim.keymap.set({ "n", "v" }, "<leader>qd", function() vim.diagnostic.setqflist() end)
+vim.keymap.set({ "n", "v" }, "<leader>qy", function()
+    local lines = {}
+    for _, item in ipairs(vim.fn.getqflist()) do
+        local fname = vim.fn.bufname(item.bufnr)
+        table.insert(lines, fname .. ':' .. item.lnum)
+    end
+    vim.fn.setreg('"', table.concat(lines, '\n'))
+end)
 -- replace
 vim.keymap.set("n", "<leader>r", [[:%s/\V]])
 vim.keymap.set("v", "<leader>r", [[:s/\V]])
