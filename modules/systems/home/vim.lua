@@ -14,7 +14,16 @@ vim.o.termguicolors = true;
 -- binds
 -- convenience
 vim.keymap.set({ "n", "v" }, "<leader>w", ":noa w<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>q", ":copen<CR>")
+-- quickfix
+vim.keymap.set({ "n", "v" }, "<leader>qo", ":copen<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>qc", function() vim.fn.setqflist({}, 'r') end)
+vim.keymap.set({ "n", "v" }, "<leader>ql", function()
+    vim.fn.setqflist({ {
+        bufnr = vim.fn.bufnr('%'),
+        lnum = vim.fn.line('.'),
+        text = vim.api.nvim_get_current_line(),
+    } }, 'a')
+end)
 -- system clipboard
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>yy", '"+yy')
@@ -32,8 +41,10 @@ vim.keymap.set("n", "<leader>dd", '"_dd')
 vim.keymap.set({ "n", "v" }, "<leader>a", ":e #<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>A", ":sf #<CR>")
 -- change working dir
+local original_cwd = vim.fn.getcwd()
 vim.keymap.set({ "n", "v" }, "<leader>cd", ":cd %:h<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>cb", ":cd -<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>co", function() vim.cmd.cd(original_cwd) end)
 -- swap command key
 vim.keymap.set({ "n", "v" }, ":", ";")
 vim.keymap.set({ "n", "v" }, ";", ":")
