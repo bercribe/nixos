@@ -59,6 +59,8 @@ vim.keymap.set({ "n", "v" }, "<leader>qy", function()
     end
     vim.fn.setreg('"', table.concat(lines, '\n'))
 end)
+vim.keymap.set({ "n", "v" }, "<leader>qr",
+    [[:cdo s/\V | update<Left><Left><Left><Left><Left><Left><Left><Left><Left>]])
 -- replace
 vim.keymap.set("n", "<leader>r", [[:%s/\V]])
 vim.keymap.set("v", "<leader>r", [[:s/\V]])
