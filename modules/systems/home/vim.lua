@@ -28,7 +28,20 @@ vim.keymap.set("n", "<leader>dd", '"_dd')
 -- paste
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
 -- quickfix
-vim.keymap.set({ "n", "v" }, "<leader>qo", ":copen<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>qo", function()
+    local qf_open = false
+    for _, win in ipairs(vim.fn.getwininfo()) do
+        if win.quickfix == 1 then
+            qf_open = true
+            break
+        end
+    end
+    if qf_open then
+        vim.cmd("cclose")
+    else
+        vim.cmd("copen")
+    end
+end)
 vim.keymap.set({ "n", "v" }, "<leader>qc", function() vim.fn.setqflist({}, 'r') end)
 vim.keymap.set({ "n", "v" }, "<leader>ql", function()
     vim.fn.setqflist({ {
@@ -37,6 +50,7 @@ vim.keymap.set({ "n", "v" }, "<leader>ql", function()
         text = vim.api.nvim_get_current_line(),
     } }, 'a')
 end)
+vim.keymap.set({ "n", "v" }, "<leader>qd", function() vim.diagnostic.setqflist() end)
 -- replace
 vim.keymap.set("n", "<leader>r", [[:%s/\V]])
 vim.keymap.set("v", "<leader>r", [[:s/\V]])
