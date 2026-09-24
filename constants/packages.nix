@@ -70,6 +70,7 @@
     pasta
     pastas
     pi-sync
+    pr-review
     rn
     running
     scratch

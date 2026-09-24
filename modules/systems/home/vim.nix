@@ -125,6 +125,8 @@ in {
           nvim-dap # debugger
           nvim-dap-view # debugger UI
           nvim-lspconfig # language servers
+          nvim-web-devicons # icons, used by octo's file panel
+          plenary-nvim # lua util lib, required by octo
           typst-preview-nvim # live preview for typst
           yazi-nvim # file picker
           {
@@ -187,6 +189,14 @@ in {
                     node_decremental = "V",
                   },
                 },
+              })
+            '';
+          }
+          {
+            plugin = octo-nvim; # github PR review
+            config = toLua ''
+              require('octo').setup({
+                picker = "fzf-lua",
               })
             '';
           }
@@ -267,8 +277,9 @@ in {
         lsp = with lib; filter (s: s != null) (mapAttrsToList (_: pkg: pkg) cfg.languageServers);
         fmt = with pkgs; [alejandra];
         devdocsDeps = with pkgs; [jq curl pandoc];
+        octoDeps = with pkgs; [gh];
       in
-        lsp ++ fmt ++ devdocsDeps;
+        lsp ++ fmt ++ devdocsDeps ++ octoDeps;
     };
   };
 }
