@@ -65,8 +65,10 @@ vim.keymap.set({ "n", "v" }, "<leader>qr",
 -- replace
 vim.keymap.set("n", "<leader>r", [[:%s/\V]])
 vim.keymap.set("v", "<leader>r", [[:s/\V]])
+-- tabs
+vim.keymap.set("n", "<leader>tn", ":tab split<CR>")
 -- shell
-vim.keymap.set("n", "<leader>t", ":te zsh<CR>i")
+vim.keymap.set("n", "<leader>ts", ":te zsh<CR>i")
 -- write
 vim.keymap.set({ "n", "v" }, "<leader>w", ":noa w<CR>")
 -- copy
