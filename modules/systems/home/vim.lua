@@ -63,8 +63,8 @@ end)
 vim.keymap.set({ "n", "v" }, "<leader>qr",
     [[:cdo s/\V | update<Left><Left><Left><Left><Left><Left><Left><Left><Left>]])
 -- replace
-vim.keymap.set("n", "<leader>r", [[:%s/\V]])
-vim.keymap.set("v", "<leader>r", [[:s/\V]])
+vim.keymap.set("n", "<leader>R", [[:%s/\V]])
+vim.keymap.set("v", "<leader>R", [[:s/\V]])
 -- tabs
 vim.keymap.set("n", "<leader>tn", ":tab split<CR>")
 -- shell

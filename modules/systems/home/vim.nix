@@ -121,12 +121,13 @@ in {
         toLua = str: "lua << EOF\n${str}\nEOF\n";
       in
         with pkgs.vimPlugins; [
+          blink-cmp-git # completion source for issues/PRs/commits/mentions
           fzf-lua # quick opener w/ fzf
           nvim-dap # debugger
           nvim-dap-view # debugger UI
           nvim-lspconfig # language servers
-          nvim-web-devicons # icons, used by octo's file panel
-          plenary-nvim # lua util lib, required by octo
+          nvim-web-devicons # icons, used by fzf-lua's file/git pickers
+          pkgs.errata.vimPlugins.pr-review # github PR review
           typst-preview-nvim # live preview for typst
           yazi-nvim # file picker
           {
@@ -151,6 +152,17 @@ in {
                 completion = { documentation = { auto_show = false } },
                 sources = {
                   default = { 'lsp', 'path', 'snippets', 'buffer' },
+                  per_filetype = {
+                    prreview = { 'git', inherit_defaults = true },
+                    gitcommit = { 'git', inherit_defaults = true },
+                    markdown = { 'git', inherit_defaults = true },
+                  },
+                  providers = {
+                    git = {
+                      module = 'blink-cmp-git',
+                      name = 'Git',
+                    },
+                  },
                 },
                 fuzzy = { implementation = "prefer_rust_with_warning" }
               })
@@ -189,14 +201,6 @@ in {
                     node_decremental = "V",
                   },
                 },
-              })
-            '';
-          }
-          {
-            plugin = octo-nvim; # github PR review
-            config = toLua ''
-              require('octo').setup({
-                picker = "fzf-lua",
               })
             '';
           }
@@ -277,9 +281,8 @@ in {
         lsp = with lib; filter (s: s != null) (mapAttrsToList (_: pkg: pkg) cfg.languageServers);
         fmt = with pkgs; [alejandra];
         devdocsDeps = with pkgs; [jq curl pandoc];
-        octoDeps = with pkgs; [gh];
       in
-        lsp ++ fmt ++ devdocsDeps ++ octoDeps;
+        lsp ++ fmt ++ devdocsDeps;
     };
   };
 }
