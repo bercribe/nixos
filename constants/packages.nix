@@ -194,6 +194,7 @@ in {
       [
         # GUI
         anki # SRS app
+        audacity # audio software
         beeper # universal chat
         bs-manager # mod manager for beat saber
         chromium # browser
