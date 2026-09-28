@@ -30,7 +30,7 @@ in {
 
         response="$(${lib.getExe pkgs.curl} -X GET "${utils.serviceUrl "readeck"}/api/bookmarks?is_archived=false&limit=100" -H "accept: application/json" -H "Authorization: Bearer $key")"
 
-        links="$(echo $response | ${lib.getExe pkgs.jq} -r '.[] | "[\(.title)](\(.url)) (\(.reading_time) min)\n"')"
+        links="$(echo $response | ${lib.getExe pkgs.jq} -r '.[] | (if (.title // "") != "" then .title else .url end) as $t | "[\($t)](\(.url))" + (if .reading_time then " (\(.reading_time) min)" else "" end) + "\n"' <<< "$response")"
         html=$(echo "### Links:
         $links
         " | ${lib.getExe pkgs.pandoc} -f markdown -t html)
