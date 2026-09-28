@@ -257,6 +257,7 @@ in {
         printdoc # CLI convenience
         removeexif # strips exif from jpegs
         sandbox # convenience util for code sandbox
+        save-links # bulk readeck link saving
         sfx # play sound effect
         timed-reference # drawing helper
         tunes # play music in dir

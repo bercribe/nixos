@@ -90,6 +90,9 @@
   sops.secrets.readeck = {
     path = "/home/mawz/.config/readeck/api_key";
   };
+  xdg.configFile."readeck/url" = {
+    text = local.utils.serviceUrl "readeck";
+  };
 
   gtk = {
     enable = true;
