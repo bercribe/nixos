@@ -21,6 +21,7 @@
       "pi-coding-agent"
       "pocket-tts"
       "snitch"
+      "usbtree"
       "whosthere"
     ];
     unstableOverlay = builtins.listToAttrs (map (package: {

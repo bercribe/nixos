@@ -175,6 +175,7 @@ in {
         snitch # nicer netstat
         sops # secrets management
         termsvg # record terminal as SVG
+        usbtree # interactive lsusb
         whosthere # lan discovery tui
         wikiman # CLI docs
         wireguard-tools # wireguard debug
