@@ -95,11 +95,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790557036,
-        "narHash": "sha256-VLRn5mtpSR+VxVbgW5O3Se5Qq6OGvP3P4eb+RgIWJY0=",
+        "lastModified": 1791255357,
+        "narHash": "sha256-I7tgyzK6Fp+jaOL7qXT0zMcOo8Yy0/IUrqBa3GgXUwo=",
         "owner": "bercribe",
         "repo": "errata",
-        "rev": "372f7565cbe94ee498184f1be0d3bffeeb6cf6bd",
+        "rev": "11838774ada8a1cffb7df540d018cbfe33bd7f69",
         "type": "github"
       },
       "original": {

@@ -70,6 +70,7 @@
     pasta
     pastas
     pi-sync
+    post
     pr-review
     rn
     running
