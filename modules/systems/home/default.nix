@@ -60,7 +60,7 @@ in {
     };
 
     hosts = {
-      echos = {
+      echoes = {
         hostname = "echoes.${local.secret-attrs.personal-domain}";
         localForwards = [
           {
