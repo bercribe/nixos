@@ -234,6 +234,7 @@ in {
         zoom-us # video conferencing
         # CLI
         cava # audio visualizer
+        deploy-rs # declarative deployments
         ffsubsync # sync subtitles with video
         gtypist # typing tutor
         handlr-regex # better xdg-open

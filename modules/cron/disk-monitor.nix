@@ -28,7 +28,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets."healthchecks/remote/ping-key" = {
+    local.healthchecks-secret.enable = !cfg.remoteCheck;
+    sops.secrets."healthchecks/remote/ping-key" = lib.mkIf cfg.remoteCheck {
       sopsFile = inputs.secrets + /sops/common.yaml;
     };
 

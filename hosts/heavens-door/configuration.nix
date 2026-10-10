@@ -18,6 +18,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable cross compilation for deploying echoes
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
   networking.hostName = "heavens-door"; # Define your hostname.
   networking.hostId = "0149bc0f"; # Should be unique among ZFS machines
 

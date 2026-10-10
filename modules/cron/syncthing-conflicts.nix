@@ -27,7 +27,7 @@ in {
         User = "root";
       };
       script = ''
-        ${utils.writeHealthchecksCombinedScript {slug = "syncthing-conflicts";} "${lib.getExe pkgs.check-sync-conflicts} /zvault/syncthing --no-colors"}
+        ${utils.writeHealthchecksCombinedScript {slug = "syncthing-conflicts";} "${lib.getExe pkgs.errata.check-sync-conflicts} /zvault/syncthing --no-colors"}
       '';
     };
   };

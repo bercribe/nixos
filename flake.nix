@@ -12,6 +12,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # nix extensions
+    deploy-rs.url = "github:serokell/deploy-rs";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,18 +51,19 @@
 
   outputs = {
     self,
-    errata,
-    nixpkgs,
-    nixos-hardware,
-    home-manager,
+    deploy-rs,
     disko,
+    errata,
+    glide,
+    home-manager,
+    karatui,
+    microvm,
     nix-index-database,
+    nixos-hardware,
+    nixpkgs,
+    paisa,
     sops-nix,
     stylix,
-    microvm,
-    karatui,
-    paisa,
-    glide,
     ...
   } @ inputs: let
     homeInstaller = import ./installers/home.nix;
@@ -209,5 +211,29 @@
       default = minimal;
       inherit minimal;
     });
+
+    deploy.nodes.echoes = let
+      system = "aarch64-linux";
+      pkgs = import nixpkgs {inherit system;};
+      deployPkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          deploy-rs.overlays.default
+          (self: super: {
+            deploy-rs = {
+              inherit (pkgs) deploy-rs;
+              lib = super.deploy-rs.lib;
+            };
+          })
+        ];
+      };
+    in {
+      hostname = "echoes.${(import (inputs.secrets + /nix)).personal-domain}";
+      profiles.system = {
+        user = "root";
+        sshUser = "mawz";
+        path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.echoes;
+      };
+    };
   };
 }
