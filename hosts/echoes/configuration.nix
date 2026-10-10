@@ -39,6 +39,18 @@
     useAcme = false;
   };
 
+  security.sudo.extraRules = [
+    {
+      groups = ["wheel"];
+      commands = [
+        {
+          command = "ALL";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
   # SSH security
   services.fail2ban.enable = true;
 
