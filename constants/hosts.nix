@@ -56,6 +56,16 @@
             default = false;
             description = "True to enable syncoid pull job from super-fly";
           };
+          enableUps = mkOption {
+            type = bool;
+            default = false;
+            description = "True to integrate this host with UPS monitoring";
+          };
+          macs = mkOption {
+            type = listOf str;
+            default = [];
+            description = "Mac addresses";
+          };
         };
       });
     };
@@ -82,6 +92,8 @@
       super-fly = {
         zfsEnabled = true;
         enableSyncoidBackups = true;
+        enableUps = true;
+        macs = ["74:56:3c:e4:75:32"];
       };
       hierophant-green = {
         friendlyName = "router";
@@ -118,6 +130,8 @@
         lanDomain = true;
         enableMonitoring = true;
         createBookmark = true;
+        enableUps = true;
+        macs = ["00:11:32:ea:02:ab" "00:11:32:ea:02:ac"];
       };
     };
   in

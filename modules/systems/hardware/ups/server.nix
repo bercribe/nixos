@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   local,
   inputs,
   ...
@@ -79,6 +80,14 @@
     script = let
       slug = "ups-runtime";
       utils = local.utils;
+
+      wakeHosts = pkgs.writeShellScript "wake-hosts" (with lib;
+        config.local.constants.hosts
+        |> filterAttrs (_: {enableUps, ...}: enableUps)
+        |> mapAttrsToList (_: {macs, ...}: macs)
+        |> flatten
+        |> map (mac: "${pkgs.wol}/bin/wol ${mac}")
+        |> concatStringsSep "\n");
     in ''
       runtime=$(${pkgs.nut}/bin/upsc ups battery.runtime 2>&1) || true
       ${utils.writeHealthchecksLogScript {inherit slug;}} "UPS runtime remaining: $runtime seconds"
@@ -86,9 +95,7 @@
       if [[ "$runtime" =~ ^[0-9]+$ ]] && [ "$runtime" -ge 600 ]; then
         status=$(${pkgs.nut}/bin/upsc ups ups.status 2>&1) || true
         if [[ "$status" == "OL"* ]]; then
-          ${pkgs.wol}/bin/wol 74:56:3c:e4:75:32 # super-fly
-          ${pkgs.wol}/bin/wol 00:11:32:ea:02:ab # mr-president
-          ${pkgs.wol}/bin/wol 00:11:32:ea:02:ac # mr-president
+          ${wakeHosts}
         fi
         ${utils.writeHealthchecksPingScript {inherit slug;}}
       fi
