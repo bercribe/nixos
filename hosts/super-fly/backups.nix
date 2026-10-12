@@ -5,8 +5,9 @@
   local,
   ...
 }: let
-  sanoidHosts = ["heavens-door" "highway-star" "judgement" "moody-blues" "super-fly"];
-  syncoidJobs = ["judgement" "moody-blues" "super-fly"];
+  hosts = config.local.constants.hosts;
+  sanoidHosts = lib.attrNames (lib.filterAttrs (_: {zfsEnabled, ...}: zfsEnabled) hosts);
+  syncoidJobs = lib.attrNames (lib.filterAttrs (_: {enableSyncoidBackups, ...}: enableSyncoidBackups) hosts);
   resticJobs = ["mr-president" "backblaze"];
 
   utils = local.utils;

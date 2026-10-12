@@ -46,6 +46,16 @@
             default = false;
             description = "Bookmark the base domain on homepage";
           };
+          zfsEnabled = mkOption {
+            type = bool;
+            default = false;
+            description = "Marks the host as a ZFS enabled host";
+          };
+          enableSyncoidBackups = mkOption {
+            type = bool;
+            default = false;
+            description = "True to enable syncoid pull job from super-fly";
+          };
         };
       });
     };
@@ -55,11 +65,24 @@
       echoes = {
         domain = local.secret-attrs.personal-domain;
       };
-      heavens-door = {};
-      highway-star = {};
-      judgement = {};
-      moody-blues = {};
-      super-fly = {};
+      heavens-door = {
+        zfsEnabled = true;
+      };
+      highway-star = {
+        zfsEnabled = true;
+      };
+      judgement = {
+        zfsEnabled = true;
+        enableSyncoidBackups = true;
+      };
+      moody-blues = {
+        zfsEnabled = true;
+        enableSyncoidBackups = true;
+      };
+      super-fly = {
+        zfsEnabled = true;
+        enableSyncoidBackups = true;
+      };
       hierophant-green = {
         friendlyName = "router";
         icon = "mikrotik";
