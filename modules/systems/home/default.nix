@@ -44,62 +44,37 @@ in {
       RequestTTY = "yes";
     };
 
-    mkHostBlocks = hostname: overrides: {
-      ${hostname} =
+    mkHostBlocks = host: {
+      zfs,
+      overrides,
+    }: {
+      ${host} =
         {
           inherit user forwardAgent addKeysToAgent extraOptions;
-          hostname = utils.hostDomain hostname;
+          hostname = utils.hostDomain host;
         }
         // overrides;
-      "${hostname}-git" =
+      "${host}-git" =
         {
           inherit user forwardAgent addKeysToAgent;
-          hostname = utils.hostDomain hostname;
+          hostname = utils.hostDomain host;
         }
         // overrides;
+      "${host}-decrypt" = lib.mkIf zfs ({
+          hostname = utils.hostDomain host;
+          port = 2222;
+          user = "root";
+        }
+        // overrides);
     };
 
-    hosts = {
-      echoes = {
-        hostname = "echoes.${local.secret-attrs.personal-domain}";
-        localForwards = [
-          {
-            bind.port = 8080;
-            host.address = "127.0.0.1";
-            host.port = 48815;
-          }
-        ];
-      };
-      heavens-door = {hostname = null;};
-      judgement = {};
-      lovers = {user = "root";};
-      moody-blues = {};
-      mr-president = {
-        extraOptions = {};
-        setEnv = {
-          # check /usr/share/terminfo
-          TERM = "xterm-color";
-        };
-      };
-      super-fly = {};
-    };
-    extraBlocks = {
-      heavens-door-decrypt = {
-        port = 2222;
-        user = "root";
-      };
-      super-fly-decrypt = {
-        hostname = utils.hostDomain "super-fly";
-        port = 2222;
-        user = "root";
-      };
-    };
+    hosts = config.local.constants.ssh.config;
   in {
     enable = true;
     includes = ["~/.ssh/transient.conf"];
     enableDefaultConfig = false;
     matchBlocks =
-      lib.mergeAttrsList (lib.mapAttrsToList mkHostBlocks hosts) // extraBlocks;
+      lib.mergeAttrsList (lib.mapAttrsToList mkHostBlocks hosts);
   };
 
   programs.git = {

@@ -26,6 +26,25 @@
       type = attrsOf str;
       description = "SSH public keys for host identification (for known_hosts)";
     };
+    config = mkOption {
+      type = attrsOf (
+        submodule {
+          options = {
+            overrides = mkOption {
+              type = attrs;
+              default = {};
+              description = "A set of overrides corresponding to the type of programs.ssh.matchBlocks";
+            };
+            zfs = mkOption {
+              type = bool;
+              default = false;
+              description = "True to create a decrypt target for this host";
+            };
+          };
+        }
+      );
+      description = "Hosts to populate in ssh config";
+    };
   };
 
   config.local.constants.ssh = {
@@ -65,6 +84,33 @@
       judgement = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNTo4tnqG7zk+yAmA7JUOapVjhSWkhdqSoEor9q+KbL";
       moody-blues = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBUCKXB7muqmoovAblrX2znV3PUejkIqqZ4OxSMGuXGE";
       super-fly = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdZUinVNS9d3LOmDKYWq4kEb6iO1uKaJOGhBZ4cQ6/h";
+    };
+
+    config = {
+      echoes.overrides = {
+        localForwards = [
+          {
+            bind.port = 8080;
+            host.address = "127.0.0.1";
+            host.port = 48815;
+          }
+        ];
+      };
+      heavens-door = {
+        zfs = true;
+        overrides = {hostname = null;};
+      };
+      judgement = {};
+      lovers.overrides = {user = "root";};
+      moody-blues = {};
+      mr-president.overrides = {
+        extraOptions = {};
+        setEnv = {
+          # check /usr/share/terminfo
+          TERM = "xterm-color";
+        };
+      };
+      super-fly.zfs = true;
     };
   };
 }
