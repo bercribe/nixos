@@ -82,6 +82,7 @@
       };
       heavens-door = {
         zfsEnabled = true;
+        macs = ["04:D9:F5:7B:DF:D8" "04:D9:F5:7B:DF:D9"];
         syncthingId = "HK3YODK-63EFXRW-77XQ2PK-ZB5A35F-6BSAZ6S-J76VARS-KV6HJSN-D7KR4AB";
       };
       highway-star = {
@@ -91,6 +92,7 @@
       judgement = {
         zfsEnabled = true;
         enableSyncoidBackups = true;
+        macs = ["88:AE:DD:0F:56:D7"];
       };
       moody-blues = {
         zfsEnabled = true;

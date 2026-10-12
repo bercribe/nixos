@@ -87,8 +87,29 @@ in {
         };
         wake_on_lan = {};
 
-        "automation nixos" = [
-        ];
+        "automation nixos" = let
+          mkWolAutomation = host: macs: {
+            alias = "Wake ${host}";
+            triggers = [
+              {
+                entity_id = ["input_button.wake_${lib.replaceString "-" "_" host}"];
+                trigger = "state";
+              }
+            ];
+            actions =
+              macs
+              |> map (mac: {
+                data = {inherit mac;};
+                action = "wake_on_lan.send_magic_packet";
+              });
+            mode = "single";
+          };
+          wolAutomations = with lib;
+            config.local.constants.hosts
+            |> filterAttrs (_: {macs, ...}: (length macs) > 0)
+            |> mapAttrsToList (host: {macs, ...}: (mkWolAutomation host macs));
+        in
+          wolAutomations;
         "scene nixos" = [
         ];
         "script nixos" = [

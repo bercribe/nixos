@@ -26,7 +26,7 @@ in {
     nhs = "nh home switch ~/.config/nixos";
     nrs = "~/.config/nixos/rebuild-switch.sh";
     scan = "scanimage -d pixma:04A91912_515996 --format=tiff -b --resolution=300 --button-controlled=yes";
-    wake-hd = "wol 04:D9:F5:7B:DF:D8; wol 04:D9:F5:7B:DF:D9";
+    wake-hd = config.local.constants.hosts.heavens-door.macs |> map (mac: "wol ${mac}") |> lib.concatStringsSep ";";
   };
 
   nixpkgs.config = import ./nixpkgs-config.nix;
