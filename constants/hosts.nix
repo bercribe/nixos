@@ -66,6 +66,11 @@
             default = [];
             description = "Mac addresses";
           };
+          syncthingId = mkOption {
+            type = nullOr str;
+            default = null;
+            description = "Syncthing public key";
+          };
         };
       });
     };
@@ -77,9 +82,11 @@
       };
       heavens-door = {
         zfsEnabled = true;
+        syncthingId = "HK3YODK-63EFXRW-77XQ2PK-ZB5A35F-6BSAZ6S-J76VARS-KV6HJSN-D7KR4AB";
       };
       highway-star = {
         zfsEnabled = true;
+        syncthingId = "EEM5E4H-7TFYA5Y-BY37H4D-25LOQIS-M5ETY2C-JSVJHOL-4O67NI3-CPZQ4AE";
       };
       judgement = {
         zfsEnabled = true;
@@ -94,6 +101,7 @@
         enableSyncoidBackups = true;
         enableUps = true;
         macs = ["74:56:3c:e4:75:32"];
+        syncthingId = "QL7YLXY-WKBMRND-BKQB6KN-Q4QI2MT-Z4RJXUS-JF7HJGE-PZ7D7Y2-B5RGJAV";
       };
       hierophant-green = {
         friendlyName = "router";
@@ -132,7 +140,11 @@
         createBookmark = true;
         enableUps = true;
         macs = ["00:11:32:ea:02:ab" "00:11:32:ea:02:ac"];
+        syncthingId = "XX5DKCN-4OTCVAB-2QWFVBN-NVIK24H-AENGONB-FQ67OPV-GITYMJY-55S6AAV";
       };
+      geb = {syncthingId = "Z5BAWSH-SKUWWP7-AIPUJIT-FNB4E3U-4LDOCVV-XGZOBHO-VJ26EAB-XNHEFAF";};
+      sethan = {syncthingId = "HXAAIQL-OXKK5KA-YCD6KGU-RBXLLM2-XIDKKVG-GA6PCSZ-C4MZHVK-2H7HNAO";};
+      whitesnake = {syncthingId = "GAGOH5G-KBA557E-T7UVVKE-K2TYB5W-KRSCTUF-B6HU3UP-OZA3LAC-5S27BQI";};
     };
   in
     with lib;
