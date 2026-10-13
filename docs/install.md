@@ -65,6 +65,11 @@ Copy over secrets if necessary. Don't forget to:
 - enable secure boot
 - reboot automatically on power restored
 
+### BIOS
+
+If desired:
+- [ ] enable Wake on LAN
+
 ### VPS
 ```
 # initial install:
