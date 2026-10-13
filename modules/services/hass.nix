@@ -64,7 +64,38 @@ in {
       customComponents = with pkgs.home-assistant-custom-components; [
         frigate
       ];
-      config = {
+      config = let
+        slug = host: lib.replaceString "-" "_" host;
+        mkWolAutomation = host: macs: {
+          alias = "Wake ${host}";
+          triggers = [
+            {
+              entity_id = ["input_button.wake_${slug host}"];
+              trigger = "state";
+            }
+          ];
+          actions =
+            macs
+            |> map (mac: {
+              data = {inherit mac;};
+              action = "wake_on_lan.send_magic_packet";
+            });
+          mode = "single";
+        };
+        wolHosts = with lib;
+          config.local.constants.hosts
+          |> filterAttrs (_: {macs, ...}: (length macs) > 0);
+        wolAutomations = with lib;
+          wolHosts
+          |> mapAttrsToList (host: {macs, ...}: (mkWolAutomation host macs));
+        input_button =
+          wolHosts
+          |> lib.mapAttrs' (host: _:
+            lib.nameValuePair "wake_${slug host}" {
+              name = "Wake ${host}";
+              icon = "mdi:power";
+            });
+      in {
         # Includes dependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
         default_config = {};
@@ -87,29 +118,8 @@ in {
         };
         wake_on_lan = {};
 
-        "automation nixos" = let
-          mkWolAutomation = host: macs: {
-            alias = "Wake ${host}";
-            triggers = [
-              {
-                entity_id = ["input_button.wake_${lib.replaceString "-" "_" host}"];
-                trigger = "state";
-              }
-            ];
-            actions =
-              macs
-              |> map (mac: {
-                data = {inherit mac;};
-                action = "wake_on_lan.send_magic_packet";
-              });
-            mode = "single";
-          };
-          wolAutomations = with lib;
-            config.local.constants.hosts
-            |> filterAttrs (_: {macs, ...}: (length macs) > 0)
-            |> mapAttrsToList (host: {macs, ...}: (mkWolAutomation host macs));
-        in
-          wolAutomations;
+        inherit input_button;
+        "automation nixos" = wolAutomations;
         "scene nixos" = [
         ];
         "script nixos" = [
