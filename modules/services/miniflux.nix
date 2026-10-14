@@ -25,6 +25,8 @@ in {
         POLLING_PARSING_ERROR_LIMIT = 10;
         POLLING_FREQUENCY = 5; # minutes
         BATCH_SIZE = 4; # num feeds / 288, so everything gets refreshed every 24 hours
+        INTEGRATION_ALLOW_PRIVATE_NETWORKS = 1;
+        FETCHER_ALLOW_PRIVATE_NETWORKS = 1;
       };
       adminCredentialsFile = config.sops.secrets.miniflux-admin.path;
     };
