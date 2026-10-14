@@ -55,6 +55,7 @@ in {
             path = lib.mkDefault "/home/mawz/projects";
             devices = ["heavens-door" "highway-star" "super-fly"];
             inherit versioning;
+            ignorePatterns = [".git"];
           };
           libraries = {
             enable = lib.mkDefault false;
