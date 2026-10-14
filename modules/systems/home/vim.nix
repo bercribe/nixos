@@ -54,6 +54,7 @@ in {
         astro = astro-language-server;
         bashls = bash-language-server;
         clangd = clang-tools; # c lsp
+        gdscript = null;
         glsl_analyzer = glsl_analyzer; # shader lsp
         glslls = lib.mkIf (lib.meta.availableOn stdenv.hostPlatform.system glslls) glslls; # shader lsp
         jsonls = vscode-langservers-extracted;
@@ -71,6 +72,7 @@ in {
         "bash"
         "cpp"
         "css"
+        "gdscript"
         "glsl"
         "html"
         "javascript"
@@ -88,6 +90,7 @@ in {
         "bash"
         "cpp"
         "css"
+        "godot~4.7"
         "html"
         "javascript"
         "lua~5.1"
@@ -101,6 +104,7 @@ in {
         "*" = {};
         astro.commentPattern = "//";
         cpp.commentPattern = "//";
+        gdscript.commentPattern = "#";
         glsl.commentPattern = "//";
         json.tabsize = 2;
         lua.commentPattern = "--";
