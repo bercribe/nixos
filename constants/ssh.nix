@@ -101,10 +101,13 @@
         overrides = {hostname = null;};
       };
       judgement = {};
-      lovers.overrides = {user = "root";};
+      lovers.overrides = {
+        user = "root";
+        extraOptions = {}; # use bash, not zsh
+      };
       moody-blues = {};
       mr-president.overrides = {
-        extraOptions = {};
+        extraOptions = {}; # use bash, not zsh
         setEnv = {
           # check /usr/share/terminfo
           TERM = "xterm-color";
