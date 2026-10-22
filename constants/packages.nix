@@ -198,6 +198,7 @@ in {
         anki # SRS app
         audacity # audio software
         beeper # universal chat
+        blender # 3D modeling
         bs-manager # mod manager for beat saber
         chromium # browser
         czkawka # deduping util
