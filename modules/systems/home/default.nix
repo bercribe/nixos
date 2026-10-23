@@ -130,16 +130,6 @@ in {
     enable = true;
     target = "$HOME/sources/public/playground";
   };
-  programs.sfx = {
-    enable = true;
-    sounds = let
-      assets = ../../../assets;
-    in {
-      failure = assets + /failure.mp3;
-      ringaling = assets + /ringaling.mp3;
-      success = assets + /success.mp3;
-    };
-  };
   programs.snippets = {
     enable = true;
     snippets = {

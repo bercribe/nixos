@@ -76,6 +76,16 @@ in {
       enable = true;
       pi.allowedDirs = ["~/sources"];
     };
+    programs.sfx = {
+      enable = true;
+      sounds = let
+        assets = ../../../assets;
+      in {
+        failure = assets + /failure.mp3;
+        ringaling = assets + /ringaling.mp3;
+        success = assets + /success.mp3;
+      };
+    };
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
