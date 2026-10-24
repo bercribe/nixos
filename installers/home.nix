@@ -30,6 +30,7 @@ system: ''
           my-nix.homeModules.minimal
           errata.homeModules.file-actions
           errata.homeModules.session-tool
+          errata.homeModules.sfx
           {
             local.packages.includeScripts = true;
           }
