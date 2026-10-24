@@ -44,7 +44,7 @@
         # TODO: promote these to scripts?
         agent = "nono run --profile pi --allow-cwd -- pi";
         doro = "bb timer 30m";
-        "project init" = "devenv init --include-envrc && just --init";
+        "project init" = ''git init && devenv init --include-envrc && just --init && echo "remember to track in forgejo"'';
       };
       globalAbbreviations = {
         "S:" = ''| sed "s/:/\\n/g"'';
