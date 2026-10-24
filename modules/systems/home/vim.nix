@@ -55,9 +55,11 @@ in {
         bashls = bash-language-server;
         clangd = clang-tools; # c lsp
         gdscript = null;
+        gleam = gleam;
         glsl_analyzer = glsl_analyzer; # shader lsp
         glslls = lib.mkIf (lib.meta.availableOn pkgs.stdenv.hostPlatform glslls) glslls; # shader lsp
         jsonls = vscode-langservers-extracted;
+        just = just-lsp;
         lua_ls = lua-language-server;
         nixd = nixd;
         pyright = pyright;
@@ -73,10 +75,12 @@ in {
         "cpp"
         "css"
         "gdscript"
+        "gleam"
         "glsl"
         "html"
         "javascript"
         "json"
+        "just"
         "lua"
         "nix"
         "python"
@@ -105,6 +109,8 @@ in {
         astro.commentPattern = "//";
         cpp.commentPattern = "//";
         gdscript.commentPattern = "#";
+        gleam.commentPattern = "//";
+        gleam.tabsize = 2;
         glsl.commentPattern = "//";
         json.tabsize = 2;
         lua.commentPattern = "--";

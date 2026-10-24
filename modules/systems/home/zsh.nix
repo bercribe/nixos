@@ -35,13 +35,16 @@
         "git pace" = "git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c";
         "git who" = "git shortlog -sn --no-merges";
 
-        agent = "nono run --profile pi --allow-cwd -- pi";
-        doro = "bb timer 30m";
         jctl = "journalctl";
         jfu = "journalctl -f -u";
         nsu = "nix shell github:NixOS/nixpkgs/nixos-unstable#%%";
         sctl = "systemctl";
         vim = "nvim";
+
+        # TODO: promote these to scripts?
+        agent = "nono run --profile pi --allow-cwd -- pi";
+        doro = "bb timer 30m";
+        "project init" = "devenv init --include-envrc && just --init";
       };
       globalAbbreviations = {
         "S:" = ''| sed "s/:/\\n/g"'';
