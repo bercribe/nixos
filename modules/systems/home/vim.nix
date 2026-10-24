@@ -56,7 +56,7 @@ in {
         clangd = clang-tools; # c lsp
         gdscript = null;
         glsl_analyzer = glsl_analyzer; # shader lsp
-        glslls = lib.mkIf (lib.meta.availableOn stdenv.hostPlatform.system glslls) glslls; # shader lsp
+        glslls = lib.mkIf (lib.meta.availableOn pkgs.stdenv.hostPlatform glslls) glslls; # shader lsp
         jsonls = vscode-langservers-extracted;
         lua_ls = lua-language-server;
         nixd = nixd;
