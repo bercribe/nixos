@@ -72,7 +72,7 @@ in {
               "Teatime Chinese" = [
                 {
                   abbr = "CN";
-                  href = "https://teatimechinese.com/teatime-chinese-podcast/";
+                  href = "https://teatimechinese.com/podcast/chinese";
                   icon = "https://teatimechinese.s3.amazonaws.com/wp-content/uploads/2022/06/12220228/cropped-logo-192x192.png";
                 }
               ];
