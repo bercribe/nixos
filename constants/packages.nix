@@ -47,6 +47,7 @@
   ];
 
   scripts = with pkgs.errata; [
+    ago
     bb
     catbin
     copy
