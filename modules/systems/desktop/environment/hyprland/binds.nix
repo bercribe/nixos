@@ -83,7 +83,10 @@
             key = "r";
             desc = "Command runner";
             cmd = let
-              commands = ["timer 10m"];
+              commands = [
+                "timer 10m"
+                "timer 30m"
+              ];
               run-command = pkgs.writeShellScript "run-command" ''
                 cmd=$(echo "${lib.concatStringsSep "\n" commands}" | ${fuzzel} --dmenu)
                 [[ -z "$cmd" ]] && exit 0
