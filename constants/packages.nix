@@ -205,6 +205,7 @@ in {
         czkawka # deduping util
         darktable # photo editor
         discord # voice chat
+        elektroid # elektron transfer
         firefox # browser
         foot # terminal
         gale # thunderstore mod manager
