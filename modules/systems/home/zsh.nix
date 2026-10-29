@@ -76,6 +76,10 @@
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # case insensitive completion
         zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # directory colors
 
+        # ^W behavior
+        autoload -U select-word-style
+        select-word-style bash
+
         # enable zmv
         autoload -Uz zmv
 
