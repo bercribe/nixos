@@ -9,6 +9,7 @@
     ./gdrive-backup.nix
     ./heartbeat-healthchecks.nix
     ./media-download.nix
+    ./note-snapshot.nix
     ./pcloud-echoes-sync.nix
     ./syncthing-conflicts.nix
     ./syncthing-healthchecks.nix

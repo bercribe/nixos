@@ -13,6 +13,7 @@
   local.cron.finance-sync.enable = true;
   local.cron.heartbeat-healthchecks.enable = true;
   local.cron.media-download.enable = true;
+  local.cron.note-snapshot.enable = true;
   local.cron.pcloud-echoes-sync.enable = true;
   local.cron.syncthing-conflicts.enable = true;
 

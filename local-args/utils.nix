@@ -18,9 +18,11 @@
     port = lib.optionalString (host.port != null) ":${toString host.port}";
   in "${scheme}${domain}${port}";
   localHostServiceUrlBase = service: "${config.local.constants.service-registry."${service}".shortName}.${hostDomain config.networking.hostName}";
-  serviceUrl = service: let
+
+  plainUrl = service: let
     serviceRegistration = config.local.constants.service-registry."${service}";
-  in "https://${serviceRegistration.shortName}.${hostDomain (lib.head serviceRegistration.hosts)}";
+  in "${serviceRegistration.shortName}.${hostDomain (lib.head serviceRegistration.hosts)}";
+  serviceUrl = service: "https://${plainUrl service}";
 
   localSecret = "healthchecks/local/ping-key";
   remoteSecret = "healthchecks/remote/ping-key";
@@ -124,6 +126,7 @@ in {
   hostUrl = hostUrl;
   localHostServiceUrlBase = localHostServiceUrlBase;
   localHostServiceUrl = service: "https://${localHostServiceUrlBase service}";
+  plainUrl = plainUrl;
   serviceUrl = serviceUrl;
   writeHealthchecksPingScript = healthchecksPing;
   writeHealthchecksLogScript = healthchecksLog;
