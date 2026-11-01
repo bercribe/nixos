@@ -264,11 +264,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
--- for vim symbols
-vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } })
-vim.lsp.config("nixd", { settings = { nixd = { formatting = { command = { "alejandra" } } } } })
 vim.lsp.config("clangd", { cmd = { "clangd", "--fallback-style=webkit" } })
 vim.lsp.config("glslls", { cmd = { "glslls", "--stdin", "--target-env=opengl" } })
+vim.lsp.config("lua_ls", { settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } }) -- for vim symbols
+vim.lsp.config("nixd", { settings = { nixd = { formatting = { command = { "alejandra" } } } } })
+vim.lsp.config('sqls', { cmd = { "sqls", "-config", "sqls.yml" } })
 
 -- disable completion for markdown
 vim.api.nvim_create_autocmd('BufEnter', {

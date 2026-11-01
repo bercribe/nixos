@@ -65,10 +65,12 @@ in {
         pyright = pyright;
         ruff = ruff; # python linter
         rust_analyzer = rust-analyzer;
+        sqls = sqls;
         tinymist = tinymist; # typst lsp
         ts_ls = typescript-language-server;
         yamlls = yaml-language-server;
       };
+      # https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers
       treesitterParsers = [
         "astro"
         "bash"
@@ -85,10 +87,12 @@ in {
         "nix"
         "python"
         "rust"
+        "sql"
         "typescript"
         "typst"
         "yaml"
       ];
+      # :DevDocs install
       devdocsLanguages = [
         "astro"
         "bash"
