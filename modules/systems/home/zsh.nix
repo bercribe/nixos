@@ -47,8 +47,9 @@
         "project init" = ''git init && devenv init --include-envrc && just --init && echo "remember to track in forgejo"'';
       };
       globalAbbreviations = {
-        "S:" = ''| sed "s/:/\\n/g"'';
         C = ''| copy'';
+        G = ''| grep'';
+        "S:" = ''| sed "s/:/\\n/g"'';
       };
     };
 
