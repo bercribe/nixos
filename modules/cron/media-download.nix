@@ -86,7 +86,8 @@ in {
             mf_cli = get_miniflux_client()
             yt_cli = yt_dlp.YoutubeDL(params={
                 "paths": _paths,
-                "proxy": "${config.local.network.mullvad-proxy.url}",
+                # TODO: uncomment
+                # "proxy": "${config.local.network.mullvad-proxy.url}",
             })
 
 
