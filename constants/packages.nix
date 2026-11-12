@@ -194,8 +194,8 @@ in {
       ]);
 
     user-desktop =
+      # GUI
       [
-        # GUI
         anki # SRS app
         audacity # audio software
         beeper # universal chat
@@ -229,13 +229,16 @@ in {
         pavucontrol # sound control
         pdfarranger # simple pdf editor
         pureref # reference image viewer
+        rapid-photo-downloader # SD card export
         thunar # file browser
         wineWowPackages.waylandFull # windows game emulator
         wireshark # network analyzer
         xivlauncher # ffxiv
         zathura # pdf viewer
         zoom-us # video conferencing
-        # CLI
+      ]
+      # CLI
+      ++ [
         cava # audio visualizer
         deploy-rs # declarative deployments
         ffsubsync # sync subtitles with video
