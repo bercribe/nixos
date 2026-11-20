@@ -9,6 +9,8 @@
 
   specialisation.china = {
     configuration = {
+      environment.variables.NIXOS_SPECIALISATION = "china";
+
       time.timeZone = lib.mkForce "Asia/Shanghai";
 
       users.users.mawz.packages = [

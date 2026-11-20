@@ -1,13 +1,15 @@
+#!/usr/bin/env bash
+
 # A rebuild script that commits on a successful build
 # based on: https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 
-#!/bin/sh
 set -eo pipefail
 
 # set up args
 # ignore errexit with `&& true`
 getopt --test > /dev/null && true
 if [[ $? -ne 4 ]]; then
+    # shellcheck disable=SC1112 disable=SC2016
     echo 'I’m sorry, `getopt --test` failed in this environment.'
     exit 1
 fi
@@ -88,11 +90,15 @@ git diff HEAD -U1 '*.nix'
 echo "NixOS rebuilding $HOSTNAME..."
 
 # Rebuild
-rebuildCmd=(sudo nixos-rebuild switch --flake .#${HOSTNAME})
+specialisation=()
+if [ -n "$NIXOS_SPECIALISATION" ]; then
+  specialisation=(--specialisation "$NIXOS_SPECIALISATION")
+fi
+rebuildCmd=(sudo nixos-rebuild switch --flake ".#${HOSTNAME}" "${specialisation[@]}")
 if [ "$showTrace" == true ]; then
     rebuildCmd+=(--show-trace --option eval-cache false)
 elif [ "$(command -v nh)" ]; then
-    rebuildCmd=(nh os switch .)
+    rebuildCmd=(nh os switch . "${specialisation[@]}")
 fi
 "${rebuildCmd[@]}" || exit 1
 
