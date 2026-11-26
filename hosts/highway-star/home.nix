@@ -8,8 +8,8 @@
       "[workspace 1 silent] $TERMINAL"
       "[workspace 6 silent] firefox"
       "[workspace 7 silent] obsidian"
-      "[workspace 8 silent] $TERMINAL -e ncspot"
-      "[workspace 9 silent] beeper"
+      "[workspace 8 silent] beeper"
+      "[workspace 9 silent] $TERMINAL -e ncspot"
       "[workspace 10 silent] keepassxc"
     ];
   };
